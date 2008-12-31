@@ -1,0 +1,34 @@
+//
+// BToolsPPC.RC2 - Microsoft Visual C++에서 직접 편집하지 않는 리소스
+//
+
+#ifdef APSTUDIO_INVOKED
+#error 이 파일은 Microsoft Visual C++에서 편집할 수 없습니다.
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 여기에 수동으로 편집한 리소스를 추가합니다.
+
+/////////////////////////////////////////////////////////////////////////////
+HI_RES_AWARE CEUX {1}    // 에뮬레이션 레이어 기능을 해제합니다.
+            // 지원하는 플랫폼에서 이중 픽셀을 사용하려면
+            // 이 리소스를 제거하십시오.
+/////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// SHMENUBAR
+//
+
+IDR_MAINFRAME SHMENUBAR DISCARDABLE
+BEGIN
+    IDR_MAINFRAME, 
+    2,
+    
+    I_IMAGENONE, ID_FILE_NEW, TBSTATE_ENABLED, TBSTYLE_BUTTON | TBSTYLE_AUTOSIZE,
+    IDS_NEW, 0, NOMENU,
+
+    I_IMAGENONE, IDM_MENU, TBSTATE_ENABLED, TBSTYLE_DROPDOWN | TBSTYLE_AUTOSIZE,
+    IDS_MENU, 0, 0,
+END

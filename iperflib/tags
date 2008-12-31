@@ -1,0 +1,308 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+ASSERT_H	assert.h	87;"	d
+Accept	Socket.cpp	/^int Socket::Accept( void ) {$/;"	f	class:Socket
+BROADCAST	Condition.hpp	/^    BROADCAST = 1, $/;"	e	enum:Condition::__anon4::__anon5
+BROADCAST	Condition.hpp	/^    BROADCAST = 1, $/;"	e	enum:__anon2::__anon3
+BlockUntilSignal	Queue.cpp	/^void Queue::BlockUntilSignal( time_t inAbsTimeout ) {$/;"	f	class:Queue
+Broadcast	Condition.hpp	/^    void Broadcast( void )$/;"	f	class:Condition
+CONDITION_H	Condition.hpp	78;"	d
+CONFIG_H	config.win32.h	26;"	d
+Close	Socket.cpp	/^void Socket::Close( void ) {$/;"	f	class:Socket
+Condition	Condition.hpp	/^    Condition( void )$/;"	f	class:Condition
+Condition	Condition.hpp	/^class Condition : public Mutex$/;"	c
+Connect	Socket.cpp	/^void Socket::Connect( const char *inHostname, const char *inLocalhost ) {$/;"	f	class:Socket
+DELAY_H	delay.hpp	77;"	d
+DELETE_ARRAY	util.h	228;"	d
+DELETE_PTR	util.h	220;"	d
+DeleteSelfAfterRun	Thread.hpp	/^    void DeleteSelfAfterRun( void ) {$/;"	f	class:Thread
+Dequeue	Queue.cpp	/^void* Queue::Dequeue( void ) {$/;"	f	class:Queue
+EINTR	headers.h	123;"	d
+Enqueue	Queue.cpp	/^bool Queue::Enqueue( void* inItem ) {$/;"	f	class:Queue
+EqualID	Thread.cpp	/^bool Thread::EqualID( nthread_t inLeft, nthread_t inRight ) {$/;"	f	class:Thread
+FAIL	util.h	148;"	d
+FAIL_errno	util.h	173;"	d
+Front	Queue.cpp	/^void* Queue::Front( void ) {$/;"	f	class:Queue
+GETTIMEOFDAY_H	gettimeofday.h	101;"	d
+GetID	Thread.cpp	/^nthread_t Thread::GetID( void ) {$/;"	f	class:Thread
+HAVE_INT32_T	config.win32.h	59;"	d
+HAVE_INT64_T	config.win32.h	61;"	d
+HAVE_SNPRINTF	config.win32.h	83;"	d
+HAVE_THREAD	Thread.hpp	102;"	d
+HAVE_THREAD	Thread.hpp	111;"	d
+HAVE_THREAD	Thread.hpp	94;"	d
+HAVE_U_INT32_T	config.win32.h	60;"	d
+HEADERS	Queue.cpp	82;"	d	file:
+HEADERS	Socket.cpp	78;"	d	file:
+HEADERS	SocketAddr.cpp	78;"	d	file:
+HEADERS	Thread.cpp	87;"	d	file:
+HEADERS	endian.c	77;"	d	file:
+HEADERS_H	headers.h	80;"	d
+Hostare_Equal	SocketAddr.cpp	/^bool SocketAddr::Hostare_Equal( sockaddr* first, sockaddr* second ) {$/;"	f	class:SocketAddr
+INET6_ADDRSTRLEN	headers.h	185;"	d
+INET_ADDRSTRLEN	headers.h	188;"	d
+INET_ATON_H	inet_aton.h	80;"	d
+INVALID_SOCKET	headers.h	180;"	d
+IsEmpty	Queue.hpp	/^    bool IsEmpty( void ) {$/;"	f	class:Queue
+IsFull	Queue.cpp	/^bool Queue::IsFull( void ) {$/;"	f	class:Queue
+Join	Thread.cpp	/^void Thread::Join( void ) {$/;"	f	class:Thread
+Joinall	Thread.cpp	/^void Thread::Joinall( void ) {$/;"	f	class:Thread
+Listen	Socket.cpp	/^void Socket::Listen( const char *inLocalhost, bool isIPv6 ) {$/;"	f	class:Socket
+Lock	Mutex.hpp	/^    void Lock( void ) {$/;"	f	class:Mutex
+Lock	Queue.hpp	/^    void Lock( void ) {$/;"	f	class:Queue
+MAX_EVENTS	Condition.hpp	/^    MAX_EVENTS = 2   }; $/;"	e	enum:Condition::__anon4::__anon5
+MAX_EVENTS	Condition.hpp	/^    MAX_EVENTS = 2   }; $/;"	e	enum:__anon2::__anon3
+MUTEX_H	Mutex.hpp	77;"	d
+McastJoin	Socket.cpp	/^void Socket::McastJoin( SocketAddr &inAddr ) {$/;"	f	class:Socket
+McastSetTTL	Socket.cpp	/^void Socket::McastSetTTL( int val, SocketAddr &inAddr ) {$/;"	f	class:Socket
+Mutex	Mutex.hpp	/^    Mutex( void ) {$/;"	f	class:Mutex
+Mutex	Mutex.hpp	/^class Mutex {$/;"	c
+NONOPTION_P	gnu_getopt.c	388;"	d	file:
+NS_IN6ADDRSZ	inet_ntop.c	26;"	d	file:
+NS_IN6ADDRSZ	inet_pton.c	26;"	d	file:
+NS_INADDRSZ	inet_ntop.c	25;"	d	file:
+NS_INADDRSZ	inet_pton.c	25;"	d	file:
+NS_INT16SZ	inet_ntop.c	24;"	d	file:
+NS_INT16SZ	inet_pton.c	24;"	d	file:
+NumUserThreads	Thread.hpp	/^    static int NumUserThreads( void ) {$/;"	f	class:Thread
+PERMUTE	gnu_getopt.c	/^    REQUIRE_ORDER, PERMUTE, RETURN_IN_ORDER$/;"	e	enum:__anon7	file:
+QUEUE_H	Queue.hpp	78;"	d
+Queue	Queue.cpp	/^Queue::Queue( int inSize ) {$/;"	f	class:Queue
+Queue	Queue.hpp	/^class Queue {$/;"	c
+REPORT_ADDRLEN	headers.h	193;"	d
+REQUIRE_ORDER	gnu_getopt.c	/^    REQUIRE_ORDER, PERMUTE, RETURN_IN_ORDER$/;"	e	enum:__anon7	file:
+RETURN_IN_ORDER	gnu_getopt.c	/^    REQUIRE_ORDER, PERMUTE, RETURN_IN_ORDER$/;"	e	enum:__anon7	file:
+Run_Wrapper	Thread.cpp	/^Thread::Run_Wrapper( void* paramPtr ) {$/;"	f	class:Thread
+SHUT_RD	headers.h	207;"	d
+SHUT_RDWR	headers.h	209;"	d
+SHUT_WR	headers.h	208;"	d
+SIGINT	util.h	/^    SIGINT,$/;"	e	enum:__anon1
+SIGNAL	Condition.hpp	/^    SIGNAL = 0, $/;"	e	enum:Condition::__anon4::__anon5
+SIGNAL	Condition.hpp	/^    SIGNAL = 0, $/;"	e	enum:__anon2::__anon3
+SIGPIPE	util.h	/^    SIGPIPE,$/;"	e	enum:__anon1
+SIGTERM	util.h	/^    SIGTERM,$/;"	e	enum:__anon1
+SNPRINTF_H	snprintf.h	2;"	d
+SOCKET_ADDR_H	SocketAddr.hpp	80;"	d
+SOCKET_ERROR	headers.h	179;"	d
+SOCKET_H	Socket.hpp	78;"	d
+SPECIAL_OSF1_EXTERN_C_START	headers.h	88;"	d
+SPECIAL_OSF1_EXTERN_C_START	headers.h	91;"	d
+SPECIAL_OSF1_EXTERN_C_STOP	headers.h	89;"	d
+SPECIAL_OSF1_EXTERN_C_STOP	headers.h	92;"	d
+SetDaemon	Thread.cpp	/^void Thread::SetDaemon( void ) {$/;"	f	class:Thread
+SetSocketOptions	Socket.hpp	/^    virtual void SetSocketOptions( void ) {$/;"	f	class:Socket
+Sigfunc	util.h	/^typedef void Sigfunc(int);$/;"	t
+SigfuncPtr	util.h	/^typedef Sigfunc *SigfuncPtr;$/;"	t
+Signal	Condition.hpp	/^    void Signal( void )$/;"	f	class:Condition
+Size	Queue.hpp	/^    int Size( void ) {$/;"	f	class:Queue
+Socket	Socket.cpp	/^Socket::Socket( unsigned short inPort, bool inUDP ) {$/;"	f	class:Socket
+Socket	Socket.hpp	/^class Socket {$/;"	c
+SocketAddr	SocketAddr.cpp	/^SocketAddr::SocketAddr( const char* inHostname, unsigned short inPort, bool isIPv6 ) {$/;"	f	class:SocketAddr
+SocketAddr	SocketAddr.cpp	/^SocketAddr::SocketAddr( const struct sockaddr* inAddr, Socklen_t inSize ) {$/;"	f	class:SocketAddr
+SocketAddr	SocketAddr.hpp	/^class SocketAddr {$/;"	c
+Socklen_t	config.win32.h	80;"	d
+Start	Thread.cpp	/^void Thread::Start( void ) {$/;"	f	class:Thread
+Stop	Thread.cpp	/^void Thread::Stop( void ) {$/;"	f	class:Thread
+THREAD_H	Thread.hpp	80;"	d
+TIMESTAMP_H	Timestamp.hpp	84;"	d
+Thread	Thread.cpp	/^Thread::Thread( void ) {$/;"	f	class:Thread
+Thread	Thread.hpp	/^class Thread {$/;"	c
+Thread_func	Thread.hpp	/^typedef void* Thread_func( void* );$/;"	t
+Thread_func_ptr	Thread.hpp	/^typedef LPTHREAD_START_ROUTINE Thread_func_ptr;$/;"	t
+Thread_func_ptr	Thread.hpp	/^typedef Thread_func *Thread_func_ptr;$/;"	t
+TimedWait	Condition.hpp	/^    void TimedWait( time_t inSeconds )$/;"	f	class:Condition
+Timestamp	Timestamp.hpp	/^    Timestamp( double sec ) {$/;"	f	class:Timestamp
+Timestamp	Timestamp.hpp	/^    Timestamp( long sec, long usec ) {$/;"	f	class:Timestamp
+Timestamp	Timestamp.hpp	/^    Timestamp( void ) {$/;"	f	class:Timestamp
+Timestamp	Timestamp.hpp	/^class Timestamp {$/;"	c
+UTIL_H	util.h	77;"	d
+Unlock	Mutex.hpp	/^    void Unlock( void ) {$/;"	f	class:Mutex
+Unlock	Queue.hpp	/^    void Unlock( void ) {$/;"	f	class:Queue
+WARN	util.h	156;"	d
+WARN_errno	util.h	182;"	d
+WIN32_LEAN_AND_MEAN	headers.h	116;"	d
+Wait	Condition.hpp	/^    void Wait( void )$/;"	f	class:Condition
+ZeroID	Thread.cpp	/^nthread_t Thread::ZeroID( void ) {$/;"	f	class:Thread
+_	gnu_getopt.c	77;"	d	file:
+_	gnu_getopt.c	79;"	d	file:
+_GETOPT_H	gnu_getopt.h	57;"	d
+_NSIG	util.h	/^    _NSIG$/;"	e	enum:__anon1
+_WIN32_WINNT	headers.h	115;"	d
+__gnu_getopt_initialized	gnu_getopt.c	/^int __gnu_getopt_initialized = 0;$/;"	v
+_gnu_getopt_initialize	gnu_getopt.c	/^_gnu_getopt_initialize( int argc,$/;"	f	file:
+_gnu_getopt_internal	gnu_getopt.c	/^_gnu_getopt_internal( int argc,$/;"	f
+add	Timestamp.hpp	/^    void add( Timestamp right ) {$/;"	f	class:Timestamp
+add	Timestamp.hpp	/^    void add( double sec ) {$/;"	f	class:Timestamp
+after	Timestamp.hpp	/^    bool after( Timestamp right ) {$/;"	f	class:Timestamp
+are_Equal	SocketAddr.cpp	/^bool SocketAddr::are_Equal( sockaddr* first, sockaddr* second ) {$/;"	f	class:SocketAddr
+assert	assert.h	89;"	d
+before	Timestamp.hpp	/^    bool before( Timestamp right ) {$/;"	f	class:Timestamp
+byte_atof	stdio.c	/^double byte_atof( const char *inString ) {$/;"	f
+byte_atoi	stdio.c	/^int byte_atoi( const char *inString ) {$/;"	f
+byte_snprintf	stdio.c	/^void byte_snprintf( char* outString, int inLen,$/;"	f
+close	headers.h	141;"	d
+concat	string.c	/^char *concat( char *dest, int len, const char *src ) {$/;"	f
+copy	string.c	/^char *copy( char *dest, int len, const char *src ) {$/;"	f
+delay_loop	delay.cpp	/^void delay_loop( unsigned long usec ) {$/;"	f
+err	error.c	/^    DWORD       err;$/;"	m	struct:mesg	file:
+error_mesgs	error.c	/^const struct mesg error_mesgs[] =$/;"	v	typeref:struct:mesg
+events_	Condition.hpp	/^  HANDLE events_[MAX_EVENTS]; $/;"	m	struct:Condition::__anon4
+events_	Condition.hpp	/^  HANDLE events_[MAX_EVENTS]; $/;"	m	struct:__anon2
+exchange	gnu_getopt.c	/^exchange( char **argv ) {$/;"	f	file:
+false	config.win32.h	74;"	d
+first_nonopt	gnu_getopt.c	/^static int first_nonopt;$/;"	v	file:
+flag	gnu_getopt.h	/^    int *flag;$/;"	m	struct:option
+fraction	Timestamp.hpp	/^    double fraction(Timestamp currentTime, Timestamp endTime) {$/;"	f	class:Timestamp
+get	Timestamp.hpp	/^    double get( void ) {$/;"	f	class:Timestamp
+getHostAddress	SocketAddr.cpp	/^void SocketAddr::getHostAddress( char* outAddress, size_t len ) {$/;"	f	class:SocketAddr
+getHostname	SocketAddr.cpp	/^void SocketAddr::getHostname( char* outHostname, size_t len ) {$/;"	f	class:SocketAddr
+getLocalAddress	Socket.cpp	/^SocketAddr Socket::getLocalAddress( void ) {$/;"	f	class:Socket
+getPort	SocketAddr.cpp	/^unsigned short SocketAddr::getPort( void ) {$/;"	f	class:SocketAddr
+getRemoteAddress	Socket.cpp	/^SocketAddr Socket::getRemoteAddress( void ) {$/;"	f	class:Socket
+getSecs	Timestamp.hpp	/^    long getSecs( void ) {$/;"	f	class:Timestamp
+getUsecs	Timestamp.hpp	/^    long getUsecs( void ) {$/;"	f	class:Timestamp
+get_in6_addr	SocketAddr.cpp	/^struct in6_addr* SocketAddr::get_in6_addr( void ) {$/;"	f	class:SocketAddr
+get_in_addr	SocketAddr.cpp	/^struct in_addr* SocketAddr::get_in_addr( void ) {$/;"	f	class:SocketAddr
+get_sizeof_sockaddr	SocketAddr.cpp	/^Socklen_t SocketAddr::get_sizeof_sockaddr( void ) {$/;"	f	class:SocketAddr
+get_sockaddr	SocketAddr.cpp	/^struct sockaddr* SocketAddr::get_sockaddr( void ) {$/;"	f	class:SocketAddr
+get_sockaddr_in	SocketAddr.cpp	/^struct sockaddr_in* SocketAddr::get_sockaddr_in( void ) {$/;"	f	class:SocketAddr
+getsock_tcp_mss	sockets.c	/^int getsock_tcp_mss( int inSock ) {$/;"	f
+getsock_tcp_windowsize	tcp_window_size.c	/^int getsock_tcp_windowsize( int inSock, int inSend ) {$/;"	f
+gettimeofday	gettimeofday.c	/^int gettimeofday( struct timeval* tv, void* timezone ) {$/;"	f
+gnu_getopt	gnu_getopt.c	/^gnu_getopt ( int argc,$/;"	f
+gnu_getopt_long	gnu_getopt_long.c	/^gnu_getopt_long( int argc,$/;"	f
+gnu_getopt_long_only	gnu_getopt_long.c	/^gnu_getopt_long_only( int argc,$/;"	f
+gnu_optarg	gnu_getopt.c	/^char *gnu_optarg = NULL;$/;"	v
+gnu_opterr	gnu_getopt.c	/^int gnu_opterr = 1;$/;"	v
+gnu_optind	gnu_getopt.c	/^int gnu_optind = 1;$/;"	v
+gnu_optopt	gnu_getopt.c	/^int gnu_optopt = '?';$/;"	v
+handlers	signal.c	/^static SigfuncPtr handlers[ _NSIG ] = { 0};$/;"	v	file:
+has_arg	gnu_getopt.h	/^    int has_arg;$/;"	m	struct:option
+hton	util.h	97;"	d
+inet_ntop	inet_ntop.c	/^inet_ntop(int af, const void *src, char *dst, size_t size) {$/;"	f
+inet_ntop4	inet_ntop.c	/^inet_ntop4(const unsigned char *src, char *dst, size_t size) {$/;"	f	file:
+inet_ntop6	inet_ntop.c	/^inet_ntop6(const unsigned char *src, char *dst, size_t size) {$/;"	f	file:
+inet_pton	inet_pton.c	/^inet_pton(int af,$/;"	f
+inet_pton4	inet_pton.c	/^inet_pton4(src, dst)$/;"	f	file:
+inet_pton6	inet_pton.c	/^inet_pton6(src, dst)$/;"	f	file:
+int32_t	config.win32.h	63;"	d
+int64_t	headers.h	129;"	d
+int64_t	headers.h	131;"	d
+iperf_sockaddr	headers.h	/^typedef sockaddr_storage iperf_sockaddr;$/;"	t
+isIPv6	SocketAddr.hpp	/^    bool isIPv6(void) {$/;"	f	class:SocketAddr
+isMulticast	SocketAddr.cpp	/^bool SocketAddr::isMulticast( void ) {$/;"	f	class:SocketAddr
+kConv_Giga	stdio.c	/^    kConv_Giga$/;"	e	enum:__anon8	file:
+kConv_Kilo	stdio.c	/^    kConv_Kilo,$/;"	e	enum:__anon8	file:
+kConv_Mega	stdio.c	/^    kConv_Mega,$/;"	e	enum:__anon8	file:
+kConv_Unit	stdio.c	/^    kConv_Unit,$/;"	e	enum:__anon8	file:
+kConversion	stdio.c	/^const double kConversion[] =$/;"	v
+kConversionForBits	stdio.c	/^const double kConversionForBits[] =$/;"	v
+kGiga_to_Unit	stdio.c	/^const long kGiga_to_Unit = 1024 * 1024 * 1024;$/;"	v
+kKilo_to_Unit	stdio.c	/^const long kKilo_to_Unit = 1024;$/;"	v
+kLabel_Byte	stdio.c	/^const char* kLabel_Byte[] =$/;"	v
+kLabel_bit	stdio.c	/^const char* kLabel_bit[]  =$/;"	v
+kMega_to_Unit	stdio.c	/^const long kMega_to_Unit = 1024 * 1024;$/;"	v
+kMillion	Timestamp.hpp	/^        kMillion = 1000000$/;"	e	enum:Timestamp::__anon6
+kgiga_to_Unit	stdio.c	/^const long kgiga_to_Unit = 1000 * 1000 * 1000;$/;"	v
+kkilo_to_Unit	stdio.c	/^const long kkilo_to_Unit = 1000;$/;"	v
+kmega_to_Unit	stdio.c	/^const long kmega_to_Unit = 1000 * 1000;$/;"	v
+last_nonopt	gnu_getopt.c	/^static int last_nonopt;$/;"	v	file:
+mAddress	SocketAddr.hpp	/^    iperf_sockaddr mAddress;$/;"	m	class:SocketAddr
+mAddress_size	SocketAddr.cpp	/^Socklen_t SocketAddr::mAddress_size = sizeof(iperf_sockaddr);$/;"	m	class:SocketAddr	file:
+mAddress_size	SocketAddr.hpp	/^    static Socklen_t mAddress_size;$/;"	m	class:SocketAddr
+mCondition	Condition.hpp	/^    HANDLE mCondition;$/;"	m	class:Condition
+mCondition	Condition.hpp	/^    pthread_cond_t mCondition;$/;"	m	class:Condition
+mCondition	Condition.hpp	/^pthread_cond_t mCondition;$/;"	m	class:Condition
+mDeleteSelf	Thread.hpp	/^    bool mDeleteSelf;$/;"	m	class:Thread
+mHandle	Thread.hpp	/^    HANDLE mHandle;$/;"	m	class:Thread
+mHead	Queue.hpp	/^    int  mHead;$/;"	m	class:Queue
+mIsIPv6	SocketAddr.hpp	/^    bool mIsIPv6;$/;"	m	class:SocketAddr
+mMutex	Mutex.hpp	/^	CRITICAL_SECTION mMutex; \/\/ naming fake$/;"	m	class:Mutex
+mMutex	Mutex.hpp	/^    HANDLE mMutex;$/;"	m	class:Mutex
+mMutex	Mutex.hpp	/^    pthread_mutex_t mMutex;$/;"	m	class:Mutex
+mPort	Socket.hpp	/^    unsigned short mPort;    \/\/ port to listen to$/;"	m	class:Socket
+mQ	Queue.hpp	/^    void **mQ;$/;"	m	class:Queue
+mQ_cond	Queue.hpp	/^    Condition mQ_cond;$/;"	m	class:Queue
+mSize	Queue.hpp	/^    int  mSize;$/;"	m	class:Queue
+mSock	Socket.hpp	/^    int   mSock;             \/\/ socket file descriptor (sockfd)$/;"	m	class:Socket
+mTID	Thread.hpp	/^    nthread_t mTID;$/;"	m	class:Thread
+mTail	Queue.hpp	/^    int  mTail;$/;"	m	class:Queue
+mTime	Timestamp.hpp	/^    struct timeval mTime;$/;"	m	class:Timestamp	typeref:struct:Timestamp::timeval
+mUDP	Socket.hpp	/^    bool  mUDP;              \/\/ true for UDP, false for TCP$/;"	m	class:Socket
+main	gnu_getopt.c	/^main (argc, argv)$/;"	f
+main	gnu_getopt_long.c	/^main (argc, argv)$/;"	f
+max_size_t	headers.h	/^typedef int64_t max_size_t;$/;"	t
+max_size_t	headers.h	/^typedef unsigned long max_size_t;$/;"	t
+mesg	error.c	/^struct mesg {$/;"	s	file:
+my_index	gnu_getopt.c	/^my_index( const char* str, int chr ) {$/;"	f	file:
+my_signal	signal.c	/^SigfuncPtr my_signal( int inSigno, SigfuncPtr inFunc ) {$/;"	f
+name	gnu_getopt.h	/^    const char *name;$/;"	m	struct:option
+nextchar	gnu_getopt.c	/^static char *nextchar;$/;"	v	file:
+no_argument	gnu_getopt.h	127;"	d
+nthread_t	Thread.hpp	/^typedef DWORD nthread_t;$/;"	t
+nthread_t	Thread.hpp	/^typedef int nthread_t;$/;"	t
+nthread_t	Thread.hpp	/^typedef pthread_t nthread_t;$/;"	t
+ntoh	endian.c	/^void ntoh( void *buffer, int len, int inSizeof ) {$/;"	f
+ntoh	util.h	92;"	d
+option	gnu_getopt.h	/^struct option {$/;"	s
+optional_argument	gnu_getopt.h	129;"	d
+ordering	gnu_getopt.c	/^} ordering;$/;"	v	typeref:enum:__anon7	file:
+pattern	string.c	/^void pattern( char *outBuf, int inBytes ) {$/;"	f
+posixly_correct	gnu_getopt.c	/^static char *posixly_correct;$/;"	v	file:
+pthread_cond_broadcast	Condition.hpp	/^pthread_cond_broadcast (pthread_cond_t *cv) $/;"	f	class:Condition
+pthread_cond_init	Condition.hpp	/^int  pthread_cond_init (pthread_cond_t *cv,  $/;"	f	class:Condition
+pthread_cond_signal	Condition.hpp	/^pthread_cond_signal (pthread_cond_t *cv) $/;"	f	class:Condition
+pthread_cond_t	Condition.hpp	/^} pthread_cond_t; $/;"	t	class:Condition	typeref:struct:Condition::__anon4
+pthread_cond_t	Condition.hpp	/^} pthread_cond_t; $/;"	t	typeref:struct:__anon2
+pthread_cond_wait	Condition.hpp	/^pthread_cond_wait (pthread_cond_t *cv, $/;"	f	class:Condition
+pthread_condattr_t	Condition.hpp	/^typedef int pthread_condattr_t;$/;"	t
+pthread_mutex_t	Condition.hpp	/^typedef CRITICAL_SECTION pthread_mutex_t; $/;"	t
+read	headers.h	142;"	d
+readn	sockets.c	/^ssize_t readn( int inSock, void *outBuf, size_t inLen ) {$/;"	f
+redirect	stdio.c	/^void redirect(const char *inOutputFileName) {$/;"	f
+replace	string.c	/^void replace( char *position, int poslen, const char *replacement ) {$/;"	f
+required_argument	gnu_getopt.h	128;"	d
+sNum	Thread.cpp	/^int Thread::sNum = 0;$/;"	m	class:Thread	file:
+sNum	Thread.hpp	/^    static int sNum;$/;"	m	class:Thread
+sNum_cond	Thread.cpp	/^Condition Thread::sNum_cond;$/;"	m	class:Thread	file:
+sNum_cond	Thread.hpp	/^    static Condition sNum_cond;$/;"	m	class:Thread
+set	Timestamp.hpp	/^    void set( double sec ) {$/;"	f	class:Timestamp
+set	Timestamp.hpp	/^    void set( long sec, long usec ) {$/;"	f	class:Timestamp
+setAddressAny	SocketAddr.cpp	/^void SocketAddr::setAddressAny( void ) {$/;"	f	class:SocketAddr
+setHostname	SocketAddr.cpp	/^void SocketAddr::setHostname( const char* inHostname ) {$/;"	f	class:SocketAddr
+setPort	SocketAddr.cpp	/^void SocketAddr::setPort( unsigned short inPort ) {$/;"	f	class:SocketAddr
+setPortAny	SocketAddr.cpp	/^void SocketAddr::setPortAny( void ) {$/;"	f	class:SocketAddr
+setnow	Timestamp.hpp	/^    void setnow( void ) {$/;"	f	class:Timestamp
+setsock_tcp_mss	sockets.c	/^void setsock_tcp_mss( int inSock, int inMSS ) {$/;"	f
+setsock_tcp_windowsize	tcp_window_size.c	/^int setsock_tcp_windowsize( int inSock, int inTCPWin, int inSend ) {$/;"	f
+sig_dispatcher	signal.c	/^BOOL WINAPI sig_dispatcher( DWORD type ) {$/;"	f
+sig_exit	signal.c	/^void sig_exit( int inSigno ) {$/;"	f
+snprintf	headers.h	136;"	d
+snprintf	snprintf.c	/^int snprintf(char *buf, size_t size, const char *fmt, ...) {$/;"	f
+ssize_t	config.win32.h	66;"	d
+str	error.c	/^    const char* str;$/;"	m	struct:mesg	file:
+subSec	Timestamp.hpp	/^    double subSec( Timestamp right ) {$/;"	f	class:Timestamp
+subUsec	Timestamp.hpp	/^    long subUsec( Timestamp right ) {$/;"	f	class:Timestamp
+true	config.win32.h	73;"	d
+u_int16_t	config.win32.h	70;"	d
+u_int32_t	config.win32.h	64;"	d
+val	gnu_getopt.h	/^    int val;$/;"	m	struct:option
+warn	error.c	/^void warn( const char *inMessage, const char *inFile, int inLine ) {$/;"	f
+warn_errno	error.c	/^void warn_errno( const char *inMessage, const char *inFile, int inLine ) {$/;"	f
+warn_mss_fail	sockets.c	/^const char warn_mss_fail[] = "\\$/;"	v
+warn_mss_notset	sockets.c	/^const char warn_mss_notset[] =$/;"	v
+winCEStderr	wincestderr.c	/^FILE *winCEStderr;$/;"	v
+winsock_strerror	error.c	/^const char* winsock_strerror( DWORD inErrno ) {$/;"	f
+write	headers.h	143;"	d
+writen	sockets.c	/^ssize_t writen( int inSock, const void *inBuf, size_t inLen ) {$/;"	f
+zeroAddress	SocketAddr.cpp	/^void SocketAddr::zeroAddress( void ) {$/;"	f	class:SocketAddr
+~Condition	Condition.hpp	/^    ~Condition()$/;"	f	class:Condition
+~Mutex	Mutex.hpp	/^    ~Mutex() {$/;"	f	class:Mutex
+~Queue	Queue.cpp	/^Queue::~Queue() {$/;"	f	class:Queue
+~Socket	Socket.cpp	/^Socket::~Socket() {$/;"	f	class:Socket
+~SocketAddr	SocketAddr.cpp	/^SocketAddr::~SocketAddr( ) {$/;"	f	class:SocketAddr
+~Thread	Thread.cpp	/^Thread::~Thread() {$/;"	f	class:Thread

@@ -1,0 +1,2914 @@
+# Microsoft eMbedded Visual Tools Project File - Name="iperflib" - Package Owner=<4>
+# Microsoft eMbedded Visual Tools Generated Build File, Format Version 6.02
+# ** DO NOT EDIT **
+
+# TARGTYPE "Win32 (WCE SH4) Static Library" 0x8604
+# TARGTYPE "Win32 (WCE MIPS) Static Library" 0x8204
+# TARGTYPE "Win32 (WCE x86em) Static Library" 0x7f04
+# TARGTYPE "Win32 (WCE ARM) Static Library" 0x8504
+# TARGTYPE "Win32 (WCE SH3) Static Library" 0x8104
+
+CFG=iperflib - Win32 (WCE MIPS) Debug
+!MESSAGE This is not a valid makefile. To build this project using NMAKE,
+!MESSAGE use the Export Makefile command and run
+!MESSAGE 
+!MESSAGE NMAKE /f "iperflib.vcn".
+!MESSAGE 
+!MESSAGE You can specify a configuration when running NMAKE
+!MESSAGE by defining the macro CFG on the command line. For example:
+!MESSAGE 
+!MESSAGE NMAKE /f "iperflib.vcn" CFG="iperflib - Win32 (WCE MIPS) Debug"
+!MESSAGE 
+!MESSAGE Possible choices for configuration are:
+!MESSAGE 
+!MESSAGE "iperflib - Win32 (WCE MIPS) Release" (based on "Win32 (WCE MIPS) Static Library")
+!MESSAGE "iperflib - Win32 (WCE MIPS) Debug" (based on "Win32 (WCE MIPS) Static Library")
+!MESSAGE "iperflib - Win32 (WCE SH4) Release" (based on "Win32 (WCE SH4) Static Library")
+!MESSAGE "iperflib - Win32 (WCE SH4) Debug" (based on "Win32 (WCE SH4) Static Library")
+!MESSAGE "iperflib - Win32 (WCE SH3) Release" (based on "Win32 (WCE SH3) Static Library")
+!MESSAGE "iperflib - Win32 (WCE SH3) Debug" (based on "Win32 (WCE SH3) Static Library")
+!MESSAGE "iperflib - Win32 (WCE ARM) Release" (based on "Win32 (WCE ARM) Static Library")
+!MESSAGE "iperflib - Win32 (WCE ARM) Debug" (based on "Win32 (WCE ARM) Static Library")
+!MESSAGE "iperflib - Win32 (WCE x86em) Release" (based on "Win32 (WCE x86em) Static Library")
+!MESSAGE "iperflib - Win32 (WCE x86em) Debug" (based on "Win32 (WCE x86em) Static Library")
+!MESSAGE 
+
+# Begin Project
+# PROP AllowPerConfigDependencies 0
+# PROP Scc_ProjName ""
+# PROP Scc_LocalPath ""
+# PROP ATL_Project 2
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "MIPSRel"
+# PROP BASE Intermediate_Dir "MIPSRel"
+# PROP BASE CPU_ID "{D6519010-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "MIPSRel"
+# PROP Intermediate_Dir "MIPSRel"
+# PROP CPU_ID "{D6519010-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=clmips.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /YX /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /D "WIN32" /YX /Oxs /M$(CECrtMT) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "MIPSDbg"
+# PROP BASE Intermediate_Dir "MIPSDbg"
+# PROP BASE CPU_ID "{D6519010-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "MIPSDbg"
+# PROP Intermediate_Dir "MIPSDbg"
+# PROP CPU_ID "{D6519010-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=clmips.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "MIPS" /D "_MIPS_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /D "WIN32" /YX /M$(CECrtMTDebug) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "SH4Rel"
+# PROP BASE Intermediate_Dir "SH4Rel"
+# PROP BASE CPU_ID "{D6519021-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "SH4Rel"
+# PROP Intermediate_Dir "SH4Rel"
+# PROP CPU_ID "{D6519021-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=shcl.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH4" /D "_SH4_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /YX /Qsh4 /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH4" /D "_SH4_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /YX /Qsh4 /Oxs /M$(CECrtMT) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "SH4Dbg"
+# PROP BASE Intermediate_Dir "SH4Dbg"
+# PROP BASE CPU_ID "{D6519021-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "SH4Dbg"
+# PROP Intermediate_Dir "SH4Dbg"
+# PROP CPU_ID "{D6519021-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=shcl.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH4" /D "_SH4_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /YX /Qsh4 /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH4" /D "_SH4_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /YX /Qsh4 /M$(CECrtMTDebug) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "SH3Rel"
+# PROP BASE Intermediate_Dir "SH3Rel"
+# PROP BASE CPU_ID "{D6519020-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "SH3Rel"
+# PROP Intermediate_Dir "SH3Rel"
+# PROP CPU_ID "{D6519020-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=shcl.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH3" /D "_SH3_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /YX /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH3" /D "_SH3_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "NDEBUG" /D "_LIB" /D "WIN32" /YX /Oxs /M$(CECrtMT) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "SH3Dbg"
+# PROP BASE Intermediate_Dir "SH3Dbg"
+# PROP BASE CPU_ID "{D6519020-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "SH3Dbg"
+# PROP Intermediate_Dir "SH3Dbg"
+# PROP CPU_ID "{D6519020-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=shcl.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH3" /D "_SH3_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "SHx" /D "SH3" /D "_SH3_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /D "WIN32" /YX /M$(CECrtMTDebug) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "ARMRel"
+# PROP BASE Intermediate_Dir "ARMRel"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "ARMRel"
+# PROP Intermediate_Dir "ARMRel"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /YX /Oxs /M$(CECrtMT) /c
+# ADD CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "NDEBUG" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /D "WIN32" /YX /Oxs /M$(CECrtMT) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "ARMDbg"
+# PROP BASE Intermediate_Dir "ARMDbg"
+# PROP BASE CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "ARMDbg"
+# PROP Intermediate_Dir "ARMDbg"
+# PROP CPU_ID "{D6518FFC-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=clarm.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /YX /M$(CECrtMTDebug) /c
+# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "$(CePlatform)" /D "ARM" /D "_ARM_" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_LIB" /D "WIN32" /YX /M$(CECrtMTDebug) /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 0
+# PROP BASE Output_Dir "X86EMRel"
+# PROP BASE Intermediate_Dir "X86EMRel"
+# PROP BASE CPU_ID "{D6518FF4-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 0
+# PROP Output_Dir "X86EMRel"
+# PROP Intermediate_Dir "X86EMRel"
+# PROP CPU_ID "{D6518FF4-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=cl.exe
+# ADD BASE CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "$(CePlatform)" /D "i486" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /D "_LIB" /YX /Oxs /Gz /c
+# ADD CPP /nologo /W3 /D _WIN32_WCE=$(CEVersion) /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "$(CePlatform)" /D "i486" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "NDEBUG" /D "_LIB" /YX /Oxs /Gz /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+# PROP BASE Use_MFC 0
+# PROP BASE Use_Debug_Libraries 1
+# PROP BASE Output_Dir "X86EMDbg"
+# PROP BASE Intermediate_Dir "X86EMDbg"
+# PROP BASE CPU_ID "{D6518FF4-710F-11D3-99F2-00105A0DF099}"
+# PROP BASE Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP BASE Target_Dir ""
+# PROP Use_MFC 0
+# PROP Use_Debug_Libraries 1
+# PROP Output_Dir "X86EMDbg"
+# PROP Intermediate_Dir "X86EMDbg"
+# PROP CPU_ID "{D6518FF4-710F-11D3-99F2-00105A0DF099}"
+# PROP Platform_ID "{8A9A2F80-6887-11D3-842E-005004848CBA}"
+# PROP Target_Dir ""
+CPP=cl.exe
+# ADD BASE CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "$(CePlatform)" /D "i486" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "_LIB" /YX /Gz /c
+# ADD CPP /nologo /W3 /Zi /Od /D "DEBUG" /D _WIN32_WCE=$(CEVersion) /D "WIN32" /D "STRICT" /D "_WIN32_WCE_EMULATION" /D "INTERNATIONAL" /D "USA" /D "INTLMSG_CODEPAGE" /D "$(CePlatform)" /D "i486" /D UNDER_CE=$(CEVersion) /D "UNICODE" /D "_UNICODE" /D "_X86_" /D "x86" /D "_LIB" /YX /Gz /c
+LIB32=link.exe -lib
+# ADD BASE LIB32 /nologo
+# ADD LIB32 /nologo
+BSC32=bscmake.exe
+# ADD BASE BSC32 /nologo
+# ADD BSC32 /nologo
+
+!ENDIF 
+
+# Begin Target
+
+# Name "iperflib - Win32 (WCE MIPS) Release"
+# Name "iperflib - Win32 (WCE MIPS) Debug"
+# Name "iperflib - Win32 (WCE SH4) Release"
+# Name "iperflib - Win32 (WCE SH4) Debug"
+# Name "iperflib - Win32 (WCE SH3) Release"
+# Name "iperflib - Win32 (WCE SH3) Debug"
+# Name "iperflib - Win32 (WCE ARM) Release"
+# Name "iperflib - Win32 (WCE ARM) Debug"
+# Name "iperflib - Win32 (WCE x86em) Release"
+# Name "iperflib - Win32 (WCE x86em) Debug"
+# Begin Group "Source Files"
+
+# PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
+# Begin Source File
+
+SOURCE=.\delay.cpp
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_DELAY=\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_DELAY=\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_DELAY=\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_DELAY=\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_DELAY=\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_DELAY=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_DELAY=\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_DELAY=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_DELAY=\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_DELAY=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\delay.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Timestamp.hpp"\
+	
+NODEP_CPP_DELAY=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\endian.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_ENDIA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_ENDIA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_ENDIA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_ENDIA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_ENDIA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_ENDIA=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_ENDIA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_ENDIA=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_ENDIA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_ENDIA=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ENDIA=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\error.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_ERROR=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_ERROR=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_ERROR=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_ERROR=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_ERROR=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_ERROR=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_ERROR=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_ERROR=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_ERROR=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_ERROR=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_ERROR=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\gettimeofday.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_GETTI=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_GETTI=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_GETTI=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_GETTI=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_GETTI=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_GETTI=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_GETTI=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_GETTI=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_GETTI=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_GETTI=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_GETTI=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\gnu_getopt.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_GNU_G=\
+	".\gnu_getopt.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\gnu_getopt_long.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_GNU_GE=\
+	".\gnu_getopt.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\inet_ntop.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_INET_=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_INET_=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_INET_=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_INET_=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_INET_=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_INET_=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_INET_=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_INET_=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_INET_=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_INET_=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\inet_pton.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_INET_P=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_INET_P=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_INET_P=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_INET_P=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_INET_P=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_INET_P=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_INET_P=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_INET_P=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_INET_P=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_INET_P=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	
+NODEP_CPP_INET_P=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\Queue.cpp
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_QUEUE=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_QUEUE=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_QUEUE=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_QUEUE=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_QUEUE=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_QUEUE=\
+	".\assert.h"\
+	".\Condition.hpp"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_QUEUE=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_QUEUE=\
+	".\assert.h"\
+	".\Condition.hpp"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_QUEUE=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_QUEUE=\
+	".\assert.h"\
+	".\Condition.hpp"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\Queue.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_QUEUE=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\signal.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_SIGNA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_SIGNA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_SIGNA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_SIGNA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_SIGNA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_SIGNA=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_SIGNA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SIGNA=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_SIGNA=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_SIGNA=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SIGNA=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\snprintf.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_SNPRI=\
+	".\snprintf.h"\
+	
+NODEP_CPP_SNPRI=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\Socket.cpp
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_SOCKE=\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_SOCKE=\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_SOCKE=\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_SOCKE=\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_SOCKE=\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_SOCKE=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_SOCKE=\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SOCKE=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_SOCKE=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_SOCKE=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\Socket.hpp"\
+	".\SocketAddr.hpp"\
+	".\Timestamp.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKE=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\SocketAddr.cpp
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_SOCKET=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_SOCKET=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_SOCKET=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_SOCKET=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_SOCKET=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_SOCKET=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_SOCKET=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SOCKET=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_SOCKET=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_SOCKET=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\SocketAddr.hpp"\
+	
+NODEP_CPP_SOCKET=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\sockets.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_SOCKETS=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_SOCKETS=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_SOCKETS=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_SOCKETS=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_SOCKETS=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_SOCKETS=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_SOCKETS=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_SOCKETS=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_SOCKETS=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_SOCKETS=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_SOCKETS=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\stdio.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_STDIO=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_STDIO=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_STDIO=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_STDIO=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_STDIO=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_STDIO=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_STDIO=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_STDIO=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_STDIO=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_STDIO=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STDIO=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\string.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_STRIN=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_STRIN=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_STRIN=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_STRIN=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_STRIN=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_STRIN=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_STRIN=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_STRIN=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_STRIN=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_STRIN=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_STRIN=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\tcp_window_size.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_TCP_W=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_TCP_W=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_TCP_W=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_TCP_W=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_TCP_W=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_TCP_W=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_TCP_W=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_TCP_W=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_TCP_W=\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_TCP_W=\
+	".\assert.h"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\snprintf.h"\
+	".\util.h"\
+	
+NODEP_CPP_TCP_W=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\Thread.cpp
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+DEP_CPP_THREA=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+DEP_CPP_THREA=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+DEP_CPP_THREA=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+DEP_CPP_THREA=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+DEP_CPP_THREA=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+DEP_CPP_THREA=\
+	".\assert.h"\
+	".\Condition.hpp"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+DEP_CPP_THREA=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	".\config.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+DEP_CPP_THREA=\
+	".\assert.h"\
+	".\Condition.hpp"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+DEP_CPP_THREA=\
+	".\Condition.hpp"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	".\onfig.win32.h"\
+	
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+DEP_CPP_THREA=\
+	".\assert.h"\
+	".\Condition.hpp"\
+	".\config.win32.h"\
+	".\gettimeofday.h"\
+	".\headers.h"\
+	".\inet_aton.h"\
+	".\Mutex.hpp"\
+	".\snprintf.h"\
+	".\Thread.hpp"\
+	".\util.h"\
+	
+NODEP_CPP_THREA=\
+	".\config.h"\
+	
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\wincestderr.c
+
+!IF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Release"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE MIPS) Debug"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Release"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH4) Debug"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Release"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE SH3) Debug"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Release"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE ARM) Debug"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Release"
+
+!ELSEIF  "$(CFG)" == "iperflib - Win32 (WCE x86em) Debug"
+
+!ENDIF 
+
+# End Source File
+# End Group
+# Begin Group "Header Files"
+
+# PROP Default_Filter "h;hpp;hxx;hm;inl"
+# End Group
+# End Target
+# End Project

@@ -1,0 +1,11 @@
+2008.12
+ - add preprocessor WINCE to iperflib
+ - modify FAIL_errno macro not to call exit(1) which exit the application.
+
+ - Add implementation of condition variable in Condition.hpp, Mutex.hpp. 
+   Testing in win32 app with that classes but "lost wait" problem occured. 
+   See douglas schmidt's article. SignalAndWaitObjects is my goal.
+
+ - logging to "\My Documents\btools_log"
+ - ping log will be appended to "btools_ping.txt"
+ - ICMP error shows socket error ID and string both.
