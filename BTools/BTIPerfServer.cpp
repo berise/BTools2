@@ -141,7 +141,9 @@ BOOL BTIPerfServer::OnInitDialog()
 void BTIPerfServer::PrintBuffer(char *buffer,char *speed)
 {
 //	m_csReport.AddString((const unsigned short *)buffer);
-	m_lbResult.AddString(ansi_to_unicode(buffer));
+	int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
+
+	m_lbResult.SetCurSel(nInserted );
 
 	/*if (m_fStatistics !=NULL)
 	{
@@ -266,7 +268,7 @@ void BTIPerfServer::OnBnClickedRunServer()
 		theListener->Stop();
 
 		DWORD dwExitCode;
-		TerminateThread(m_ThreadHandle, dwExitCode);
+		//TerminateThread(m_ThreadHandle, dwExitCode);
 
 		m_bServerStarted=FALSE;
 		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));

@@ -99,30 +99,30 @@ IDR_MAINFRAME MENU
 BEGIN
     POPUP "Menu"
     BEGIN
-        MENUITEM "Preference...",               ID_32772
+        MENUITEM "&Preference...",              ID_32772
         MENUITEM SEPARATOR
-        POPUP "Function Tabs"
+        MENUITEM "iPin&g tab",                  ID_FILE_PING
+        MENUITEM "i&Client tab",                ID_FILE_IPERFCLIENT
+        MENUITEM "i&Server tab",                ID_FILE_IPERFSERVER
+        MENUITEM SEPARATOR
+        POPUP "&Functions"
         BEGIN
-            MENUITEM "Ping",                        ID_FILE_PING
-            MENUITEM SEPARATOR
-            MENUITEM "IPerf Client",                ID_FILE_IPERFCLIENT
-            MENUITEM "IPerf Server",                ID_FILE_IPERFSERVER
-        END
-        POPUP "devel"
-        BEGIN
-            POPUP "파일"
+            POPUP "devel", GRAYED
             BEGIN
-                MENUITEM "저장",                          ID_FILE_SAVE
+                POPUP "파일"
+                BEGIN
+                    MENUITEM "저장",                          ID_FILE_SAVE
+                END
+                POPUP "편집"
+                BEGIN
+                    MENUITEM "실행 취소",                       ID_EDIT_UNDO
+                    MENUITEM SEPARATOR
+                    MENUITEM "잘라내기",                        ID_EDIT_CUT
+                    MENUITEM "복사",                          ID_EDIT_COPY
+                    MENUITEM "붙여넣기",                        ID_EDIT_PASTE
+                END
+                MENUITEM "도구",                          ID_DEVEL_32782
             END
-            POPUP "편집"
-            BEGIN
-                MENUITEM "실행 취소",                       ID_EDIT_UNDO
-                MENUITEM SEPARATOR
-                MENUITEM "잘라내기",                        ID_EDIT_CUT
-                MENUITEM "복사",                          ID_EDIT_COPY
-                MENUITEM "붙여넣기",                        ID_EDIT_PASTE
-            END
-            MENUITEM "도구",                          65535
         END
         MENUITEM SEPARATOR
         MENUITEM "&About...",                   ID_APP_ABOUT
@@ -193,7 +193,7 @@ CAPTION "대화 상자"
 FONT 9, "굴림"
 BEGIN
     LTEXT           "Host:",IDC_STATIC,1,10,17,8
-    LISTBOX         IDC_LIST1,6,48,96,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LISTBOX         IDC_LIST1,6,48,96,90,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
     COMBOBOX        IDC_COMBO1,20,8,58,58,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
     PUSHBUTTON      "&Ping",IDC_DO_PING,78,7,30,14
 END

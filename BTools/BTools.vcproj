@@ -374,7 +374,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="iperfclient"
+			Name="iperfclientserver"
 			>
 			<File
 				RelativePath=".\Audience.cpp"

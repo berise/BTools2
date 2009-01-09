@@ -21,8 +21,6 @@ DWORD WINAPI StartThread(LPVOID lpParameter )
 
 
 
-
-
 // BTIPerfClient 대화 상자입니다.
 
 IMPLEMENT_DYNAMIC(BTIPerfClient, CPropertyViewPage)
@@ -32,9 +30,7 @@ BTIPerfClient::BTIPerfClient(CWnd* pParent /*=NULL*/)
 	, m_csHostName(_T(""))
 {
 	m_pIPerfClient=0;
-	m_bClientStarted=FALSE;
-
-	
+	m_bClientStarted=FALSE;	
 	
 	m_fStatistics = NULL;
 	//{{AFX_DATA_INIT(CIperfDlg)
@@ -105,7 +101,9 @@ BOOL BTIPerfClient::OnInitDialog()
 void BTIPerfClient::PrintBuffer(char *buffer,char *speed)
 {
 //	m_csReport.AddString((const unsigned short *)buffer);
-	m_lbResult.AddString(ansi_to_unicode(buffer));
+	int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
+
+	m_lbResult.SetCurSel(nInserted );
 
 	if (m_fStatistics !=NULL)
 	{

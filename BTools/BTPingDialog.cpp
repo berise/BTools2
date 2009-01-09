@@ -64,13 +64,15 @@ BOOL BTPingDialog::OnInitDialog()
 	//m_ping_host.ModifyStyle(0, CBS_AUTOHSCROLL);	
 	m_ping_host.AddString(_T("203.242.63.135"));
 	m_ping_host.AddString(_T("192.168.1.1"));
-	m_ping_host.AddString(_T("192.168.1.2"));
-	m_ping_host.AddString(_T("192.168.2.2"));
-	m_ping_host.AddString(_T("192.168.2.3"));
+
 	m_ping_host.AddString(_T("localhost"));
 
 
 	m_ping_host.SetCurSel(2);
+
+	// LB style 변경.
+	DWORD dwStyle = m_ping_result.GetStyle();
+	//m_ping_result.ModifyStyle(0, dwStyle | LB_SETHORIZONTALEXTENT);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.

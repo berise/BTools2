@@ -315,7 +315,12 @@ void PerfSocket::ReportBW( max_size_t inBytes,
 
     byte_snprintf( bytes, sizeof(bytes), (double) inBytes,
                    toupper( mSettings->mFormat));
-    byte_snprintf( speed, sizeof(speed),
+
+
+	// This comes when I debug server code
+	// Server side stopped while client trying to calculate BW
+	if(inStop - inStart != 0)
+		byte_snprintf( speed, sizeof(speed),
                    inBytes / (inStop - inStart), mSettings->mFormat);
 
     sprintf( reportBuffer, report_bw_format,

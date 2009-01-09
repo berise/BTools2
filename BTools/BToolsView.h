@@ -56,6 +56,9 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnFilePing();
+	afx_msg void OnFileIperfclient();
+	afx_msg void OnFileIperfserver();
 };
 
 #ifndef _DEBUG  // BToolsView.cpp의 디버그 버전

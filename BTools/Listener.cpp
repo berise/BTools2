@@ -94,6 +94,8 @@ Listener::Listener( ext_Settings *inSettings, CReporter *rep )
 Thread(),
 m_pExtSettings(inSettings)
 {
+	//
+	m_bStop = FALSE;
 
     mCount = ( inSettings->mThreads != 0 );
     mClients = inSettings->mThreads;
@@ -135,6 +137,35 @@ void Listener::Run( void ) {
     Iperf_ListEntry *exist = 0, *listtemp = 0;
 
     if ( mUDP ) {
+
+		// let's be selective server
+		// Socket callback status structure
+		fd_set  fds;
+		// Maximum wait time for the "select" command
+		timeval tv; 
+
+		// Start looping and check the respective port for incoming request
+		do
+		{
+			// Socket callback status structure
+			fds;
+			// Maximum wait time for the "select" command
+			tv.tv_sec = 3;   // 3 seconds
+			tv.tv_usec = 0; 
+			// Initialize the fd_set structure to NULL
+			FD_ZERO (&fds);
+			// Add the sckServer socket to fd_set structure
+			FD_SET (mSock, &fds);
+			// Call the select command
+			if (select(0, &fds, NULL, NULL, &tv) == 0)
+				// Maximum wait time is expired.
+				continue;
+			// Check is there any incoming request/active in the fd_set structure
+			// Zero mean no, else
+			if (FD_ISSET(mSock, &fds) != 0)
+			{
+
+
         struct UDP_datagram* mBuf_UDP  = (struct UDP_datagram*) mBuf;
         client_hdr* hdr = (client_hdr*) (mBuf_UDP + 1);
         // UDP uses listening socket 
@@ -145,7 +176,7 @@ void Listener::Run( void ) {
         // a new thread to service the new client 
         // The main server runs in a single thread 
         // Thread per client model is followed 
-        do {
+        //do {
             peer = Accept_UDP(); 
             if ( client != NULL ) {
                 if ( !SocketAddr::Hostare_Equal( client->get_sockaddr(), 
@@ -241,7 +272,7 @@ void Listener::Run( void ) {
 
 #endif /* WIN32 */
 #else // HAVE_THREAD
-            {
+            
                 tempSettings = NULL;
                 int rc = connect( mSock, (struct sockaddr*) &peer,
                                   // Some OSes do not like the size of sockaddr_storage so we
@@ -276,94 +307,150 @@ void Listener::Run( void ) {
                 mSock = -1; 
                 Listen( mSettings->mLocalhost, mSettings->mDomain );
                 mClients--; 
-            }
-        } while ( !mCount || ( mCount && mClients > 0 ) ); 
+            
+        //} while ( !mCount || ( mCount && mClients > 0 ) ); 
+			} // if(FD_SET
+			// GUI Exit code must be here
+		}while (mSock != INVALID_SOCKET && m_bStop != TRUE);
     } else {
-        // TCP uses sockets returned from Accept 
-        client_hdr buf;
-        int connected_sock; 
-        do {
-            connected_sock = Accept(); 
-            if ( connected_sock >= 0 ) {
-                Socklen_t temp = sizeof( peer );
-                getpeername( connected_sock, (sockaddr*)&peer, &temp );
-                if ( client != NULL ) {
-                    if ( !SocketAddr::Hostare_Equal( client->get_sockaddr(), 
-                                                     (sockaddr*) &peer ) ) {
-                        close( connected_sock );
-                        continue;
-                    }
-                }
-                tempSettings = NULL;
-#ifdef HAVE_THREAD
-                clients_mutex.Lock(); 
-                exist = Iperf_hostpresent( &peer, clients); 
-                listtemp = new Iperf_ListEntry;
-                memcpy(listtemp, &peer, sizeof(peer));
-                listtemp->next = NULL;
 
-                if ( exist != NULL ) {
-                    listtemp->holder = exist->holder;
-                    exist->holder->AddSocket(connected_sock);
-                } else {
-                    clients_mutex.Unlock(); 
-                    if ( !mSettings->mCompat ) {
-                        if ( recv( connected_sock, (char*)&buf, sizeof(buf), 0) > 0 ) {
-                            Settings::GenerateSpeakerSettings( mSettings, &tempSettings, 
-                                                               &buf, (sockaddr*) &peer );
-                        }
-                    }
 
-                    theAudience = new Audience( mSettings, connected_sock ); 
+		// let's be selective server
+		// Socket callback status structure
+		fd_set  fds;
+		// Maximum wait time for the "select" command
+		timeval tv; 
 
-                    if ( tempSettings != NULL ) {
-                        Speaker *theSpeaker = new Speaker( tempSettings );
-                        theSpeaker->OwnSettings();
-                        theSpeaker->DeleteSelfAfterRun();
-                        if ( tempSettings->mMode == kTest_DualTest ) {
-                            theSpeaker->Start();
-                        } else {
-                            theAudience->StartWhenDone( theSpeaker );
-                        }
-                    }
+		// Start looping and check the respective port for incoming request
+		do
+		{
+			// Socket callback status structure
+			fds;
+			// Maximum wait time for the "select" command
+			tv.tv_sec = 3;   // 3 seconds
+			tv.tv_usec = 0; 
+			// Initialize the fd_set structure to NULL
+			FD_ZERO (&fds);
+			// Add the sckServer socket to fd_set structure
+			FD_SET (mSock, &fds);
+			// Call the select command
+			if (select(0, &fds, NULL, NULL, &tv) == 0)
+				// Maximum wait time is expired.
+				continue;
+			// Check is there any incoming request/active in the fd_set structure
+			// Zero mean no, else
+			if (FD_ISSET(mSock, &fds) != 0)
+			{
+				/*
+				// Accept the incoming request
+				sckClient = accept(sckServer, NULL, 0);
+				// Close the existing listen socket (sckServer)
+				closesocket(sckServer); 
+				// Reset the sckSocket variable to NULL
+				sckServer = INVALID_SOCKET;
+				// Update status control
+				SetDlgItemText(hWnd, IDC_STATUS1, TEXT("Connected"));
+				// Create read input buffer thread
+				hThread2 = CreateThread(NULL, 0, ReadInBuffer, hWnd, 0, &dwThreadID);
+				// Self terminate this thread
+				break;
+				*/
 
-                    listtemp->holder = theAudience;
+				// TCP uses sockets returned from Accept 
+				client_hdr buf;
+				int connected_sock; 
+				//do {
+					connected_sock = Accept(); 
+					if ( connected_sock >= 0 ) {
+						Socklen_t temp = sizeof( peer );
+						getpeername( connected_sock, (sockaddr*)&peer, &temp );
+						if ( client != NULL ) {
+							if ( !SocketAddr::Hostare_Equal( client->get_sockaddr(), 
+															 (sockaddr*) &peer ) ) {
+								close( connected_sock );
+								continue;
+							}
+						}
+						tempSettings = NULL;
+		#ifdef HAVE_THREAD
+						clients_mutex.Lock(); 
+						exist = Iperf_hostpresent( &peer, clients); 
+						listtemp = new Iperf_ListEntry;
+						memcpy(listtemp, &peer, sizeof(peer));
+						listtemp->next = NULL;
 
-                    // startup the server thread, then forget about it 
-                    theAudience->DeleteSelfAfterRun(); 
-                    theAudience->Start(); 
-                    theAudience = NULL; 
-                    clients_mutex.Lock(); 
-                }
-                Iperf_pushback( listtemp, &clients ); 
-                clients_mutex.Unlock();
-#else
-                if ( !mSettings->mCompat ) {
-                    if ( recv( connected_sock, (char*)&buf, sizeof(buf), 0 ) > 0 ) {
-                        Settings::GenerateSpeakerSettings( mSettings, &tempSettings, 
-                                                           &buf, (sockaddr*) &peer );
-                    }
-                }
+						if ( exist != NULL ) {
+							listtemp->holder = exist->holder;
+							exist->holder->AddSocket(connected_sock);
+						} else {
+							clients_mutex.Unlock(); 
+							if ( !mSettings->mCompat ) {
+								if ( recv( connected_sock, (char*)&buf, sizeof(buf), 0) > 0 ) {
+									Settings::GenerateSpeakerSettings( mSettings, &tempSettings, 
+																	   &buf, (sockaddr*) &peer );
+								}
+							}
 
-                Server* theServer = new Server( mSettings, connected_sock );
-                theServer->DeleteSelfAfterRun();
-                theServer->Start();
-                
-                if ( tempSettings != NULL ) {
-                    Client *theClient = new Client( tempSettings );
-					//Client *theClient = new Client( tempSettings, NULL );
-                    theClient->DeleteSelfAfterRun();
-                    theClient->Start();
-                    DELETE_PTR( tempSettings );
-                }
-#endif
-                mClients--; 
-            }
-        } while ( !mCount || ( mCount && mClients > 0 ) ); 
+							theAudience = new Audience( mSettings, connected_sock ); 
+
+							if ( tempSettings != NULL ) {
+								Speaker *theSpeaker = new Speaker( tempSettings );
+								theSpeaker->OwnSettings();
+								theSpeaker->DeleteSelfAfterRun();
+								if ( tempSettings->mMode == kTest_DualTest ) {
+									theSpeaker->Start();
+								} else {
+									theAudience->StartWhenDone( theSpeaker );
+								}
+							}
+
+							listtemp->holder = theAudience;
+
+							// startup the server thread, then forget about it 
+							theAudience->DeleteSelfAfterRun(); 
+							theAudience->Start(); 
+							theAudience = NULL; 
+							clients_mutex.Lock(); 
+						}
+						Iperf_pushback( listtemp, &clients ); 
+						clients_mutex.Unlock();
+		#else
+						if ( !mSettings->mCompat ) {
+							if ( recv( connected_sock, (char*)&buf, sizeof(buf), 0 ) > 0 ) {
+								Settings::GenerateSpeakerSettings( mSettings, &tempSettings, 
+																   &buf, (sockaddr*) &peer );
+							}
+						}
+
+						Server* theServer = new Server( mSettings, connected_sock );
+						theServer->DeleteSelfAfterRun();
+						theServer->Start();
+		                
+						if ( tempSettings != NULL ) {
+							Client *theClient = new Client( tempSettings );
+							//Client *theClient = new Client( tempSettings, NULL );
+							theClient->DeleteSelfAfterRun();
+							theClient->Start();
+							DELETE_PTR( tempSettings );
+						}
+		#endif
+						mClients--; 
+					}
+				//} while ( !mCount || ( mCount && mClients > 0 ) ); 
+			} // FD_SET
+			// GUI Exit code must be here
+		}while (mSock != INVALID_SOCKET && m_bStop != TRUE);
     }
 } // end Run 
 
 
+// GUI activate Stop
+void Listener::Stop( void )
+{
+	m_bStop = TRUE;
+
+	Thread::Stop();
+}
 /**-------------------------------------------------------------------- 
  * Run the server as a daemon  
  * --------------------------------------------------------------------*/ 

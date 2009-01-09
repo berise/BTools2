@@ -207,10 +207,10 @@ BOOL CAboutDlg::OnInitDialog()
 					"| = MOD_IPERF_SERVER |"//8
 					"|                    |"//9				
 					"|------+-----+-------|"//0
-					"|            |       |"//1
-					"|cOPYRIGHT(r)|       |"//2
-					"| aLL rIGHTS |       |"//3
-					"|  rESERVED  +      @|"//4
+					"|            |Elbereh|"//1
+					"|cOPYRIGHT(r)|ELBERET|"//2
+					"| aLL rIGHTS |Elberet|"//3
+					"|  rESERVED  +NoSpac@|"//4
 					"+=-=-=-=-=-=-=-=-=-=-+");//5
 
 	if(bFlip == false)
@@ -242,8 +242,8 @@ BOOL CAboutDlg::OnInitDialog()
 	m_matrix2.AdjustClientYToSize(3);
 	//m_matrix2.SetText(_T(" !\"#$%&'()*+,-./0123456789;:<=>?@ABCDEFGHIJKLMNO PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
 	CString msg2(	"berise the developer  "
-					"Dlvl;46 $;0 HP;24(57) " // index for ';', ':' is mismatched in MatrixStatic.cpp
-					"Pw;34(42) AC;-9 Exp;12"	// ';' shows ':' and ':' shows ';'.
+					"Dlvl;54 $;-99 HP;3(17)" // index for ';', ':' is mismatched in MatrixStatic.cpp
+					"Pw;34(42) AC;-9 Exp;16"	// ';' shows ':' and ':' shows ';'.
 					);
 	m_matrix2.SetText(msg2);
 	//m_matrix2.DoScroll(5000, CMatrixStatic::RIGHT);

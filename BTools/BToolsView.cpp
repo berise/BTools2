@@ -19,6 +19,9 @@ IMPLEMENT_DYNCREATE(CBToolsView, CPropertyView)
 
 BEGIN_MESSAGE_MAP(CBToolsView, CPropertyView)
 	ON_WM_CREATE()
+	ON_COMMAND(ID_FILE_PING, &CBToolsView::OnFilePing)
+	ON_COMMAND(ID_FILE_IPERFCLIENT, &CBToolsView::OnFileIperfclient)
+	ON_COMMAND(ID_FILE_IPERFSERVER, &CBToolsView::OnFileIperfserver)
 END_MESSAGE_MAP()
 
 // CBToolsView 생성/소멸
@@ -86,7 +89,25 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	//EnableStackedTabs(TRUE);
 
-	SetActivePage(2);
+	SetActivePage(0);
 
 	return 0;
+}
+
+void CBToolsView::OnFilePing()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	SetActivePage(0);
+}
+
+void CBToolsView::OnFileIperfclient()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	SetActivePage(1);
+}
+
+void CBToolsView::OnFileIperfserver()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	SetActivePage(2);
 }

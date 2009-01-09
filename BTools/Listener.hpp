@@ -71,6 +71,9 @@ public:
     // accepts connections and starts Servers
     virtual void Run( void );
 
+	// triggers stop sign in run loop
+	virtual void Stop( void );
+
     // Starts the Servers as a daemon 
     virtual void runAsDaemon( const char *, int );
 
@@ -85,6 +88,8 @@ public:
 	ext_Settings *m_pExtSettings;
 
 protected:
+	BOOL m_bStop;
+
     int mClients;
     bool mCount;
 }; // end class Listener

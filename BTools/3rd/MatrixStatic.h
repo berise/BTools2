@@ -60,7 +60,7 @@
 // Any improvements you can think of.
 
 // Feature Added by berise _at_ gmail _dot_ com
-//	2008.12.22 : Flicker Free Scrolling with MemDC.h (minimum source changes)
+//	2008.12.22 : Flicker Free Scrolling with MemDC.h (with minimum code changes)
 
 
 // See the project example for a working demonstration.
