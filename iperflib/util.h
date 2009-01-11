@@ -169,14 +169,14 @@ void warn_errno( const char *inMessage, const char *inFile, int inLine );
     }                                           \
   } while( 0 )
 */
-#if defined(WINCE)
+//#if defined(WINCE)
 #define FAIL_errno( cond, msg )                 \
   do {                                          \
     if ( cond ) {                               \
       warn_errno( msg, __FILE__, __LINE__ );    \
     }                                           \
   } while( 0 )
-#endif
+//#endif
 
 
 #define WARN_errno( cond, msg )                 \

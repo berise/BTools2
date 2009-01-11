@@ -1,3 +1,9 @@
+ * UI layout following screen orientation
+ * Visualization of ping
+ * Visualization of iperf client & server(only with -i option, checker will be used for this)
+  - when checker is enabled, then visualization of performance(-i) is shown and log is turned off
+  - Visualization must not be used when doing a real benchmark.
+
  * port OScopeCtrl to ppc
  * Dynamic Range with AutoRange
  * Screen layout with ScreenLib

@@ -51,4 +51,5 @@ public:
 	CListBox m_lbResult;
 	afx_msg void OnBnClickedAddCommand();
 	afx_msg void OnLbnSelchangeCommandList();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

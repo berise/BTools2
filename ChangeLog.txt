@@ -1,3 +1,8 @@
+2009.01
+ - Added more platforms Pocket PC 2003, Smartphone 2003.
+ - Screen layout for Client & Server
+
+
 2008.12
  - add preprocessor WINCE to iperflib
  - modify FAIL_errno macro not to call exit(1) which exit the application.

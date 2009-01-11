@@ -8,6 +8,8 @@
 #include "Util.h"
 #include "LIstener.hpp"
 
+#include "3rd/ScreenLib.h"
+
 
 /* -------------------------------------------------------------------
  * Blocks the thread until a quit thread signal is sent
@@ -79,9 +81,7 @@ BTIPerfServer::BTIPerfServer(CWnd* pParent /*=NULL*/)
 
 	m_pIPerfServer=0;
 	m_bServerStarted=FALSE;
-	theListener = NULL;
-
-	
+	theListener = NULL;	
 	
 	m_fStatistics = NULL;
 	//{{AFX_DATA_INIT(CIperfDlg)
@@ -94,8 +94,6 @@ BTIPerfServer::BTIPerfServer(CWnd* pParent /*=NULL*/)
 	//m_csErrorFile = _T("\\My Documents\\iperf_err.txt");
 	m_csReportFile = _T("\\My Documents\\btools_stats.txt");
 	m_csErrorFile = _T("\\My Documents\\btools_error.txt");
-
-
 }
 
 BTIPerfServer::~BTIPerfServer()
@@ -114,6 +112,7 @@ BEGIN_MESSAGE_MAP(BTIPerfServer, CPropertyViewPage)
 	ON_BN_CLICKED(IDC_RUN_SERVER, &BTIPerfServer::OnBnClickedRunServer)
 	ON_LBN_SELCHANGE(IDC_COMMAND_LIST, &BTIPerfServer::OnLbnSelchangeCommandList)
 	ON_BN_CLICKED(IDC_ADD_COMMAND, &BTIPerfServer::OnBnClickedAddCommand)
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -161,7 +160,7 @@ void BTIPerfServer::PrintBuffer(char *buffer,char *speed)
 
 void BTIPerfServer::ClientFinished()
 {	
-	m_lbResult.AddString(_T("iServer finished"));
+	m_lbResult.AddString(_T("Server finished"));
 
 	m_bServerStarted=FALSE;
 	GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
@@ -267,11 +266,11 @@ void BTIPerfServer::OnBnClickedRunServer()
 		theListener->Sig_Interupt(0);
 		theListener->Stop();
 
-		DWORD dwExitCode;
+		//DWORD dwExitCode;
 		//TerminateThread(m_ThreadHandle, dwExitCode);
 
 		m_bServerStarted=FALSE;
-		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
+		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start &Server"));
 	}
 }
 
@@ -283,10 +282,7 @@ void BTIPerfServer::OnLbnSelchangeCommandList()
 	int nSelected = m_lbCommand.GetCurSel();
 	m_lbCommand.GetText(nSelected, szCmd);
 
-
 	GetDlgItem(IDC_COMMAND_EDIT)->SetWindowText(szCmd);
-
-
 }
 
 void BTIPerfServer::OnBnClickedAddCommand()
@@ -297,6 +293,20 @@ void BTIPerfServer::OnBnClickedAddCommand()
 	GetDlgItem(IDC_COMMAND_EDIT)->GetWindowText(szCmd);
 
 	m_lbCommand.AddString(szCmd);
+}
 
+void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
+{
+	__super::OnSize(nType, cx, cy);
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	CScreenLib::DockControl(m_hWnd, IDC_COMMAND_LIST, CScreenLib::dtTop);
+
+	CScreenLib::OptimizeWidth(m_hWnd, 2, IDC_COMMAND_LIST, IDC_RESULT_LIST);
+
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_ADD_COMMAND);
+
+	// IDC_COMMAND_LIST을 기준으로 COMMAND_EDIT을 왼쪽에 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_COMMAND_LIST, IDC_COMMAND_EDIT);
 
 }

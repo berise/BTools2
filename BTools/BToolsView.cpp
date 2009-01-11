@@ -89,7 +89,7 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	//EnableStackedTabs(TRUE);
 
-	SetActivePage(0);
+	SetActivePage(1);
 
 	return 0;
 }

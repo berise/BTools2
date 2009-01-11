@@ -7,6 +7,8 @@
 
 #include "Util.h" // unicode ansi
 
+#include "3rd/ScreenLib.h"
+
 
 DWORD WINAPI StartThread(LPVOID lpParameter )
 
@@ -63,6 +65,7 @@ BEGIN_MESSAGE_MAP(BTIPerfClient, CPropertyViewPage)
 	ON_BN_CLICKED(IDC_RUN_CLIENT, &BTIPerfClient::OnBnClickedRunClient)
 	ON_BN_CLICKED(IDC_ADD_COMMAND, &BTIPerfClient::OnBnClickedAddCommand)
 	ON_LBN_SELCHANGE(IDC_COMMAND_LIST, &BTIPerfClient::OnLbnSelchangeCommandList)
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -123,7 +126,7 @@ void BTIPerfClient::ClientFinished()
 	m_lbResult.AddString(_T("iperf client finished"));
 	//GetDlgItem(IDC_CLIENT_STATUS)->SetWindowText(_T("Client Finished"));
 	m_bClientStarted=FALSE;
-	GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start"));
+	GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start &Client"));
 	fclose(m_fStatistics);
 	m_fStatistics=NULL;
 	fclose(winCEStderr);
@@ -292,5 +295,59 @@ void BTIPerfClient::OnLbnSelchangeCommandList()
 
 	GetDlgItem(IDC_COMMAND_EDIT)->SetWindowText(szCmd);
 
+
+}
+
+void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
+{
+	__super::OnSize(nType, cx, cy);
+
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	CScreenLib::DockControl(m_hWnd, IDC_COMMAND_LIST, CScreenLib::dtTop);
+
+	CScreenLib::OptimizeWidth(m_hWnd, 2, IDC_COMMAND_LIST, IDC_RESULT_LIST);
+
+	// IDC_COMMAND_LIST 기준으로 오른쪽에 Add정렬
+	CScreenLib::AlignControls(m_hWnd, 
+		CScreenLib::atRight, 
+		2, 
+		IDC_COMMAND_LIST,		// right edge point
+		IDC_ADD_COMMAND,
+		IDC_RUN_CLIENT);
+
+	// IDC_COMMAND_LIST을 기준으로 COMMAND_EDIT을 왼쪽에 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, IDC_LOCAL_IP);
+
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_CLIENT);
+
+	// 왼쪽 상단의 기준인 호스트 텍스트에 따라 LISt와 OSCOPECTRL을 정렬(왼쪽)
+	//if(m_OScopeCtrl.GetSafeHwnd() != NULL)
+	//	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_STATIC1, IDC_LIST1, IDC_CUSTOM1);
+
+
+	//CScreenLib::MakeSameSize(m_hWnd, CScreenLib::stHeight, 2, IDC_STATIC1, IDC_COMBO1, IDC_DO_PING);
+
+	
+
+	// IDC_OSCOPECTRL은 Control이 아니다. 고로 CScreenLib에서 오류가 발생. 별도로 처리함.
+	/*if(m_OScopeCtrl.GetSafeHwnd() != NULL)
+	{
+		CRect rect;
+
+		if(DRA::GetDisplayMode() == DRA::Landscape)
+		{
+			GetDlgItem(IDC_LIST1)->GetWindowRect(rect);
+			GetDlgItem(IDC_LIST1)->ShowWindow(SW_HIDE);
+		}
+		else
+		{
+			GetDlgItem(IDC_LIST1)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_CUSTOM1)->GetWindowRect(rect);
+		}
+
+		ScreenToClient(rect);
+		m_OScopeCtrl.MoveWindow(rect);
+	}
+	*/
 
 }

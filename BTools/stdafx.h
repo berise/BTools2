@@ -69,3 +69,6 @@
 
 #include <altcecrt.h>
 #include <IPExport.h>
+
+#include <afxpriv.h>  // to avoid -_-
+//To avoid this message please put AFXPRIV.H in your PCH (normally stdafx.h)

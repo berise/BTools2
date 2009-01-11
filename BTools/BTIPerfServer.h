@@ -117,4 +117,5 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 	delete Buff;
 }
 
+afx_msg void OnSize(UINT nType, int cx, int cy);
 };
