@@ -154,7 +154,7 @@ void COScopeCtrl::SetRange(double dLower, double dUpper, int nDecimalPlaces)
   }
 
   // We don't need to erase, because we're blitting - berise
-  Invalidate(FALSE);
+  Invalidate(TRUE);
 
 }  // SetRange
 
@@ -431,8 +431,8 @@ void COScopeCtrl::InvalidateCtrl()
   */
   // 아. 역시 디버그는 시간과의 싸움이다.
   // Orientation이 바뀔때는 m_bitmapPlot도 역시 갱신 해 주어야 하는데... 
-  // 이걸 찾지 못해서, 하루를 고생하는 구나.. 머리가 나쁘면 시간을 소모하던가, 아니면 속이 썩던가 한다.
-
+  // 이걸 찾지 못해서, 하루를 고생하는 구나..
+  // 머리가 나쁘면 시간을 소모하던가, 아니면 속이 썩던가 한다.
   if (m_dcPlot.GetSafeHdc() == NULL)
   {
     m_dcPlot.CreateCompatibleDC(&dc) ;
@@ -454,7 +454,6 @@ void COScopeCtrl::InvalidateCtrl()
   // make sure the plot bitmap is cleared
   m_dcPlot.SetBkColor (m_crBackColor) ;
   m_dcPlot.FillRect(m_rectClient, &m_brushBack) ;
-
   
 
 	  // Auto Ranging
@@ -524,9 +523,8 @@ void COScopeCtrl::InvalidateCtrl()
 		
 	}  ///////////// added for y-autorange support
 
-// finally, force the plot area to redraw
-		InvalidateRect(m_rectClient) ; // m_rectClient
-	
+	// finally, force the plot area to redraw
+	InvalidateRect(m_rectClient) ; // m_rectClient
 
 } // InvalidateCtrl
 
@@ -540,7 +538,6 @@ double COScopeCtrl::AppendPoint(double dNewPoint)
 
   // append a data point to the plot
   // return the previous point
-
   double dPrevious ;
 
   m_pdblDataPoints[m_nDataIndex++] = dNewPoint;
@@ -596,9 +593,7 @@ void COScopeCtrl::OnPaint()
 
 /////////////////////////////////////////////////////////////////////////////
 //#berise
-// 좀 더 부드러운 이동을 위해서는 m_dcPlot의 이동을 1 칸씩 할 필요가 있다.
-// 이를 위해서는 DrawPoint의 개념을 바꿀 필요가 있다.
-// Points에 대한 관리를 하고, 이를 필요시 다시 그리는 작업이 필요.
+// 좀 더 부드러운 이동을 위해서는...
 void COScopeCtrl::DrawPoint()
 {
   // this does the work of "scrolling" the plot to the left
@@ -707,7 +702,9 @@ void COScopeCtrl::OnSize(UINT nType, int cx, int cy)
   m_dVerticalFactor = (double)m_nPlotHeight / m_dRange ; 
 
 #ifdef WINCE
-	static DRA::DisplayMode mode = DRA::GetDisplayMode();
+	// 최초 실행시 SetRange를 호출 할 수 있도록 0로 설정
+  static DRA::DisplayMode mode = DRA::Portrait;//
+	
 
 	DRA::DisplayMode newMode = DRA::GetDisplayMode();
 
@@ -715,9 +712,14 @@ void COScopeCtrl::OnSize(UINT nType, int cx, int cy)
 	{
 		mode = newMode;
 		//Reset();
-		SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
+
+		// x, y  축이 변경될 가능성이 있기 때문에, SetRange로 갱신 필요.
+		//SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
 		
 	}
+
+	// Orientation 에 상관 없이 Reset!
+	Reset();
 #endif
 
 } // OnSize

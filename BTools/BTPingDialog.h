@@ -2,6 +2,8 @@
 #include "resourceppc.h"
 #include "3rd/PropertyView.h"
 #include "afxwin.h"
+#include "3rd/OScopeCtrl.h"
+
 
 class CPingThread;
 
@@ -40,6 +42,9 @@ public:
 	CPingOption opt;
 	BOOL is_host_alive;
 
+	// visualization
+	COScopeCtrl m_OScopeCtrl;
+
 
 // 대화 상자 데이터입니다.
 	enum { IDD = IDD_PING };
@@ -50,7 +55,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	CListBox m_ping_result;
-	CComboBox m_ping_host;
+	CComboBox m_cbHosts;
 	afx_msg void OnBnClickedDoPing();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnDestroy();

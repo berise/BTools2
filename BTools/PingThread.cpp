@@ -164,6 +164,16 @@ UINT CPingThread::ThreadProc(void* lpParam)
 		WriteLog(szMsg.GetBuffer());
 		parent->m_ping_result.SetCurSel(n_inserted);
 
+		// visualization
+		//double nRandom;
+		// generate a random number between -5 and 5
+		//nRandom = -5.0 + 10.0*rand()/(double)RAND_MAX;
+
+		// append the new value to the plot
+		parent->m_OScopeCtrl.AppendPoint(pr.RTT);
+
+
+
 		Sleep(1000);
 		//}  // WaitForMultipleObjects
 	} // while

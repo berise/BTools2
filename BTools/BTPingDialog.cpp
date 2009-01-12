@@ -7,6 +7,10 @@
 #include "PingThread.h"
 #include "util.h"	//	log
 
+#include "3rd/ScreenLib.h"
+
+#define IDC_OSCOPECTRL WM_USER+999
+
 
 // BTPingDialog 대화 상자입니다.
 
@@ -39,8 +43,8 @@ BTPingDialog::~BTPingDialog()
 void BTPingDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyViewPage::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_LIST1, m_ping_result);
-	DDX_Control(pDX, IDC_COMBO1, m_ping_host);
+	DDX_Control(pDX, IDC_RESULT_LIST, m_ping_result);
+	DDX_Control(pDX, IDC_HOST_COMBO, m_cbHosts);
 }
 
 
@@ -61,14 +65,34 @@ BOOL BTPingDialog::OnInitDialog()
 	ping_thread = new CPingThread;
 
 	// this might be enough
-	//m_ping_host.ModifyStyle(0, CBS_AUTOHSCROLL);	
-	m_ping_host.AddString(_T("203.242.63.135"));
-	m_ping_host.AddString(_T("192.168.1.1"));
+	//m_cbHosts.ModifyStyle(0, CBS_AUTOHSCROLL);	
+	m_cbHosts.AddString(_T("localhost"));
+	m_cbHosts.AddString(_T("203.242.63.135"));	
+	m_cbHosts.AddString(_T("192.168.1.1"));
+	m_cbHosts.AddString(_T("knu.ac.kr"));
+	m_cbHosts.AddString(_T("snu.ac.kr"));
+	m_cbHosts.AddString(_T("pnu.ac.kr"));
 
-	m_ping_host.AddString(_T("localhost"));
+	m_cbHosts.SetCurSel(0);
+
+	CRect rect;
+
+	//  최초 rect가 너무 작은 경우 오류 발생(new double에서 발생 ※※)
+	// 임시로 크기를 가져옴 (올ㅁ?)
+	GetDlgItem(IDC_CUSTOM1)->GetClientRect(rect);
+	//ScreenToClient(rect);
+	
+	m_OScopeCtrl.Create(WS_CHILD | WS_VISIBLE, rect, this);
 
 
-	m_ping_host.SetCurSel(2);
+	// customize the control
+  m_OScopeCtrl.SetRange(0.0, 10.0, 1) ;
+  m_OScopeCtrl.SetYUnits(L"") ;
+  m_OScopeCtrl.SetXUnits(L"Period (1 sec)") ;
+  m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
+  m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
+  m_OScopeCtrl.SetPlotColor(RGB(255, 255, 255)) ;
+
 
 	// LB style 변경.
 	DWORD dwStyle = m_ping_result.GetStyle();
@@ -126,12 +150,12 @@ void BTPingDialog::OnBnClickedDoPing()
 	//TCHAR msg[256];
 
 	// Combobox manipulation, CBS_AUTOHSCROLL must be in style
-	int nSel = m_ping_host.GetCurSel();
+	int nSel = m_cbHosts.GetCurSel();
 
 	if(nSel == -1) // nothing selected
 	{
 		// get user input in edit control
-		m_ping_host.GetWindowText(szServer.GetBuffer(128), 128);//LOWORD(nCount)+1);//
+		m_cbHosts.GetWindowText(szServer.GetBuffer(128), 128);//LOWORD(nCount)+1);//
 
 		// szServer의 길이에 따라 처리 필요
 		if(szServer.GetLength() < 0) // 호스트 주소가 없는 경우
@@ -139,18 +163,18 @@ void BTPingDialog::OnBnClickedDoPing()
 			return;
 		}
 		/*
-		DWORD nCount = m_ping_host.GetEditSel();
+		DWORD nCount = m_cbHosts.GetEditSel();
 
 		if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)
 		*/
 	}
 	else // get selected ListBox string
 	{
-		m_ping_host.GetLBText(nSel, szServer);
+		m_cbHosts.GetLBText(nSel, szServer);
 	}
 
 	// szServer를 다시 ComboBox에 넣고 Ping 시작
-	m_ping_host.AddString(szServer);
+	m_cbHosts.AddString(szServer);
 
 	opt.m_sHostToResolve = szServer;
 	ping_thread->run(this);	
@@ -173,8 +197,46 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 {
 	CPropertyViewPage::OnSize(nType, cx, cy);
 
-	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-	CRect r;
-	GetClientRect(r);
-	m_ping_result.MoveWindow(0, r.Height()/4, r.Width(), (r.Height()/4)*3);
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.  
+	CScreenLib::OptimizeWidth(m_hWnd, 3, IDC_HOST_COMBO, IDC_RESULT_LIST, IDC_CUSTOM1);
+
+	// 오른쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 핑 버튼을 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_HOST_COMBO, IDC_DO_PING);
+
+	// 왼쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 호스트 텍스트를 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_HOST_COMBO, IDC_HOST);
+
+	// 왼쪽 상단의 기준인 호스트 텍스트에 따라 LISt와 OSCOPECTRL을 정렬(왼쪽)
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);
+
+	// OSCOPECTRL은 나머지 영역을 채운다
+	CScreenLib::OptimizeHeight(m_hWnd, IDC_CUSTOM1);
+
+	// IDC_OSCOPECTRL은 Control이 아니다. 고로 CScreenLib에서 오류가 발생. 별도로 처리함.
+	if(m_OScopeCtrl.GetSafeHwnd() != NULL)
+	{
+		CRect rect;
+
+		if(DRA::GetDisplayMode() == DRA::Landscape)
+		{
+			//  가로 모드가 될 경우, RESULT_LIST의 높이가 달라지면.. 
+			// 다시 Portrait가 될 경우 어떻게 처리하나?? 따라서, 그대로 커멘트 처리
+			//CScreenLib::OptimizeHeight(m_hWnd, IDC_RESULT_LIST);
+
+			GetDlgItem(IDC_RESULT_LIST)->GetWindowRect(rect);
+			GetDlgItem(IDC_RESULT_LIST)->ShowWindow(SW_HIDE);
+			
+			ScreenToClient(rect);
+			m_OScopeCtrl.MoveWindow(rect);
+		}
+		else
+		{
+			GetDlgItem(IDC_RESULT_LIST)->ShowWindow(SW_SHOW);
+			GetDlgItem(IDC_CUSTOM1)->GetWindowRect(rect);
+			
+			ScreenToClient(rect);
+			m_OScopeCtrl.MoveWindow(rect);
+		}
+
+	}
 }

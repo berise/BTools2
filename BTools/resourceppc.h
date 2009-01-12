@@ -22,6 +22,7 @@
 #define IDM_NEW                         401
 #define IDM_MENU                        402
 #define IDC_COMBO1                      1000
+#define IDC_HOST_COMBO                  1000
 #define IDC_DO_PING                     1001
 #define IDC_LIST1                       1002
 #define IDC_HOST                        1003
@@ -41,6 +42,7 @@
 #define IDC_MATRIX2                     1015
 #define IDC_SERVER_IP                   1016
 #define IDC_LOCAL_IP                    1017
+#define IDC_CUSTOM1                     1019
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
