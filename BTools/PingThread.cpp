@@ -133,10 +133,6 @@ UINT CPingThread::ThreadProc(void* lpParam)
 				if(ICMPStatus2String[i].id == icmp_error)
 					break;
 			}
-
-			//TCHAR msg_u[256];
-			//ansi_to_unicode(ICMPStatus2String[i].status, msg_u);
-
 			
 			szMsg.Format(_T("Ping failed:%s"), ansi_to_unicode(ICMPStatus2String[i].status));
 			//_tprintf(_T("Failed in ping specified host, GetLastError returns: %d"), GetLastError());
@@ -149,8 +145,7 @@ UINT CPingThread::ThreadProc(void* lpParam)
 		{
 			if (nRequestsSent == parent->opt.m_nRequestsToSend)
 			break;
-		}
-		
+		}		
 
 		// Post WM_USER_PING_MESSAGE.
 		/*
@@ -165,9 +160,11 @@ UINT CPingThread::ThreadProc(void* lpParam)
 		parent->m_ping_result.SetCurSel(n_inserted);
 
 		// visualization
-		//double nRandom;
-		// generate a random number between -5 and 5
-		//nRandom = -5.0 + 10.0*rand()/(double)RAND_MAX;
+		double nRandom;
+		// generate a random number between 
+		nRandom = -5.0 + 1000.0*rand()/(double)RAND_MAX;
+		parent->m_OScopeCtrl.AppendPoint(nRandom);
+
 
 		// append the new value to the plot
 		parent->m_OScopeCtrl.AppendPoint(pr.RTT);

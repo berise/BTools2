@@ -10,6 +10,8 @@
 #define IDB_MATRIX_TINY_BLUE            130
 #define IDB_MATRIX_TINY_RED             131
 #define IDR_ABOUTDLG_MENU               132
+#define IDI_ICON1                       136
+#define IDI_WIFI                        136
 #define IDD_ABOUTBOX_WIDE               200
 #define IDC_STATIC_1                    201
 #define IDD_THROUGHPUT                  201
@@ -60,7 +62,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        133
+#define _APS_NEXT_RESOURCE_VALUE        137
 #define _APS_NEXT_COMMAND_VALUE         32783
 #define _APS_NEXT_CONTROL_VALUE         1018
 #define _APS_NEXT_SYMED_VALUE           101

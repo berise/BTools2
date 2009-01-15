@@ -66,6 +66,7 @@ END
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\BTools.ico"
 IDR_BToolsTYPE          ICON                    "res\\BToolsDoc.ico"
+IDI_WIFI                ICON                    "res\\app_wifi.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //

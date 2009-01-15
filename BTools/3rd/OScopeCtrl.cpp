@@ -649,6 +649,15 @@ void COScopeCtrl::DrawPoint()
             (long)((m_dCurrentPosition - m_dLowerLimit) * m_dVerticalFactor) ;
     m_dcPlot.LineTo (currX, currY) ;
 
+	CPoint Pt[3];
+
+	// Top Triangle
+	Pt[0] = CPoint(currX,  currY-2);
+	Pt[1] = CPoint(currX-2, currY+2);
+	Pt[2] = CPoint(currX+2, currY+2);
+	m_dcPlot.Polygon(Pt, 3);
+
+
 #ifdef DEBUG
 	//m_dcPlot.Rectangle(prevX, prevY, currX, currY);
 #endif
