@@ -31,9 +31,6 @@ BTPingDialog::BTPingDialog(CWnd* pParent /*=NULL*/)
 	opt.m_bDontFragment  = FALSE;
 
 	is_host_alive = false;
-
-
-
 }
 
 BTPingDialog::~BTPingDialog()
@@ -75,19 +72,20 @@ BOOL BTPingDialog::OnInitDialog()
 
 	m_cbHosts.SetCurSel(0);
 
-	CRect rect;
+	
 
-	//  최초 rect가 너무 작은 경우 오류 발생(new double에서 발생 ※※)
+	//  최초 rect가 너무 작은 경우 오류 발생(OScope의 ratio 계산, points의 new double에서 발생 ※※)
 	// 임시로 크기를 가져옴 (올ㅁ?)
+	CRect rect;
 	GetDlgItem(IDC_CUSTOM1)->GetClientRect(rect);
 	//ScreenToClient(rect);
 	
-	m_OScopeCtrl.Create(WS_CHILD | WS_VISIBLE, rect, this);
+	m_OScopeCtrl.Create(WS_CHILD | WS_VISIBLE |  WS_BORDER , rect, this);
 
 
 	// customize the control
   m_OScopeCtrl.SetRange(0.0, 10.0, 1) ;
-  m_OScopeCtrl.SetYUnits(L"") ;
+  m_OScopeCtrl.SetYUnits(L"ms") ;
   m_OScopeCtrl.SetXUnits(L"Period (1 sec)") ;
   m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
   m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
@@ -195,7 +193,7 @@ void BTPingDialog::OnBnClickedDoPing()
 
 void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 {
-	CPropertyViewPage::OnSize(nType, cx, cy);
+	__super::OnSize(nType, cx, cy);
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.  
 	CScreenLib::OptimizeWidth(m_hWnd, 3, IDC_HOST_COMBO, IDC_RESULT_LIST, IDC_CUSTOM1);
@@ -204,10 +202,11 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_HOST_COMBO, IDC_DO_PING);
 
 	// 왼쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 호스트 텍스트를 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_HOST_COMBO, IDC_HOST);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 3, IDC_HOST_COMBO, 
+		IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);
 
 	// 왼쪽 상단의 기준인 호스트 텍스트에 따라 LISt와 OSCOPECTRL을 정렬(왼쪽)
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);
+	//CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);
 
 	// OSCOPECTRL은 나머지 영역을 채운다
 	CScreenLib::OptimizeHeight(m_hWnd, IDC_CUSTOM1);

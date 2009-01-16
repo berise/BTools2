@@ -21,5 +21,7 @@
  * OR PERFORMANCE OF THIS SOFTWARE.
  *
  */
-#define IPERF_VERSION "WinCE port based on 1.7.0 + Windows Mobile 5.0 patched by berise"
-#define IPERF_VERSION_DATE "March 2006 + Dec 2008"
+
+//#define IPERF_MOBILE_VERSION $Id$
+#define IPERF_VERSION "WinCE port based on 1.7.0, Windows Mobile 5.0, 6.x port by berise_at_gmail_dot_com"
+#define IPERF_VERSION_DATE "March 2006, Dec 2008, JAN 2009"

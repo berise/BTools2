@@ -83,13 +83,20 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	// TODO:  여기에 특수화된 작성 코드를 추가합니다.
 
+	// Windows Mobile 6.1.4 Professional에서는 CPropertyView::AdjustPagePosition의
+	// ScrollSize에서 오류가 발생한다. 
+	// 원인 : SetScrollSize의 인자로 pPage->m_szMin 의 값이 너무 크다
+	// 해결 : 아래와 같이 ScrollView를 FALSE로 처리
+	// 참고 : 이전 버전(WM 5.0, 6.0에서는 모두 문제가 생기지 않는다. 피하는 것으로 처리된다.
+	EnableScrollView(FALSE);
+
 	AddPage(&bt_ping, L"iPing");
 	AddPage(&bt_iperf_client, L"&iClient");
 	AddPage(&m_iperf_server, L"&iServer");
 
 	//EnableStackedTabs(TRUE);
 
-	SetActivePage(1);
+	SetActivePage(0);
 
 	return 0;
 }

@@ -108,7 +108,7 @@ BOOL COScopeCtrl::Create(DWORD dwStyle, const RECT& rect,
   BOOL result ;
   static CString className = AfxRegisterWndClass(CS_HREDRAW | CS_VREDRAW) ;
 
-  result = CWnd::CreateEx(WS_EX_CLIENTEDGE | WS_EX_STATICEDGE, 
+  result = CWnd::CreateEx( WS_EX_CLIENTEDGE, // | WS_EX_WINDOWEDGE,  WS_EX_STATICEDGE, 
                           className, NULL, dwStyle, 
                           rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top,
                           pParentWnd->GetSafeHwnd(), (HMENU)nID) ;
@@ -401,15 +401,14 @@ void COScopeCtrl::InvalidateCtrl()
   m_dcGrid.SelectObject(oldFont) ;
 
   // y units
+  // y units는 박스가 왼쪽으로 90도 회전한 형태라 생각하면 쉽다.
+
   oldFont = m_dcGrid.SelectObject(&yUnitFont) ;
-
-  textRect = CRect(m_rectClient.left+10, m_rectPlot.top, m_rectPlot.left, m_rectPlot.bottom);
-
+  textRect = CRect(m_rectClient.left+10, m_rectPlot.top + m_rectPlot.Height()*0.7 , m_rectPlot.left, m_rectPlot.bottom );
   //m_dcGrid.Rectangle(textRect);
-
   // Vertical은 90도 이동한 상태로 생각해야 한다. 그런데도 이상하다.
   // SetTextAlign과 DrawText의 조합은 정상적으로 동작하지 않은 듯 보인다.
-   m_dcGrid.DrawText(m_strYUnitsString, textRect, DT_BOTTOM | DT_NOCLIP);
+   m_dcGrid.DrawText(m_strYUnitsString, textRect, DT_LEFT | DT_NOCLIP);
    /*
   m_dcGrid.TextOut ((m_rectClient.left+m_rectPlot.left)/2, 
                     (m_rectPlot.bottom+m_rectPlot.top)/2, m_strYUnitsString) ;
