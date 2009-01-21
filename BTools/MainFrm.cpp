@@ -48,9 +48,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;      // 만들지 못했습니다.
 	}
 
-	HICON hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_WIFI));
-	SetIcon(AfxGetApp()->LoadIconW(IDI_WIFI), TRUE);
-	SetIcon(AfxGetApp()->LoadIconW(IDI_WIFI), FALSE);
+	//HICON hIcon = LoadIcon(NULL, MAKEINTRESOURCE(IDI_WIFI));
+	//SetIcon(AfxGetApp()->LoadIconW(IDI_WIFI), TRUE);
+	//SetIcon(AfxGetApp()->LoadIconW(IDI_WIFI), FALSE);
 
 	//m_wndCommandBar.SetBarStyle(m_wndCommandBar.GetBarStyle() | CBRS_SIZE_FIXED);
 

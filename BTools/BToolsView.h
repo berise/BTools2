@@ -4,7 +4,7 @@
 #include "3rd/PropertyView.h"
 
 #include "BTPingDialog.h"
-#include "BTThroughputDialog.h"
+//#include "BTThroughputDialog.h"
 #include "BTIPerfClient.h"
 #include "BTIPerfServer.h"
 
@@ -41,9 +41,10 @@ public:
 
 
 public:
-	BTPingDialog bt_ping;
-	BTThroughputDialog bt_throughput;
-	BTIPerfClient bt_iperf_client;
+	CImageList	m_ImageList16x16;
+	BTPingDialog	m_ping;
+	//BTThroughputDialog bt_throughput;
+	BTIPerfClient m_iperf_client;
 	BTIPerfServer m_iperf_server;
 
 
@@ -59,6 +60,7 @@ public:
 	afx_msg void OnFilePing();
 	afx_msg void OnFileIperfclient();
 	afx_msg void OnFileIperfserver();
+	afx_msg void OnDestroy();
 };
 
 #ifndef _DEBUG  // BToolsView.cpp의 디버그 버전

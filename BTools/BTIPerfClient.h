@@ -1,13 +1,18 @@
 #pragma once
-#include "3rd/PropertyView.h"
+
+#include "afxwin.h"
 
 #include "Client.hpp"
 #include "Reporter.h"
-#include "afxwin.h"
+
+#include "3rd/PropertyView.h"
+#include "3rd/XGroupBox.h"
 
 
 // BTIPerfClient 대화 상자입니다.
 
+/*! \brief Delegation of IPerf Client. It is basically a CView!
+*/
 class BTIPerfClient : public CPropertyViewPage, CReporter
 {
 	DECLARE_DYNAMIC(BTIPerfClient)
@@ -39,7 +44,7 @@ public:
 	Settings *m_piperf_setting;
 
 
-	CString m_csHostName;
+	//CString m_csHostName;
 	CString	m_csReportFile;
 	CString	m_csErrorFile;
 
@@ -52,4 +57,8 @@ public:
 	afx_msg void OnBnClickedAddCommand();
 	afx_msg void OnLbnSelchangeCommandList();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+
+	CXGroupBox m_sCommands;
+	CXGroupBox m_sOutput;
 };

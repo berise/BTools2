@@ -9,8 +9,6 @@
 
 #include "3rd/ScreenLib.h"
 
-#define IDC_OSCOPECTRL WM_USER+999
-
 
 // BTPingDialog 대화 상자입니다.
 
@@ -40,8 +38,10 @@ BTPingDialog::~BTPingDialog()
 void BTPingDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyViewPage::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_RESULT_LIST, m_ping_result);
+	DDX_Control(pDX, IDC_RESULT_LIST, m_lbPingResult);
 	DDX_Control(pDX, IDC_HOST_COMBO, m_cbHosts);
+	DDX_Control(pDX, IDC_XGROUP, m_xgroup1);
+	DDX_Control(pDX, IDC_HOST, m_sHost);
 }
 
 
@@ -84,17 +84,44 @@ BOOL BTPingDialog::OnInitDialog()
 
 
 	// customize the control
-  m_OScopeCtrl.SetRange(0.0, 10.0, 1) ;
-  m_OScopeCtrl.SetYUnits(L"ms") ;
-  m_OScopeCtrl.SetXUnits(L"Period (1 sec)") ;
-  m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
-  m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
-  m_OScopeCtrl.SetPlotColor(RGB(255, 255, 255)) ;
+	m_OScopeCtrl.SetRange(0.0, 10.0, 1) ;
+	m_OScopeCtrl.SetYUnits(L"ms") ;
+	m_OScopeCtrl.SetXUnits(L"Period (1 sec)") ;
+	m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
+	m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
+	m_OScopeCtrl.SetPlotColor(RGB(0, 255, 0)) ;
+
+	// old fashioned
+	//m_OScopeCtrl.SetBackgroundColor(RGB(0, 64, 0)) ;
+	//m_OScopeCtrl.SetGridColor(RGB(192, 255, 192)) ;
+	//m_OScopeCtrl.SetPlotColor(RGB(0, 255, 0)) ;	
+
+
+	m_sHost.EnableWindow(TRUE, TRUE);
+	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+	m_sHost.SetWindowText(L"Host", FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+				.SetBorderColor(RGB(255,0,0), FALSE)
+				//.SetBold(TRUE, FALSE)
+				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+				.SetAlignment(CXGroupBox::left, FALSE)
+				.SetControlStyle(CXGroupBox::header, FALSE);
+
+
+  	m_xgroup1.EnableWindow(TRUE, TRUE);
+	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+	m_xgroup1.SetWindowText(L"Visualization", FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+						.SetBorderColor(RGB(255,0,0), FALSE)
+						//.SetBold(TRUE, FALSE)
+						// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+						.SetAlignment(CXGroupBox::left, FALSE)
+						.SetControlStyle(CXGroupBox::header, FALSE);
 
 
 	// LB style 변경.
-	DWORD dwStyle = m_ping_result.GetStyle();
-	//m_ping_result.ModifyStyle(0, dwStyle | LB_SETHORIZONTALEXTENT);
+	DWORD dwStyle = m_lbPingResult.GetStyle();
+	//m_lbPingResult.ModifyStyle(0, dwStyle | LB_SETHORIZONTALEXTENT);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -196,7 +223,11 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 	__super::OnSize(nType, cx, cy);
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.  
-	CScreenLib::OptimizeWidth(m_hWnd, 3, IDC_HOST_COMBO, IDC_RESULT_LIST, IDC_CUSTOM1);
+	CScreenLib::OptimizeWidth(m_hWnd, 4, 
+		IDC_HOST_COMBO, 
+		IDC_RESULT_LIST, 
+		IDC_CUSTOM1, 
+		IDC_XGROUP);
 
 	// 오른쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 핑 버튼을 정렬
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_HOST_COMBO, IDC_DO_PING);
@@ -220,7 +251,7 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 		{
 			//  가로 모드가 될 경우, RESULT_LIST의 높이가 달라지면.. 
 			// 다시 Portrait가 될 경우 어떻게 처리하나?? 따라서, 그대로 커멘트 처리
-			//CScreenLib::OptimizeHeight(m_hWnd, IDC_RESULT_LIST);
+			CScreenLib::OptimizeHeight(m_hWnd, IDC_RESULT_LIST);
 
 			GetDlgItem(IDC_RESULT_LIST)->GetWindowRect(rect);
 			GetDlgItem(IDC_RESULT_LIST)->ShowWindow(SW_HIDE);

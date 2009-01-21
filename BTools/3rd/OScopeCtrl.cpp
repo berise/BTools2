@@ -13,6 +13,7 @@ static char THIS_FILE[] = __FILE__ ;
 #endif
 
 // 09.01 berise@gmail.com
+// 090119 OPEN : Changing orientation does not draw all points backed up
 // 090109 DONE : Sometimes, graph overdrawn to below x axis   
 // 090109 DONE : Changing orientation while appending points (continuously draw graph)
 // 090106 DONE : PPC display orientation
@@ -648,13 +649,25 @@ void COScopeCtrl::DrawPoint()
             (long)((m_dCurrentPosition - m_dLowerLimit) * m_dVerticalFactor) ;
     m_dcPlot.LineTo (currX, currY) ;
 
-	CPoint Pt[3];
+	
 
 	// Top Triangle
-	Pt[0] = CPoint(currX,  currY-2);
+	/*
+	CPoint Pt[4];
+	Pt[0] = CPoint(currX,  currY);
 	Pt[1] = CPoint(currX-2, currY+2);
 	Pt[2] = CPoint(currX+2, currY+2);
 	m_dcPlot.Polygon(Pt, 3);
+	
+
+	// diamond
+	
+	Pt[0] = CPoint(currX,  currY+2);
+	Pt[1] = CPoint(currX-2, currY);
+	Pt[2] = CPoint(currX, currY-2);
+	Pt[3] = CPoint(currX+2, currY);
+	m_dcPlot.Polygon(Pt, 4);
+	*/
 
 
 #ifdef DEBUG

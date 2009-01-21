@@ -10,11 +10,16 @@
 #define IDB_MATRIX_TINY_BLUE            130
 #define IDB_MATRIX_TINY_RED             131
 #define IDR_ABOUTDLG_MENU               132
-#define IDI_ICON1                       136
-#define IDI_WIFI                        136
+#define IDI_PING                        137
+#define IDI_IPERF_SERVER                138
+#define IDI_ABOUT1                      139
+#define IDI_ABOUT2                      140
+#define IDI_IPERF_CLIENT                141
+#define IDB_WMCONTEST                   143
+#define IDB_BITMAP2                     144
+#define IDB_BITMAP1                     145
 #define IDD_ABOUTBOX_WIDE               200
 #define IDC_STATIC_1                    201
-#define IDD_THROUGHPUT                  201
 #define IDC_STATIC_2                    202
 #define IDD_IPERF_CLIENT                202
 #define IDC_STATIC_3                    203
@@ -44,7 +49,10 @@
 #define IDC_MATRIX2                     1015
 #define IDC_SERVER_IP                   1016
 #define IDC_LOCAL_IP                    1017
+#define IDC_XGROUP                      1018
 #define IDC_CUSTOM1                     1019
+#define IDC_STATIC_COMMANDS             1019
+#define IDC_STATIC_OUTPUT               1020
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -62,9 +70,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        137
+#define _APS_NEXT_RESOURCE_VALUE        146
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1018
+#define _APS_NEXT_CONTROL_VALUE         1021
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -29,22 +29,30 @@ IMPLEMENT_DYNAMIC(BTIPerfClient, CPropertyViewPage)
 
 BTIPerfClient::BTIPerfClient(CWnd* pParent /*=NULL*/)
 	: CPropertyViewPage(BTIPerfClient::IDD, 0, pParent)
-	, m_csHostName(_T(""))
 {
 	m_pIPerfClient=0;
 	m_bClientStarted=FALSE;	
 	
 	m_fStatistics = NULL;
 	//{{AFX_DATA_INIT(CIperfDlg)
-	m_csHostName = _T("");
 //	m_uiInterval = 0.0;
 //	m_uiTotalTime = 0;
 	// Add Preference items : logdir
 	// m_csReportFile.Format("%s\\iperf_stats.txt", logdir);
 	//m_csReportFile = _T("\\My Documents\\iperf_stats.txt");
 	//m_csErrorFile = _T("\\My Documents\\iperf_err.txt");
-	m_csReportFile = _T("\\My Documents\\btools_log\\btools_stats.txt");
-	m_csErrorFile = _T("\\My Documents\\btools_log\\btools_error.txt");
+
+	TCHAR *log_dir = L"\\My Documents\\btools_log";
+	TCHAR *log_file_postfix = L"iClient.txt";
+	// log
+	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
+
+	m_csReportFile = pLogFile;
+
+
+	TCHAR *error_file_postfix = L"iClient_error.txt";
+	pLogFile = SetupLog(log_dir, error_file_postfix);
+	m_csErrorFile = pLogFile;
 }
 
 BTIPerfClient::~BTIPerfClient()
@@ -55,9 +63,10 @@ BTIPerfClient::~BTIPerfClient()
 void BTIPerfClient::DoDataExchange(CDataExchange* pDX)
 {
 	CPropertyViewPage::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_HOST, m_csHostName);
 	DDX_Control(pDX, IDC_COMMAND_LIST, m_lbCommand);
 	DDX_Control(pDX, IDC_RESULT_LIST, m_lbResult);
+	DDX_Control(pDX, IDC_STATIC_COMMANDS, m_sCommands);
+	DDX_Control(pDX, IDC_STATIC_OUTPUT, m_sOutput);
 }
 
 
@@ -94,6 +103,29 @@ BOOL BTIPerfClient::OnInitDialog()
 	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -u -b 2m"));
 	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -u -b 4m"));
 	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -u -b 8m"));	
+
+
+	// init Groupboxes
+	m_sCommands.EnableWindow(TRUE, TRUE);
+	
+	m_sCommands.SetWindowText(L"Commands", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+				.SetBorderColor(RGB(255,0,0), FALSE)
+				//.SetBold(TRUE, FALSE)
+				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+				.SetAlignment(CXGroupBox::left, FALSE)
+				.SetControlStyle(CXGroupBox::header, FALSE);
+
+	m_sOutput.EnableWindow(TRUE, TRUE);
+	
+	m_sOutput.SetWindowText(L"Output", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+				.SetBorderColor(RGB(255,0,0), FALSE)
+				//.SetBold(TRUE, FALSE)
+				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+				.SetAlignment(CXGroupBox::left, FALSE)
+				.SetControlStyle(CXGroupBox::header, FALSE);
+
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -300,12 +332,17 @@ void BTIPerfClient::OnLbnSelchangeCommandList()
 
 void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 {
-	__super::OnSize(nType, cx, cy);
+	CPropertyViewPage::OnSize(nType, cx, cy);
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-	CScreenLib::DockControl(m_hWnd, IDC_COMMAND_LIST, CScreenLib::dtTop);
+	CScreenLib::DockControl(m_hWnd, IDC_STATIC_COMMANDS, CScreenLib::dtTop);
+	//CScreenLib::DockControl(m_hWnd, IDC_COMMAND_LIST, CScreenLib::dtTop);
 
-	CScreenLib::OptimizeWidth(m_hWnd, 2, IDC_COMMAND_LIST, IDC_RESULT_LIST);
+	CScreenLib::OptimizeWidth(m_hWnd, 4, 
+		IDC_STATIC_COMMANDS,
+		IDC_COMMAND_LIST,
+		IDC_STATIC_OUTPUT,
+		IDC_RESULT_LIST);
 
 	// IDC_COMMAND_LIST 기준으로 오른쪽에 Add정렬
 	CScreenLib::AlignControls(m_hWnd, 
@@ -319,35 +356,5 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, IDC_LOCAL_IP);
 
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_CLIENT);
-
-	// 왼쪽 상단의 기준인 호스트 텍스트에 따라 LISt와 OSCOPECTRL을 정렬(왼쪽)
-	//if(m_OScopeCtrl.GetSafeHwnd() != NULL)
-	//	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_STATIC1, IDC_LIST1, IDC_CUSTOM1);
-
-
-	//CScreenLib::MakeSameSize(m_hWnd, CScreenLib::stHeight, 2, IDC_STATIC1, IDC_COMBO1, IDC_DO_PING);
-
 	
-
-	// IDC_OSCOPECTRL은 Control이 아니다. 고로 CScreenLib에서 오류가 발생. 별도로 처리함.
-	/*if(m_OScopeCtrl.GetSafeHwnd() != NULL)
-	{
-		CRect rect;
-
-		if(DRA::GetDisplayMode() == DRA::Landscape)
-		{
-			GetDlgItem(IDC_LIST1)->GetWindowRect(rect);
-			GetDlgItem(IDC_LIST1)->ShowWindow(SW_HIDE);
-		}
-		else
-		{
-			GetDlgItem(IDC_LIST1)->ShowWindow(SW_SHOW);
-			GetDlgItem(IDC_CUSTOM1)->GetWindowRect(rect);
-		}
-
-		ScreenToClient(rect);
-		m_OScopeCtrl.MoveWindow(rect);
-	}
-	*/
-
 }

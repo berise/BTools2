@@ -63,9 +63,6 @@ DWORD WINAPI StartServerThread(LPVOID lpParameter )
 #endif
 	}
 	*/
-	
-	
-
 	l->m_pReporter->ClientFinished();
 
 	return 0;
@@ -84,16 +81,18 @@ BTIPerfServer::BTIPerfServer(CWnd* pParent /*=NULL*/)
 	theListener = NULL;	
 	
 	m_fStatistics = NULL;
-	//{{AFX_DATA_INIT(CIperfDlg)
-	//m_csHostName = _T("");
-//	m_uiInterval = 0.0;
-//	m_uiTotalTime = 0;
-	// Add Preference items : logdir
-	// m_csReportFile.Format("%s\\iperf_stats.txt", logdir);
-	//m_csReportFile = _T("\\My Documents\\iperf_stats.txt");
-	//m_csErrorFile = _T("\\My Documents\\iperf_err.txt");
-	m_csReportFile = _T("\\My Documents\\btools_stats.txt");
-	m_csErrorFile = _T("\\My Documents\\btools_error.txt");
+	
+	TCHAR *log_dir = L"\\My Documents\\btools_log";
+	TCHAR *log_file_postfix = L"iServer.txt";
+	// log
+	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
+
+	m_csReportFile = pLogFile;
+
+
+	TCHAR *error_file_postfix = L"iServer_error.txt";
+	pLogFile = SetupLog(log_dir, error_file_postfix);
+	m_csErrorFile = pLogFile;
 }
 
 BTIPerfServer::~BTIPerfServer()
@@ -141,6 +140,8 @@ void BTIPerfServer::PrintBuffer(char *buffer,char *speed)
 {
 //	m_csReport.AddString((const unsigned short *)buffer);
 	int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
+
+	WriteLog(m_csReportFile.GetBuffer(), ansi_to_unicode(buffer));
 
 	m_lbResult.SetCurSel(nInserted );
 
@@ -225,19 +226,17 @@ void BTIPerfServer::OnBnClickedRunServer()
 	TCHAR hostname[32], ip[48];
 
 	GetLocalIP(hostname, ip);
-
 	GetDlgItem(IDC_SERVER_IP)->SetWindowText(ip);
 
+	int nSelected = m_lbCommand.GetCurSel();
+	if(nSelected < 0) // nothing selected
+		return;	// do nothing
 
 	if (!m_bServerStarted)
-	{		
+	{
+
 		// ListBox에서 선택된 명령행을 가져옮
 		CString szCmd;
-
-		int nSelected = m_lbCommand.GetCurSel();
-		if(nSelected < 0) // nothing selected
-			return;	// do nothing
-
 
 		m_lbCommand.GetText(nSelected, szCmd);		
 
@@ -259,6 +258,8 @@ void BTIPerfServer::OnBnClickedRunServer()
 			return;
 		}
 
+		
+		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Server Started (Do Nothing)"));
 		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Stop"));
 	}
 	else

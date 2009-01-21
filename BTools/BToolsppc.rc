@@ -66,7 +66,11 @@ END
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\BTools.ico"
 IDR_BToolsTYPE          ICON                    "res\\BToolsDoc.ico"
-IDI_WIFI                ICON                    "res\\app_wifi.ico"
+IDI_PING                ICON                    "res\\icon_world_dynamic.ico"
+IDI_IPERF_SERVER        ICON                    "res\\page_down.ico"
+IDI_ABOUT1              ICON                    "res\\page_favourites.ico"
+IDI_ABOUT2              ICON                    "res\\page_tick.ico"
+IDI_IPERF_CLIENT        ICON                    "res\\page_up.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -76,6 +80,7 @@ IDI_WIFI                ICON                    "res\\app_wifi.ico"
 IDR_MAINFRAME           BITMAP                  "res\\Cmdbar.bmp"
 IDB_MATRIX_TINY_BLUE    BITMAP                  "res\\matrixsettinyblue.bmp"
 IDB_MATRIX_TINY_RED     BITMAP                  "res\\matrixsettinyred.bmp"
+IDB_WMCONTEST           BITMAP                  "res\\wmcontest.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -106,29 +111,28 @@ BEGIN
         MENUITEM "i&Client tab",                ID_FILE_IPERFCLIENT
         MENUITEM "i&Server tab",                ID_FILE_IPERFSERVER
         MENUITEM SEPARATOR
-        POPUP "&Functions"
-        BEGIN
-            POPUP "devel", GRAYED
-            BEGIN
-                POPUP "파일"
-                BEGIN
-                    MENUITEM "저장",                          ID_FILE_SAVE
-                END
-                POPUP "편집"
-                BEGIN
-                    MENUITEM "실행 취소",                       ID_EDIT_UNDO
-                    MENUITEM SEPARATOR
-                    MENUITEM "잘라내기",                        ID_EDIT_CUT
-                    MENUITEM "복사",                          ID_EDIT_COPY
-                    MENUITEM "붙여넣기",                        ID_EDIT_PASTE
-                END
-                MENUITEM "도구",                          ID_DEVEL_32782
-            END
-        END
-        MENUITEM SEPARATOR
         MENUITEM "&About...",                   ID_APP_ABOUT
         MENUITEM SEPARATOR
         MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Functions"
+    BEGIN
+        POPUP "devel", GRAYED
+        BEGIN
+            POPUP "파일"
+            BEGIN
+                MENUITEM "저장",                          ID_FILE_SAVE
+            END
+            POPUP "편집"
+            BEGIN
+                MENUITEM "실행 취소",                       ID_EDIT_UNDO
+                MENUITEM SEPARATOR
+                MENUITEM "잘라내기",                        ID_EDIT_CUT
+                MENUITEM "복사",                          ID_EDIT_COPY
+                MENUITEM "붙여넣기",                        ID_EDIT_PASTE
+            END
+            MENUITEM "도구",                          ID_DEVEL_32782
+        END
     END
 END
 
@@ -167,14 +171,15 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG  0, 0, 155, 151
-STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION
+IDD_ABOUTBOX DIALOG  0, 0, 145, 206
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE 0x80000000L
 CAPTION "BTools 정보"
 FONT 9, "MS Shell Dlg"
 BEGIN
-    LTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,0,150,90
-    LTEXT           "Matrix_tiny_red",IDC_MATRIX2,0,138,150,12
+    LTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,0,136,90
+    LTEXT           "Matrix_tiny_red",IDC_MATRIX2,1,103,131,22
+    CONTROL         143,IDC_STATIC,"Static",SS_BITMAP,4,166,131,25
 END
 
 IDD_ABOUTBOX_WIDE DIALOG  0, 0, 210, 129
@@ -188,39 +193,32 @@ BEGIN
     LTEXT           "Copyright (C) 2008",IDC_STATIC_3,48,24,66,8
 END
 
-IDD_PING DIALOG  0, 0, 115, 150
+IDD_PING DIALOG  0, 0, 115, 171
 STYLE DS_SETFONT | WS_CHILD | WS_CAPTION | WS_SYSMENU
 CAPTION "대화 상자"
 FONT 9, "굴림"
 BEGIN
-    LTEXT           "Host:",IDC_HOST,9,2,17,8
+    LTEXT           "Host:",IDC_HOST,9,2,88,8
     LISTBOX         IDC_RESULT_LIST,6,29,96,56,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_HOST_COMBO,7,15,84,58,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "&Ping",IDC_DO_PING,83,0,30,14
-    LTEXT           "Static",IDC_CUSTOM1,6,90,95,50,NOT WS_VISIBLE | WS_BORDER
+    COMBOBOX        IDC_HOST_COMBO,7,15,95,58,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "&Ping",IDC_DO_PING,84,0,30,14
+    LTEXT           "Static",IDC_CUSTOM1,6,98,95,50,NOT WS_VISIBLE | WS_BORDER
+    LTEXT           "Visualization",IDC_XGROUP,6,88,95,8
 END
 
-IDD_THROUGHPUT DIALOG  0, 0, 114, 177
-STYLE DS_SETFONT | WS_CHILD | WS_CAPTION | WS_SYSMENU
-CAPTION "대화 상자"
-FONT 9, "굴림"
-BEGIN
-    LTEXT           "TODO: 컨트롤을 추가합니다.",IDC_STATIC,18,72,57,8
-    CONTROL         IDR_MAINFRAME,IDC_STATIC,"Static",SS_BITMAP,12,6,37,11
-END
-
-IDD_IPERF_CLIENT DIALOG  0, 0, 115, 146
+IDD_IPERF_CLIENT DIALOG  0, 0, 115, 191
 STYLE DS_SETFONT | DS_CONTROL | WS_CHILD | WS_CAPTION | WS_SYSMENU
 CAPTION "iClient"
 FONT 9, "굴림"
 BEGIN
-    EDITTEXT        IDC_HOST,25,2,86,14,ES_AUTOHSCROLL | NOT WS_VISIBLE
-    LISTBOX         IDC_COMMAND_LIST,0,0,108,42,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    EDITTEXT        IDC_COMMAND_EDIT,0,43,78,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "&Add",IDC_ADD_COMMAND,85,43,23,14
-    PUSHBUTTON      "Start &Client",IDC_RUN_CLIENT,58,124,50,15
-    LISTBOX         IDC_RESULT_LIST,0,59,108,63,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
-    LTEXT           "",IDC_LOCAL_IP,3,124,50,12,0,WS_EX_STATICEDGE
+    LISTBOX         IDC_COMMAND_LIST,0,14,108,42,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_COMMAND_EDIT,1,61,78,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Add",IDC_ADD_COMMAND,85,61,23,14
+    PUSHBUTTON      "Start &Client",IDC_RUN_CLIENT,58,161,50,15
+    LISTBOX         IDC_RESULT_LIST,0,95,108,63,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    CTEXT           "",IDC_LOCAL_IP,3,161,50,15,0,WS_EX_STATICEDGE
+    LTEXT           "Commands",IDC_STATIC_COMMANDS,3,4,39,8
+    LTEXT           "Output",IDC_STATIC_OUTPUT,3,82,34,8
 END
 
 IDD_IPERF_SERVER DIALOG  0, 0, 115, 147
@@ -231,9 +229,9 @@ BEGIN
     LISTBOX         IDC_COMMAND_LIST,0,0,108,42,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
     EDITTEXT        IDC_COMMAND_EDIT,0,43,78,14,ES_AUTOHSCROLL
     PUSHBUTTON      "&Add",IDC_ADD_COMMAND,85,43,23,14
-    PUSHBUTTON      "Start &Server",IDC_RUN_SERVER,59,123,50,15
+    PUSHBUTTON      "Start &Server",IDC_RUN_SERVER,68,123,41,15
     LISTBOX         IDC_RESULT_LIST,0,59,108,63,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
-    LTEXT           "",IDC_SERVER_IP,4,124,50,12,0,WS_EX_STATICEDGE
+    LTEXT           "",IDC_SERVER_IP,4,124,61,12,0,WS_EX_STATICEDGE
 END
 
 
@@ -259,13 +257,13 @@ BEGIN
     BEGIN
         BLOCK "041203b5"
         BEGIN
-            VALUE "CompanyName", "TODO: <회사 이름>"
-            VALUE "FileDescription", "TODO: <파일 설명>"
+            VALUE "CompanyName", "NA"
+            VALUE "FileDescription", "BTools Executable"
             VALUE "FileVersion", "1.0.0.1"
             VALUE "InternalName", "BTools.exe"
-            VALUE "LegalCopyright", "TODO: (c) <회사 이름>.  All rights reserved."
+            VALUE "LegalCopyright", "Copyright (c) berise, All rights reserved."
             VALUE "OriginalFilename", "BTools.exe"
-            VALUE "ProductName", "TODO: <제품 이름>"
+            VALUE "ProductName", "BTools"
             VALUE "ProductVersion", "1.0.0.1"
         END
     END
@@ -287,9 +285,9 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 148
+        RIGHTMARGIN, 138
         TOPMARGIN, 7
-        BOTTOMMARGIN, 144
+        BOTTOMMARGIN, 199
     END
 
     IDD_ABOUTBOX_WIDE, DIALOG
@@ -303,11 +301,13 @@ BEGIN
     IDD_PING, DIALOG
     BEGIN
         RIGHTMARGIN, 114
+        BOTTOMMARGIN, 168
     END
 
     IDD_IPERF_CLIENT, DIALOG
     BEGIN
-        RIGHTMARGIN, 103
+        RIGHTMARGIN, 108
+        BOTTOMMARGIN, 146
     END
 
     IDD_IPERF_SERVER, DIALOG
@@ -349,8 +349,8 @@ END
 
 STRINGTABLE 
 BEGIN
-    IDS_NEW                 "새로 만들기"
-    IDS_MENU                "메뉴"
+    IDS_NEW                 "BTools"
+    IDS_MENU                "Menu"
 END
 
 STRINGTABLE 

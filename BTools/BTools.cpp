@@ -184,13 +184,13 @@ BOOL CAboutDlg::OnInitDialog()
 	//				01234567890123456789012345
 	CString msg(	"+--------------------+"//0
 					"|BTools for Pocket PC|"//1
-					"| =?Windows?Mobile V |"//2
-					"| =?Windows?Mobile VI|"//3
-					"|-------------------+|"//5
-					"| = mod_ping         |"//6
-					"| = mod_Iperf_client |"//7
-					"| = mod_Iperf_server |"//8
-					"|   based on v.1.7.0 |"//9				
+					"| = Windows Mobile V |"//2
+					"| = Windows Mobile VI|"//3
+					"|-------------------+|"//5 4
+					"| = ping             |"//6
+					"| = Iperf client &   |"//7
+					"|   server based on  |"//8
+					"|   version I.VII.O  |"//9				
 					"|------+-----+-------|"//0
 					"|Copyright(R)|       |"//1
 					"| All Rights |       |"//2
@@ -201,17 +201,17 @@ BOOL CAboutDlg::OnInitDialog()
 					"|btOOLS FOR          |"//1
 					"|   wINDOWS mOBILE 5 |"//2
 					"|   wINDOWS mOBILE 6 |"//3
-					"|                    |"//5
-					"| = MOD_PING         |"//6
-					"| = MOD_IPERF_CLIENT |"//7
-					"| = MOD_IPERF_SERVER |"//8
+					"|-------------------+|"//5
+					"| = ping             |"//6
+					"| = Iperf client &   |"//7
+					"|   server based on  |"//8
+					"|   version I.VII.O  |"//9		
 					"|                    |"//9				
-					"|------+-----+-------|"//0
-					"|            |Elbereh|"//1
-					"|cOPYRIGHT(r)|ELBERET|"//2
-					"| aLL rIGHTS |Elberet|"//3
-					"|  rESERVED  +NoSpac@|"//4
-					"+=-=-=-=-=-=-=-=-=-=-+");//5
+					"|------+-----+-------|"//0					
+					"|cOPYRIGHT(r)|ELBERET|"//1
+					"| aLL rIGHTS |Elberet|"//2
+					"|  rESERVED  +NoSpac@|"//3
+					"+=-=-=-=-=-=-=-=-=-=-+");//4
 
 	if(bFlip == false)
 	{
@@ -234,16 +234,18 @@ BOOL CAboutDlg::OnInitDialog()
 	
 	//ClientToScreen(&mr);
 	m_matrix2.MoveWindow(0, mr.bottom-4, mr.Width(), 20);// matrix2 will be adjusted by AdjustClientX[Y]Zie function.
-	m_matrix2.SetNumberOfLines(3);
+	m_matrix2.SetNumberOfLines(5);
 	m_matrix2.SetXCharsPerLine(22);
 	m_matrix2.SetSize(CMatrixStatic::TINY);
 	m_matrix2.SetBitmapResource(IDB_MATRIX_TINY_RED);
 	m_matrix2.AdjustClientXToSize(22);
-	m_matrix2.AdjustClientYToSize(3);
+	m_matrix2.AdjustClientYToSize(5);
 	//m_matrix2.SetText(_T(" !\"#$%&'()*+,-./0123456789;:<=>?@ABCDEFGHIJKLMNO PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
 	CString msg2(	"berise the developer  "
 					"Dlvl;54 $;-99 HP;3(17)" // index for ';', ':' is mismatched in MatrixStatic.cpp
 					"Pw;34(42) AC;-9 Exp;16"	// ';' shows ':' and ':' shows ';'.
+					"* Limited Version of  "
+					" BTools for WMCONTEST!"
 					);
 	m_matrix2.SetText(msg2);
 	//m_matrix2.DoScroll(5000, CMatrixStatic::RIGHT);
@@ -284,7 +286,13 @@ void CBToolsApp::OnAppAbout()
 void CAboutDlg::OnAboutmenu2Scroll2()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	m_matrix2.DoScroll(200, CMatrixStatic::RIGHT);
+	srand(GetTickCount()); // in CE use GetTickCount instead of time(null)
+
+	int direction = rand() % 4;
+	m_matrix2.DoScroll(200, direction);//CMatrixStatic::RIGHT);
+
+	direction = rand() % 4;
+	m_matrix1.DoScroll(2000, direction);//CMatrixStatic::RIGHT);
 }
 
 //void CAboutDlg::OnAboutmenuStop()
@@ -296,5 +304,6 @@ void CAboutDlg::OnAboutmenu2Scroll2()
 void CAboutDlg::OnAboutmenu2Stop()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	m_matrix1.StopScroll();
 	m_matrix2.StopScroll();
 }
