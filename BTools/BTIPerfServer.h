@@ -16,9 +16,14 @@
 	Still didn't appeared
 */
 #include "afxwin.h"
-#include "3rd/PropertyView.h"
+
 #include "Server.hpp"
 #include "Reporter.h"
+
+#include "3rd/XGroupBox.h"
+#include "3rd/PropertyView.h"
+
+
 
 class Listener;
 
@@ -85,4 +90,9 @@ public:
 	//
 	
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+public:
+	/// XGroupBox for displaying header groups
+	CXGroupBox m_sCommands;
+	CXGroupBox m_sOutput;
 };

@@ -307,3 +307,42 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 	//
 	delete Buff;
 }
+
+
+// move hwndAlignee to just below hwnd apart nx (dialog unit)
+// align points are left & bottom.
+void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx)
+{
+	ASSERT(hwndDlg != NULL);
+
+	HWND hwndAlign = ::GetDlgItem(hwndDlg, nIDAlignCtrl);
+	ASSERT(hwndAlign!= NULL);
+	RECT rcAlign;
+	::GetWindowRect(hwndAlign, &rcAlign);
+
+	POINT ptMoveTo;
+	ptMoveTo.x = rcAlign.left;
+	ptMoveTo.y = rcAlign.bottom;
+
+	::ScreenToClient(hwndDlg, &ptMoveTo);
+
+
+	// Verify the affected control and obtain its rect
+	HWND hwndCtl = ::GetDlgItem(hwndDlg, nIDAffectedCtl);
+	ASSERT(hwndCtl != NULL);
+	RECT rcCtl;
+	::GetClientRect(hwndCtl, &rcCtl);
+
+
+	::SetWindowPos(hwndCtl, NULL, ptMoveTo.x, ptMoveTo.y + nx,
+			0, 0, SWP_NOSIZE|SWP_NOZORDER);
+
+	/*
+	::MoveWindow(hwndCtl, 
+		ptMoveTo.x, 
+		ptMoveTo.y + nx,
+		rcCtl.right - rcCtl.left,
+		rcCtl.bottom - rcCtl.top,
+		TRUE);
+	*/	
+}

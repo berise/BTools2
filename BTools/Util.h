@@ -15,3 +15,7 @@ int HsWriteCeFile(TCHAR *fname, char *buf, int len, TCHAR *mode);
 int GetCurTimeW(TCHAR *s, int fmt);
 
 void GetLocalIP(TCHAR *hostname, TCHAR *ip);
+
+
+// GUI geometry adjustment
+void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx);

@@ -244,7 +244,7 @@ BOOL CAboutDlg::OnInitDialog()
 	CString msg2(	"berise the developer  "
 					"Dlvl;54 $;-99 HP;3(17)" // index for ';', ':' is mismatched in MatrixStatic.cpp
 					"Pw;34(42) AC;-9 Exp;16"	// ';' shows ':' and ':' shows ';'.
-					"* Limited Version of  "
+					"Special version of    "
 					" BTools for WMCONTEST!"
 					);
 	m_matrix2.SetText(msg2);
