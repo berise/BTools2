@@ -942,12 +942,52 @@
 			Name="3rd"
 			>
 			<File
+				RelativePath=".\3rd\CFireRoutine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\CFireRoutine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\CWaterRoutine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\CWaterRoutine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\DIBSectionLite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\DIBSectionLite.h"
+				>
+			</File>
+			<File
 				RelativePath=".\3rd\FileEx.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\FileEx.h"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\MatrixStatic.cpp"
@@ -960,10 +1000,26 @@
 			<File
 				RelativePath=".\3rd\md5.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\md5.h"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\MemDC.h"
@@ -988,10 +1044,26 @@
 			<File
 				RelativePath=".\3rd\rijndael.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\rijndael.h"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					ExcludedFromBuild="true"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\ScreenLib.cpp"

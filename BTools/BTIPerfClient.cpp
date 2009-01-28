@@ -344,6 +344,15 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 		IDC_STATIC_OUTPUT,
 		IDC_RESULT_LIST);
 
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 4);
+	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 4);
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 8);
+
+	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 4);
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_CLIENT_IP, 4);
+
+
+
 	// IDC_COMMAND_LIST 기준으로 오른쪽에 Add정렬
 	CScreenLib::AlignControls(m_hWnd, 
 		CScreenLib::atRight, 
@@ -352,9 +361,17 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 		IDC_ADD_COMMAND,
 		IDC_RUN_CLIENT);
 
+	// TIPS for ScreenLib
+	// Affected Ctrl의 개수를 잘못 사용할 경우, 발견하기 어렵다 -_-;
 	// IDC_COMMAND_LIST을 기준으로 COMMAND_EDIT을 왼쪽에 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, IDC_LOCAL_IP);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, 
+		IDC_COMMAND_LIST, 
+		IDC_COMMAND_EDIT, 
+		IDC_CLIENT_IP);
 
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_COMMAND_EDIT, IDC_ADD_COMMAND);
+
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_CLIENT_IP, IDC_RUN_CLIENT);
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_CLIENT);
 	
 }

@@ -58,7 +58,8 @@ protected:
 public:
 	CListBox	m_lbPingResult;
 	CComboBox m_cbHosts;
-	CXGroupBox m_xgroup1;
+
+	CXGroupBox m_sVisual;
 	CXGroupBox m_sHost;
 
 
@@ -67,5 +68,6 @@ public:
 	afx_msg void OnDestroy();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 
+	
 	
 };

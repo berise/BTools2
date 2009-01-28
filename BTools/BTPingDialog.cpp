@@ -40,8 +40,8 @@ void BTPingDialog::DoDataExchange(CDataExchange* pDX)
 	CPropertyViewPage::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_RESULT_LIST, m_lbPingResult);
 	DDX_Control(pDX, IDC_HOST_COMBO, m_cbHosts);
-	DDX_Control(pDX, IDC_XGROUP, m_xgroup1);
 	DDX_Control(pDX, IDC_HOST, m_sHost);
+	DDX_Control(pDX, IDC_STATIC_VISUAL, m_sVisual);
 }
 
 
@@ -108,9 +108,9 @@ BOOL BTPingDialog::OnInitDialog()
 				.SetControlStyle(CXGroupBox::header, FALSE);
 
 
-  	m_xgroup1.EnableWindow(TRUE, TRUE);
+  	m_sVisual.EnableWindow(TRUE, TRUE);
 	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
-	m_xgroup1.SetWindowText(L"Visualization", FALSE)
+	m_sVisual.SetWindowText(L"Visualization", FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 						.SetBorderColor(RGB(255,0,0), FALSE)
 						//.SetBold(TRUE, FALSE)
@@ -220,21 +220,33 @@ void BTPingDialog::OnBnClickedDoPing()
 
 void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 {
-	__super::OnSize(nType, cx, cy);
+	CPropertyViewPage::OnSize(nType, cx, cy);
+
+	CScreenLib::DockControl(m_hWnd, IDC_HOST, CScreenLib::dtTop);
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.  
-	CScreenLib::OptimizeWidth(m_hWnd, 4, 
+	CScreenLib::OptimizeWidth(m_hWnd, 4,
 		IDC_HOST_COMBO, 
 		IDC_RESULT_LIST, 
 		IDC_CUSTOM1, 
-		IDC_XGROUP);
+		IDC_STATIC_VISUAL);
+
+	// IDC_HOST에 Ping 버튼 상 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_HOST, IDC_DO_PING);
 
 	// 오른쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 핑 버튼을 정렬
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_HOST_COMBO, IDC_DO_PING);
 
 	// 왼쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 호스트 텍스트를 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 3, IDC_HOST_COMBO, 
-		IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_HOST_COMBO, IDC_HOST);
+
+
+	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST_COMBO, 6);
+	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_RESULT_LIST, 4);
+
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_VISUAL, 8);
+	VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_CUSTOM1, 4);
+
 
 	// 왼쪽 상단의 기준인 호스트 텍스트에 따라 LISt와 OSCOPECTRL을 정렬(왼쪽)
 	//CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);

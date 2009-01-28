@@ -17,7 +17,6 @@
 #define IDI_IPERF_CLIENT                141
 #define IDB_WMCONTEST                   143
 #define IDB_BITMAP2                     144
-#define IDB_BITMAP1                     145
 #define IDD_ABOUTBOX_WIDE               200
 #define IDC_STATIC_1                    201
 #define IDC_STATIC_2                    202
@@ -48,11 +47,13 @@
 #define IDC_MATRIX1                     1014
 #define IDC_MATRIX2                     1015
 #define IDC_SERVER_IP                   1016
-#define IDC_LOCAL_IP                    1017
+#define IDC_CLIENT_IP                   1017
 #define IDC_XGROUP                      1018
+#define IDC_STATIC_VISUAL               1018
 #define IDC_CUSTOM1                     1019
 #define IDC_STATIC_COMMANDS             1019
 #define IDC_STATIC_OUTPUT               1020
+#define IDC_STATIC_CONTEST_LOGO         1021
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -72,7 +73,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        146
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1021
+#define _APS_NEXT_CONTROL_VALUE         1022
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

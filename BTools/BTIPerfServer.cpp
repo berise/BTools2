@@ -352,6 +352,7 @@ void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
 	// IDC_COMMAND_LIST을 기준으로 COMMAND_EDIT을 왼쪽에 정렬
 	//CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_COMMAND_LIST, IDC_COMMAND_EDIT);
 
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_SERVER_IP, IDC_RUN_SERVER);
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_SERVER);
 
 }

@@ -113,7 +113,7 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	AddPage(&m_iperf_server, L"&iServer", 2);
 
 	//EnableStackedTabs(TRUE); // 보기 싫게 보임
-	SetActivePage(2);
+	SetActivePage(0);
 
 	return 0;
 }
