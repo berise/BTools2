@@ -125,10 +125,10 @@ void CSFXStatic::OnTimer(UINT nIDEvent)
 {
 	CClientDC dc(this);
 
-	CSize bmSize = m_src->GetSize();
+	CSize bmSize = m_dest->GetSize();
  
 	m_Water->Render((DWORD*)m_src->GetDIBits(),(DWORD*)m_dest->GetDIBits());
-	//m_Fire->Render((DWORD*)m_dest->GetDIBits(),bmSize.cx, bmSize.cy);
+	m_Fire->Render((DWORD*)m_dest->GetDIBits(),bmSize.cx, bmSize.cy);
 
 	m_dest->Draw(&dc, CPoint(0, 0));
 } 

@@ -19,11 +19,9 @@
 #define IDB_BITMAP2                     144
 #define IDI_ICON2                       147
 #define IDI_ICON1                       148
-#define IDI_BTOOLS                      156
 #define IDI_ICON4                       160
 #define IDI_BTOOLS_32x32                162
 #define IDI_ICON3                       164
-#define IDI_BTOOLS16x16                 164
 #define IDI_BTOOLS_16x16                164
 #define IDD_ABOUTBOX_WIDE               200
 #define IDC_STATIC_1                    201
@@ -62,6 +60,7 @@
 #define IDC_STATIC_COMMANDS             1019
 #define IDC_STATIC_OUTPUT               1020
 #define IDC_STATIC_CONTEST_LOGO         1021
+#define IDC_STATIC_GRAPH                1022
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -81,7 +80,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        165
 #define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1022
+#define _APS_NEXT_CONTROL_VALUE         1023
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

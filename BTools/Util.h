@@ -16,6 +16,10 @@ int GetCurTimeW(TCHAR *s, int fmt);
 
 void GetLocalIP(TCHAR *hostname, TCHAR *ip);
 
+// LogToFile
+// Writes szLog into the file named pszFilename
+HRESULT LogToFileA(LPTSTR szLog, LPCTSTR pszFilename);
+HRESULT LogToFile(TCHAR * szLog, TCHAR * pszFilename);
 
 // GUI geometry adjustment
 void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx);

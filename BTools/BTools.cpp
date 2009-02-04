@@ -46,6 +46,49 @@ CBToolsApp theApp;
 
 BOOL CBToolsApp::InitInstance()
 {
+	// Program Expiration routines
+	CTime fixedTime(2009,	// year
+		2,					// month
+		5+7,					// date
+		23,					// hour 24
+		59,					// minute
+		0);					// second
+	CTime curTime = CTime::GetCurrentTime();
+
+    CTimeSpan leftTime = fixedTime - curTime;   
+
+     if(leftTime.GetTotalSeconds() > 0)
+    {
+		 CString msg;
+		 msg = L"이 프로그램은 기한 제한 버전입니다.\n";
+		 msg += L"This is a date limited version of BTools.\n";
+		 msg += L"You can use this software for a 7 days.\n";
+		 msg += fixedTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
+		 msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
+        AfxMessageBox(msg);
+    }
+    else
+    {
+		/*CString msg("This is a limited version of BTools.\n"
+				"This is submitted for the Windows Mobile Contest only.\n"
+				"Please contact the author for more use.\n\n"
+				"Thank you for your interest");
+				*/
+		CString msg("This software a limited version of BTools.\n"
+				"It is submitted for the Windows Mobile Contest,\n"
+				"co-held by SK & Microsoft, only.\n"
+				"Please contact the author for more use.\n\n"
+				"Thank you for your interest");
+					
+        //msg.Format(L"This software is submitted for the Windows Mobile Contest");
+		AfxMessageBox(msg);
+		return FALSE;
+	 }
+
+    //
+
+
+
     // CAPEDIT 및 SIPPREF와 같은 모든 Windows Mobile 관련 컨트롤을 초기화하기 위해
     // 응용 프로그램을 초기화하는 동안 SHInitExtraControls를 한 번 호출해야 합니다.
     SHInitExtraControls();

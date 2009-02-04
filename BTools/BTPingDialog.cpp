@@ -80,7 +80,7 @@ BOOL BTPingDialog::OnInitDialog()
 	GetDlgItem(IDC_CUSTOM1)->GetClientRect(rect);
 	//ScreenToClient(rect);
 	
-	m_OScopeCtrl.Create(WS_CHILD | WS_VISIBLE |  WS_BORDER , rect, this);
+	m_OScopeCtrl.Create(WS_CHILD | WS_VISIBLE, rect, this);
 
 
 	// customize the control
@@ -135,7 +135,7 @@ void BTPingDialog::OnDestroy()
 	if(ping_thread)
 	{
 		ping_thread->stop();
-		WaitForSingleObject(ping_thread->thread_handle, 2000);
+		WaitForSingleObject(ping_thread->thread_handle, INFINITE /* 2000*/);
 	}
 
 	if(ping_thread != NULL)

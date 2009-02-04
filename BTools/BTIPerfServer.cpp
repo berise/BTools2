@@ -211,7 +211,7 @@ void BTIPerfServer::CallbackBW(double fBW)
 {
 	CString temp;
 	temp.Format(L"Bandwidth : %l", fBW);
-	m_lbResult.AddString(temp);
+	//m_lbResult.AddString(temp);
 }
 
 
@@ -224,7 +224,7 @@ BOOL BTIPerfServer::ParseCommandLine(Settings *pSetting, CString &szCmd)
 	CString resToken;
 
 	pargv[count] = new char[10];
-	strcpy(pargv[count], "btiperf"); // program name
+	strcpy(pargv[count], "btiperf"); // dummy program name
 	count++;
 
 	do
@@ -292,7 +292,7 @@ void BTIPerfServer::OnBnClickedRunServer()
 		}
 
 		
-		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Server Started (Do Nothing)"));
+		//GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Server Started (Do Nothing)"));
 		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Stop"));
 	}
 	else
@@ -330,8 +330,6 @@ void BTIPerfServer::OnBnClickedAddCommand()
 }
 
 
-
-
 void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
 {
 	__super::OnSize(nType, cx, cy);
@@ -358,8 +356,10 @@ void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
 
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_COMMAND_EDIT, IDC_ADD_COMMAND);
 
-	// IDC_COMMAND_LIST을 기준으로 COMMAND_EDIT을 왼쪽에 정렬
-	//CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_COMMAND_LIST, IDC_COMMAND_EDIT);
+	// IDC_COMMAND_LIST을 기준으로 IDC_SERVER_IP을 왼쪽에 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_COMMAND_LIST, 
+		IDC_COMMAND_EDIT,
+		IDC_SERVER_IP);
 
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_SERVER_IP, IDC_RUN_SERVER);
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_SERVER);

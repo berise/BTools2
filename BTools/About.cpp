@@ -10,13 +10,8 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 END_MESSAGE_MAP()
 
 
-CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
-{
-}
-
-CAboutDlg::~CAboutDlg()
-{
-}
+CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD){}
+CAboutDlg::~CAboutDlg(){}
 
 
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
@@ -29,7 +24,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 
 
 //TODO:
-//IDEA: What about changing msg on the fly. OnTimer callback changes msg. ^^
+//IDEA: changing msg on the fly. OnTimer callback changes msg. ^^
 BOOL CAboutDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
@@ -97,12 +92,7 @@ BOOL CAboutDlg::OnInitDialog()
 	// It looks like working with MemDC.h !o!
 	//m_matrix1.DoScroll(50, CMatrixStatic::DOWN);
 
-
-	CRect mr;
-	//m_matrix1.GetClientRect(mr);
 	
-	//ClientToScreen(&mr);
-	//m_matrix2.MoveWindow(0, mr.bottom-4, mr.Width(), 20);// matrix2 will be adjusted by AdjustClientX[Y]Zie function.
 	m_matrix2.SetNumberOfLines(5);
 	m_matrix2.SetXCharsPerLine(22);
 	m_matrix2.SetSize(CMatrixStatic::TINY);
@@ -142,9 +132,10 @@ void CAboutDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 			DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
 	}
 	*/
-	//VerticalSpace(m_hWnd, IDC_MATRIX1, IDC_MATRIX2, 0);
+	VerticalSpace(m_hWnd, IDC_STATIC_CONTEST_LOGO, IDC_MATRIX2, 1);
+	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_MATRIX1, -4);
 	// place IDC_STATIC_CONTEST_LOGO just below IDC_MATRIX2
-	//VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_STATIC_CONTEST_LOGO, 0);
+	
 }
 #endif
 

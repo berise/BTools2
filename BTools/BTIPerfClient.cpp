@@ -127,6 +127,22 @@ BOOL BTIPerfClient::OnInitDialog()
 				.SetControlStyle(CXGroupBox::header, FALSE);
 
 
+	// OScopeCtrl
+	// Control for OScopeCtrl must be set to invisible. (place holder)
+	CRect rect;
+	GetDlgItem(IDC_STATIC_GRAPH)->GetClientRect(rect);
+	m_OScopeCtrl.Create(WS_CHILD | WS_VISIBLE, rect, this);
+
+
+	// customize the control
+	m_OScopeCtrl.SetRange(0.0, 10.0, 1) ;
+	m_OScopeCtrl.SetYUnits(L"ms") ;
+	m_OScopeCtrl.SetXUnits(L"Seconds") ;
+	m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
+	m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
+	m_OScopeCtrl.SetPlotColor(RGB(0, 0, 255)) ;
+
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
@@ -181,10 +197,18 @@ void BTIPerfClient::ClientFinished()
 // 포멧도 필요 m_Setting->mFormat  그래프 레이블 변경에 필요함.
 void BTIPerfClient::CallbackBW(double fBW)
 {
-
 	CString temp;
 	temp.Format(L"Bandwidth : %lf", fBW/1024);
-	m_lbResult.AddString(temp);
+	//m_lbResult.AddString(temp);
+
+	// visualization
+	double nRandom;
+	// generate a random number between 
+	nRandom = -5.0 + 1000.0*rand()/(double)RAND_MAX;
+	//m_OScopeCtrl.AppendPoint(nRandom);
+
+		// append the new value to the plot
+	m_OScopeCtrl.AppendPoint(fBW/1024);
 
 }
 
@@ -350,19 +374,23 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 	CScreenLib::DockControl(m_hWnd, IDC_STATIC_COMMANDS, CScreenLib::dtTop);
 	//CScreenLib::DockControl(m_hWnd, IDC_COMMAND_LIST, CScreenLib::dtTop);
 
-	CScreenLib::OptimizeWidth(m_hWnd, 4, 
+	CScreenLib::OptimizeWidth(m_hWnd, 5, 
 		IDC_STATIC_COMMANDS,
 		IDC_COMMAND_LIST,
 		IDC_STATIC_OUTPUT,
-		IDC_RESULT_LIST);
+		IDC_RESULT_LIST,
+		IDC_STATIC_GRAPH);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 4);
-	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 4);
-	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 8);
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 3);
+	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 6);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 4);
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_CLIENT_IP, 4);
+	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_CLIENT_IP, 3);
+	VerticalSpace(m_hWnd, IDC_CLIENT_IP, IDC_STATIC_GRAPH, 3);
 
+
+	//CScreenLib::OptimizeHeight(m_hWnd, IDC_STATIC_GRAPH);
 
 
 	// IDC_COMMAND_LIST 기준으로 오른쪽에 Add정렬
@@ -385,5 +413,13 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_CLIENT_IP, IDC_RUN_CLIENT);
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_CLIENT);
-	
+
+
+	if(m_OScopeCtrl.GetSafeHwnd() != NULL)
+	{
+		CRect rect;
+		GetDlgItem(IDC_STATIC_GRAPH)->GetWindowRect(rect);
+		ScreenToClient(rect);
+		m_OScopeCtrl.MoveWindow(rect);
+	}	
 }

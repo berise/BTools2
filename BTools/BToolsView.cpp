@@ -30,20 +30,16 @@ END_MESSAGE_MAP()
 CBToolsView::CBToolsView()
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
-
 }
 
 CBToolsView::~CBToolsView()
 {
-
-
 }
 
 BOOL CBToolsView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: CREATESTRUCT cs를 수정하여 여기에서
 	//  Window 클래스 또는 스타일을 수정합니다.
-
 	return CPropertyView::PreCreateWindow(cs);
 }
 
@@ -89,14 +85,15 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// Init CPropertyView 
 	CTabCtrl *tab = GetTabControl();
 	
+	HINSTANCE hInstance = ::AfxGetApp()->m_hInstance;
+	//LoadIcon(
 	m_ImageList16x16.Create(16, 16, ILC_COLOR32|ILC_MASK, 6, 3);
-	m_ImageList16x16.Add( ::LoadIcon(::AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_PING)) );
-	m_ImageList16x16.Add( ::LoadIcon(::AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_IPERF_CLIENT)) );
-	m_ImageList16x16.Add( ::LoadIcon(::AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_IPERF_SERVER)) );
-	m_ImageList16x16.Add( ::LoadIcon(::AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ABOUT1)) );
-	m_ImageList16x16.Add( ::LoadIcon(::AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ABOUT2)) );
-	//m_ImageList16x16.Add( ::LoadIcon(::AfxGetApp()->m_hInstance, MAKEINTRESOURCE(IDI_ABOUT1)) );
-	
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PING)) );
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_CLIENT)) );
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_SERVER)) );
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT1)) );
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT2)) );
+	//m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT1)) );	
 
 	tab->SetImageList(&m_ImageList16x16);
 
@@ -108,12 +105,12 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// 참고 : 이전 버전(WM 5.0, 6.0에서는 모두 문제가 생기지 않는다. 피하는 것으로 처리되는 듯 보인다.
 	EnableScrollView(FALSE);
 
-	AddPage(&m_ping, L"iPing", 0);
-	AddPage(&m_iperf_client, L"i&Client", 1);
-	AddPage(&m_iperf_server, L"i&Server", 2);
+	AddPage(&m_ping, L"&Ping", 0);
+	AddPage(&m_iperf_client, L"&Client", 1);
+	AddPage(&m_iperf_server, L"&Server", 2);
 
 	//EnableStackedTabs(TRUE); // 보기 싫게 보임
-	SetActivePage(0);
+	SetActivePage(1);
 
 	return 0;
 }
@@ -184,6 +181,7 @@ void CBToolsView::OnDestroy()
 {
 	CPropertyView::OnDestroy();
 
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	/*
 	RemovePage(&m_ping);
 	RemovePage(&m_iperf_client);
@@ -193,8 +191,6 @@ void CBToolsView::OnDestroy()
 
 	for(int i = 0; i < nCount; i++)
 		RemovePage(0);
-		//RemovePage(&m_ping);
-		
 
-	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	
 }

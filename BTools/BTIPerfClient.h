@@ -7,6 +7,7 @@
 
 #include "3rd/PropertyView.h"
 #include "3rd/XGroupBox.h"
+#include "3rd/OScopeCtrl.h"
 
 
 // BTIPerfClient 대화 상자입니다.
@@ -36,6 +37,20 @@ public:
 	virtual void CallbackBW(double fBW);
 
 
+
+	BOOL ParseCommandLine(Settings *pSetting, CString &szCmd);
+
+	afx_msg void OnBnClickedRunClient();
+	CListBox m_lbCommand;
+	virtual BOOL OnInitDialog();
+	CListBox m_lbResult;
+	afx_msg void OnBnClickedAddCommand();
+	afx_msg void OnLbnSelchangeCommandList();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+
+private:
+	// Member variables
 	FILE *m_fStatistics;
 
 	BOOL m_bClientStarted;
@@ -49,17 +64,11 @@ public:
 	CString	m_csReportFile;
 	CString	m_csErrorFile;
 
-	BOOL ParseCommandLine(Settings *pSetting, CString &szCmd);
-
-	afx_msg void OnBnClickedRunClient();
-	CListBox m_lbCommand;
-	virtual BOOL OnInitDialog();
-	CListBox m_lbResult;
-	afx_msg void OnBnClickedAddCommand();
-	afx_msg void OnLbnSelchangeCommandList();
-	afx_msg void OnSize(UINT nType, int cx, int cy);
-
 
 	CXGroupBox m_sCommands;
 	CXGroupBox m_sOutput;
+
+
+	// visualization
+	COScopeCtrl m_OScopeCtrl;
 };

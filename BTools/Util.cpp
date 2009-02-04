@@ -211,9 +211,45 @@ void WriteLog(TCHAR *pLogFile, wchar_t *fmt, ...)
 
 
 ////////////////////////////////////////////////////////////
-// LogToFile 
-// Writes szLog into the file named pszFilename
-HRESULT LogToFile(LPTSTR szLog, LPCTSTR pszFilename)
+/// LogToFile 
+/// Writes szLog into the file named pszFilename
+HRESULT LogToFileA(LPTSTR szLog, LPCTSTR pszFilename)
+{
+    HRESULT hr = E_FAIL;
+    
+    //Open the handle to the file (and create it if it doesn't exist
+    HANDLE hFile = CreateFile(pszFilename, GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (INVALID_HANDLE_VALUE == hFile)
+        goto Exit;
+
+    //Set the pointer at the end so that we can append szLog
+    DWORD dwFilePointer = SetFilePointer(hFile, 0, NULL, FILE_END);
+    if (0xFFFFFFFF == dwFilePointer)
+        goto Exit;
+
+    //Write to the file
+    DWORD dwBytesWritten = 0;
+    BOOL bWriteFileRet = WriteFile(hFile, szLog, wcslen(szLog) * 2, &dwBytesWritten, NULL);
+    if (!bWriteFileRet)
+        goto Exit;
+
+    //Flush the buffer
+    BOOL bFlushFileBuffersRet = FlushFileBuffers(hFile);
+    if (!bFlushFileBuffersRet)
+        goto Exit;
+
+    //Success
+    hr = S_OK;
+
+Exit:
+    if (NULL != hFile)
+        CloseHandle(hFile);
+
+    return hr;
+}
+
+
+HRESULT LogToFile(TCHAR * szLog, TCHAR * pszFilename)
 {
     HRESULT hr = E_FAIL;
     
@@ -310,6 +346,7 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 
 // move hwndAlignee to just below hwnd apart nx (dialog unit)
 // align points are left & bottom.
+// 왼쪽 정렬은 제거. 상하 만 조절
 void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx)
 {
 	ASSERT(hwndDlg != NULL);
@@ -329,10 +366,14 @@ void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx
 	HWND hwndCtl = ::GetDlgItem(hwndDlg, nIDAffectedCtl);
 	ASSERT(hwndCtl != NULL);
 	RECT rcCtl;
-	::GetClientRect(hwndCtl, &rcCtl);
+	::GetWindowRect(hwndCtl, &rcCtl);
+	POINT ptCtl;
+	ptCtl.x = rcCtl.left;
+	ptCtl.y = rcCtl.bottom;
+	::ScreenToClient(hwndDlg, &ptCtl);
 
 
-	::SetWindowPos(hwndCtl, NULL, ptMoveTo.x, ptMoveTo.y + nx,
+	::SetWindowPos(hwndCtl, NULL, ptCtl.x, ptMoveTo.y + nx,
 			0, 0, SWP_NOSIZE|SWP_NOZORDER);
 
 	/*
