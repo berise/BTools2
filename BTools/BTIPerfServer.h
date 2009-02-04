@@ -54,6 +54,7 @@ public:
 	*/
 	void virtual PrintBuffer(char *buffer,char *speed);
 	void virtual ClientFinished();
+	virtual void CallbackBW(double fBW);
 
 
 protected:

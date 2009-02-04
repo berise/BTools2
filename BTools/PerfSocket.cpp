@@ -286,10 +286,12 @@ void PerfSocket::ReportPeriodicBW_Jitter_Loss( int32_t errorCnt,
  * Report the bandwidth (inBytes / inSeconds).
  * ------------------------------------------------------------------- */
 
-void PerfSocket::IPerfWinCEReport(char *buffer,char *speed)
+void PerfSocket::IPerfWinCEReport(char *buffer,char *speed, double fBW)
 {
 	if (m_pReporter!=0)
 		m_pReporter->PrintBuffer(buffer,speed);
+	if (m_pReporter!=0 && fBW > 0)
+		m_pReporter->CallbackBW(fBW);
 }
 
 void PerfSocket::ReportBW( max_size_t inBytes,
@@ -315,7 +317,8 @@ void PerfSocket::ReportBW( max_size_t inBytes,
                    toupper( mSettings->mFormat));
 
 
-	// This comes when I debug server code
+	// inStop - inStart != 0 can be happen when debug server side code.
+	// In client side, server doesn't work & time doesn't goes.
 	// Server side stopped while client trying to calculate BW
 	if(inStop - inStart != 0)
 	{
@@ -323,7 +326,7 @@ void PerfSocket::ReportBW( max_size_t inBytes,
                    inBytes / (inStop - inStart), mSettings->mFormat);
 		
 		sprintf( reportBuffer, report_bw_format, mSock, inStart, inStop, bytes, speed );
-		IPerfWinCEReport(reportBuffer,speed);
+		IPerfWinCEReport(reportBuffer, speed, inBytes / (inStop - inStart));
 	}
 
 	//IPerfWinCEReport(reportBuffer,speed);

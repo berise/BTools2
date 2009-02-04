@@ -133,7 +133,10 @@ void BTPingDialog::OnDestroy()
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	if(ping_thread)
-		WaitForSingleObject(ping_thread->thread_handle, 1000);
+	{
+		ping_thread->stop();
+		WaitForSingleObject(ping_thread->thread_handle, 2000);
+	}
 
 	if(ping_thread != NULL)
 	{

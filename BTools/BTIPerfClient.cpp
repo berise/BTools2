@@ -176,6 +176,18 @@ void BTIPerfClient::ClientFinished()
 
 }
 
+// char *transfer, char *bandwidth
+// 위 두가지를 숫자로 전환하면 종료 (David의 string-to-number를 사용)
+// 포멧도 필요 m_Setting->mFormat  그래프 레이블 변경에 필요함.
+void BTIPerfClient::CallbackBW(double fBW)
+{
+
+	CString temp;
+	temp.Format(L"Bandwidth : %lf", fBW/1024);
+	m_lbResult.AddString(temp);
+
+}
+
 
 /* @note dynamic allocation confusion
 char** array;

@@ -718,6 +718,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\About.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\BTIPerfClient.cpp"
 				>
 			</File>
@@ -831,62 +835,20 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="헤더 파일"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
-			>
-			<File
-				RelativePath=".\BTIPerfClient.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BTIPerfServer.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BTools.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BToolsDoc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BToolsView.h"
-				>
-			</File>
-			<File
-				RelativePath=".\BTPingDialog.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MainFrm.h"
-				>
-			</File>
-			<File
-				RelativePath=".\ping.h"
-				>
-			</File>
-			<File
-				RelativePath=".\PingThread.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Resourceppc.h"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.h"
-				>
-			</File>
-		</Filter>
-		<Filter
 			Name="리소스 파일"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
 				RelativePath=".\res\BTools.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\BTools_16x16.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\BTools_32x32.ico"
 				>
 			</File>
 			<File
@@ -944,26 +906,76 @@
 			<File
 				RelativePath=".\3rd\CFireRoutine.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\CFireRoutine.h"
+				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\3rd\CPlasmaRoutine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\CPlasmaRoutine.h"
 				>
 			</File>
 			<File
 				RelativePath=".\3rd\CWaterRoutine.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\CWaterRoutine.h"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\DIBSectionLite.cpp"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\DIBSectionLite.h"
 				>
+				<FileConfiguration
+					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+					/>
+				</FileConfiguration>
 			</File>
 			<File
 				RelativePath=".\3rd\FileEx.cpp"
@@ -1074,6 +1086,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\3rd\SFXStatic.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\SFXStatic.h"
+				>
+			</File>
+			<File
 				RelativePath=".\3rd\XGroupBox.cpp"
 				>
 			</File>
@@ -1179,6 +1199,60 @@
 			</File>
 			<File
 				RelativePath=".\Speaker.hpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="헤더 파일"
+			Filter="h;hpp;hxx;hm;inl;inc;xsd"
+			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+			>
+			<File
+				RelativePath=".\About.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BTIPerfClient.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BTIPerfServer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BTools.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BToolsDoc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BToolsView.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BTPingDialog.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MainFrm.h"
+				>
+			</File>
+			<File
+				RelativePath=".\ping.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PingThread.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Resourceppc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\stdafx.h"
 				>
 			</File>
 		</Filter>

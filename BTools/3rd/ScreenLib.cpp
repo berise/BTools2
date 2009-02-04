@@ -60,9 +60,9 @@ void CScreenLib::DockControl(HWND hwndDlg, UINT nIDAffectedCtl, DockType nType /
 		case dtTop:
 			nLeft = 0;
 			nTop = 0;
-			nWidth = rcClient.right - rcClient.left;
+			//nWidth = rcClient.right - rcClient.left;
 			// keep original width
-			//nWidth = rcCtl.right - rcCtl.left;
+			nWidth = rcCtl.right - rcCtl.left;
 			nHeight = rcCtl.bottom - rcCtl.top;
 			break;
 

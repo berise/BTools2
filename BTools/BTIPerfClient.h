@@ -33,6 +33,7 @@ protected:
 public:
 	void virtual PrintBuffer(char *buffer,char *speed);
 	void virtual ClientFinished();
+	virtual void CallbackBW(double fBW);
 
 
 	FILE *m_fStatistics;

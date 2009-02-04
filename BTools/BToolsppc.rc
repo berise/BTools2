@@ -71,6 +71,8 @@ IDI_IPERF_SERVER        ICON                    "res\\page_down.ico"
 IDI_ABOUT1              ICON                    "res\\page_favourites.ico"
 IDI_ABOUT2              ICON                    "res\\page_tick.ico"
 IDI_IPERF_CLIENT        ICON                    "res\\page_up.ico"
+IDI_BTOOLS_32x32        ICON                    "res\\BTools_32x32.ico"
+IDI_BTOOLS_16x16        ICON                    "res\\BTools_16x16.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -171,15 +173,15 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG  0, 0, 145, 206
+IDD_ABOUTBOX DIALOG  0, 0, 143, 171
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE 0x80000000L
 CAPTION "BTools Á¤º¸"
 FONT 9, "MS Shell Dlg"
 BEGIN
-    LTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,0,136,90
-    LTEXT           "Matrix_tiny_red",IDC_MATRIX2,1,103,131,22
-    LTEXT           "Windows Mobile Contest Logo && SFX",IDC_STATIC_CONTEST_LOGO,7,177,131,22
+    LTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,53,139,90,WS_BORDER
+    LTEXT           "Matrix_tiny_red",IDC_MATRIX2,0,31,139,22,WS_BORDER
+    LTEXT           "Logo with SFX",IDC_STATIC_CONTEST_LOGO,0,0,139,31,WS_BORDER
 END
 
 IDD_ABOUTBOX_WIDE DIALOG  0, 0, 210, 129
@@ -286,10 +288,8 @@ GUIDELINES DESIGNINFO
 BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 138
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 199
+        RIGHTMARGIN, 139
+        BOTTOMMARGIN, 154
     END
 
     IDD_ABOUTBOX_WIDE, DIALOG

@@ -322,10 +322,10 @@ COLORREF SEGM_COLORS[3] = {
 	CMemDC off_screen_dc(&dc, &m_rect);
 
 	CBitmap bmp;//,*pOldBmp;
-		BITMAP bm;
+	//	BITMAP bm;
 	//	dc.CreateCompatibleDC(pDC);
 		bmp.LoadBitmap(m_iImagematrix);
-		bmp.GetObject(sizeof(bm),&bm);
+		//bmp.GetObject(sizeof(bm),&bm);
 		//pOldBmp=dc.SelectObject(&bmp);
 
 
@@ -335,7 +335,7 @@ COLORREF SEGM_COLORS[3] = {
 	CBitmap* pOldBitmap = dcMemory.SelectObject(&bmp);
 	int charcount = 0;
 	int linecount = 1;
-	HBRUSH hbBkBrush = CreateSolidBrush(m_crBackColor);
+	//HBRUSH hbBkBrush = CreateSolidBrush(m_crBackColor);
 	//FillRect(dc.m_hDC, &m_rect, hbBkBrush);
 	//FillRect(off_screen_dc.m_hDC, &m_rect, hbBkBrush);
 	for (int ix = 0; ix < strlen; ix++)
@@ -361,7 +361,7 @@ COLORREF SEGM_COLORS[3] = {
 	dcMemory.SelectObject(pOldBitmap);
 	dcMemory.DeleteDC();
 	DeleteObject(bmp);
-	DeleteObject(hbBkBrush);
+	//DeleteObject(hbBkBrush);
 
 	// CMemDC will do following line in destructor.(very strange concept in MemDC)
 	//dc.BitBlt(0, 0, m_rect.Width(), m_rect.Height(), &off_screen_dc, m_rect.left, m_rect.top, SRCCOPY);

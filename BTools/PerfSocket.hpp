@@ -108,7 +108,7 @@ public:
 
 	CReporter *m_pReporter;
 
-	void IPerfWinCEReport(char *buffer,char *speed);
+	void IPerfWinCEReport(char *buffer,char *speed, double fBW = -1);
 
 protected:
     // UDP, in PerfSocket_UDP.cpp

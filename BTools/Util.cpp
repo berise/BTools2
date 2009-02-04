@@ -303,7 +303,6 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 		
 	}
 
-
 	//
 	delete Buff;
 }
@@ -325,7 +324,6 @@ void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx
 	ptMoveTo.y = rcAlign.bottom;
 
 	::ScreenToClient(hwndDlg, &ptMoveTo);
-
 
 	// Verify the affected control and obtain its rect
 	HWND hwndCtl = ::GetDlgItem(hwndDlg, nIDAffectedCtl);

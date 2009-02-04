@@ -109,8 +109,8 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	EnableScrollView(FALSE);
 
 	AddPage(&m_ping, L"iPing", 0);
-	AddPage(&m_iperf_client, L"&iClient", 1);
-	AddPage(&m_iperf_server, L"&iServer", 2);
+	AddPage(&m_iperf_client, L"i&Client", 1);
+	AddPage(&m_iperf_server, L"i&Server", 2);
 
 	//EnableStackedTabs(TRUE); // 보기 싫게 보임
 	SetActivePage(0);

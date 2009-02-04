@@ -485,6 +485,10 @@ CDIBSectionLite::CDIBSectionLite()
     m_hBitmap     = NULL;
     m_hOldBitmap  = NULL;
 
+	// raw bits
+	m_ppvBits = NULL;
+	m_bBitsAllocated = FALSE;
+
 #ifndef DIBSECTION_NO_MEMDC_REUSE
     m_bReuseMemDC = FALSE;
 #endif
@@ -518,6 +522,19 @@ void CDIBSectionLite::DeleteObject()
     if (m_hBitmap)
         ::DeleteObject(m_hBitmap);
     m_hBitmap = NULL;
+
+	//http://www.pocketpcdn.com/articles/bitmap_bits.html
+	//Here we can bitmap bits: pBuffer. Note:
+	// 1. pBuffer contains 3 bytes per point
+	// 2. Lines ane from the bottom to the top!
+	// 3. Points in the line are from the left to the right
+	// 4. Bytes in one point are BGR (blue, green, red) not RGB
+	// 5. Don't delete pBuffer, it will be automatically deleted
+	// when delete m_hBitmap
+
+
+	//if(m_ppvBits != NULL && m_bBitsAllocated == TRUE)
+		;//delete [] m_ppvBits;
     m_ppvBits = NULL;
 
 #ifndef DIBSECTION_NO_PALETTE
@@ -835,7 +852,7 @@ BOOL CDIBSectionLite::SetBitmap(LPBITMAPINFO lpBitmapInfo, LPVOID lpBits)
         }
 
         m_hBitmap = CreateDIBSection(hDC, (const BITMAPINFO*) m_DIBinfo,
-                                     m_iColorDataType, &m_ppvBits, NULL, 0);
+                                     m_iColorDataType, (void**)&m_ppvBits, NULL, 0);
         ::ReleaseDC(NULL, hDC);
         if (!m_hBitmap)
         {
@@ -954,7 +971,7 @@ BOOL CDIBSectionLite::SetBitmap(HBITMAP hBitmap
         m_hBitmap = CreateDIBSection(dc.m_hDC, 
                                      (const BITMAPINFO*) m_DIBinfo,
                                      m_iColorDataType,
-                                     &m_ppvBits, 
+                                     (void **)&m_ppvBits, 
                                      NULL, 0);
 #ifndef DIBSECTION_NO_PALETTE
         if (pOldPalette)
@@ -1717,7 +1734,8 @@ void CDIBSectionLite::Create32Bit(CDC *pDC, CDIBSectionLite &dib, int iWidth, in
 
 
 	// Create a 32 bit bitmap
-	m_ppvBits = new DWORD[iWidth*iHeight];
+	m_bBitsAllocated = TRUE;
+	m_ppvBits = (LPBYTE) new DWORD[iWidth*iHeight];
 	BITMAPINFO bih;
 
     // create DIB Section
@@ -1774,7 +1792,8 @@ void CDIBSectionLite::Create32Bit(CDIBSectionLite &dib, int iWidth, int iHeight)
 
 
 	// Create a 32 bit bitmap
-	m_ppvBits = new DWORD[iWidth*iHeight];
+	m_bBitsAllocated = TRUE; //##
+	m_ppvBits = (LPBYTE)new DWORD[iWidth*iHeight];
 	BITMAPINFO bih;
 
     // create DIB Section

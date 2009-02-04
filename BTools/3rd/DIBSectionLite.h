@@ -217,7 +217,9 @@ protected:
 public://###
     HBITMAP  m_hBitmap;          // Handle to DIBSECTION
     DIBINFO  m_DIBinfo;          // Bitmap header & color table info
-    VOID    *m_ppvBits;          // Pointer to bitmap bits
+    //VOID    *m_ppvBits;          // Pointer to bitmap bits
+	LPBYTE	m_ppvBits;          // Pointer to bitmap bits
+	BOOL	m_bBitsAllocated;			// m_ppvBits의 할당 여부 (SetBitmap을 통해 지정된 것들은 m_ppvBits가 제대로 지워지지 않는다.)
     UINT     m_iColorDataType;   // color data type (palette or RGB values)
     UINT     m_iColorTableSize;  // Size of color table
 

@@ -207,6 +207,15 @@ void BTIPerfServer::ClientFinished()
 	DELETE_PTR(m_piperf_setting);
 }
 
+void BTIPerfServer::CallbackBW(double fBW)
+{
+	CString temp;
+	temp.Format(L"Bandwidth : %l", fBW);
+	m_lbResult.AddString(temp);
+}
+
+
+
 
 BOOL BTIPerfServer::ParseCommandLine(Settings *pSetting, CString &szCmd)
 {
