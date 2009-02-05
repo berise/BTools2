@@ -1126,7 +1126,8 @@ BOOL CDIBSectionLite::Load(LPCTSTR lpszFileName)
     }
 
     // Allocate the memory for the bits and read the bits from the file.
-    BYTE* pBits = (BYTE*) malloc(nBitsSize);
+    //BYTE* pBits = (BYTE*) malloc(nBitsSize);
+	BYTE* pBits = new BYTE[nBitsSize];
     if (!pBits) 
     {
         TRACE0("Out of memory for DIB bits\n");

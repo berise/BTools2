@@ -7,6 +7,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 #endif
 	ON_COMMAND(ID_ABOUTMENU2_SCROLL2, &CAboutDlg::OnAboutmenu2Scroll2)
 	ON_COMMAND(ID_ABOUTMENU2_STOP, &CAboutDlg::OnAboutmenu2Stop)
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -111,8 +112,11 @@ BOOL CAboutDlg::OnInitDialog()
 
 	// SFX
 	m_cSFX.SetBitmapResource(IDB_WMCONTEST);
-	m_cSFX.Run(40);
+	
 
+
+	//
+	SetTimer(999, 5000, NULL);
 	
 	return TRUE;	// 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 			// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -132,8 +136,8 @@ void CAboutDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 			DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
 	}
 	*/
-	VerticalSpace(m_hWnd, IDC_STATIC_CONTEST_LOGO, IDC_MATRIX2, 1);
-	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_MATRIX1, -4);
+	VerticalSpace(m_hWnd, IDC_STATIC_CONTEST_LOGO, IDC_MATRIX2, 0);
+	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_MATRIX1, -8);
 	// place IDC_STATIC_CONTEST_LOGO just below IDC_MATRIX2
 	
 }
@@ -165,4 +169,15 @@ void CAboutDlg::OnAboutmenu2Stop()
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	m_matrix1.StopScroll();
 	m_matrix2.StopScroll();
+}
+void CAboutDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+	if(nIDEvent == 999)
+	{
+		m_cSFX.Run(50);
+		KillTimer(nIDEvent); // one time timer.
+	}
+
+	CDialog::OnTimer(nIDEvent);
 }

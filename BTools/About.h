@@ -47,6 +47,7 @@ public:
 
 	afx_msg void OnAboutmenu2Scroll2();
 	afx_msg void OnAboutmenu2Stop();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 

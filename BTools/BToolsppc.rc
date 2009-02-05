@@ -179,9 +179,9 @@ EXSTYLE 0x80000000L
 CAPTION "BTools Á¤º¸"
 FONT 9, "MS Shell Dlg"
 BEGIN
-    LTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,56,139,90,WS_BORDER
-    LTEXT           "Matrix_tiny_red",IDC_MATRIX2,0,32,139,22,WS_BORDER
-    LTEXT           "Logo with SFX",IDC_STATIC_CONTEST_LOGO,0,0,139,31,WS_BORDER
+    CTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,53,139,81
+    CTEXT           "Matrix_tiny_red",IDC_MATRIX2,0,32,139,22
+    CTEXT           "Logo with SFX",IDC_STATIC_CONTEST_LOGO,0,0,139,31
 END
 
 IDD_ABOUTBOX_WIDE DIALOG  0, 0, 210, 129
@@ -290,7 +290,7 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         RIGHTMARGIN, 139
-        BOTTOMMARGIN, 154
+        BOTTOMMARGIN, 162
     END
 
     IDD_ABOUTBOX_WIDE, DIALOG
