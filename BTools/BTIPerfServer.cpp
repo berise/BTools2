@@ -106,6 +106,7 @@ void BTIPerfServer::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RESULT_LIST, m_lbResult);
 	DDX_Control(pDX, IDC_STATIC_COMMANDS, m_sCommands);
 	DDX_Control(pDX, IDC_STATIC_OUTPUT, m_sOutput);
+	DDX_Control(pDX, IDC_STATIC_INFO, m_sInfo);
 }
 
 
@@ -114,6 +115,7 @@ BEGIN_MESSAGE_MAP(BTIPerfServer, CPropertyViewPage)
 	ON_LBN_SELCHANGE(IDC_COMMAND_LIST, &BTIPerfServer::OnLbnSelchangeCommandList)
 	ON_BN_CLICKED(IDC_ADD_COMMAND, &BTIPerfServer::OnBnClickedAddCommand)
 	ON_WM_SIZE()
+	ON_STN_CLICKED(IDC_STATIC_INFO, &BTIPerfServer::OnStnClickedStaticInfo)
 END_MESSAGE_MAP()
 
 
@@ -125,16 +127,17 @@ BOOL BTIPerfServer::OnInitDialog()
 
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 	m_lbCommand.AddString(_T("-s"));
-	m_lbCommand.AddString(_T("-s -i 1"));
+	//m_lbCommand.AddString(_T("-s -i 1"));
 	m_lbCommand.AddString(_T("-s -u"));
-	m_lbCommand.AddString(_T("-s -u -i 1"));
+	//m_lbCommand.AddString(_T("-s -u -i 1"));
 
-	m_lbCommand.SetCurSel(0);	// default set
+	m_lbCommand.SetCurSel(0);	// default selection
 
 
 	// init Groupboxes
 	m_sCommands.EnableWindow(TRUE, TRUE);	
-	m_sCommands.SetWindowText(L"Commands", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+	m_sCommands.SetWindowText(L"IPerf Server Commands", FALSE)
+		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
 				//.SetBold(TRUE, FALSE)
@@ -144,7 +147,8 @@ BOOL BTIPerfServer::OnInitDialog()
 
 	m_sOutput.EnableWindow(TRUE, TRUE);
 	
-	m_sOutput.SetWindowText(L"Output", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+	m_sOutput.SetWindowText(L"IPerf Server Output", FALSE)
+		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
 				//.SetBold(TRUE, FALSE)
@@ -153,7 +157,14 @@ BOOL BTIPerfServer::OnInitDialog()
 				.SetControlStyle(CXGroupBox::header, FALSE);
 
 
-
+	m_sInfo.SetWindowText(L"Server IP && Start Server", FALSE)
+		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+				.SetBorderColor(RGB(255,0,0), FALSE)
+				//.SetBold(TRUE, FALSE)
+				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+				.SetAlignment(CXGroupBox::left, FALSE)
+				.SetControlStyle(CXGroupBox::header, FALSE);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
@@ -304,7 +315,7 @@ void BTIPerfServer::OnBnClickedRunServer()
 		//TerminateThread(m_ThreadHandle, dwExitCode);
 
 		m_bServerStarted=FALSE;
-		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start &Server"));
+		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
 	}
 }
 
@@ -336,19 +347,22 @@ void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
 
 	CScreenLib::DockControl(m_hWnd, IDC_STATIC_COMMANDS, CScreenLib::dtTop);
 
-	CScreenLib::OptimizeWidth(m_hWnd, 4, 
+	CScreenLib::OptimizeWidth(m_hWnd, 5, 
 		IDC_STATIC_COMMANDS, 
 		IDC_COMMAND_LIST, 
 		IDC_STATIC_OUTPUT,
-		IDC_RESULT_LIST
+		IDC_RESULT_LIST,
+		IDC_STATIC_INFO
 		);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 4);
-	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 4);
-	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 8);
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 3);
+	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 4);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 4);
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_SERVER_IP, 4);
+	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);	
+
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_INFO, 4);
+	VerticalSpace(m_hWnd, IDC_STATIC_INFO, IDC_SERVER_IP, 3);
 	
 
 
@@ -364,4 +378,9 @@ void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_SERVER_IP, IDC_RUN_SERVER);
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_SERVER);
 
+}
+
+void BTIPerfServer::OnStnClickedStaticInfo()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

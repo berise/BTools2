@@ -52,7 +52,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//SetIcon(AfxGetApp()->LoadIconW(IDI_WIFI), TRUE);
 	//SetIcon(AfxGetApp()->LoadIconW(IDI_WIFI), FALSE);
 
-	//m_wndCommandBar.SetBarStyle(m_wndCommandBar.GetBarStyle() | CBRS_SIZE_FIXED);
+	m_wndCommandBar.SetBarStyle(m_wndCommandBar.GetBarStyle() | CBRS_SIZE_FIXED);
 
 	return 0;
 }

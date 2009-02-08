@@ -31,6 +31,7 @@
 #define IDD_IPERF_SERVER                203
 #define IDS_NEW                         301
 #define IDS_MENU                        302
+#define IDS_MENU_START                  303
 #define IDM_NEW                         401
 #define IDM_MENU                        402
 #define IDC_COMBO1                      1000
@@ -61,6 +62,7 @@
 #define IDC_STATIC_OUTPUT               1020
 #define IDC_STATIC_CONTEST_LOGO         1021
 #define IDC_STATIC_GRAPH                1022
+#define IDC_STATIC_INFO                 1023
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -73,14 +75,15 @@
 #define ID_ABOUTMENU2_SCROLL2           32780
 #define ID_ABOUTMENU2_STOP              32781
 #define ID_DEVEL_32782                  32782
+#define ID_PREFERENCE                   32783
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        165
-#define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1023
+#define _APS_NEXT_COMMAND_VALUE         32784
+#define _APS_NEXT_CONTROL_VALUE         1024
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

@@ -96,4 +96,6 @@ public:
 	/// XGroupBox for displaying header groups
 	CXGroupBox m_sCommands;
 	CXGroupBox m_sOutput;
+	CXGroupBox m_sInfo;
+	afx_msg void OnStnClickedStaticInfo();
 };

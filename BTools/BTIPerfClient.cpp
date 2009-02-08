@@ -97,18 +97,17 @@ BOOL BTIPerfClient::OnInitDialog()
 	*/
 
 	m_lbCommand.AddString(_T("-c localhost -t 5 -i 1"));
-	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -i 1"));
-	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 3"));
-	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -u"));
-	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -u -b 2m"));
-	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -u -b 4m"));
-	m_lbCommand.AddString(_T("-c 192.168.0.13 -t 5 -u -b 8m"));	
+	m_lbCommand.AddString(_T("-c 192.168.0.1 -i 1"));
+	m_lbCommand.AddString(_T("-c 125.152.1.1 -i 1"));
+	m_lbCommand.AddString(_T("-c 192.168.0.1 -i 1 -u"));
 
+	m_lbCommand.SetCurSel(0);	// default selection
 
 	// init Groupboxes
 	m_sCommands.EnableWindow(TRUE, TRUE);
 	
-	m_sCommands.SetWindowText(L"Commands", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+	m_sCommands.SetWindowText(L"IPerf Client Commands", FALSE)
+				//.SetIcon(IDI_ABOUT1, 16, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
 				//.SetBold(TRUE, FALSE)
@@ -118,7 +117,7 @@ BOOL BTIPerfClient::OnInitDialog()
 
 	m_sOutput.EnableWindow(TRUE, TRUE);
 	
-	m_sOutput.SetWindowText(L"Output", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+	m_sOutput.SetWindowText(L"IPerf Client Output", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
 				//.SetBold(TRUE, FALSE)
@@ -128,16 +127,16 @@ BOOL BTIPerfClient::OnInitDialog()
 
 
 	// OScopeCtrl
-	// Control for OScopeCtrl must be set to invisible. (place holder)
+	// PlaceHodler for OScopeCtrl must be set to invisible.
 	CRect rect;
 	GetDlgItem(IDC_STATIC_GRAPH)->GetClientRect(rect);
 	m_OScopeCtrl.Create(WS_CHILD | WS_VISIBLE, rect, this);
 
 
-	// customize the control
-	m_OScopeCtrl.SetRange(0.0, 10.0, 1) ;
-	m_OScopeCtrl.SetYUnits(L"ms") ;
-	m_OScopeCtrl.SetXUnits(L"Seconds") ;
+	// customize the OScope Control
+	m_OScopeCtrl.SetRange(0.0, 100.0, 1) ;
+	m_OScopeCtrl.SetYUnits(L"BW") ;
+	m_OScopeCtrl.SetXUnits(L"") ;
 	m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
 	m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
 	m_OScopeCtrl.SetPlotColor(RGB(0, 0, 255)) ;
@@ -174,7 +173,7 @@ void BTIPerfClient::ClientFinished()
 	m_lbResult.AddString(_T("iperf client finished"));
 	//GetDlgItem(IDC_CLIENT_STATUS)->SetWindowText(_T("Client Finished"));
 	m_bClientStarted=FALSE;
-	GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start &Client"));
+	GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start"));
 	fclose(m_fStatistics);
 	m_fStatistics=NULL;
 	fclose(winCEStderr);
@@ -330,12 +329,14 @@ void BTIPerfClient::OnBnClickedRunClient()
 
 		//		StartThread(m_pIPerfClient);
 		// Run the test
+		// TODO : Start 버튼 이후, 초기화 및 client 실행시 까지 Button을 disable
+		// Stop시도 마찬가지 처리 (client/server 둘다)
 	}
 	else
 	{
 		m_pIPerfClient->Sig_Interupt(0);
 		m_bClientStarted=FALSE;
-		GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start Client"));
+		GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start"));
 	}
 	
 }
@@ -383,14 +384,12 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 
 	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 3);
 	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
-	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 6);
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 4);
 
 	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);
 	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_CLIENT_IP, 3);
 	VerticalSpace(m_hWnd, IDC_CLIENT_IP, IDC_STATIC_GRAPH, 3);
 
-
-	//CScreenLib::OptimizeHeight(m_hWnd, IDC_STATIC_GRAPH);
 
 
 	// IDC_COMMAND_LIST 기준으로 오른쪽에 Add정렬
@@ -418,8 +417,19 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 	if(m_OScopeCtrl.GetSafeHwnd() != NULL)
 	{
 		CRect rect;
-		GetDlgItem(IDC_STATIC_GRAPH)->GetWindowRect(rect);
-		ScreenToClient(rect);
-		m_OScopeCtrl.MoveWindow(rect);
+
+		if(DRA::GetDisplayMode() == DRA::Portrait)
+		{
+			CScreenLib::OptimizeHeight(m_hWnd, IDC_STATIC_GRAPH);
+
+			CRect rect;
+			GetDlgItem(IDC_STATIC_GRAPH)->GetWindowRect(rect);
+			ScreenToClient(rect);
+			m_OScopeCtrl.MoveWindow(rect);
+		}
+		else if (DRA::GetDisplayMode() == DRA::Landscape)
+		{
+			;	// not yet implemented
+		}
 	}	
 }

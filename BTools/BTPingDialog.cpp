@@ -122,6 +122,7 @@ BOOL BTPingDialog::OnInitDialog()
 	// LB style 변경.
 	DWORD dwStyle = m_lbPingResult.GetStyle();
 	//m_lbPingResult.ModifyStyle(0, dwStyle | LB_SETHORIZONTALEXTENT);
+	//::AfxGetMainWnd()->m_wndCommandBar;
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -257,7 +258,8 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 	// OSCOPECTRL은 나머지 영역을 채운다
 	CScreenLib::OptimizeHeight(m_hWnd, IDC_CUSTOM1);
 
-	// IDC_OSCOPECTRL은 Control이 아니다. 고로 CScreenLib에서 오류가 발생. 별도로 처리함.
+	// IDC_OSCOPECTRL은 Control이 아니다. 고로 CScreenLib에서 오류가 발생. 
+	// 별도의 PlaceHolder를 통해 처리함.
 	if(m_OScopeCtrl.GetSafeHwnd() != NULL)
 	{
 		CRect rect;

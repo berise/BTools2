@@ -62,10 +62,9 @@ BOOL CBToolsApp::InitInstance()
 		 CString msg;
 		 msg = L"이 프로그램은 기한 제한 버전입니다.\n";
 		 msg += L"This is a date limited version of BTools.\n";
-		 msg += L"You can use this software for a 7 days.\n";
 		 msg += fixedTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
 		 msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
-        AfxMessageBox(msg);
+        //AfxMessageBox(msg);
     }
     else
     {
@@ -74,12 +73,15 @@ BOOL CBToolsApp::InitInstance()
 				"Please contact the author for more use.\n\n"
 				"Thank you for your interest");
 				*/
-		CString msg("This software a limited version of BTools.\n"
+		CString msg("이 프로그램은 기한 제한 버전입니다.\n"
+				"This software a limited version of BTools.\n"
 				"It is submitted for the Windows Mobile Contest,\n"
-				"co-held by SK & Microsoft, only.\n"
+				"co-held by SK & Microsoft.\n"
 				"Please contact the author for more use.\n\n"
 				"Thank you for your interest");
-					
+
+		msg += fixedTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
+		msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
         //msg.Format(L"This software is submitted for the Windows Mobile Contest");
 		AfxMessageBox(msg);
 		return FALSE;
