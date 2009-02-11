@@ -109,9 +109,9 @@ BEGIN
     BEGIN
         MENUITEM "&Preference...",              ID_PREFERENCE, GRAYED
         MENUITEM SEPARATOR
-        MENUITEM "iPin&g tab",                  ID_FILE_PING
-        MENUITEM "i&Client tab",                ID_FILE_IPERFCLIENT
-        MENUITEM "i&Server tab",                ID_FILE_IPERFSERVER
+        MENUITEM "Pin&g tab",                   ID_FILE_PING
+        MENUITEM "&Client tab",                 ID_FILE_IPERFCLIENT
+        MENUITEM "&Server tab",                 ID_FILE_IPERFSERVER
         MENUITEM SEPARATOR
         MENUITEM "&About...",                   ID_APP_ABOUT
         MENUITEM SEPARATOR
@@ -179,9 +179,9 @@ EXSTYLE 0x80000000L
 CAPTION "BTools Á¤º¸"
 FONT 9, "MS Shell Dlg"
 BEGIN
-    CTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,53,139,81
-    CTEXT           "Matrix_tiny_red",IDC_MATRIX2,0,32,139,22
-    CTEXT           "Logo with SFX",IDC_STATIC_CONTEST_LOGO,0,0,139,31
+    CTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,0,139,81
+    CTEXT           "Matrix_tiny_red",IDC_MATRIX2,0,82,139,22
+    CTEXT           "Logo with SFX",IDC_STATIC_CONTEST_LOGO,0,110,139,30,0,WS_EX_STATICEDGE
 END
 
 IDD_ABOUTBOX_WIDE DIALOG  0, 0, 210, 129
@@ -234,9 +234,9 @@ BEGIN
     PUSHBUTTON      "&Add",IDC_ADD_COMMAND,85,50,23,12
     LISTBOX         IDC_RESULT_LIST,0,77,108,61,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
     LTEXT           "",IDC_SERVER_IP,4,154,78,12,0,WS_EX_STATICEDGE
-    LTEXT           "Commands",IDC_STATIC_COMMANDS,3,4,39,8
-    LTEXT           "Output",IDC_STATIC_OUTPUT,3,66,34,8
-    PUSHBUTTON      "Start",IDC_RUN_SERVER,85,153,23,12
+    LTEXT           "IPerf Server Commands",IDC_STATIC_COMMANDS,3,4,78,8
+    LTEXT           "IPerf Server Output",IDC_STATIC_OUTPUT,3,66,74,8
+    PUSHBUTTON      "Start",IDC_RUN_SERVER,85,154,23,12
     LTEXT           "Server IP  Start",IDC_STATIC_INFO,4,142,95,8
 END
 

@@ -59,7 +59,7 @@ BOOL CAboutDlg::OnInitDialog()
 	
 	// initialize matrix 1
 	// Your must call SetResourceBitmap, SetSize before SetText
-	int n_blue_lines = 14;		// determine number matrix lines
+	int n_blue_lines = 13;		// determine number matrix lines
 	int n_blue_char_per_line = 22;	//	number of chars in line
 
 	m_matrix1.SetNumberOfLines(n_blue_lines);
@@ -75,48 +75,47 @@ BOOL CAboutDlg::OnInitDialog()
 	//				01234567890123456789012345
 	CString msg(	"+--------------------+"//0
 					"|BTools for Pocket PC|"//1
-					"| = Windows Mobile V |"//2
-					"| = Windows Mobile VI|"//3
+					"|Special Version for |"//2
+					"| WM Contest(T*Omnia)|"//3
 					"|-------------------+|"//5 4
 					"| = ping             |"//6
-					"| = Iperf client &   |"//7
-					"|   server based on  |"//8
-					"|   version I.VII.O  |"//9				
+					"| = Iperf based on   |"//7
+					"|    version 1.7.0   |"//8			
 					"|------+-----+-------|"//0
-					"|Copyright(R)|       |"//1
+					"|Copyright(R)|Elbereth"//1
 					"| All Rights |       |"//2
-					"|  Reserved  +      @|"//3
-					"+--------------------+");//4
+					"|  Reserved  +berise@|"//3
+					"+--------------+-----+");//4
 	
 
 	// Uncomment next code to test flicker free blitting
 	// It looks like working with MemDC.h !o!
 	//m_matrix1.DoScroll(50, CMatrixStatic::DOWN);
 
+	int nLine = 6;
 	
-	m_matrix2.SetNumberOfLines(5);
+	m_matrix2.SetNumberOfLines(nLine);
 	m_matrix2.SetXCharsPerLine(22);
 	m_matrix2.SetSize(CMatrixStatic::TINY);
 	m_matrix2.SetBitmapResource(IDB_MATRIX_TINY_RED);
 	m_matrix2.AdjustClientXToSize(22);
-	m_matrix2.AdjustClientYToSize(5);
+	m_matrix2.AdjustClientYToSize(nLine);
 	//m_matrix2.SetText(_T(" !\"#$%&'()*+,-./0123456789;:<=>?@ABCDEFGHIJKLMNO PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
-	CString msg2(	"berise the developer  "
+	CString msg2(	"|Do you know that you|"
+					"| can drag the LOGO! |"
+					"+--------------------+"
+					"berise the developer  "
 					"Dlvl;54 $;-9M HP;3(17)" // index for ';', ':' is mismatched in MatrixStatic.cpp
-					"Pw;34(42) AC;-9 Exp;16"	// ';' shows ':' and ':' shows ';'.
-					"Special Version for   "
-					"Windows Mobile Contest"
+					"Pw;4(42) AC;-9 Exp;16 "	// ';' shows ':' and ':' shows ';'.						
 					);
 	m_matrix1.SetText(msg);
 	m_matrix2.SetText(msg2);
 
 	// SFX
 	m_cSFX.SetBitmapResource(IDB_WMCONTEST);
-	
 
-
-	//
-	SetTimer(999, 5000, NULL);
+	// Start effect 10 seconds later
+	SetTimer(999, 10000, NULL);
 	
 	return TRUE;	// 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 			// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -136,9 +135,11 @@ void CAboutDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 			DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
 	}
 	*/
-	VerticalSpace(m_hWnd, IDC_STATIC_CONTEST_LOGO, IDC_MATRIX2, 0);
-	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_MATRIX1, -8);
+	VerticalSpace(m_hWnd, IDC_MATRIX1, IDC_MATRIX2, -8);
+	
 	// place IDC_STATIC_CONTEST_LOGO just below IDC_MATRIX2
+	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_STATIC_CONTEST_LOGO,  0);
+	
 	
 }
 #endif
@@ -148,13 +149,12 @@ void CAboutDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 void CAboutDlg::OnAboutmenu2Scroll2()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	/*
+	
 	int direction = rand() % 4;
 	m_matrix2.DoScroll(2000, direction);//CMatrixStatic::RIGHT);
 
 	direction = rand() % 4;
 	m_matrix1.DoScroll(5000, direction);//CMatrixStatic::RIGHT);
-	*/
 
 }
 
@@ -176,7 +176,7 @@ void CAboutDlg::OnTimer(UINT_PTR nIDEvent)
 	if(nIDEvent == 999)
 	{
 		m_cSFX.Run(50);
-		KillTimer(nIDEvent); // one time timer.
+		KillTimer(nIDEvent); // for one time timer.
 	}
 
 	CDialog::OnTimer(nIDEvent);

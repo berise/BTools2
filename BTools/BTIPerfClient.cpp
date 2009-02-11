@@ -135,11 +135,11 @@ BOOL BTIPerfClient::OnInitDialog()
 
 	// customize the OScope Control
 	m_OScopeCtrl.SetRange(0.0, 100.0, 1) ;
-	m_OScopeCtrl.SetYUnits(L"BW") ;
-	m_OScopeCtrl.SetXUnits(L"") ;
+	m_OScopeCtrl.SetYUnits(L"kB/s") ;
+	m_OScopeCtrl.SetXUnits(L"Time(sec)") ;
 	m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
 	m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
-	m_OScopeCtrl.SetPlotColor(RGB(0, 0, 255)) ;
+	m_OScopeCtrl.SetPlotColor(RGB(255, 0, 255)) ;
 
 
 	return TRUE;  // return TRUE unless you set the focus to a control

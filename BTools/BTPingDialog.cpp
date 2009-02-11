@@ -64,12 +64,10 @@ BOOL BTPingDialog::OnInitDialog()
 	// this might be enough
 	//m_cbHosts.ModifyStyle(0, CBS_AUTOHSCROLL);	
 	m_cbHosts.AddString(_T("localhost"));
-	m_cbHosts.AddString(_T("203.242.63.135"));	
+	m_cbHosts.AddString(_T("skt.com"));	
 	m_cbHosts.AddString(_T("192.168.1.1"));
 	m_cbHosts.AddString(_T("knu.ac.kr"));
-	m_cbHosts.AddString(_T("snu.ac.kr"));
-	m_cbHosts.AddString(_T("pnu.ac.kr"));
-
+	
 	m_cbHosts.SetCurSel(0);
 
 	
@@ -86,7 +84,7 @@ BOOL BTPingDialog::OnInitDialog()
 	// customize the control
 	m_OScopeCtrl.SetRange(0.0, 10.0, 1) ;
 	m_OScopeCtrl.SetYUnits(L"ms") ;
-	m_OScopeCtrl.SetXUnits(L"Period (1 sec)") ;
+	m_OScopeCtrl.SetXUnits(L"Time(sec)") ;
 	m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
 	m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
 	m_OScopeCtrl.SetPlotColor(RGB(0, 255, 0)) ;

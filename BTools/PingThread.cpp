@@ -159,8 +159,8 @@ UINT CPingThread::ThreadProc(void* lpParam)
 
 		n_inserted = parent->m_lbPingResult.AddString(szMsg);
 		WriteLog(pLogFile, szMsg.GetBuffer());
-		szMsg += L"LogToFile";
-		LogToFile(szMsg.GetBuffer(), pLogFile);
+		//szMsg += L"LogToFile";
+		//LogToFile(szMsg.GetBuffer(), pLogFile);
 		parent->m_lbPingResult.SetCurSel(n_inserted);
 
 		// visualization
