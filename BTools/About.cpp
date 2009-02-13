@@ -59,8 +59,8 @@ BOOL CAboutDlg::OnInitDialog()
 	
 	// initialize matrix 1
 	// Your must call SetResourceBitmap, SetSize before SetText
-	int n_blue_lines = 13;		// determine number matrix lines
-	int n_blue_char_per_line = 22;	//	number of chars in line
+	int n_blue_lines = 15;		// determine number matrix lines
+	int n_blue_char_per_line = 44;	//	number of chars in line
 
 	m_matrix1.SetNumberOfLines(n_blue_lines);
 	m_matrix1.SetXCharsPerLine(n_blue_char_per_line);
@@ -73,7 +73,7 @@ BOOL CAboutDlg::OnInitDialog()
 	//
 	//m_matrix1.SetText(_T(" !\"#$%&'()*+,-./0123456789;:<=>?@ABCDEFGHIJKLMNO PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
 	//				01234567890123456789012345
-	CString msg(	"+--------------------+"//0
+	/*CString msg(	"+--------------------+"//0
 					"|BTools for Pocket PC|"//1
 					"|Special Version for |"//2
 					"| WM Contest(T*Omnia)|"//3
@@ -85,28 +85,47 @@ BOOL CAboutDlg::OnInitDialog()
 					"|Copyright(R)|Elbereth"//1
 					"| All Rights |       |"//2
 					"|  Reserved  +berise@|"//3
-					"+--------------+-----+");//4
+					"+--------------+-----+");//4*/
+
+	// about message for real device(M490)
+	CString msg(	"+------------------------------------------+"//0
+					"|BTools for Pocket PC                      |"//1
+					"|Special Version for Windows Mobile        |"//2
+					"|  Contest for T*Omnia                     |"//3
+					"|---------------------+--------------------|"//5 4
+					"| Features ;                               |"//6
+					"|  = ping with visualization               |"//7
+					"|  = Iperf for Windows Mobile              |"//8
+					"|     (based on iperf version 1.7.0        |"//9		
+					"|------+-----+-----------------------------|"//0
+					"|Copyright(R)|Elbereth                     |"//1
+					"| All Rights |                             |"//2
+					"|  Reserved  +berise@                      |"//3
+					"+--------------+---------------------------+");//4
 	
 
 	// Uncomment next code to test flicker free blitting
 	// It looks like working with MemDC.h !o!
 	//m_matrix1.DoScroll(50, CMatrixStatic::DOWN);
 
-	int nLine = 6;
+	int nLine = 8;
+	int nChar = 44;
 	
 	m_matrix2.SetNumberOfLines(nLine);
-	m_matrix2.SetXCharsPerLine(22);
+	m_matrix2.SetXCharsPerLine(nChar);
 	m_matrix2.SetSize(CMatrixStatic::TINY);
 	m_matrix2.SetBitmapResource(IDB_MATRIX_TINY_RED);
-	m_matrix2.AdjustClientXToSize(22);
+	m_matrix2.AdjustClientXToSize(nChar);
 	m_matrix2.AdjustClientYToSize(nLine);
 	//m_matrix2.SetText(_T(" !\"#$%&'()*+,-./0123456789;:<=>?@ABCDEFGHIJKLMNO PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
-	CString msg2(	"|Do you know that you|"
-					"| can drag the LOGO! |"
-					"+--------------------+"
-					"berise the developer  "
-					"Dlvl;54 $;-9M HP;3(17)" // index for ';', ':' is mismatched in MatrixStatic.cpp
-					"Pw;4(42) AC;-9 Exp;16 "	// ';' shows ':' and ':' shows ';'.						
+	CString msg2(	"+--------------+---------------------------+"
+					"|Do you know that you can drag the LOGO!   |"
+					"|                                          |"
+					"+--------------------+---------------------+"
+					"                                            "
+					"berise the developer                        "
+					"Dlvl;54 $;-9M HP;3(7) Pw;4(42) AC;-9 Exp;16 "// index for ';', ':' is misplaced
+					"                                            "// ';' shows ':' and ':' shows ';'
 					);
 	m_matrix1.SetText(msg);
 	m_matrix2.SetText(msg2);
@@ -135,7 +154,7 @@ void CAboutDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 			DRA::GetDisplayMode() != DRA::Portrait ? MAKEINTRESOURCE(IDD_ABOUTBOX_WIDE) : MAKEINTRESOURCE(IDD_ABOUTBOX));
 	}
 	*/
-	VerticalSpace(m_hWnd, IDC_MATRIX1, IDC_MATRIX2, -8);
+	VerticalSpace(m_hWnd, IDC_MATRIX1, IDC_MATRIX2, -20);
 	
 	// place IDC_STATIC_CONTEST_LOGO just below IDC_MATRIX2
 	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_STATIC_CONTEST_LOGO,  0);

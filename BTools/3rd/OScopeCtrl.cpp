@@ -154,8 +154,8 @@ void COScopeCtrl::SetRange(double dLower, double dUpper, int nDecimalPlaces)
 	  }
   }
 
-  // We don't need to erase, because we're blitting - berise
-  Invalidate(TRUE);
+	// We don't need to erase, because we're blitting - berise
+	Invalidate(TRUE);
 
 }  // SetRange
 
@@ -519,12 +519,13 @@ void COScopeCtrl::InvalidateCtrl()
 		else
 				m_nDataIndex = nPointsToCopy;
 		m_bWrapped = bNewWrapFlag;
-
-		
+	
 	}  ///////////// added for y-autorange support
 
 	// finally, force the plot area to redraw
-	InvalidateRect(m_rectClient) ; // m_rectClient
+	//InvalidateRect(m_rectClient) ; // m_rectClient
+
+	Invalidate(TRUE);
 
 } // InvalidateCtrl
 
@@ -550,7 +551,7 @@ double COScopeCtrl::AppendPoint(double dNewPoint)
   m_dCurrentPosition = dNewPoint ;
   DrawPoint() ;
 
-  Invalidate() ;
+  Invalidate(TRUE) ;
 
   return dPrevious ;
 

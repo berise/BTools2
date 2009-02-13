@@ -110,7 +110,7 @@ BOOL BTIPerfClient::OnInitDialog()
 				//.SetIcon(IDI_ABOUT1, 16, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
-				//.SetBold(TRUE, FALSE)
+				.SetBold(TRUE, FALSE)
 				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
 				.SetAlignment(CXGroupBox::left, FALSE)
 				.SetControlStyle(CXGroupBox::header, FALSE);
@@ -120,7 +120,7 @@ BOOL BTIPerfClient::OnInitDialog()
 	m_sOutput.SetWindowText(L"IPerf Client Output", FALSE)	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
-				//.SetBold(TRUE, FALSE)
+				.SetBold(TRUE, FALSE)
 				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
 				.SetAlignment(CXGroupBox::left, FALSE)
 				.SetControlStyle(CXGroupBox::header, FALSE);
@@ -135,7 +135,7 @@ BOOL BTIPerfClient::OnInitDialog()
 
 	// customize the OScope Control
 	m_OScopeCtrl.SetRange(0.0, 100.0, 1) ;
-	m_OScopeCtrl.SetYUnits(L"kB/s") ;
+	m_OScopeCtrl.SetYUnits(L"Bandwidth(kB/s)") ;
 	m_OScopeCtrl.SetXUnits(L"Time(sec)") ;
 	m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
 	m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;
@@ -382,13 +382,13 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 		IDC_RESULT_LIST,
 		IDC_STATIC_GRAPH);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 3);
-	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
-	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 4);
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 8);
+	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 6);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_CLIENT_IP, 3);
-	VerticalSpace(m_hWnd, IDC_CLIENT_IP, IDC_STATIC_GRAPH, 3);
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 12);
+	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 8);
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_CLIENT_IP, 8);
+	VerticalSpace(m_hWnd, IDC_CLIENT_IP, IDC_STATIC_GRAPH, 8);
 
 
 
@@ -425,7 +425,7 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 			CRect rect;
 			GetDlgItem(IDC_STATIC_GRAPH)->GetWindowRect(rect);
 			ScreenToClient(rect);
-			m_OScopeCtrl.MoveWindow(rect);
+			m_OScopeCtrl.SetWindowPos(NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE);//MoveWindow(rect);
 		}
 		else if (DRA::GetDisplayMode() == DRA::Landscape)
 		{

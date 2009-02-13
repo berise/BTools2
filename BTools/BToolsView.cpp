@@ -87,10 +87,10 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	
 	HINSTANCE hInstance = ::AfxGetApp()->m_hInstance;
 	//LoadIcon(
-	m_ImageList16x16.Create(16, 16, ILC_COLOR32|ILC_MASK, 6, 3);
-	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PING)) );
-	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_CLIENT)) );
-	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_SERVER)) );
+	m_ImageList16x16.Create(32, 32, ILC_COLOR32|ILC_MASK, 6, 3);
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_BTOOLS_32x32)) ); // IDI_PING
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_CLIENT_32)) );
+	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_SERVER_32)) );
 	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT1)) );
 	m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT2)) );
 	//m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT1)) );	

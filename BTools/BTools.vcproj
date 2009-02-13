@@ -868,6 +868,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\down.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\res\icon_world_dynamic.ico"
 				>
 			</File>
@@ -893,6 +897,10 @@
 			</File>
 			<File
 				RelativePath=".\res\page_up.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\up.ico"
 				>
 			</File>
 			<File

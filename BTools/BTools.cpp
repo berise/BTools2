@@ -47,24 +47,24 @@ CBToolsApp theApp;
 BOOL CBToolsApp::InitInstance()
 {
 	// Program Expiration routines
-	CTime fixedTime(2009,	// year
+	CTime expirationTime(2009,	// year
 		2,					// month
-		5+7,					// date
-		23,					// hour 24
-		59,					// minute
+		12,					// date
+		16,					// hour 24
+		15,					// minute
 		0);					// second
-	CTime curTime = CTime::GetCurrentTime();
+	CTime currentTime = CTime::GetCurrentTime();
 
-    CTimeSpan leftTime = fixedTime - curTime;   
+    CTimeSpan leftTime = expirationTime - currentTime;   
 
      if(leftTime.GetTotalSeconds() > 0)
     {
 		 CString msg;
 		 msg = L"이 프로그램은 기한 제한 버전입니다.\n";
 		 msg += L"This is a date limited version of BTools.\n";
-		 msg += fixedTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
+		 msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
 		 msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
-        //AfxMessageBox(msg);
+        AfxMessageBox(msg);
     }
     else
     {
@@ -77,16 +77,17 @@ BOOL CBToolsApp::InitInstance()
 				"This software a limited version of BTools.\n"
 				"It is submitted for the Windows Mobile Contest,\n"
 				"co-held by SK & Microsoft.\n"
-				"Please contact the author for more use.\n\n"
-				"Thank you for your interest");
+				"Please contact the author for more use.\nberise@gmail.com\n"
+				"Thank you for your interest\n");
 
-		msg += fixedTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
+		msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
 		msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
         //msg.Format(L"This software is submitted for the Windows Mobile Contest");
 		AfxMessageBox(msg);
 		return FALSE;
 	 }
 
+	 //CAboutDlg aboutDlg;	aboutDlg.DoModal();
     //
 
 

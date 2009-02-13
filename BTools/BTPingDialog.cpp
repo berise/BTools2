@@ -63,10 +63,11 @@ BOOL BTPingDialog::OnInitDialog()
 
 	// this might be enough
 	//m_cbHosts.ModifyStyle(0, CBS_AUTOHSCROLL);	
-	m_cbHosts.AddString(_T("localhost"));
 	m_cbHosts.AddString(_T("skt.com"));	
+	m_cbHosts.AddString(_T("localhost"));	
 	m_cbHosts.AddString(_T("192.168.1.1"));
-	m_cbHosts.AddString(_T("knu.ac.kr"));
+	m_cbHosts.AddString(_T("192.168.1.2"));
+	//m_cbHosts.AddString(_T("knu.ac.kr"));
 	
 	m_cbHosts.SetCurSel(0);
 
@@ -100,7 +101,7 @@ BOOL BTPingDialog::OnInitDialog()
 	m_sHost.SetWindowText(L"Host", FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
-				//.SetBold(TRUE, FALSE)
+				.SetBold(TRUE, FALSE)
 				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
 				.SetAlignment(CXGroupBox::left, FALSE)
 				.SetControlStyle(CXGroupBox::header, FALSE);
@@ -108,10 +109,10 @@ BOOL BTPingDialog::OnInitDialog()
 
   	m_sVisual.EnableWindow(TRUE, TRUE);
 	//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
-	m_sVisual.SetWindowText(L"Visualization", FALSE)
+	m_sVisual.SetWindowText(L"Ping Graph", FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 						.SetBorderColor(RGB(255,0,0), FALSE)
-						//.SetBold(TRUE, FALSE)
+						.SetBold(TRUE, FALSE)
 						// .SetFont(_T("Comic Sans MS"), 10, FALSE)
 						.SetAlignment(CXGroupBox::left, FALSE)
 						.SetControlStyle(CXGroupBox::header, FALSE);
@@ -230,8 +231,9 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 	CScreenLib::OptimizeWidth(m_hWnd, 4,
 		IDC_HOST_COMBO, 
 		IDC_RESULT_LIST, 
-		IDC_CUSTOM1, 
-		IDC_STATIC_VISUAL);
+		IDC_STATIC_VISUAL,
+		IDC_CUSTOM1
+		);
 
 	// IDC_HOST에 Ping 버튼 상 정렬
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_HOST, IDC_DO_PING);
@@ -243,18 +245,18 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_HOST_COMBO, IDC_HOST);
 
 
-	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST_COMBO, 6);
-	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_RESULT_LIST, 4);
+	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST_COMBO, 12);
+	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_RESULT_LIST, 6);
 
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_VISUAL, 8);
-	VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_CUSTOM1, 4);
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_VISUAL, 12);
+	VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_CUSTOM1, 6);
 
 
 	// 왼쪽 상단의 기준인 호스트 텍스트에 따라 LISt와 OSCOPECTRL을 정렬(왼쪽)
 	//CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);
 
 	// OSCOPECTRL은 나머지 영역을 채운다
-	CScreenLib::OptimizeHeight(m_hWnd, IDC_CUSTOM1);
+	//CScreenLib::OptimizeHeight(m_hWnd, IDC_CUSTOM1);
 
 	// IDC_OSCOPECTRL은 Control이 아니다. 고로 CScreenLib에서 오류가 발생. 
 	// 별도의 PlaceHolder를 통해 처리함.
@@ -269,7 +271,7 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 			CScreenLib::OptimizeHeight(m_hWnd, IDC_RESULT_LIST);
 
 			GetDlgItem(IDC_RESULT_LIST)->GetWindowRect(rect);
-			GetDlgItem(IDC_RESULT_LIST)->ShowWindow(SW_HIDE);
+			//GetDlgItem(IDC_RESULT_LIST)->ShowWindow(SW_HIDE);
 			
 			ScreenToClient(rect);
 			m_OScopeCtrl.MoveWindow(rect);
@@ -280,7 +282,7 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 			GetDlgItem(IDC_CUSTOM1)->GetWindowRect(rect);
 			
 			ScreenToClient(rect);
-			m_OScopeCtrl.MoveWindow(rect);
+			m_OScopeCtrl.SetWindowPos(NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE);//MoveWindow(rect, TRUE);
 		}
 
 	}

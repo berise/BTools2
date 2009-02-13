@@ -140,7 +140,7 @@ BOOL BTIPerfServer::OnInitDialog()
 		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
-				//.SetBold(TRUE, FALSE)
+				.SetBold(TRUE, FALSE)
 				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
 				.SetAlignment(CXGroupBox::left, FALSE)
 				.SetControlStyle(CXGroupBox::header, FALSE);
@@ -151,7 +151,7 @@ BOOL BTIPerfServer::OnInitDialog()
 		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
-				//.SetBold(TRUE, FALSE)
+				.SetBold(TRUE, FALSE)
 				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
 				.SetAlignment(CXGroupBox::left, FALSE)
 				.SetControlStyle(CXGroupBox::header, FALSE);
@@ -161,7 +161,7 @@ BOOL BTIPerfServer::OnInitDialog()
 		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
 				.SetTextColor(RGB(0,0,255), FALSE)
 				.SetBorderColor(RGB(255,0,0), FALSE)
-				//.SetBold(TRUE, FALSE)
+				.SetBold(TRUE, FALSE)
 				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
 				.SetAlignment(CXGroupBox::left, FALSE)
 				.SetControlStyle(CXGroupBox::header, FALSE);
@@ -355,14 +355,14 @@ void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
 		IDC_STATIC_INFO
 		);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 3);
-	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
-	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 4);
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 8);
+	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 6);
 
-	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);	
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 12);
+	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 8);	
 
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_INFO, 4);
-	VerticalSpace(m_hWnd, IDC_STATIC_INFO, IDC_SERVER_IP, 3);
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_INFO,12);
+	VerticalSpace(m_hWnd, IDC_STATIC_INFO, IDC_SERVER_IP, 6);
 	
 
 

@@ -2,7 +2,7 @@ Overview
 --------------------
 BTools is a sort of handy tools to check latency and bandwidth of your network.
 Check your latency with ping and bandwidth with iperf. 
-This program is based on iperf-1.7.0 and completely compatible it.
+This program is based on iperf-1.7.0 and completely compatible with it.
 
 
 Features
@@ -18,6 +18,8 @@ Acknowledges
 Thanks for all who contributes their great efforts, 
 without their them nothing could be done.
 
+ - DIB class by ???@????
+ - SFX(water, fire, plasma) by ???@codeproject (needed to see who made it)
  - OScopeCtrl by Mark C. Malburg
  - MatrixStatic by Nic Wilson, nicw@bigpond.net.au
  - ScreenLib by Microsoft(R)
