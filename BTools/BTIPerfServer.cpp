@@ -200,6 +200,7 @@ void BTIPerfServer::ClientFinished()
 
 	m_bServerStarted=FALSE;
 	GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
+	GetDlgItem(IDC_RUN_SERVER)->EnableWindow(TRUE);
 
 	fclose(m_fStatistics);
 	m_fStatistics=NULL;
@@ -303,7 +304,6 @@ void BTIPerfServer::OnBnClickedRunServer()
 		}
 
 		
-		//GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Server Started (Do Nothing)"));
 		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Stop"));
 	}
 	else
@@ -315,7 +315,8 @@ void BTIPerfServer::OnBnClickedRunServer()
 		//TerminateThread(m_ThreadHandle, dwExitCode);
 
 		m_bServerStarted=FALSE;
-		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
+		GetDlgItem(IDC_RUN_SERVER)->EnableWindow(FALSE);
+		//GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
 	}
 }
 

@@ -173,7 +173,7 @@ void BTIPerfClient::ClientFinished()
 	m_lbResult.AddString(_T("iperf client finished"));
 	//GetDlgItem(IDC_CLIENT_STATUS)->SetWindowText(_T("Client Finished"));
 	m_bClientStarted=FALSE;
-	GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start"));
+	
 	fclose(m_fStatistics);
 	m_fStatistics=NULL;
 	fclose(winCEStderr);
@@ -188,6 +188,10 @@ void BTIPerfClient::ClientFinished()
 	DELETE_PTR(m_pSettings);
 
 	DELETE_PTR(m_piperf_setting);
+
+
+	GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start"));
+	GetDlgItem(IDC_RUN_CLIENT)->EnableWindow(TRUE);
 
 }
 
@@ -336,6 +340,7 @@ void BTIPerfClient::OnBnClickedRunClient()
 	{
 		m_pIPerfClient->Sig_Interupt(0);
 		m_bClientStarted=FALSE;
+		GetDlgItem(IDC_RUN_CLIENT)->EnableWindow(FALSE);
 		GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start"));
 	}
 	

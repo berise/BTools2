@@ -96,11 +96,11 @@ BOOL CAboutDlg::OnInitDialog()
 					"| Features ;                               |"//6
 					"|  = ping with visualization               |"//7
 					"|  = Iperf for Windows Mobile              |"//8
-					"|     (based on iperf version 1.7.0        |"//9		
-					"|------+-----+-----------------------------|"//0
-					"|Copyright(R)|Elbereth                     |"//1
-					"| All Rights |                             |"//2
-					"|  Reserved  +berise@                      |"//3
+					"|     (based on iperf version 1.7.0)       |"//9		
+					"|------+------+----------------------------|"//0
+					"|Copyrights(R)|        ????????            |"//1
+					"| All Rights  |                            |"//2
+					"| Reserved    +berise _@_ gmail _dot_ com >|"//3
 					"+--------------+---------------------------+");//4
 	
 
@@ -108,7 +108,7 @@ BOOL CAboutDlg::OnInitDialog()
 	// It looks like working with MemDC.h !o!
 	//m_matrix1.DoScroll(50, CMatrixStatic::DOWN);
 
-	int nLine = 8;
+	int nLine = 9;
 	int nChar = 44;
 	
 	m_matrix2.SetNumberOfLines(nLine);
@@ -119,9 +119,10 @@ BOOL CAboutDlg::OnInitDialog()
 	m_matrix2.AdjustClientYToSize(nLine);
 	//m_matrix2.SetText(_T(" !\"#$%&'()*+,-./0123456789;:<=>?@ABCDEFGHIJKLMNO PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
 	CString msg2(	"+--------------+---------------------------+"
-					"|Do you know that you can drag the LOGO!   |"
-					"|                                          |"
-					"+--------------------+---------------------+"
+					"|Thank you for reporting bugs.             |"
+					"|Screen size is too big to fill out.       |"
+					"|Do you know that you can drag the Logo!   |"
+					"+------------------------------------------+"
 					"                                            "
 					"berise the developer                        "
 					"Dlvl;54 $;-9M HP;3(7) Pw;4(42) AC;-9 Exp;16 "// index for ';', ':' is misplaced
@@ -133,8 +134,8 @@ BOOL CAboutDlg::OnInitDialog()
 	// SFX
 	m_cSFX.SetBitmapResource(IDB_WMCONTEST);
 
-	// Start effect 10 seconds later
-	SetTimer(999, 10000, NULL);
+	// Start effect 8 seconds later
+	SetTimer(999, 8000, NULL);
 	
 	return TRUE;	// 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 			// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.

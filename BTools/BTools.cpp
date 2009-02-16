@@ -48,11 +48,11 @@ BOOL CBToolsApp::InitInstance()
 {
 	// Program Expiration routines
 	CTime expirationTime(2009,	// year
-		2,					// month
-		12,					// date
-		16,					// hour 24
-		15,					// minute
-		0);					// second
+		3,					// month
+		1,					// date
+		23,					// hour 24
+		59,					// minute
+		59);				// second
 	CTime currentTime = CTime::GetCurrentTime();
 
     CTimeSpan leftTime = expirationTime - currentTime;   
@@ -64,7 +64,12 @@ BOOL CBToolsApp::InitInstance()
 		 msg += L"This is a date limited version of BTools.\n";
 		 msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
 		 msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
-        AfxMessageBox(msg);
+         //AfxMessageBox(msg);
+		 if(leftTime.GetDays() < 7)
+		 {
+			 msg = leftTime.Format(L"This software will expire after %D day(s) %H Hour(s) %M Minute(s)");
+			 AfxMessageBox(msg);
+		 }
     }
     else
     {
@@ -74,7 +79,7 @@ BOOL CBToolsApp::InitInstance()
 				"Thank you for your interest");
 				*/
 		CString msg("이 프로그램은 기한 제한 버전입니다.\n"
-				"This software a limited version of BTools.\n"
+				"This is a limited version of BTools.\n"
 				"It is submitted for the Windows Mobile Contest,\n"
 				"co-held by SK & Microsoft.\n"
 				"Please contact the author for more use.\nberise@gmail.com\n"
@@ -87,7 +92,7 @@ BOOL CBToolsApp::InitInstance()
 		return FALSE;
 	 }
 
-	 //CAboutDlg aboutDlg;	aboutDlg.DoModal();
+	//CAboutDlg aboutDlg;	aboutDlg.DoModal();
     //
 
 

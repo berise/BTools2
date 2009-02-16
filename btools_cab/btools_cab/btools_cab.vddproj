@@ -70,14 +70,32 @@
             "Property" = "8:%CE1%"
                 "Folders"
                 {
+                    "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_0B20D2FC95864602BAB465765256C0DF"
+                    {
+                    "Name" = "8:BTools"
+                    "Condition" = "8:"
+                    "Property" = "8:_1211A7DE5288447096E44986680C8DF3"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
+            "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_FA4BFC74F99C4B1E9F04D65112967059"
+            {
+            "Name" = "8:#1919"
+            "Condition" = "8:"
+            "Property" = "8:%CE17%"
+                "Folders"
+                {
                 }
             }
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:btools_cab"
-        "Manufacturer" = "8:BTools_Author"
+        "ProductName" = "8:BTools"
+        "Manufacturer" = "8:berise@"
         "OSVersionMin" = "8:4.0"
         "OSVersionMax" = "8:6.99"
         "NoUninstall" = "11:FALSE"
@@ -91,7 +109,7 @@
             "SourcePath" = "8:..\\..\\BTools\\Windows Mobile 6 Professional SDK (ARMV4I)\\Release\\BTools.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
-            "Folder" = "8:_1B234935255B47709AE33F8AFF9431EA"
+            "Folder" = "8:_0B20D2FC95864602BAB465765256C0DF"
             "Condition" = "8:"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -155,7 +173,7 @@
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "Target" = "8:_71E63D94B20243A3B5943B0FD9EA4C97"
-            "Folder" = "8:_F0AB25EDC3884C4EA9ABD7B61498EABE"
+            "Folder" = "8:_FA4BFC74F99C4B1E9F04D65112967059"
             "WorkingFolder" = "8:_1B234935255B47709AE33F8AFF9431EA"
             }
         }

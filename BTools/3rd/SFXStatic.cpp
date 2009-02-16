@@ -125,10 +125,31 @@ void CSFXStatic::OnTimer(UINT nIDEvent)
 {
 	CClientDC dc(this);
 
+	//자동 물방울 처리 
+	if(nIDEvent == 1000)
+	{
+		srand(GetTickCount());
+
+		CRect rcPicture;
+
+		rcPicture.left = 0;
+		rcPicture.top = m_src->GetHeight();
+		rcPicture.right = rcPicture.left + m_src->GetWidth();
+		rcPicture.bottom = rcPicture.top + m_src->GetHeight();
+
+		CPoint point;
+		point.x = rand() % m_src->GetWidth();
+		point.y = rcPicture.top + rand() % m_src->GetHeight();
+		
+		point.y = rcPicture.bottom - point.y;
+		m_Water->HeightBlob(point.x,point.y,20,40,m_Water->m_iHpage);
+	}
+
+
 	CSize bmSize = m_dest->GetSize();
  
 	m_Water->Render((DWORD*)m_src->GetDIBits(),(DWORD*)m_dest->GetDIBits());
-	m_Fire->Render((DWORD*)m_dest->GetDIBits(),bmSize.cx, bmSize.cy);
+	//m_Fire->Render((DWORD*)m_dest->GetDIBits(),bmSize.cx, bmSize.cy);
 
 	m_dest->Draw(&dc, CPoint(0, 0));
 } 
@@ -145,6 +166,9 @@ int CSFXStatic::Run(UINT nMilliSecond)
 {
 	// Time trigger
 	m_hTimer = SetTimer(999, nMilliSecond, NULL);
+	
+	//자동 물 효과
+	SetTimer(999+1, 1000, NULL);
 
 	return m_hTimer;
 }
@@ -176,7 +200,7 @@ void CSFXStatic::OnMouseMove(UINT nFlags, CPoint point)
 		// since dibs are drawn upside down we need to flip the y position (for it to look right)
 		point.y = rcPicture.bottom - point.y;
 
-		m_Water->HeightBlob(point.x,point.y,10,30,m_Water->m_iHpage);
+		m_Water->HeightBlob(point.x,point.y,10,20,m_Water->m_iHpage);
 		//m_Water->HeightBox(point.x,point.y,10,30,m_Water->m_iHpage);
 		//m_Water->SineBlob(point.x,point.y,15,60,m_Water->m_iHpage);
 		//m_Water->WarpBlob(point.x,point.y,5,10,m_Water->m_iHpage);
