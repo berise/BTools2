@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__ ;
 #endif
 
 // 09.01 berise@gmail.com
-// 090119 OPEN : Changing orientation does not draw all points backed up
+// 090119 DONE : Changing orientation does not draw all points backed up (SetRange in OnSize)
 // 090109 DONE : Sometimes, graph overdrawn to below x axis   
 // 090109 DONE : Changing orientation while appending points (continuously draw graph)
 // 090106 DONE : PPC display orientation
@@ -155,7 +155,7 @@ void COScopeCtrl::SetRange(double dLower, double dUpper, int nDecimalPlaces)
   }
 
 	// We don't need to erase, because we're blitting - berise
-	Invalidate(TRUE);
+	Invalidate(FALSE);
 
 }  // SetRange
 
@@ -332,13 +332,13 @@ void COScopeCtrl::InvalidateCtrl()
   // create some fonts (horizontal and vertical)
   // use a height of 14 pixels and 300 weight 
   // (these may need to be adjusted depending on the display)
-  axisFont.CreateFont (14, 0, 0, 0, 300,
+  axisFont.CreateFont (18, 0, 0, 0, 300,
                        FALSE, FALSE, 0, ANSI_CHARSET,
                        OUT_DEFAULT_PRECIS, 
                        CLIP_DEFAULT_PRECIS,
                        DEFAULT_QUALITY, 
                        DEFAULT_PITCH|FF_SWISS, L"Arial") ;
-  yUnitFont.CreateFont (14, 0, 900, 0, 300,
+  yUnitFont.CreateFont (18, 0, 900, 0, 300,
                        FALSE, FALSE, 0, ANSI_CHARSET,
                        OUT_DEFAULT_PRECIS, 
                        CLIP_DEFAULT_PRECIS,
@@ -523,9 +523,9 @@ void COScopeCtrl::InvalidateCtrl()
 	}  ///////////// added for y-autorange support
 
 	// finally, force the plot area to redraw
-	//InvalidateRect(m_rectClient) ; // m_rectClient
+	InvalidateRect(m_rectClient) ; // m_rectClient
 
-	Invalidate(TRUE);
+	//Invalidate(FALSE);
 
 } // InvalidateCtrl
 
@@ -650,8 +650,6 @@ void COScopeCtrl::DrawPoint()
             (long)((m_dCurrentPosition - m_dLowerLimit) * m_dVerticalFactor) ;
     m_dcPlot.LineTo (currX, currY) ;
 
-	
-
 	// Top Triangle
 	/*
 	CPoint Pt[4];
@@ -669,6 +667,9 @@ void COScopeCtrl::DrawPoint()
 	Pt[3] = CPoint(currX+2, currY);
 	m_dcPlot.Polygon(Pt, 4);
 	*/
+	// Circle
+	int r = 2;
+	m_dcPlot.Ellipse(currX-r, currY+r, currX+r, currY-r);
 
 
 #ifdef DEBUG
@@ -730,18 +731,11 @@ void COScopeCtrl::OnSize(UINT nType, int cx, int cy)
 
 	DRA::DisplayMode newMode = DRA::GetDisplayMode();
 
-	if(mode != newMode)
-	{
-		mode = newMode;
-		//Reset();
+	if(mode != newMode)	{		mode = newMode;	}
 
-		// x, y  축이 변경될 가능성이 있기 때문에, SetRange로 갱신 필요.
-		//SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
-		
-	}
-
-	// Orientation 에 상관 없이 Reset!
-	Reset();
+	// Orientation 에 상관 없이 
+	// x, y  축이 변경될 가능성이 있기 때문에, SetRange로 갱신 필요.
+	SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
 #endif
 
 } // OnSize

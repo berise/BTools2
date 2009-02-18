@@ -90,12 +90,12 @@ BOOL CAboutDlg::OnInitDialog()
 	// about message for real device(M490)
 	CString msg(	"+------------------------------------------+"//0
 					"|BTools for Pocket PC                      |"//1
-					"|Special Version for Windows Mobile        |"//2
+					"|Limited Version for Windows Mobile        |"//2
 					"|  Contest for T*Omnia                     |"//3
 					"|---------------------+--------------------|"//5 4
 					"| Features ;                               |"//6
 					"|  = ping with visualization               |"//7
-					"|  = Iperf for Windows Mobile              |"//8
+					"|  = Iperf for  Windows Mobile             |"//8
 					"|     (based on iperf version 1.7.0)       |"//9		
 					"|------+------+----------------------------|"//0
 					"|Copyrights(R)|        ????????            |"//1
@@ -119,8 +119,8 @@ BOOL CAboutDlg::OnInitDialog()
 	m_matrix2.AdjustClientYToSize(nLine);
 	//m_matrix2.SetText(_T(" !\"#$%&'()*+,-./0123456789;:<=>?@ABCDEFGHIJKLMNO PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
 	CString msg2(	"+--------------+---------------------------+"
-					"|Thank you for reporting bugs.             |"
-					"|Screen size is too big to fill out.       |"
+					"|Reporting bug would be really appreciated.|"
+					"|=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_|"
 					"|Do you know that you can drag the Logo!   |"
 					"+------------------------------------------+"
 					"                                            "

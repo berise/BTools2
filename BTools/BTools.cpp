@@ -48,8 +48,8 @@ BOOL CBToolsApp::InitInstance()
 {
 	// Program Expiration routines
 	CTime expirationTime(2009,	// year
-		3,					// month
-		1,					// date
+		6,					// month
+		30,					// date
 		23,					// hour 24
 		59,					// minute
 		59);				// second
@@ -62,14 +62,15 @@ BOOL CBToolsApp::InitInstance()
 		 CString msg;
 		 msg = L"이 프로그램은 기한 제한 버전입니다.\n";
 		 msg += L"This is a date limited version of BTools.\n";
-		 msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
+		 msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M:%S\n\n");
 		 msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
-         //AfxMessageBox(msg);
+         
 		 if(leftTime.GetDays() < 7)
 		 {
 			 msg = leftTime.Format(L"This software will expire after %D day(s) %H Hour(s) %M Minute(s)");
-			 AfxMessageBox(msg);
+			//AfxMessageBox(msg);
 		 }
+		 AfxMessageBox(msg);
     }
     else
     {
