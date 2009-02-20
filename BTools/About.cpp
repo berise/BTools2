@@ -21,6 +21,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MATRIX1, m_matrix1);
 	DDX_Control(pDX, IDC_MATRIX2, m_matrix2);
 	DDX_Control(pDX, IDC_STATIC_CONTEST_LOGO, m_cSFX);
+	DDX_Control(pDX, IDC_STATIC_CONTEST_LOGO2, m_cSFX2);
 }
 
 
@@ -121,7 +122,7 @@ BOOL CAboutDlg::OnInitDialog()
 	CString msg2(	"+--------------+---------------------------+"
 					"|Reporting bug would be really appreciated.|"
 					"|=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_=_|"
-					"|Do you know that you can drag the Logo!   |"
+					"|Do you know that you can drag the T*Omnia?|"
 					"+------------------------------------------+"
 					"                                            "
 					"berise the developer                        "
@@ -132,10 +133,11 @@ BOOL CAboutDlg::OnInitDialog()
 	m_matrix2.SetText(msg2);
 
 	// SFX
-	m_cSFX.SetBitmapResource(IDB_WMCONTEST);
+	m_cSFX.SetBitmapResource(IDB_WMCONTEST);// no effects on their logos
+	m_cSFX2.SetBitmapResource(IDB_OMNIA);
 
 	// Start effect 8 seconds later
-	SetTimer(999, 8000, NULL);
+	SetTimer(999, 8000, NULL); 
 	
 	return TRUE;	// 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 			// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -195,7 +197,7 @@ void CAboutDlg::OnTimer(UINT_PTR nIDEvent)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	if(nIDEvent == 999)
 	{
-		m_cSFX.Run(50);
+		m_cSFX2.Run(50);
 		KillTimer(nIDEvent); // for one time timer.
 	}
 

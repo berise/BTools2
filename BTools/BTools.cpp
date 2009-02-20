@@ -68,9 +68,9 @@ BOOL CBToolsApp::InitInstance()
 		 if(leftTime.GetDays() < 7)
 		 {
 			 msg = leftTime.Format(L"This software will expire after %D day(s) %H Hour(s) %M Minute(s)");
-			//AfxMessageBox(msg);
+			AfxMessageBox(msg);
 		 }
-		 AfxMessageBox(msg);
+		 //AfxMessageBox(msg);
     }
     else
     {

@@ -85,6 +85,7 @@ IDR_MAINFRAME           BITMAP                  "res\\Cmdbar.bmp"
 IDB_MATRIX_TINY_BLUE    BITMAP                  "res\\matrixsettinyblue.bmp"
 IDB_MATRIX_TINY_RED     BITMAP                  "res\\matrixsettinyred.bmp"
 IDB_WMCONTEST           BITMAP                  "res\\wmcontest.bmp"
+IDB_OMNIA               BITMAP                  "res\\T_Omnia_resized.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -175,7 +176,7 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG  0, 0, 143, 171
+IDD_ABOUTBOX DIALOG  0, 0, 143, 185
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_VISIBLE | WS_CAPTION
 EXSTYLE 0x80000000L
 CAPTION "BTools Á¤º¸"
@@ -183,7 +184,8 @@ FONT 9, "MS Shell Dlg"
 BEGIN
     CTEXT           "Matrix_tiny_blue",IDC_MATRIX1,0,0,139,81
     CTEXT           "Matrix_tiny_red",IDC_MATRIX2,0,81,139,22
-    CTEXT           "Logo with SFX",IDC_STATIC_CONTEST_LOGO,0,110,139,30,0,WS_EX_STATICEDGE
+    CTEXT           "Logo with SFX",IDC_STATIC_CONTEST_LOGO,0,117,71,30
+    CTEXT           "Omnia Logo",IDC_STATIC_CONTEST_LOGO2,79,140,56,30
 END
 
 IDD_ABOUTBOX_WIDE DIALOG  0, 0, 210, 129
@@ -293,7 +295,7 @@ BEGIN
     IDD_ABOUTBOX, DIALOG
     BEGIN
         RIGHTMARGIN, 139
-        BOTTOMMARGIN, 162
+        BOTTOMMARGIN, 176
     END
 
     IDD_ABOUTBOX_WIDE, DIALOG

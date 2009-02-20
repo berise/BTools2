@@ -112,7 +112,7 @@ void CSFXStatic::SetBitmapResource(UINT nBitmap)
 	//m_Fire->m_iAlpha = 60;// want a 30% alpha
 	m_Fire->m_iHeight =  bmSize.cy;
 	m_Fire->m_iWidth = bmSize.cx;
-	m_Fire->InitFire();
+	//m_Fire->InitFire();
 
 	// finally the plasma
 	//m_Plasma->Create(bmSize.cx, bmSize.cy);
@@ -142,6 +142,8 @@ void CSFXStatic::OnTimer(UINT nIDEvent)
 		point.y = rcPicture.top + rand() % m_src->GetHeight();
 		
 		point.y = rcPicture.bottom - point.y;
+		//m_Water->WarpBlob(point.x,point.y,15,30,m_Water->m_iHpage);
+		//m_Water->SineBlob(point.x,point.y,15,30,m_Water->m_iHpage);
 		m_Water->HeightBlob(point.x,point.y,20,40,m_Water->m_iHpage);
 	}
 
@@ -168,7 +170,7 @@ int CSFXStatic::Run(UINT nMilliSecond)
 	m_hTimer = SetTimer(999, nMilliSecond, NULL);
 	
 	//자동 물 효과
-	SetTimer(999+1, 1000, NULL);
+	SetTimer(999+1,  8000, NULL);
 
 	return m_hTimer;
 }

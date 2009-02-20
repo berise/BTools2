@@ -10,6 +10,7 @@
 #include "3rd/SFXStatic.h"
 
 #include "Util.h"
+#include "afxwin.h"
 
 
 #ifdef _DEBUG
@@ -42,12 +43,13 @@ public:
 
 	CMatrixStatic m_matrix1;
 	CMatrixStatic m_matrix2;
-	CSFXStatic		m_cSFX;
-
+	CSFXStatic m_cSFX;
+	CSFXStatic m_cSFX2;
 
 	afx_msg void OnAboutmenu2Scroll2();
 	afx_msg void OnAboutmenu2Stop();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	
 };
 
 

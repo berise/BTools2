@@ -63,7 +63,7 @@ BOOL BTPingDialog::OnInitDialog()
 
 	// this might be enough
 	//m_cbHosts.ModifyStyle(0, CBS_AUTOHSCROLL);	
-	m_cbHosts.AddString(_T("skt.com"));	
+	//m_cbHosts.AddString(_T("skt.com"));	
 	m_cbHosts.AddString(_T("localhost"));	
 	m_cbHosts.AddString(_T("192.168.1.1"));
 	m_cbHosts.AddString(_T("192.168.1.2"));

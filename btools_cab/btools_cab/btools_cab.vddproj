@@ -94,7 +94,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:BTools(iperf for wm6)"
+        "ProductName" = "8:BTools"
         "Manufacturer" = "8:berise"
         "OSVersionMin" = "8:4.0"
         "OSVersionMax" = "8:6.99"
