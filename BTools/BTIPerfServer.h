@@ -1,13 +1,41 @@
 #pragma once
+
+/*!
+	\file BTIPerfServer.h
+	\author berise
+	\date 2008.12
+
+	IPerf 서버 모듈을 이식한 것이다. IPerf 클라이언트를 기본으로 개발하였다.
+
+
+	\todo
+	\li Consistent log
+	\li Add error text to log
+
+	\bug
+	Still didn't appeared
+*/
 #include "afxwin.h"
-#include "3rd/PropertyView.h"
+
 #include "Server.hpp"
 #include "Reporter.h"
+
+#include "3rd/XGroupBox.h"
+#include "3rd/PropertyView.h"
+
+
 
 class Listener;
 
 // BTIPerfServer 대화 상자입니다.
 
+/*!
+	\class BTIPerfServer
+	\brief IPerf 서버 UI
+
+	IPerf의 서버는 클라이언트의 요청을 받아 일(!)을 하는 Server와 Server를 래핑한
+	Listener, Audience가 있으나, 여기서는 Listener만을 사용하여 구현한다.
+*/
 class BTIPerfServer : public CPropertyViewPage, CReporter
 {
 	DECLARE_DYNAMIC(BTIPerfServer)
@@ -20,8 +48,13 @@ public:
 	enum { IDD = IDD_IPERF_SERVER };
 
 public:
+
+	/*!
+		\brief CReporter의 가상 함수
+	*/
 	void virtual PrintBuffer(char *buffer,char *speed);
 	void virtual ClientFinished();
+	virtual void CallbackBW(double fBW);
 
 
 protected:
@@ -57,65 +90,12 @@ public:
 
 	//
 	
-void GetLocalIP(TCHAR *hostname, TCHAR *ip)
-{
-	//  PURPOSE:  
-	//		- Obtain the current IP assign to the local PC
-	//  PARAMETERS:
-	//		- hWnd		:: Handle of the parent window.
-	//  OPERATION:
-	//		- Call the gethostname API
-	//  RETURN VALUE:
-	//      - NIL
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
-	HOSTENT *LocalAddress;
-	char	*Buff;
-	TCHAR	*wBuff;
-
-
-	// Create new string buffer
-	Buff = new char[256];
-	wBuff = new TCHAR[256];
-	// Reset the string buffer
-	memset(Buff, '\0', 256);
-	memset(wBuff, TEXT('\0'), 256*sizeof(TCHAR));
-	// Get computer name
-	if (gethostname(Buff, 256) == 0)
-	{
-		// Convert computer name from MultiByte char to UNICODE
-		mbstowcs(wBuff, Buff, 256);
-		// Copy the machine name into the GUI control
-		//SetWindowText(GetDlgItem(hWnd, IDC_MACHINE), wBuff);
-		wcscpy(hostname, wBuff);
-
-
-		// Get the local PC IP address
-		LocalAddress = gethostbyname(Buff);
-		// Reset the string buffer
-		memset(Buff, '\0', 256);
-		// Compose the obtain ip address
-		sprintf(Buff, "%d.%d.%d.%d\0", LocalAddress->h_addr_list[0][0] & 0xFF, LocalAddress->h_addr_list[0][1] & 0x00FF, LocalAddress->h_addr_list[0][2] & 0x0000FF, LocalAddress->h_addr_list[0][3] & 0x000000FF);
-		// Reset the wBuff
-		memset(wBuff, TEXT('\0'), 256*sizeof(TCHAR));
-		// Convert computer name from MultiByte char to UNICODE
-		mbstowcs(wBuff, Buff, 256);
-		// Set the ip address to edit control 1
-		//SetWindowText(GetDlgItem(hWnd, IDC_EDIT1), wBuff);
-		wcscpy(ip, wBuff);
-		// Set the default port number
-		//SetWindowText(GetDlgItem(hWnd, IDC_EDIT2), TEXT("5000"));
-	}
-	else
-	{
-		// Notify user about the error
-		//MessageBox(hWnd, TEXT("Fail to get host name."), TEXT("MySocket"), MB_OK | MB_ICONEXCLAMATION);
-		
-	}
-
-
-	//
-	delete Buff;
-}
-
-afx_msg void OnSize(UINT nType, int cx, int cy);
+public:
+	/// XGroupBox for displaying header groups
+	CXGroupBox m_sCommands;
+	CXGroupBox m_sOutput;
+	CXGroupBox m_sInfo;
+	afx_msg void OnStnClickedStaticInfo();
 };

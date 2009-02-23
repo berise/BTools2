@@ -1,9 +1,11 @@
 #pragma once
 #include "resourceppc.h"
-#include "3rd/PropertyView.h"
-#include "afxwin.h"
-#include "3rd/OScopeCtrl.h"
 
+#include "afxwin.h"
+
+#include "3rd/PropertyView.h"
+#include "3rd/OScopeCtrl.h"
+#include "3rd/XGroupBox.h"
 
 class CPingThread;
 
@@ -54,10 +56,18 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	CListBox m_ping_result;
+	CListBox	m_lbPingResult;
 	CComboBox m_cbHosts;
+
+	CXGroupBox m_sVisual;
+	CXGroupBox m_sHost;
+
+
 	afx_msg void OnBnClickedDoPing();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnDestroy();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+	
+	
 };

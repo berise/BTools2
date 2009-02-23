@@ -63,9 +63,6 @@ DWORD WINAPI StartServerThread(LPVOID lpParameter )
 #endif
 	}
 	*/
-	
-	
-
 	l->m_pReporter->ClientFinished();
 
 	return 0;
@@ -84,16 +81,18 @@ BTIPerfServer::BTIPerfServer(CWnd* pParent /*=NULL*/)
 	theListener = NULL;	
 	
 	m_fStatistics = NULL;
-	//{{AFX_DATA_INIT(CIperfDlg)
-	//m_csHostName = _T("");
-//	m_uiInterval = 0.0;
-//	m_uiTotalTime = 0;
-	// Add Preference items : logdir
-	// m_csReportFile.Format("%s\\iperf_stats.txt", logdir);
-	//m_csReportFile = _T("\\My Documents\\iperf_stats.txt");
-	//m_csErrorFile = _T("\\My Documents\\iperf_err.txt");
-	m_csReportFile = _T("\\My Documents\\btools_stats.txt");
-	m_csErrorFile = _T("\\My Documents\\btools_error.txt");
+	
+	TCHAR *log_dir = L"\\My Documents\\btools_log";
+	TCHAR *log_file_postfix = L"iServer.txt";
+	// log
+	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
+
+	m_csReportFile = pLogFile;
+
+
+	TCHAR *error_file_postfix = L"iServer_error.txt";
+	pLogFile = SetupLog(log_dir, error_file_postfix);
+	m_csErrorFile = pLogFile;
 }
 
 BTIPerfServer::~BTIPerfServer()
@@ -105,6 +104,9 @@ void BTIPerfServer::DoDataExchange(CDataExchange* pDX)
 	CPropertyViewPage::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_COMMAND_LIST, m_lbCommand);
 	DDX_Control(pDX, IDC_RESULT_LIST, m_lbResult);
+	DDX_Control(pDX, IDC_STATIC_COMMANDS, m_sCommands);
+	DDX_Control(pDX, IDC_STATIC_OUTPUT, m_sOutput);
+	DDX_Control(pDX, IDC_STATIC_INFO, m_sInfo);
 }
 
 
@@ -113,6 +115,7 @@ BEGIN_MESSAGE_MAP(BTIPerfServer, CPropertyViewPage)
 	ON_LBN_SELCHANGE(IDC_COMMAND_LIST, &BTIPerfServer::OnLbnSelchangeCommandList)
 	ON_BN_CLICKED(IDC_ADD_COMMAND, &BTIPerfServer::OnBnClickedAddCommand)
 	ON_WM_SIZE()
+	ON_STN_CLICKED(IDC_STATIC_INFO, &BTIPerfServer::OnStnClickedStaticInfo)
 END_MESSAGE_MAP()
 
 
@@ -124,13 +127,44 @@ BOOL BTIPerfServer::OnInitDialog()
 
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 	m_lbCommand.AddString(_T("-s"));
-	m_lbCommand.AddString(_T("-s -i 1"));
+	//m_lbCommand.AddString(_T("-s -i 1"));
 	m_lbCommand.AddString(_T("-s -u"));
-	m_lbCommand.AddString(_T("-s -u -i 1"));
+	//m_lbCommand.AddString(_T("-s -u -i 1"));
 
-	m_lbCommand.SetCurSel(0);	// default set
+	m_lbCommand.SetCurSel(0);	// default selection
 
 
+	// init Groupboxes
+	m_sCommands.EnableWindow(TRUE, TRUE);	
+	m_sCommands.SetWindowText(L"IPerf Server Commands", FALSE)
+		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+				.SetBorderColor(RGB(255,0,0), FALSE)
+				.SetBold(TRUE, FALSE)
+				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+				.SetAlignment(CXGroupBox::left, FALSE)
+				.SetControlStyle(CXGroupBox::header, FALSE);
+
+	m_sOutput.EnableWindow(TRUE, TRUE);
+	
+	m_sOutput.SetWindowText(L"IPerf Server Output", FALSE)
+		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+				.SetBorderColor(RGB(255,0,0), FALSE)
+				.SetBold(TRUE, FALSE)
+				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+				.SetAlignment(CXGroupBox::left, FALSE)
+				.SetControlStyle(CXGroupBox::header, FALSE);
+
+
+	m_sInfo.SetWindowText(L"Server IP && Start Server", FALSE)
+		//SetIcon(IDI_UAC_SHIELD, 32, FALSE)
+				.SetTextColor(RGB(0,0,255), FALSE)
+				.SetBorderColor(RGB(255,0,0), FALSE)
+				.SetBold(TRUE, FALSE)
+				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
+				.SetAlignment(CXGroupBox::left, FALSE)
+				.SetControlStyle(CXGroupBox::header, FALSE);
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
@@ -141,6 +175,8 @@ void BTIPerfServer::PrintBuffer(char *buffer,char *speed)
 {
 //	m_csReport.AddString((const unsigned short *)buffer);
 	int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
+
+	WriteLog(m_csReportFile.GetBuffer(), ansi_to_unicode(buffer));
 
 	m_lbResult.SetCurSel(nInserted );
 
@@ -164,6 +200,7 @@ void BTIPerfServer::ClientFinished()
 
 	m_bServerStarted=FALSE;
 	GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
+	GetDlgItem(IDC_RUN_SERVER)->EnableWindow(TRUE);
 
 	fclose(m_fStatistics);
 	m_fStatistics=NULL;
@@ -182,6 +219,15 @@ void BTIPerfServer::ClientFinished()
 	DELETE_PTR(m_piperf_setting);
 }
 
+void BTIPerfServer::CallbackBW(double fBW)
+{
+	CString temp;
+	temp.Format(L"Bandwidth : %l", fBW);
+	//m_lbResult.AddString(temp);
+}
+
+
+
 
 BOOL BTIPerfServer::ParseCommandLine(Settings *pSetting, CString &szCmd)
 {
@@ -190,7 +236,7 @@ BOOL BTIPerfServer::ParseCommandLine(Settings *pSetting, CString &szCmd)
 	CString resToken;
 
 	pargv[count] = new char[10];
-	strcpy(pargv[count], "btiperf"); // program name
+	strcpy(pargv[count], "btiperf"); // dummy program name
 	count++;
 
 	do
@@ -225,19 +271,17 @@ void BTIPerfServer::OnBnClickedRunServer()
 	TCHAR hostname[32], ip[48];
 
 	GetLocalIP(hostname, ip);
-
 	GetDlgItem(IDC_SERVER_IP)->SetWindowText(ip);
 
+	int nSelected = m_lbCommand.GetCurSel();
+	if(nSelected < 0) // nothing selected
+		return;	// do nothing
 
 	if (!m_bServerStarted)
-	{		
+	{
+
 		// ListBox에서 선택된 명령행을 가져옮
 		CString szCmd;
-
-		int nSelected = m_lbCommand.GetCurSel();
-		if(nSelected < 0) // nothing selected
-			return;	// do nothing
-
 
 		m_lbCommand.GetText(nSelected, szCmd);		
 
@@ -259,6 +303,7 @@ void BTIPerfServer::OnBnClickedRunServer()
 			return;
 		}
 
+		
 		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Stop"));
 	}
 	else
@@ -270,7 +315,8 @@ void BTIPerfServer::OnBnClickedRunServer()
 		//TerminateThread(m_ThreadHandle, dwExitCode);
 
 		m_bServerStarted=FALSE;
-		GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start &Server"));
+		GetDlgItem(IDC_RUN_SERVER)->EnableWindow(FALSE);
+		//GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));
 	}
 }
 
@@ -295,18 +341,47 @@ void BTIPerfServer::OnBnClickedAddCommand()
 	m_lbCommand.AddString(szCmd);
 }
 
+
 void BTIPerfServer::OnSize(UINT nType, int cx, int cy)
 {
-	__super::OnSize(nType, cx, cy);
+	CPropertyViewPage::OnSize(nType, cx, cy);
 
-	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
-	CScreenLib::DockControl(m_hWnd, IDC_COMMAND_LIST, CScreenLib::dtTop);
+	CScreenLib::DockControl(m_hWnd, IDC_STATIC_COMMANDS, CScreenLib::dtTop);
 
-	CScreenLib::OptimizeWidth(m_hWnd, 2, IDC_COMMAND_LIST, IDC_RESULT_LIST);
+	CScreenLib::OptimizeWidth(m_hWnd, 5, 
+		IDC_STATIC_COMMANDS, 
+		IDC_COMMAND_LIST, 
+		IDC_STATIC_OUTPUT,
+		IDC_RESULT_LIST,
+		IDC_STATIC_INFO
+		);
+
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 3);
+	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
+
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 6);
+	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);	
+
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_INFO,6);
+	VerticalSpace(m_hWnd, IDC_STATIC_INFO, IDC_SERVER_IP, 3);
+	
+
 
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_ADD_COMMAND);
 
-	// IDC_COMMAND_LIST을 기준으로 COMMAND_EDIT을 왼쪽에 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_COMMAND_LIST, IDC_COMMAND_EDIT);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_COMMAND_EDIT, IDC_ADD_COMMAND);
 
+	// IDC_COMMAND_LIST을 기준으로 IDC_SERVER_IP을 왼쪽에 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_COMMAND_LIST, 
+		IDC_COMMAND_EDIT,
+		IDC_SERVER_IP);
+
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_SERVER_IP, IDC_RUN_SERVER);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_SERVER);
+
+}
+
+void BTIPerfServer::OnStnClickedStaticInfo()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }

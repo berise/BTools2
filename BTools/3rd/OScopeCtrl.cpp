@@ -13,6 +13,7 @@ static char THIS_FILE[] = __FILE__ ;
 #endif
 
 // 09.01 berise@gmail.com
+// 090119 DONE : Changing orientation does not draw all points backed up (SetRange in OnSize)
 // 090109 DONE : Sometimes, graph overdrawn to below x axis   
 // 090109 DONE : Changing orientation while appending points (continuously draw graph)
 // 090106 DONE : PPC display orientation
@@ -108,7 +109,7 @@ BOOL COScopeCtrl::Create(DWORD dwStyle, const RECT& rect,
   BOOL result ;
   static CString className = AfxRegisterWndClass(CS_HREDRAW | CS_VREDRAW) ;
 
-  result = CWnd::CreateEx(WS_EX_CLIENTEDGE | WS_EX_STATICEDGE, 
+  result = CWnd::CreateEx( WS_EX_CLIENTEDGE, // | WS_EX_WINDOWEDGE,  WS_EX_STATICEDGE, 
                           className, NULL, dwStyle, 
                           rect.left, rect.top, rect.right-rect.left, rect.bottom-rect.top,
                           pParentWnd->GetSafeHwnd(), (HMENU)nID) ;
@@ -153,8 +154,8 @@ void COScopeCtrl::SetRange(double dLower, double dUpper, int nDecimalPlaces)
 	  }
   }
 
-  // We don't need to erase, because we're blitting - berise
-  Invalidate(TRUE);
+	// We don't need to erase, because we're blitting - berise
+	Invalidate(FALSE);
 
 }  // SetRange
 
@@ -331,13 +332,13 @@ void COScopeCtrl::InvalidateCtrl()
   // create some fonts (horizontal and vertical)
   // use a height of 14 pixels and 300 weight 
   // (these may need to be adjusted depending on the display)
-  axisFont.CreateFont (14, 0, 0, 0, 300,
+  axisFont.CreateFont (14, 0, 0, 0, 300,		// set 18 for 480x800
                        FALSE, FALSE, 0, ANSI_CHARSET,
                        OUT_DEFAULT_PRECIS, 
                        CLIP_DEFAULT_PRECIS,
                        DEFAULT_QUALITY, 
                        DEFAULT_PITCH|FF_SWISS, L"Arial") ;
-  yUnitFont.CreateFont (14, 0, 900, 0, 300,
+  yUnitFont.CreateFont (14, 0, 900, 0, 300,		// set 18 for 480x800
                        FALSE, FALSE, 0, ANSI_CHARSET,
                        OUT_DEFAULT_PRECIS, 
                        CLIP_DEFAULT_PRECIS,
@@ -401,15 +402,14 @@ void COScopeCtrl::InvalidateCtrl()
   m_dcGrid.SelectObject(oldFont) ;
 
   // y units
+  // y units는 박스가 왼쪽으로 90도 회전한 형태라 생각하면 쉽다.
+
   oldFont = m_dcGrid.SelectObject(&yUnitFont) ;
-
-  textRect = CRect(m_rectClient.left+10, m_rectPlot.top, m_rectPlot.left, m_rectPlot.bottom);
-
+  textRect = CRect(m_rectClient.left+10, m_rectPlot.top + m_rectPlot.Height()*0.7 , m_rectPlot.left, m_rectPlot.bottom );
   //m_dcGrid.Rectangle(textRect);
-
   // Vertical은 90도 이동한 상태로 생각해야 한다. 그런데도 이상하다.
   // SetTextAlign과 DrawText의 조합은 정상적으로 동작하지 않은 듯 보인다.
-   m_dcGrid.DrawText(m_strYUnitsString, textRect, DT_BOTTOM | DT_NOCLIP);
+   m_dcGrid.DrawText(m_strYUnitsString, textRect, DT_LEFT | DT_NOCLIP);
    /*
   m_dcGrid.TextOut ((m_rectClient.left+m_rectPlot.left)/2, 
                     (m_rectPlot.bottom+m_rectPlot.top)/2, m_strYUnitsString) ;
@@ -519,12 +519,13 @@ void COScopeCtrl::InvalidateCtrl()
 		else
 				m_nDataIndex = nPointsToCopy;
 		m_bWrapped = bNewWrapFlag;
-
-		
+	
 	}  ///////////// added for y-autorange support
 
 	// finally, force the plot area to redraw
 	InvalidateRect(m_rectClient) ; // m_rectClient
+
+	//Invalidate(FALSE);
 
 } // InvalidateCtrl
 
@@ -550,7 +551,7 @@ double COScopeCtrl::AppendPoint(double dNewPoint)
   m_dCurrentPosition = dNewPoint ;
   DrawPoint() ;
 
-  Invalidate() ;
+  Invalidate(TRUE) ;
 
   return dPrevious ;
 
@@ -649,6 +650,28 @@ void COScopeCtrl::DrawPoint()
             (long)((m_dCurrentPosition - m_dLowerLimit) * m_dVerticalFactor) ;
     m_dcPlot.LineTo (currX, currY) ;
 
+	// Top Triangle
+	/*
+	CPoint Pt[4];
+	Pt[0] = CPoint(currX,  currY);
+	Pt[1] = CPoint(currX-2, currY+2);
+	Pt[2] = CPoint(currX+2, currY+2);
+	m_dcPlot.Polygon(Pt, 3);
+	
+
+	// diamond
+	
+	Pt[0] = CPoint(currX,  currY+2);
+	Pt[1] = CPoint(currX-2, currY);
+	Pt[2] = CPoint(currX, currY-2);
+	Pt[3] = CPoint(currX+2, currY);
+	m_dcPlot.Polygon(Pt, 4);
+	*/
+	// Circle
+	int r = 2;
+	m_dcPlot.Ellipse(currX-r, currY+r, currX+r, currY-r);
+
+
 #ifdef DEBUG
 	//m_dcPlot.Rectangle(prevX, prevY, currX, currY);
 #endif
@@ -708,18 +731,11 @@ void COScopeCtrl::OnSize(UINT nType, int cx, int cy)
 
 	DRA::DisplayMode newMode = DRA::GetDisplayMode();
 
-	if(mode != newMode)
-	{
-		mode = newMode;
-		//Reset();
+	if(mode != newMode)	{		mode = newMode;	}
 
-		// x, y  축이 변경될 가능성이 있기 때문에, SetRange로 갱신 필요.
-		//SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
-		
-	}
-
-	// Orientation 에 상관 없이 Reset!
-	Reset();
+	// Orientation 에 상관 없이 
+	// x, y  축이 변경될 가능성이 있기 때문에, SetRange로 갱신 필요.
+	SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
 #endif
 
 } // OnSize

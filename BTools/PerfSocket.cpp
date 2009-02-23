@@ -286,10 +286,12 @@ void PerfSocket::ReportPeriodicBW_Jitter_Loss( int32_t errorCnt,
  * Report the bandwidth (inBytes / inSeconds).
  * ------------------------------------------------------------------- */
 
-void PerfSocket::IPerfWinCEReport(char *buffer,char *speed)
+void PerfSocket::IPerfWinCEReport(char *buffer,char *speed, double fBW)
 {
 	if (m_pReporter!=0)
 		m_pReporter->PrintBuffer(buffer,speed);
+	if (m_pReporter!=0 && fBW > 0)
+		m_pReporter->CallbackBW(fBW);
 }
 
 void PerfSocket::ReportBW( max_size_t inBytes,
@@ -304,9 +306,7 @@ void PerfSocket::ReportBW( max_size_t inBytes,
 		sprintf(reportBuffer,report_bw_header);
 
 		IPerfWinCEReport(reportBuffer,0);
-
-
-//        printf( report_bw_header );
+		//        printf( report_bw_header );
         sReportCount = 20;
     }
 
@@ -317,16 +317,19 @@ void PerfSocket::ReportBW( max_size_t inBytes,
                    toupper( mSettings->mFormat));
 
 
-	// This comes when I debug server code
+	// inStop - inStart != 0 can be happen when debug server side code.
+	// In client side, server doesn't work & time doesn't goes.
 	// Server side stopped while client trying to calculate BW
 	if(inStop - inStart != 0)
+	{
 		byte_snprintf( speed, sizeof(speed),
                    inBytes / (inStop - inStart), mSettings->mFormat);
+		
+		sprintf( reportBuffer, report_bw_format, mSock, inStart, inStop, bytes, speed );
+		IPerfWinCEReport(reportBuffer, speed, inBytes / (inStop - inStart));
+	}
 
-    sprintf( reportBuffer, report_bw_format,
-            mSock, inStart, inStop, bytes, speed );
-
-	IPerfWinCEReport(reportBuffer,speed);
+	//IPerfWinCEReport(reportBuffer,speed);
 
 	/*
     printf( report_bw_format,
@@ -346,9 +349,13 @@ void PerfSocket::ReportBW_Jitter_Loss( max_size_t inBytes,
                                        int32_t inErrorcnt,
                                        int32_t inOutofOrder,
                                        int32_t inDatagrams ) {
+
+	char reportBuffer[256];
+
     // print a field header every 20 lines
     if ( --sReportCount <= 0 ) {
-        printf( report_bw_jitter_loss_header );
+        sprintf(reportBuffer, report_bw_jitter_loss_header );
+		IPerfWinCEReport(reportBuffer, 0);
         sReportCount = 20;
     }
 
@@ -366,13 +373,19 @@ void PerfSocket::ReportBW_Jitter_Loss( max_size_t inBytes,
     // assume most of the time out-of-order packets are not
     // duplicate packets, so subtract them from the lost packets.
     inErrorcnt -= inOutofOrder;
-    printf( report_bw_jitter_loss_format,
+
+
+    sprintf(reportBuffer,report_bw_jitter_loss_format,
             mSock, inStart, inStop, bytes, speed,
             mJitter*1000.0, inErrorcnt, inDatagrams,
             (100.0 * inErrorcnt) / inDatagrams );
+	IPerfWinCEReport(reportBuffer,0);
+
     if ( inOutofOrder > 0 ) {
-        printf( report_outoforder,
+        sprintf(reportBuffer, report_outoforder,
                 mSock, inStart, inStop, inOutofOrder );
+
+		IPerfWinCEReport(reportBuffer,0);
     }
     fflush( stdout );
 }
@@ -397,10 +410,14 @@ void PerfSocket::ReportPeer( int inSock ) {
 
     sReporting.Lock();
 
-    printf( report_peer,
+	char reportBuffer[256];
+
+    sprintf(reportBuffer, report_peer,
             inSock,
             local_addr,  local.getPort(),
             remote_addr, remote.getPort());
+	IPerfWinCEReport(reportBuffer,0);
+
     fflush( stdout );
 
     sReporting.Unlock();
@@ -518,7 +535,9 @@ void PerfSocket::ReportClientSettings( const char* inHost,
         SocketAddr local = getLocalAddress();
         char addr[ REPORT_ADDRLEN ];
         local.getHostAddress( addr, sizeof(addr));
-        printf( bind_address, addr );
+        //printf( bind_address, addr );
+		sprintf(buffer,bind_address, addr );
+		IPerfWinCEReport(buffer, 0);
     }
 
     if ( mUDP ) {
@@ -526,7 +545,9 @@ void PerfSocket::ReportClientSettings( const char* inHost,
 
         SocketAddr remote = getRemoteAddress();
         if ( remote.isMulticast() ) {
-            printf( multicast_ttl, mSettings->mTTL);
+            sprintf(buffer, multicast_ttl, mSettings->mTTL); ///<
+			IPerfWinCEReport(buffer, 0);
+			
         }
     }
 
@@ -563,17 +584,21 @@ void PerfSocket::ReportServerSettings( const char* inLocalhost ) {
         char addr[ REPORT_ADDRLEN ];
         local.getHostAddress( addr, sizeof(addr));
 
-        printf( bind_address, addr );
+        sprintf(buffer,  bind_address, addr );
+		IPerfWinCEReport(buffer, 0);
 
         if ( local.isMulticast() ) {
-            printf( join_multicast, addr );
+            sprintf(buffer,  join_multicast, addr );
+			IPerfWinCEReport(buffer, 0);
         }
     }
     if ( mUDP ) {
-        printf( server_datagram_size, mSettings->mBufLen );
+        sprintf(buffer, server_datagram_size, mSettings->mBufLen );
+		IPerfWinCEReport(buffer, 0);
     }
     ReportWindowSize();
-    printf( seperator_line );
+    sprintf(buffer, seperator_line);
+	IPerfWinCEReport(buffer, 0);
     fflush( stdout );
 
     sReporting.Unlock();

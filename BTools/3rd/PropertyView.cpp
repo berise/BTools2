@@ -718,7 +718,7 @@ int CPropertyView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
-	SetScrollSizes (MM_TEXT, CSize(1000,1000));
+	SetScrollSizes (MM_TEXT, CSize(10,10)); // orig : 1000, 1000
 
 	DWORD	dwStyle = TCS_FORCELABELLEFT | TCS_FOCUSNEVER | ((m_bStacked) ? (TCS_MULTILINE) : (TCS_SINGLELINE));
 	CRect	rect; GetClientRect (&rect);

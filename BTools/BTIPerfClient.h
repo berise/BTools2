@@ -1,13 +1,19 @@
 #pragma once
-#include "3rd/PropertyView.h"
+
+#include "afxwin.h"
 
 #include "Client.hpp"
 #include "Reporter.h"
-#include "afxwin.h"
+
+#include "3rd/PropertyView.h"
+#include "3rd/XGroupBox.h"
+#include "3rd/OScopeCtrl.h"
 
 
 // BTIPerfClient 대화 상자입니다.
 
+/*! \brief Delegation of IPerf Client. It is basically a CView!
+*/
 class BTIPerfClient : public CPropertyViewPage, CReporter
 {
 	DECLARE_DYNAMIC(BTIPerfClient)
@@ -28,20 +34,9 @@ protected:
 public:
 	void virtual PrintBuffer(char *buffer,char *speed);
 	void virtual ClientFinished();
+	virtual void CallbackBW(double fBW);
 
 
-	FILE *m_fStatistics;
-
-	BOOL m_bClientStarted;
-	Client *m_pIPerfClient;
-
-	ext_Settings* m_pSettings;
-	Settings *m_piperf_setting;
-
-
-	CString m_csHostName;
-	CString	m_csReportFile;
-	CString	m_csErrorFile;
 
 	BOOL ParseCommandLine(Settings *pSetting, CString &szCmd);
 
@@ -52,4 +47,30 @@ public:
 	afx_msg void OnBnClickedAddCommand();
 	afx_msg void OnLbnSelchangeCommandList();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+
+
+private:
+	// Member variables
+	FILE *m_fStatistics;
+
+	BOOL m_bClientStarted;
+	Client *m_pIPerfClient;
+
+	ext_Settings* m_pSettings;
+	Settings *m_piperf_setting;
+
+
+	//CString m_csHostName;
+	CString	m_csReportFile;
+	CString	m_csErrorFile;
+
+
+	CXGroupBox m_sCommands;
+	CXGroupBox m_sOutput;
+
+
+	// visualization
+	COScopeCtrl m_OScopeCtrl;
+public:
+	CComboBox m_cbCommands;
 };

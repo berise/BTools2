@@ -1,3 +1,8 @@
+2009.02
+ - Test on real machine(T*Omnia, M490) by visiting test room prepared by SK Telecom.
+   Almost everyting runs ok but has something to be done for a real machine.(important --;)
+ - cab for Windows Mobile 6.0, 6.1.
+
 2009.01
  - Added more platforms Pocket PC 2003, Smartphone 2003.
  - Screen layout for Client & Server

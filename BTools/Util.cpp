@@ -165,25 +165,23 @@ fail:;
 
 TCHAR * SetupLog(TCHAR *dir, TCHAR *file)
 {
-	memset(btools_log_file, '\0', MAX_PATH);
+	static TCHAR buffer[256];
+	memset(buffer, '\0', MAX_PATH);
 	TCHAR timebuf[32];
 	
 	GetCurTimeW(timebuf,0);
 	BOOL ret = CreateDirectory (dir, NULL);
-	if(ret == 0) // can not create log directory
-	{
-		1;
-	}
+	
 
-	wsprintf(btools_log_file, L"%s\\%-8.8s_%s", dir, timebuf, file);
+	wsprintf(buffer, L"%s\\%-8.8s_%s", dir, timebuf, file);
 
-	return btools_log_file;
+	return buffer;
 }
 
-void WriteLog(wchar_t *fmt, ...)
+void WriteLog(TCHAR *pLogFile, wchar_t *fmt, ...)
 {
 	// do nothing, if log_file is null
-	if(btools_log_file == NULL)
+	if(pLogFile == NULL)
 		return;
 
 	va_list args;
@@ -206,8 +204,184 @@ void WriteLog(wchar_t *fmt, ...)
 	unicode_to_ansi(timebuf, timebuf_ansi);
 
     sprintf(logbuf, "%s %s\n", timebuf_ansi, buff);
-	HsWriteCeFile(btools_log_file, logbuf, strlen(logbuf)*sizeof(char), L"a+");	
+	HsWriteCeFile(pLogFile, logbuf, strlen(logbuf)*sizeof(char), L"a+");	
 }
 
 
 
+
+////////////////////////////////////////////////////////////
+/// LogToFile 
+/// Writes szLog into the file named pszFilename
+HRESULT LogToFileA(LPTSTR szLog, LPCTSTR pszFilename)
+{
+    HRESULT hr = E_FAIL;
+    
+    //Open the handle to the file (and create it if it doesn't exist
+    HANDLE hFile = CreateFile(pszFilename, GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (INVALID_HANDLE_VALUE == hFile)
+        goto Exit;
+
+    //Set the pointer at the end so that we can append szLog
+    DWORD dwFilePointer = SetFilePointer(hFile, 0, NULL, FILE_END);
+    if (0xFFFFFFFF == dwFilePointer)
+        goto Exit;
+
+    //Write to the file
+    DWORD dwBytesWritten = 0;
+    BOOL bWriteFileRet = WriteFile(hFile, szLog, wcslen(szLog) * 2, &dwBytesWritten, NULL);
+    if (!bWriteFileRet)
+        goto Exit;
+
+    //Flush the buffer
+    BOOL bFlushFileBuffersRet = FlushFileBuffers(hFile);
+    if (!bFlushFileBuffersRet)
+        goto Exit;
+
+    //Success
+    hr = S_OK;
+
+Exit:
+    if (NULL != hFile)
+        CloseHandle(hFile);
+
+    return hr;
+}
+
+
+HRESULT LogToFile(TCHAR * szLog, TCHAR * pszFilename)
+{
+    HRESULT hr = E_FAIL;
+    
+    //Open the handle to the file (and create it if it doesn't exist
+    HANDLE hFile = CreateFile(pszFilename, GENERIC_WRITE, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (INVALID_HANDLE_VALUE == hFile)
+        goto Exit;
+
+    //Set the pointer at the end so that we can append szLog
+    DWORD dwFilePointer = SetFilePointer(hFile, 0, NULL, FILE_END);
+    if (0xFFFFFFFF == dwFilePointer)
+        goto Exit;
+
+    //Write to the file
+    DWORD dwBytesWritten = 0;
+    BOOL bWriteFileRet = WriteFile(hFile, szLog, wcslen(szLog) * 2, &dwBytesWritten, NULL);
+    if (!bWriteFileRet)
+        goto Exit;
+
+    //Flush the buffer
+    BOOL bFlushFileBuffersRet = FlushFileBuffers(hFile);
+    if (!bFlushFileBuffersRet)
+        goto Exit;
+
+    //Success
+    hr = S_OK;
+
+Exit:
+    if (NULL != hFile)
+        CloseHandle(hFile);
+
+    return hr;
+}
+
+void GetLocalIP(TCHAR *hostname, TCHAR *ip)
+{
+	//  PURPOSE:  
+	//		- Obtain the current IP assign to the local PC
+	//  PARAMETERS:
+	//		- hWnd		:: Handle of the parent window.
+	//  OPERATION:
+	//		- Call the gethostname API
+	//  RETURN VALUE:
+	//      - NIL
+
+	HOSTENT *LocalAddress;
+	char	*Buff;
+	TCHAR	*wBuff;
+
+
+	// Create new string buffer
+	Buff = new char[256];
+	wBuff = new TCHAR[256];
+	// Reset the string buffer
+	memset(Buff, '\0', 256);
+	memset(wBuff, TEXT('\0'), 256*sizeof(TCHAR));
+	// Get computer name
+	if (gethostname(Buff, 256) == 0)
+	{
+		// Convert computer name from MultiByte char to UNICODE
+		mbstowcs(wBuff, Buff, 256);
+		// Copy the machine name into the GUI control
+		//SetWindowText(GetDlgItem(hWnd, IDC_MACHINE), wBuff);
+		wcscpy(hostname, wBuff);
+
+
+		// Get the local PC IP address
+		LocalAddress = gethostbyname(Buff);
+		// Reset the string buffer
+		memset(Buff, '\0', 256);
+		// Compose the obtain ip address
+		sprintf(Buff, "%d.%d.%d.%d\0", LocalAddress->h_addr_list[0][0] & 0xFF, LocalAddress->h_addr_list[0][1] & 0x00FF, LocalAddress->h_addr_list[0][2] & 0x0000FF, LocalAddress->h_addr_list[0][3] & 0x000000FF);
+		// Reset the wBuff
+		memset(wBuff, TEXT('\0'), 256*sizeof(TCHAR));
+		// Convert computer name from MultiByte char to UNICODE
+		mbstowcs(wBuff, Buff, 256);
+		// Set the ip address to edit control 1
+		//SetWindowText(GetDlgItem(hWnd, IDC_EDIT1), wBuff);
+		wcscpy(ip, wBuff);
+		// Set the default port number
+		//SetWindowText(GetDlgItem(hWnd, IDC_EDIT2), TEXT("5000"));
+	}
+	else
+	{
+		// Notify user about the error
+		//MessageBox(hWnd, TEXT("Fail to get host name."), TEXT("MySocket"), MB_OK | MB_ICONEXCLAMATION);
+		
+	}
+
+	//
+	delete Buff;
+}
+
+
+// move hwndAlignee to just below hwnd apart nx (dialog unit)
+// align points are left & bottom.
+// 왼쪽 정렬은 제거. 상하 만 조절
+void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx)
+{
+	ASSERT(hwndDlg != NULL);
+
+	HWND hwndAlign = ::GetDlgItem(hwndDlg, nIDAlignCtrl);
+	ASSERT(hwndAlign!= NULL);
+	RECT rcAlign;
+	::GetWindowRect(hwndAlign, &rcAlign);
+
+	POINT ptMoveTo;
+	ptMoveTo.x = rcAlign.left;
+	ptMoveTo.y = rcAlign.bottom;
+
+	::ScreenToClient(hwndDlg, &ptMoveTo);
+
+	// Verify the affected control and obtain its rect
+	HWND hwndCtl = ::GetDlgItem(hwndDlg, nIDAffectedCtl);
+	ASSERT(hwndCtl != NULL);
+	RECT rcCtl;
+	::GetWindowRect(hwndCtl, &rcCtl);
+	POINT ptCtl;
+	ptCtl.x = rcCtl.left;
+	ptCtl.y = rcCtl.bottom;
+	::ScreenToClient(hwndDlg, &ptCtl);
+
+
+	::SetWindowPos(hwndCtl, NULL, ptCtl.x, ptMoveTo.y + nx,
+			0, 0, SWP_NOSIZE|SWP_NOZORDER);
+
+	/*
+	::MoveWindow(hwndCtl, 
+		ptMoveTo.x, 
+		ptMoveTo.y + nx,
+		rcCtl.right - rcCtl.left,
+		rcCtl.bottom - rcCtl.top,
+		TRUE);
+	*/	
+}

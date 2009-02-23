@@ -1,9 +1,29 @@
+/// $Id$
+// berise@corner.home
+
+
+BUG
+===
+ * ScreenLib::OptimizeHeight has some bug. placement of IDC_CUSTOM1, place holder for OScopeCtrl, doesn't places properly on real device & emulator for 480x800 resolution.
+ 
+
+TODO 
+====
+ * merging CONTEST branch with main trunk which was out of dated too much. -_-;
+ * T*Omnia(M490) machine has relatively slow CPU compare to others. In addition it has big screen size(high DPI). Screen update seems so slow to use SFX. Even effects on small bitmap runs very slow.
+
+ * Redraw graphs for points saved in previously in OScopeCtrl. Especially when orientation changed.
  * UI layout following screen orientation
- * Visualization of ping
  * Visualization of iperf client & server(only with -i option, checker will be used for this)
   - when checker is enabled, then visualization of performance(-i) is shown and log is turned off
   - Visualization must not be used when doing a real benchmark.
 
+
+
+DONE 
+====
+ * Visualization of iperf client(-i)
+ * Visualization of ping latency
  * port OScopeCtrl to ppc
  * Dynamic Range with AutoRange
- * Screen layout with ScreenLib
+ * Screen layout with ScreenLib 

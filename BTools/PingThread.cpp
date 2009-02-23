@@ -60,13 +60,15 @@ UINT CPingThread::ThreadProc(void* lpParam)
 
 	CString szMsg;
 
-	CString log_dir = L"\\My Documents\\btools_log";
+	TCHAR *log_dir = L"\\My Documents\\btools_log";
+	TCHAR *log_file_postfix = L"ping.txt";
 	// log
-	TCHAR *logger = SetupLog(L"\\My Documents\\btools_log", L"btools_ping.txt");
+	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
 
-	int n_inserted = parent->m_ping_result.AddString(_T("---- Ping started ----"));
-	WriteLog(_T("---- Ping started ----"));
-	parent->m_ping_result.SetCurSel(n_inserted);
+	int n_inserted = parent->m_lbPingResult.AddString(_T("---- Ping started ----"));
+	WriteLog(pLogFile, _T("---- Ping started ----"));
+
+	parent->m_lbPingResult.SetCurSel(n_inserted);
 
 	// set host to resolve
 
@@ -133,10 +135,6 @@ UINT CPingThread::ThreadProc(void* lpParam)
 				if(ICMPStatus2String[i].id == icmp_error)
 					break;
 			}
-
-			//TCHAR msg_u[256];
-			//ansi_to_unicode(ICMPStatus2String[i].status, msg_u);
-
 			
 			szMsg.Format(_T("Ping failed:%s"), ansi_to_unicode(ICMPStatus2String[i].status));
 			//_tprintf(_T("Failed in ping specified host, GetLastError returns: %d"), GetLastError());
@@ -149,8 +147,7 @@ UINT CPingThread::ThreadProc(void* lpParam)
 		{
 			if (nRequestsSent == parent->opt.m_nRequestsToSend)
 			break;
-		}
-		
+		}		
 
 		// Post WM_USER_PING_MESSAGE.
 		/*
@@ -160,19 +157,20 @@ UINT CPingThread::ThreadProc(void* lpParam)
 		}
 		*/
 
-		n_inserted = parent->m_ping_result.AddString(szMsg);
-		WriteLog(szMsg.GetBuffer());
-		parent->m_ping_result.SetCurSel(n_inserted);
+		n_inserted = parent->m_lbPingResult.AddString(szMsg);
+		WriteLog(pLogFile, szMsg.GetBuffer());
+		//szMsg += L"LogToFile";
+		//LogToFile(szMsg.GetBuffer(), pLogFile);
+		parent->m_lbPingResult.SetCurSel(n_inserted);
 
 		// visualization
 		//double nRandom;
-		// generate a random number between -5 and 5
-		//nRandom = -5.0 + 10.0*rand()/(double)RAND_MAX;
+		// generate a random number between 
+		//nRandom = -5.0 + 1000.0*rand()/(double)RAND_MAX;
+		//parent->m_OScopeCtrl.AppendPoint(nRandom);
 
 		// append the new value to the plot
 		parent->m_OScopeCtrl.AppendPoint(pr.RTT);
-
-
 
 		Sleep(1000);
 		//}  // WaitForMultipleObjects
@@ -180,9 +178,9 @@ UINT CPingThread::ThreadProc(void* lpParam)
 
 
 	// End of ping thread
-	n_inserted = parent->m_ping_result.AddString(_T("---- Ping Finished ----"));
-	WriteLog(_T("---- Ping Finished ----"));
-	parent->m_ping_result.SetCurSel(n_inserted);
+	n_inserted = parent->m_lbPingResult.AddString(_T("---- Ping Finished ----"));
+	WriteLog(pLogFile, _T("---- Ping Finished ----"));
+	parent->m_lbPingResult.SetCurSel(n_inserted);
 
 	return 0;
 }
