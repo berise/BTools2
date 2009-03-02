@@ -157,7 +157,7 @@ BOOL CAboutDlg::OnInitDialog()
 					"Dlvl;54 $;-9M HP;3(7) "
 					"Pw;4(42) AC;-9 Exp;16 ");
 
-	
+
 	m_matrix1.SetText(msg);
 	m_matrix2.SetText(msg2);
 
@@ -165,8 +165,8 @@ BOOL CAboutDlg::OnInitDialog()
 	m_cSFX.SetBitmapResource(IDB_BITMAP1);// no effects on their logos
 	//m_cSFX2.SetBitmapResource(IDB_OMNIA);
 
-	// Start effect 8 seconds later
-	SetTimer(999, 8000, NULL); 
+	// Start effect 3 seconds later
+	SetTimer(999, 3000, NULL); 
 	
 	return TRUE;	// 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 			// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
