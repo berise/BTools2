@@ -6,7 +6,7 @@
 	#error "PCH에 대해 이 파일을 포함하기 전에 'stdafx.h'를 포함합니다."
 #endif
 
-#include "resourceppc.h"
+//#include "resourceppc.h"
 
 // CBToolsApp:
 // 이 클래스의 구현에 대해서는 BTools.cpp을 참조하십시오.

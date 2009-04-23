@@ -14,7 +14,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_A5CBEA392F54443AB807F70A121F1874"
+        "MsmKey" = "8:_F114893A87864950B90E2E7981D8859F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,6 +81,15 @@
                 {
                 }
             }
+            "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_7DC8D607237542A883F39ECA1F2DDD6B"
+            {
+            "Name" = "8:#1916"
+            "Condition" = "8:"
+            "Property" = "8:%CE11%"
+                "Folders"
+                {
+                }
+            }
         }
         "Product"
         {
@@ -95,7 +104,7 @@
         }
         "ProjectOutput"
         {
-            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_A5CBEA392F54443AB807F70A121F1874"
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_F114893A87864950B90E2E7981D8859F"
             {
             "SourcePath" = "8:..\\BTools\\Windows Mobile 6 Professional SDK (ARMV4I)\\Release\\BTools.exe"
             "TargetName" = "8:"
@@ -157,6 +166,16 @@
         }
         "Shortcut"
         {
+            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_D36AD82229254ABE9195B142AF16011C"
+            {
+            "Name" = "8:BTools"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "Target" = "8:_F114893A87864950B90E2E7981D8859F"
+            "Folder" = "8:_7DC8D607237542A883F39ECA1F2DDD6B"
+            "WorkingFolder" = "8:_9B79B1AA39A04D5A9284DE75CA90ADAD"
+            }
         }
     }
 }

@@ -8,6 +8,7 @@
 #include "util.h"	//	log
 
 #include "3rd/ScreenLib.h"
+#include "3rd/IniFile.h"
 
 
 // BTPingDialog 대화 상자입니다.
@@ -53,6 +54,51 @@ END_MESSAGE_MAP()
 
 
 // BTPingDialog 메시지 처리기입니다.
+void initIniFile(TCHAR *pszFileName)
+{
+	//Open Log file
+	HANDLE hFile = CreateFile(pszFileName, 
+			GENERIC_READ | GENERIC_WRITE, 
+			0, 
+			NULL, 
+			OPEN_EXISTING, 
+			FILE_ATTRIBUTE_NORMAL, 
+			NULL );
+
+	//A file was opened?
+	if( INVALID_HANDLE_VALUE == hFile )
+	{
+		// init ini file
+		char szAnsi[256];
+		unicode_to_ansi(pszFileName, szAnsi);
+		CIniFile::Create(szAnsi);
+		CIniFile::SetValue("cmd1", "localhost", "Ping", szAnsi);
+		CIniFile::SetValue("cmd2", "192.168.1.1", "Ping", szAnsi);
+		CIniFile::SetValue("cmd3", "192.168.1.100", "Ping", szAnsi);
+
+		CIniFile::SetValue("cmd3", "-c localhost -i 1", "iPref Client", szAnsi);
+		CIniFile::SetValue("cmd2", "-c 192.168.0.1 -t 20 -i 1", "iPref Client", szAnsi);
+		CIniFile::SetValue("cmd1", "-c 192.168.0.1 -u -i 1", "iPref Client", szAnsi);
+
+		CIniFile::SetValue("cmd1", "-s", "iPref Server", szAnsi);
+		CIniFile::SetValue("cmd2", "-s -u", "iPref Server", szAnsi);
+
+		//CIniFile::SetValue("R", 0, "Ping Graph", szAnsi);
+		
+
+		CIniFile::Sort(szAnsi, false);
+		return;
+	}
+
+	//If already exists
+	if( ERROR_ALREADY_EXISTS == GetLastError() )
+	{
+		CloseHandle( hFile );
+		return;
+	}
+
+}
+
 
 BOOL BTPingDialog::OnInitDialog()
 {
@@ -61,12 +107,29 @@ BOOL BTPingDialog::OnInitDialog()
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 	ping_thread = new CPingThread;
 
+	// Read ping section from ini file
+	initIniFile(gszIniFile);
+
+
+		char szAnsi[256];
+		unicode_to_ansi(gszIniFile, szAnsi);
+
+		vector<CIniFile::Record> s  = CIniFile::GetSection("Ping", szAnsi);
+		vector<CIniFile::Record>::iterator i;
+		for( i = s.begin(); i != s.end(); i++)
+		{
+			string value = CIniFile::GetValue( (*i).Key, "Ping", szAnsi);
+
+			m_cbHosts.AddString(ansi_to_unicode(value.c_str()));
+		}
+	
+
 	// this might be enough
 	//m_cbHosts.ModifyStyle(0, CBS_AUTOHSCROLL);	
 	//m_cbHosts.AddString(_T("skt.com"));	
-	m_cbHosts.AddString(_T("localhost"));	
-	m_cbHosts.AddString(_T("192.168.1.1"));
-	m_cbHosts.AddString(_T("192.168.1.2"));
+	//m_cbHosts.AddString(_T("localhost"));	
+	//m_cbHosts.AddString(_T("192.168.1.1"));
+	//m_cbHosts.AddString(_T("192.168.1.2"));
 	//m_cbHosts.AddString(_T("knu.ac.kr"));
 	
 	m_cbHosts.SetCurSel(0);
@@ -173,41 +236,45 @@ void BTPingDialog::OnBnClickedDoPing()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	if(ping_thread->is_running() == FALSE)
 	{
+		CString szTarget;
+		//TCHAR msg[256];
 
-	CString szServer;
-	//TCHAR msg[256];
+		// Combobox manipulation, CBS_AUTOHSCROLL must be in style
+		int nSel = m_cbHosts.GetCurSel();
 
-	// Combobox manipulation, CBS_AUTOHSCROLL must be in style
-	int nSel = m_cbHosts.GetCurSel();
-
-	if(nSel == -1) // nothing selected
-	{
-		// get user input in edit control
-		m_cbHosts.GetWindowText(szServer.GetBuffer(128), 128);//LOWORD(nCount)+1);//
-
-		// szServer의 길이에 따라 처리 필요
-		if(szServer.GetLength() < 0) // 호스트 주소가 없는 경우
+		if(nSel == -1) // nothing selected
 		{
-			return;
+			// get user input in edit control
+			m_cbHosts.GetWindowText(szTarget.GetBuffer(128), 128);//LOWORD(nCount)+1);//
+
+			// szTarget의 길이에 따라 처리 필요
+			if(szTarget.GetLength() < 0) // 호스트 주소가 없는 경우
+			{
+				return;
+			}
+			/*
+			DWORD nCount = m_cbHosts.GetEditSel();
+			if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)
+			*/
 		}
-		/*
-		DWORD nCount = m_cbHosts.GetEditSel();
+		else // get selected ListBox string
+		{
+			m_cbHosts.GetLBText(nSel, szTarget);
+		}
 
-		if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)
-		*/
-	}
-	else // get selected ListBox string
-	{
-		m_cbHosts.GetLBText(nSel, szServer);
-	}
+		// update ini 
+		UpdateIni(szTarget.GetBuffer());
 
-	// szServer를 다시 ComboBox에 넣고 Ping 시작
-	m_cbHosts.AddString(szServer);
+		szTarget.ReleaseBuffer();
+		// szTarget를 다시 ComboBox에 넣고 Ping 시작
+		m_cbHosts.AddString(szTarget);
 
-	opt.m_sHostToResolve = szServer;
-	ping_thread->run(this);	
+		
 
-	GetDlgItem(IDC_DO_PING)->SetWindowText(_T("Stop"));
+		opt.m_sHostToResolve = szTarget;
+		ping_thread->run(this);	
+
+		GetDlgItem(IDC_DO_PING)->SetWindowText(_T("Stop"));
 
 	}
 	else
@@ -256,7 +323,24 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 	//CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_HOST, IDC_RESULT_LIST, IDC_CUSTOM1);
 
 	// OSCOPECTRL은 나머지 영역을 채운다
-	CScreenLib::OptimizeHeight(m_hWnd, IDC_CUSTOM1);
+	//CScreenLib::OptimizeHeight(m_hWnd, IDC_CUSTOM1);
+	//CScreenLib::DockControl(m_hWnd, IDC_CUSTOM1, CScreenLib::dtBottom);
+	CRect r, cr, vr;
+	//::GetClientRect(::GetDlgItem(m_hWnd, IDC_STATIC_VISUAL), vr);
+	GetDlgItem(IDC_STATIC_VISUAL)->GetWindowRect(vr);
+	ScreenToClient(vr);
+	GetWindowRect(cr);
+	ScreenToClient(cr);
+
+	GetDlgItem(IDC_CUSTOM1)->GetWindowRect(r);
+	ScreenToClient(r);
+
+	GetDlgItem(IDC_CUSTOM1)->MoveWindow(r.left, 
+		r.top, 
+		r.Width(), 
+		cr.Height() - vr.bottom);
+
+	
 
 	// IDC_OSCOPECTRL은 Control이 아니다. 고로 CScreenLib에서 오류가 발생. 
 	// 별도의 PlaceHolder를 통해 처리함.
@@ -285,4 +369,36 @@ void BTPingDialog::OnSize(UINT nType, int cx, int cy)
 			m_OScopeCtrl.MoveWindow(rect);//SetWindowPos(NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE);//
 		}
 	}
+}
+
+
+
+void BTPingDialog::UpdateIni(TCHAR *pValue)
+{
+	char szFile[256];
+	char szTempKey[32], szTempValue[128];
+	unicode_to_ansi(gszIniFile, szFile);
+	unicode_to_ansi(pValue, szTempValue);
+
+	vector<CIniFile::Record> v = CIniFile::GetSection("Ping", szFile);
+	
+	vector<CIniFile::Record>::iterator i;
+	for( i = v.begin(); i != v.end(); i++)
+	{
+		CIniFile::Record r = (*i);
+
+		//  이미 존재할 경우
+		if(r.Value.compare(szTempValue) == 0)
+		{
+			return;
+		}
+	}
+
+	CString szTemp;
+	szTemp.Format(L"cmd%d", v.size());
+	unicode_to_ansi(szTemp.GetBuffer(), szTempKey);
+	
+	CIniFile::SetValue(szTempKey, szTempValue, "Ping", szFile);
+	szTemp.ReleaseBuffer();
+
 }

@@ -11,7 +11,6 @@
 
 
 DWORD WINAPI StartThread(LPVOID lpParameter )
-
 {
 	Client *c=(Client *)lpParameter;
 
@@ -97,16 +96,12 @@ BOOL BTIPerfClient::OnInitDialog()
 
 	*/
 
-	m_cbCommands.AddString(_T("-c localhost -t 5 -i 1"));
-	m_cbCommands.AddString(_T("-c 192.168.0.1 -i 1"));
-	m_cbCommands.AddString(_T("-c 192.168.0.1 -i 1 -u"));
+	m_cbCommands.AddString(_T("-i 1 -t 99999 -c 125.152."));
+	m_cbCommands.AddString(_T("-i 1 -t 99999 -c localhost"));
 	m_cbCommands.SetCurSel(0);
 
-
-	m_lbCommand.AddString(_T("-c localhost -t 5 -i 1"));
-	m_lbCommand.AddString(_T("-c 192.168.0.1 -i 1"));
-	m_lbCommand.AddString(_T("-c 125.152.1.1 -i 1"));
-	m_lbCommand.AddString(_T("-c 192.168.0.1 -i 1 -u"));
+	m_lbCommand.AddString(_T("-i 1 -t 99999 -c 125.152."));
+	m_lbCommand.AddString(_T("-i 1 -t 99999 -c "));
 
 	m_lbCommand.SetCurSel(0);	// default selection
 
@@ -159,7 +154,6 @@ void BTIPerfClient::PrintBuffer(char *buffer,char *speed)
 {
 //	m_csReport.AddString((const unsigned short *)buffer);
 	int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
-
 	m_lbResult.SetCurSel(nInserted );
 
 	if (m_fStatistics !=NULL)
@@ -177,7 +171,8 @@ void BTIPerfClient::PrintBuffer(char *buffer,char *speed)
 
 void BTIPerfClient::ClientFinished()
 {
-	m_lbResult.AddString(_T("iperf client finished"));
+	int nInserted = m_lbResult.AddString(_T("iperf client finished"));
+	m_lbResult.SetCurSel(nInserted );
 	//GetDlgItem(IDC_CLIENT_STATUS)->SetWindowText(_T("Client Finished"));
 	m_bClientStarted=FALSE;
 	
@@ -464,7 +459,23 @@ void BTIPerfClient::OnSize(UINT nType, int cx, int cy)
 
 	// OSCOPECTRL은 나머지 영역을 채운다
 	//CScreenLib::OptimizeWidth(m_hWnd, 1, IDC_STATIC_GRAPH);
-	CScreenLib::OptimizeHeight(m_hWnd, IDC_STATIC_GRAPH);
+	//CScreenLib::OptimizeHeight(m_hWnd, IDC_STATIC_GRAPH);
+
+	CRect r, cr, vr;
+	//::GetClientRect(::GetDlgItem(m_hWnd, IDC_STATIC_VISUAL), vr);
+	GetDlgItem(IDC_CLIENT_IP)->GetWindowRect(vr);
+	ScreenToClient(vr);
+	GetWindowRect(cr);
+	ScreenToClient(cr);
+
+	GetDlgItem(IDC_STATIC_GRAPH)->GetWindowRect(r);
+	ScreenToClient(r);
+
+	GetDlgItem(IDC_STATIC_GRAPH)->MoveWindow(r.left, 
+		r.top, 
+		r.Width(), 
+		cr.Height() - vr.bottom);
+
 
 	if(m_OScopeCtrl.GetSafeHwnd() != NULL)
 	{

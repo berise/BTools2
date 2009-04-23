@@ -60,12 +60,14 @@
 #include "Thread.hpp"
 #include "Notify.hpp"
 
+#include "Reporter.h"
+
 /* ------------------------------------------------------------------- */
 class Server : public PerfSocket, public Thread {
 public:
     // stores server socket, port and TCP/UDP mode
     Server( ext_Settings *inSettings, int inSock,
-            Notify* toNotify = NULL );
+            Notify* toNotify = NULL, CReporter *rep= NULL );
 
     // destroy the server object
     ~Server();

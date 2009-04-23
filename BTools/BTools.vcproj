@@ -1037,6 +1037,14 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\3rd\IniFile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\3rd\IniFile.h"
+				>
+			</File>
+			<File
 				RelativePath=".\3rd\MatrixStatic.cpp"
 				>
 			</File>

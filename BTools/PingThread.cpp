@@ -125,6 +125,9 @@ UINT CPingThread::ThreadProc(void* lpParam)
 				szMsg.Format(_T("[%d] %d.%d.%d.%d replied in %d ms"), nRequestsSent,
 				pr.Address.S_un.S_un_b.s_b1, pr.Address.S_un.S_un_b.s_b2, pr.Address.S_un.S_un_b.s_b3, 
 				pr.Address.S_un.S_un_b.s_b4, pr.RTT);
+
+			// append the new value to the plot
+			parent->m_OScopeCtrl.AppendPoint(pr.RTT);
 		}
 		else
 		{
@@ -140,7 +143,6 @@ UINT CPingThread::ThreadProc(void* lpParam)
 			//_tprintf(_T("Failed in ping specified host, GetLastError returns: %d"), GetLastError());
 		}
 
-
 		// 종료 조건 검사
 		//Prepare for the next loop around?
 		if (!parent->opt.m_bPingTillStopped)
@@ -150,27 +152,11 @@ UINT CPingThread::ThreadProc(void* lpParam)
 		}		
 
 		// Post WM_USER_PING_MESSAGE.
-		/*
-		if(parent != NULL)
-		{
-			parent->PostMessage(WM_USER_PING_MESSAGE, 0, (LPARAM)parent->is_host_alive);
-		}
-		*/
+		//		if(parent != NULL){	parent->PostMessage(WM_USER_PING_MESSAGE, 0, (LPARAM)parent->is_host_alive);		}
 
-		n_inserted = parent->m_lbPingResult.AddString(szMsg);
 		WriteLog(pLogFile, szMsg.GetBuffer());
-		//szMsg += L"LogToFile";
-		//LogToFile(szMsg.GetBuffer(), pLogFile);
-		parent->m_lbPingResult.SetCurSel(n_inserted);
-
-		// visualization
-		//double nRandom;
-		// generate a random number between 
-		//nRandom = -5.0 + 1000.0*rand()/(double)RAND_MAX;
-		//parent->m_OScopeCtrl.AppendPoint(nRandom);
-
-		// append the new value to the plot
-		parent->m_OScopeCtrl.AppendPoint(pr.RTT);
+		n_inserted = parent->m_lbPingResult.AddString(szMsg);
+		parent->m_lbPingResult.SetCurSel(n_inserted);		
 
 		Sleep(1000);
 		//}  // WaitForMultipleObjects

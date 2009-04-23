@@ -97,6 +97,8 @@ m_pExtSettings(inSettings)
 	//
 	m_bStop = FALSE;
 
+	m_pReporter = rep;
+
     mCount = ( inSettings->mThreads != 0 );
     mClients = inSettings->mThreads;
 
@@ -422,7 +424,7 @@ void Listener::Run( void ) {
 							}
 						}
 
-						Server* theServer = new Server( mSettings, connected_sock );
+						Server* theServer = new Server( mSettings, connected_sock, NULL, m_pReporter );
 						theServer->DeleteSelfAfterRun();
 						theServer->Start();
 		                

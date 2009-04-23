@@ -13,6 +13,7 @@
 #define TOOLBAR_HEIGHT 24
 
 const DWORD dwAdornmentFlags = 0; // 끝내기 단추
+TCHAR gszIniFile[64];
 
 // CMainFrame
 
@@ -53,6 +54,9 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	//SetIcon(AfxGetApp()->LoadIconW(IDI_WIFI), FALSE);
 
 	m_wndCommandBar.SetBarStyle(m_wndCommandBar.GetBarStyle() | CBRS_SIZE_FIXED);
+
+
+	 
 
 	return 0;
 }

@@ -81,6 +81,17 @@ int CBToolsView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	// TODO:  여기에 특수화된 작성 코드를 추가합니다.
+	// Setup ini file name
+	TCHAR szTemp[MAX_PATH] = L"";
+	SHGetSpecialFolderPath(this->GetSafeHwnd(),
+				szTemp,
+				CSIDL_PERSONAL,
+				0);		// do not create the directory if not exist	
+	_tcscat(gszIniFile, szTemp);
+	_tcscat(gszIniFile, L"\\btools.ini");
+
+
+
 
 	// Init CPropertyView 
 	CTabCtrl *tab = GetTabControl();

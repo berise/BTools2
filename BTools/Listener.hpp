@@ -87,6 +87,9 @@ public:
 	//##
 	ext_Settings *m_pExtSettings;
 
+	// to handle reporter to Server
+	CReporter *m_pReporter;
+
 protected:
 	BOOL m_bStop;
 

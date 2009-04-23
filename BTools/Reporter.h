@@ -28,9 +28,9 @@
 class CReporter
 {
 public:
-	void virtual PrintBuffer(char *buffer,char *speed)=0;
-	void virtual ClientFinished()=0;
-	void virtual CallbackBW(double fBW = -1)=0;
+	virtual void PrintBuffer(char *buffer,char *speed)=0;
+	virtual void ClientFinished()=0;
+	virtual void CallbackBW(double fBW = -1)=0;
 };
 
 #endif

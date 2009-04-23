@@ -64,8 +64,8 @@
  * ------------------------------------------------------------------- */
 
 Server::Server( ext_Settings *inSettings, int inSock, 
-                Notify* toNotify )
-: PerfSocket( inSettings, NULL, toNotify ),
+                Notify* toNotify, CReporter *rep)
+: PerfSocket( inSettings, rep, toNotify ),
 Thread() {
     mSock = inSock;
 }

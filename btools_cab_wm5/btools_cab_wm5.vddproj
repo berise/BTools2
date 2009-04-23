@@ -106,7 +106,7 @@
         {
             "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_FAA1F28776F74526997C30E004537B48"
             {
-            "SourcePath" = "8:..\\..\\BTools\\Windows Mobile 5.0 Pocket PC SDK (ARMV4I)\\Release\\BTools.exe"
+            "SourcePath" = "8:..\\BTools\\Windows Mobile 5.0 Pocket PC SDK (ARMV4I)\\Release\\BTools.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0B20D2FC95864602BAB465765256C0DF"

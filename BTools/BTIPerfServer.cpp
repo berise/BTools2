@@ -127,9 +127,9 @@ BOOL BTIPerfServer::OnInitDialog()
 
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 	m_lbCommand.AddString(_T("-s"));
-	//m_lbCommand.AddString(_T("-s -i 1"));
+	m_lbCommand.AddString(_T("-s -i 1"));
 	m_lbCommand.AddString(_T("-s -u"));
-	//m_lbCommand.AddString(_T("-s -u -i 1"));
+	m_lbCommand.AddString(_T("-s -u -i 1"));
 
 	m_lbCommand.SetCurSel(0);	// default selection
 
@@ -174,11 +174,19 @@ BOOL BTIPerfServer::OnInitDialog()
 void BTIPerfServer::PrintBuffer(char *buffer,char *speed)
 {
 //	m_csReport.AddString((const unsigned short *)buffer);
-	int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
+	if(buffer != NULL)
+	{
+		int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
+		WriteLog(m_csReportFile.GetBuffer(), ansi_to_unicode(buffer));
+		m_lbResult.SetCurSel(nInserted );
+	}
 
-	WriteLog(m_csReportFile.GetBuffer(), ansi_to_unicode(buffer));
-
-	m_lbResult.SetCurSel(nInserted );
+	if(speed != NULL)
+	{
+		int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
+		WriteLog(m_csReportFile.GetBuffer(), ansi_to_unicode(buffer));
+		m_lbResult.SetCurSel(nInserted );
+	}
 
 	/*if (m_fStatistics !=NULL)
 	{
@@ -196,7 +204,8 @@ void BTIPerfServer::PrintBuffer(char *buffer,char *speed)
 
 void BTIPerfServer::ClientFinished()
 {	
-	m_lbResult.AddString(_T("Server finished"));
+	int nInserted = m_lbResult.AddString(_T("Server finished"));
+	m_lbResult.SetCurSel(nInserted );
 
 	m_bServerStarted=FALSE;
 	GetDlgItem(IDC_RUN_SERVER)->SetWindowText(_T("Start"));

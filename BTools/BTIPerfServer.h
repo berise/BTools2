@@ -52,8 +52,8 @@ public:
 	/*!
 		\brief CReporter의 가상 함수
 	*/
-	void virtual PrintBuffer(char *buffer,char *speed);
-	void virtual ClientFinished();
+	virtual void  PrintBuffer(char *buffer,char *speed);
+	virtual void  ClientFinished();
 	virtual void CallbackBW(double fBW);
 
 
