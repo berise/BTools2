@@ -216,14 +216,10 @@ void PerfSocket::ReportPeriodicBW( void ) {
         double inStop = mPNextTime.subSec( mStartTime );
 
         sReporting.Lock();
-        ReportBW( mTotalLen - mPLastTotalLen,
-                  inStart,
-                  inStop );
+        ReportBW( mTotalLen - mPLastTotalLen, inStart, inStop );
 
         if ( ptr_parent ) {
-            ptr_parent->PeriodicUpdate( inStart,
-                                        inStop,
-                                        mTotalLen - mPLastTotalLen );
+            ptr_parent->PeriodicUpdate( inStart, inStop, mTotalLen - mPLastTotalLen );
         }
         sReporting.Unlock();
 
@@ -289,25 +285,27 @@ void PerfSocket::ReportPeriodicBW_Jitter_Loss( int32_t errorCnt,
 void PerfSocket::IPerfWinCEReport(char *buffer,char *speed, double fBW)
 {
 	if (m_pReporter!=0)
+	{
 		m_pReporter->PrintBuffer(buffer,speed);
-	if (m_pReporter!=0 && fBW > 0)
-		m_pReporter->CallbackBW(fBW);
+		if (fBW > 0)
+			m_pReporter->CallbackBW(fBW);
+	}
 }
 
 void PerfSocket::ReportBW( max_size_t inBytes,
                            double inStart,
-                           double inStop ) {
-    // print a field header every 20 lines
-
+                           double inStop )
+{
 	char reportBuffer[256];
 
+	// print a field header every 20 lines
     if ( --sReportCount <= 0 ) 
 	{
 		sprintf(reportBuffer,report_bw_header);
 
 		IPerfWinCEReport(reportBuffer,0);
 		//        printf( report_bw_header );
-        sReportCount = 20;
+        sReportCount = 9999;	// do not print a field header 
     }
 
     char bytes[ 32 ];
@@ -330,7 +328,6 @@ void PerfSocket::ReportBW( max_size_t inBytes,
 	}
 
 	//IPerfWinCEReport(reportBuffer,speed);
-
 	/*
     printf( report_bw_format,
             mSock, inStart, inStop, bytes, speed );
@@ -356,7 +353,7 @@ void PerfSocket::ReportBW_Jitter_Loss( max_size_t inBytes,
     if ( --sReportCount <= 0 ) {
         sprintf(reportBuffer, report_bw_jitter_loss_header );
 		IPerfWinCEReport(reportBuffer, 0);
-        sReportCount = 20;
+        sReportCount = 9999;
     }
 
     assert( inErrorcnt >= 0 );

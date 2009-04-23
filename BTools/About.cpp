@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "About.h"
+#include "version.h"
 
+#define BTOOLS_VERSION "BTools version 0.30" // $Rev$
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 #ifdef _DEVICE_RESOLUTION_AWARE
 	ON_WM_SIZE()
@@ -21,6 +23,7 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MATRIX1, m_matrix1);
 	DDX_Control(pDX, IDC_MATRIX2, m_matrix2);
 	DDX_Control(pDX, IDC_STATIC_CONTEST_LOGO, m_cSFX);
+	DDX_Control(pDX, IDC_STATIC_VERSION, m_cVersion);
 }
 
 
@@ -75,9 +78,9 @@ BOOL CAboutDlg::OnInitDialog()
 	//				 0123456789012345678901
 	CString msg(	"+--------------------+"//0
 					"|BTools for Pocket PC|"//1
-					"| - Windows Mobile V |"//2
+					"| - WM 5, WM6.x      |"//2
 					"|-------------------+|"//3//4
-					"| = ping, Iperf 1.7.0|"//5//6
+					"| - Iperf 1.7.0      |"//5//6
 					"|------+-----+-------|"//8
 					"|Copyright(R)|Elbereth"//9
 					"| All Rights |       |"//0
@@ -165,8 +168,10 @@ BOOL CAboutDlg::OnInitDialog()
 	m_cSFX.SetBitmapResource(IDB_BITMAP1);// no effects on their logos
 	//m_cSFX2.SetBitmapResource(IDB_OMNIA);
 
-	// Start effect 3 seconds later
-	SetTimer(999, 3000, NULL); 
+	// Start effect 2 seconds later
+	SetTimer(999, 2000, NULL); 
+
+	m_cVersion.SetWindowText(_T(BTOOLS_VERSION));
 	
 	return TRUE;	// 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 			// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
@@ -190,6 +195,7 @@ void CAboutDlg::OnSize(UINT /*nType*/, int /*cx*/, int /*cy*/)
 	
 	// place IDC_STATIC_CONTEST_LOGO just below IDC_MATRIX2
 	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_STATIC_CONTEST_LOGO,  -2);
+	VerticalSpace(m_hWnd, IDC_MATRIX2, IDC_STATIC_VERSION,  2);
 	
 	
 }

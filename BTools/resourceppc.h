@@ -67,6 +67,7 @@
 #define IDC_STATIC_CONTEST_LOGO         1021
 #define IDC_STATIC_GRAPH                1022
 #define IDC_STATIC_INFO                 1023
+#define IDC_STATIC_VERSION              1024
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_32773                        32773
@@ -87,7 +88,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        176
 #define _APS_NEXT_COMMAND_VALUE         32784
-#define _APS_NEXT_CONTROL_VALUE         1024
+#define _APS_NEXT_CONTROL_VALUE         1025
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

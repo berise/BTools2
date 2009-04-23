@@ -183,9 +183,7 @@ void BTIPerfServer::PrintBuffer(char *buffer,char *speed)
 
 	if(speed != NULL)
 	{
-		int nInserted = m_lbResult.AddString(ansi_to_unicode(buffer));
-		WriteLog(m_csReportFile.GetBuffer(), ansi_to_unicode(buffer));
-		m_lbResult.SetCurSel(nInserted );
+		; // DO NOTHING 4 a while
 	}
 
 	/*if (m_fStatistics !=NULL)

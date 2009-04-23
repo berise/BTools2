@@ -50,6 +50,7 @@ public:
 	afx_msg void OnAboutmenu2Stop();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	
+	CStatic m_cVersion;
 };
 
 
