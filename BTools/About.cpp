@@ -82,9 +82,9 @@ BOOL CAboutDlg::OnInitDialog()
 					"|-------------------+|"//3//4
 					"| - Iperf 1.7.0      |"//5//6
 					"|------+-----+-------|"//8
-					"|Copyright(R)|Elbereth"//9
-					"| All Rights |       |"//0
-					"|  Reserved  +berise@|"//1
+					"|Copyright(R)|Elberet|"//9
+					"| All Rights |      h|"//0
+					"|  Reserved  +      @|"//1
 					"+--------------+-----+");//2
 
 	/*
@@ -157,8 +157,8 @@ BOOL CAboutDlg::OnInitDialog()
 					//"+--------------------+"
 					//"                      "
 					"berise the developer  "
-					"Dlvl;54 $;-9M HP;3(7) "
-					"Pw;4(42) AC;-9 Exp;16 ");
+					"Dlvl;54 $;99 HP;68(97)"
+					"Pw;54(72) AC;-9 Exp;16");
 
 
 	m_matrix1.SetText(msg);
@@ -168,11 +168,11 @@ BOOL CAboutDlg::OnInitDialog()
 	m_cSFX.SetBitmapResource(IDB_BITMAP1);// no effects on their logos
 	//m_cSFX2.SetBitmapResource(IDB_OMNIA);
 
-	// Start effect 2 seconds later
-	SetTimer(999, 2000, NULL); 
+	// Start effect 1 seconds later
+	SetTimer(999, 1000, NULL); 
 
 	CString szVersion;
-	szVersion.Format(_T("BTools 0.9."));
+	szVersion.Format(_T("iperf for Windows Mobile\nBTools version 0.9."));
 	szVersion += BTOOLS_SVN_VERSION;
 	m_cVersion.SetWindowText(szVersion);
 	

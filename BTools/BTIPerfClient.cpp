@@ -193,6 +193,8 @@ void BTIPerfClient::ClientFinished()
 
 	if (m_pIPerfClient!=NULL)
 	{
+		nInserted = m_lbResult.AddString(_T("Delete client instance"));
+		m_lbResult.SetCurSel(nInserted );
 		delete m_pIPerfClient;
 		m_pIPerfClient = NULL;
 	}

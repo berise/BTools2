@@ -47,22 +47,6 @@ DWORD WINAPI StartServerThread(LPVOID lpParameter )
 	l->DeleteSelfAfterRun();
 	l->Start();
 
-	// 현재 쓰레드 구현으로 되어 있지 않으므로 사용 불가.
-	//PPC의 쓰레드 제어를 통해 서버 쓰레드를 종료시켜야 함.
-	/*
-	if ( l->m_pExtSettings->mThreads == 0 ) {
-		l->SetDaemon();
-		
-		// the listener keeps going; we terminate on user input only
-		waitUntilQuit();
-#ifdef HAVE_THREAD
-		if ( Thread::NumUserThreads() > 0 ) {
-			printf( wait_server_threads );
-			fflush( 0 );
-		}
-#endif
-	}
-	*/
 	l->m_pReporter->ClientFinished();
 
 	return 0;
@@ -227,6 +211,9 @@ void BTIPerfServer::ClientFinished()
 
 	if(theListener != NULL)
 	{
+		nInserted = m_lbResult.AddString(_T("Delete listener instance"));
+		m_lbResult.SetCurSel(nInserted );
+
 		delete theListener;
 		theListener = NULL;
 	}
