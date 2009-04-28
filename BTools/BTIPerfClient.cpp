@@ -191,6 +191,12 @@ void BTIPerfClient::ClientFinished()
 
 	DELETE_PTR(m_piperf_setting);
 
+	if (m_pIPerfClient!=NULL)
+	{
+		delete m_pIPerfClient;
+		m_pIPerfClient = NULL;
+	}
+
 
 	GetDlgItem(IDC_RUN_CLIENT)->SetWindowText(_T("Start"));
 	GetDlgItem(IDC_RUN_CLIENT)->EnableWindow(TRUE);

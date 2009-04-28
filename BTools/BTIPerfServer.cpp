@@ -224,6 +224,12 @@ void BTIPerfServer::ClientFinished()
 	DELETE_PTR(m_pextSettings);
 
 	DELETE_PTR(m_piperf_setting);
+
+	if(theListener != NULL)
+	{
+		delete theListener;
+		theListener = NULL;
+	}
 }
 
 void BTIPerfServer::CallbackBW(double fBW)

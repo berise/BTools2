@@ -139,8 +139,7 @@ void Listener::Run( void ) {
     Iperf_ListEntry *exist = 0, *listtemp = 0;
 
     if ( mUDP ) {
-
-		// let's be selective server
+		// let's be a select server
 		// Socket callback status structure
 		fd_set  fds;
 		// Maximum wait time for the "select" command
@@ -314,14 +313,13 @@ void Listener::Run( void ) {
 			} // if(FD_SET
 			// GUI Exit code must be here
 		}while (mSock != INVALID_SOCKET && m_bStop != TRUE);
-    } else {
-
-
-		// let's be selective server
+    } else {//TCP
+		// let's be a select server
 		// Socket callback status structure
 		fd_set  fds;
 		// Maximum wait time for the "select" command
-		timeval tv; 
+		timeval tv;
+		int result;
 
 		// Start looping and check the respective port for incoming request
 		do
@@ -336,12 +334,15 @@ void Listener::Run( void ) {
 			// Add the sckServer socket to fd_set structure
 			FD_SET (mSock, &fds);
 			// Call the select command
-			if (select(0, &fds, NULL, NULL, &tv) == 0)
-				// Maximum wait time is expired.
+			result = select(mSock+1, &fds, NULL, NULL, &tv);
+			if (result == 0)  	// Maximum wait time is expired.
+			{
 				continue;
+			}
+			
 			// Check is there any incoming request/active in the fd_set structure
 			// Zero mean no, else
-			if (FD_ISSET(mSock, &fds) != 0)
+			if (result > 0 && FD_ISSET(mSock, &fds))
 			{
 				/*
 				// Accept the incoming request

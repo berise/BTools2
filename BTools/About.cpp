@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "About.h"
-#include "version.h"
+#include "../btools_version.h"
 
-#define BTOOLS_VERSION "BTools version 0.30" // $Rev$
+
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 #ifdef _DEVICE_RESOLUTION_AWARE
 	ON_WM_SIZE()
@@ -171,7 +171,10 @@ BOOL CAboutDlg::OnInitDialog()
 	// Start effect 2 seconds later
 	SetTimer(999, 2000, NULL); 
 
-	m_cVersion.SetWindowText(_T(BTOOLS_VERSION));
+	CString szVersion;
+	szVersion.Format(_T("BTools 0.9."));
+	szVersion += BTOOLS_SVN_VERSION;
+	m_cVersion.SetWindowText(szVersion);
 	
 	return TRUE;	// 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 			// 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
