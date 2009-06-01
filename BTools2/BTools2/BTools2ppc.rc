@@ -1,0 +1,364 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resourceppc.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "atlresce.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 한국어 resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_KOR)
+#ifdef _WIN32
+LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
+#pragma code_page(949)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU 
+BEGIN
+    MENUITEM "BTools2",                     0
+    POPUP "&Menu"
+    BEGIN
+        MENUITEM "Ping Tab",                    ID_MENU_PINGTAB
+        MENUITEM "Client Tab",                  ID_MENU_CLIENTTAB
+        MENUITEM "Server Tab",                  ID_MENU_SERVERTAB
+        MENUITEM SEPARATOR
+        MENUITEM "About...",                    ID_MENU_ABOUT
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_MENU_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_PING_PAGE DIALOG  0, 0, 134, 177
+STYLE DS_SETFONT | WS_CHILD | WS_SYSMENU
+FONT 9, "굴림"
+BEGIN
+    LTEXT           "Static",IDC_STATIC_PLACEHOLDER,14,102,96,69,NOT WS_VISIBLE | WS_BORDER
+    LTEXT           "Target Host:",IDC_HOST,17,11,42,8
+    LISTBOX         IDC_RESULT_LIST,14,39,96,37,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_HOST_COMBO,15,25,95,58,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Visualization",IDC_STATIC_VISUAL,14,85,95,8
+    PUSHBUTTON      "&Ping",IDC_PING,87,9,30,11
+END
+
+IDD_IPERF_CLIENT_PAGE DIALOG  0, 0, 119, 213
+STYLE DS_SETFONT | WS_CHILD | WS_SYSMENU
+FONT 9, "굴림"
+BEGIN
+    LISTBOX         IDC_COMMAND_LIST,0,32,108,10,LBS_NOINTEGRALHEIGHT | NOT WS_VISIBLE | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_COMMAND_EDIT,1,51,78,12,ES_AUTOHSCROLL | NOT WS_VISIBLE
+    PUSHBUTTON      "&Add",IDC_ADD_COMMAND,85,51,23,12,NOT WS_VISIBLE
+    PUSHBUTTON      "Start",IDC_RUN_CLIENT,85,115,23,12
+    LISTBOX         IDC_RESULT_LIST,0,81,108,29,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    CTEXT           "",IDC_CLIENT_IP,1,115,78,12,0,WS_EX_STATICEDGE
+    LTEXT           "Commands",IDC_STATIC_COMMANDS,3,4,39,8
+    LTEXT           "Output",IDC_STATIC_OUTPUT,3,69,54,8
+    CTEXT           "Graph Visualization",IDC_STATIC_GRAPH,0,131,108,73,SS_CENTERIMAGE | NOT WS_VISIBLE | WS_BORDER
+    COMBOBOX        IDC_CB_COMMANDS,4,16,98,39,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_IPERF_SERVER_PAGE DIALOG  0, 0, 124, 177
+STYLE DS_SETFONT | WS_CHILD | WS_SYSMENU
+FONT 9, "굴림"
+BEGIN
+    LISTBOX         IDC_COMMAND_LIST,3,16,108,35,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_COMMAND_EDIT,4,52,78,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "&Add",IDC_ADD_COMMAND,88,52,23,12
+    LISTBOX         IDC_RESULT_LIST,3,79,108,39,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
+    LTEXT           "",IDC_SERVER_IP,7,137,78,12,0,WS_EX_STATICEDGE
+    LTEXT           "IPerf Server Commands",IDC_STATIC_COMMANDS,6,6,78,8
+    LTEXT           "IPerf Server Output",IDC_STATIC_OUTPUT,6,68,74,8
+    PUSHBUTTON      "Start",IDC_RUN_SERVER,88,137,23,12
+    LTEXT           "Server IP  Start",IDC_STATIC_INFO,7,125,95,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_IPERF_CLIENT_PAGE, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 177
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // 한국어 resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 영어(미국) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resourceppc.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""atlresce.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#include ""BTools2ppc.rc2""\r\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU 
+BEGIN
+    POPUP "Menu"
+    BEGIN
+        MENUITEM "New",                         ID_FILE_NEW
+        MENUITEM "Open",                        ID_FILE_OPEN
+        MENUITEM "Save",                        ID_FILE_SAVE
+        MENUITEM "Save As",                     ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        POPUP "Edit"
+        BEGIN
+            MENUITEM "Undo",                        ID_EDIT_UNDO
+            MENUITEM SEPARATOR
+            MENUITEM "Cut",                         ID_EDIT_CUT
+            MENUITEM "Copy",                        ID_EDIT_COPY
+            MENUITEM "Paste",                       ID_EDIT_PASTE
+        END
+        MENUITEM "About BTools2",               ID_APP_ABOUT
+        MENUITEM "Exit",                        ID_APP_EXIT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\BTools2.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 125, 55
+STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_CAPTION
+CAPTION "About BTools2"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "BTools2 v1.0",IDC_STATIC,38,10,70,8,SS_NOPREFIX
+    LTEXT           "(c) Copyright 2009",IDC_STATIC,38,25,70,8
+END
+
+IDD_BTOOLS2_PAGE DIALOG  0, 0, 156, 129
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TODO: Place form controls on this dialog.",IDC_STATIC,24,48,112,23
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 118
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS 
+BEGIN
+    "Q",            ID_APP_EXIT,            VIRTKEY, CONTROL
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "FileDescription", "BTools2 Module"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "BTools2"
+            VALUE "LegalCopyright", "Copyright 2009"
+            VALUE "OriginalFilename", "BTools2.exe"
+            VALUE "ProductName", "BTools2 Module"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "BTools2"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_FILE_NEW             "New"
+    ID_FILE_OPEN            "Open"
+    ID_FILE_CLOSE           "Close"
+    ID_FILE_SAVE            "Save"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_APP_ABOUT            "Program information"
+    ID_APP_EXIT             "Quit"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_NEXT_PANE            "Next Pane"
+    ID_PREV_PANE            "Previous Pane"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_WINDOW_SPLIT         "Split to panes"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase"
+    ID_EDIT_CLEAR_ALL       "Erase All"
+    ID_EDIT_COPY            "Copy"
+    ID_EDIT_CUT             "Cut"
+    ID_EDIT_FIND            "Find"
+    ID_EDIT_PASTE           "Paste"
+    ID_EDIT_REPEAT          "Repeat"
+    ID_EDIT_REPLACE         "Replace"
+    ID_EDIT_SELECT_ALL      "Select All"
+    ID_EDIT_UNDO            "Undo"
+    ID_EDIT_REDO            "Redo"
+END
+
+STRINGTABLE 
+BEGIN
+    ATL_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_MENU_OK              "Done"
+    ID_MENU_CANCEL          "Cancel"
+    ID_MENU                 "Menu"
+    ID_ACTION               "Action"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_VIEW_FULLSCREEN      "Full screen"
+END
+
+#endif    // 영어(미국) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#include "BTools2ppc.rc2"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
