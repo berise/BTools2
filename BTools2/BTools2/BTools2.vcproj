@@ -52,7 +52,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="C:\devel\Mobile\BTools2\BTools2\modules"
+				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;_DEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL,_WINSOCK_2_0_"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -78,7 +78,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
 				AdditionalOptions=" /subsystem:windowsce,5.01 /machine:THUMB"
-				AdditionalDependencies="atlsd.lib libcmtd.lib corelibc.lib coredll.lib commctrl.lib ole32.lib oleaut32.lib uuid.lib atl.lib atlosapis.lib $(NOINHERIT) $(NOINHERIT) ws2.lib"
+				AdditionalDependencies="../../iperflib/lib/iperf.lib"
 				LinkIncremental="2"
 				DelayLoadDLLs="$(NOINHERIT)"
 				GenerateDebugInformation="true"
@@ -231,7 +231,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
-				AdditionalIncludeDirectories="C:\devel\Mobile\BTools2\BTools2\modules"
+				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;NDEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;_WINSOCK_2_0_"
 				ExceptionHandling="1"
 				RuntimeLibrary="0"
@@ -257,7 +257,7 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
 				AdditionalOptions=" /subsystem:windowsce,5.01 /machine:THUMB"
-				AdditionalDependencies="atls.lib libcmt.lib corelibc.lib coredll.lib commctrl.lib ole32.lib oleaut32.lib uuid.lib atl.lib atlosapis.lib $(NOINHERIT) $(NOINHERIT) ws2.lib"
+				AdditionalDependencies="../../iperflib/lib/iperf.lib"
 				LinkIncremental="1"
 				DelayLoadDLLs="$(NOINHERIT)"
 				SubSystem="0"
@@ -386,6 +386,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BTIPerfClientPage.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BTIPerfServerPage.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\BTools2.cpp"
 				>
 			</File>
@@ -399,6 +407,10 @@
 			</File>
 			<File
 				RelativePath=".\BTPing.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\BTPingPage.cpp"
 				>
 			</File>
 			<File
@@ -437,6 +449,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\Util.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -444,6 +460,14 @@
 			>
 			<File
 				RelativePath=".\AboutDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BTIPerfClientPage.h"
+				>
+			</File>
+			<File
+				RelativePath=".\BTIPerfServerPage.h"
 				>
 			</File>
 			<File
@@ -459,11 +483,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\BTPingPage.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resourceppc.h"
 				>
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Util.h"
 				>
 			</File>
 		</Filter>
@@ -565,6 +597,114 @@
 			</File>
 			<File
 				RelativePath=".\modules\utstrlst.h"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\XGroupBox.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\XGroupBox.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="iperfcs"
+			>
+			<File
+				RelativePath=".\iperfcs\Audience.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Audience.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Client.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Client.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Extractor.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Extractor.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\List.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\List.h"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Listener.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Listener.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Locale.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Notify.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Notify.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\PerfSocket.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\PerfSocket.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\PerfSocket_TCP.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\PerfSocket_UDP.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Reporter.h"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Server.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Server.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Settings.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Settings.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Speaker.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\iperfcs\Speaker.hpp"
 				>
 			</File>
 		</Filter>

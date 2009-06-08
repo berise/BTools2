@@ -29,3 +29,9 @@ extern CAppModule _Module;
 #define _WTL_CE_NO_FULLSCREEN
 #define END_MSG_MAP_EX END_MSG_MAP
 #include <atlwince.h>
+
+#include <atlmisc.h>
+#include <atlcrack.h>
+
+// project specific includes
+#include "resourceppc.h"

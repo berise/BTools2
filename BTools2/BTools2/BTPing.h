@@ -3,11 +3,12 @@
 
 #include "ut_icmp.h"
 #include "BTools2View.h"
+#include "BTPingPage.h"
 
 class BTPing: public CUT_ICMP
 {
 public:
-	BTPing(CPingPage *pWnd) :m_pWnd(pWnd) { }
+	BTPing(CBTPingPage *pWnd) :m_pWnd(pWnd) { }
 	
 	void OnReceiveICMP();
     
@@ -18,7 +19,7 @@ public:
 	BOOL IsAborted();
 
 private:
-	CPingPage *m_pWnd;
+	CBTPingPage *m_pWnd;
 	BOOL m_bStop;
 };
 

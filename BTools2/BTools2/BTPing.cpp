@@ -18,6 +18,21 @@ void BTPing::OnReceiveICMP()
 	}
 
 	m_pWnd->m_OScopeCtrl.AppendPoint(nResponseDuration);
+
+	TCHAR wszLog[256], wszHost[256];
+	size_t hostlen;
+	char szLog[256];
+
+	GetResponseAddress(wszHost, 256, &hostlen);
+	wsprintf(wszLog, L"seq(%d) %s replies in ms(%d)", 		
+		GetResponseSequence(),
+		wszHost, //GetResponseAddress(),
+		GetResponseDuration());
+
+	m_pWnd->Log(wszLog);
+
+
+	
 	/*
     cout << endl << GetResponseSequence() << ". " 
         << GetResponseDuration() << "ms" << " \t " 

@@ -4,21 +4,22 @@
 #ifndef __OScopeCtrl_H__
 #define __OScopeCtrl_H__
 
-#include "atlmisc.h"
-#include "atlcrack.h"
+#include <atlmisc.h>
+#include <atlcrack.h>
 //#include <vector>
 
 /////////////////////////////////////////////////////////////////////////////
 // COScopeCtrl window
+typedef CWinTraits<WS_EX_CLIENTEDGE | WS_EX_OVERLAPPEDWINDOW, WS_EX_CLIENTEDGE | WS_EX_OVERLAPPEDWINDOW > COScopeCtrlTrait;
 
-class COScopeCtrl: public CWindowImpl<COScopeCtrl, CStatic>
+class COScopeCtrl: public CWindowImpl<COScopeCtrl>//, CStatic, COScopeCtrlTrait>
 {
 // Construction
 public:
   COScopeCtrl();
 
 
-  DECLARE_WND_CLASS(NULL)
+  DECLARE_WND_CLASS(L"OScopeCtrl")
 
 	BOOL PreTranslateMessage(MSG* pMsg);
 

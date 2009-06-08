@@ -253,18 +253,7 @@ void COScopeCtrl::InvalidateCtrl()
   CString strTemp ;
 
   // in case we haven't established the memory dc's
-  CClientDC dc(m_hWnd) ;
-  
-  /*
-  // if we don't have one yet, set up a memory dc for the grid
-  if (m_dcGrid.GetSafeHdc() == NULL ||
-	  )
-  {
-    m_dcGrid.CreateCompatibleDC(&dc) ;
-    m_bitmapGrid.CreateCompatibleBitmap(&dc, m_nClientWidth, m_nClientHeight) ;
-    m_pbitmapOldGrid = m_dcGrid.SelectObject(&m_bitmapGrid) ;
-  }
-  */
+  CClientDC dc(m_hWnd) ;  
 
   if (m_dcGrid.m_hDC == NULL)
   {
@@ -284,6 +273,7 @@ void COScopeCtrl::InvalidateCtrl()
   if( bmSize.cx != m_nClientWidth ||
 	  bmSize.cy != m_nClientHeight)
   {
+	  m_dcGrid.SelectBitmap(m_pbitmapOldGrid);
 	  // just don't care about DeleteObject error. useless.
 	  BOOL ret = m_bitmapGrid.DeleteObject();
 
@@ -427,14 +417,7 @@ void COScopeCtrl::InvalidateCtrl()
   // no more drawing to this bitmap is needed until the setting are changed
   
   // if we don't have one yet, set up a memory dc for the plot
-  /*
-  if (m_dcPlot.GetSafeHdc() == NULL)
-  {
-    m_dcPlot.CreateCompatibleDC(&dc) ;
-    m_bitmapPlot.CreateCompatibleBitmap(&dc, m_nClientWidth, m_nClientHeight) ;
-    m_pbitmapOldPlot = m_dcPlot.SelectObject(&m_bitmapPlot) ;
-  }
-  */
+ 
   // 아. 역시 디버그는 시간과의 싸움이다.
   // Orientation이 바뀔때는 m_bitmapPlot도 역시 갱신 해 주어야 하는데... 
   // 이걸 찾지 못해서, 하루를 고생하는 구나..
@@ -453,6 +436,7 @@ void COScopeCtrl::InvalidateCtrl()
   if( bmSize.cx != m_nClientWidth ||
 	  bmSize.cy != m_nClientHeight)
   {
+	  m_dcPlot.SelectBitmap(m_pbitmapOldPlot) ;
 	  // just don't care about DeleteObject error. useless.
 	  BOOL ret = m_bitmapPlot.DeleteObject();
 
@@ -658,7 +642,6 @@ void COScopeCtrl::DrawPoint()
             (long)((m_dCurrentPosition - m_dLowerLimit) * m_dVerticalFactor) ;
     m_dcPlot.LineTo (currX, currY) ;
 
-
 	// Top Triangle
 	/*
 	CPoint Pt[4];
@@ -721,28 +704,7 @@ void COScopeCtrl::OnSize(UINT nType, CSize size)
   // in the SetRange functions
   m_dVerticalFactor = (double)m_nPlotHeight / m_dRange ; 
 
-#ifdef WINCE
-	// 최초 실행시 SetRange를 호출 할 수 있도록 0로 설정
-  static DRA::DisplayMode mode = DRA::Portrait;//
-	
-
-	DRA::DisplayMode newMode = DRA::GetDisplayMode();
-
-	if(mode != newMode)
-	{
-		mode = newMode;
-		//Reset();
-
-		// x, y  축이 변경될 가능성이 있기 때문에, SetRange로 갱신 필요.
-		//SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
-		
-	}
-
-	// Orientation 에 상관 없이 Reset!
-	//Reset();
 	SetRange(m_dLowerLimit, m_dUpperLimit, m_nYDecimals);
-#endif
-
 } // OnSize
 
 
