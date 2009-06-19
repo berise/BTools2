@@ -33,13 +33,14 @@
 #define ID_MENU_SERVERTAB               32774
 #define ID_MENU_ABOUT                   32775
 #define ID_MENU_EXIT                    32776
+#define ID_BTOOLS2                      32777
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        202
-#define _APS_NEXT_COMMAND_VALUE         32777
+#define _APS_NEXT_COMMAND_VALUE         32778
 #define _APS_NEXT_CONTROL_VALUE         1004
 #define _APS_NEXT_SYMED_VALUE           101
 #endif

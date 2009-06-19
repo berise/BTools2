@@ -28,8 +28,8 @@ LANGUAGE LANG_KOREAN, SUBLANG_DEFAULT
 
 IDR_MENU1 MENU 
 BEGIN
-    MENUITEM "BTools2",                     0
-    POPUP "&Menu"
+    MENUITEM "BTools2",                     ID_BTOOLS2
+    POPUP "Menu"
     BEGIN
         MENUITEM "Ping Tab",                    ID_MENU_PINGTAB
         MENUITEM "Client Tab",                  ID_MENU_CLIENTTAB
@@ -71,7 +71,7 @@ BEGIN
     CTEXT           "",IDC_CLIENT_IP,1,115,78,12,0,WS_EX_STATICEDGE
     LTEXT           "Commands",IDC_STATIC_COMMANDS,3,4,39,8
     LTEXT           "Output",IDC_STATIC_OUTPUT,3,69,54,8
-    CTEXT           "Graph Visualization",IDC_STATIC_GRAPH,0,131,108,73,SS_CENTERIMAGE | NOT WS_VISIBLE | WS_BORDER
+    CTEXT           "Graph Visualization",IDC_STATIC_PLACEHOLDER,0,131,108,73,SS_CENTERIMAGE | NOT WS_VISIBLE | WS_BORDER
     COMBOBOX        IDC_CB_COMMANDS,4,16,98,39,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
 END
 

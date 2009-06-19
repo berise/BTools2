@@ -32,6 +32,7 @@ extern CAppModule _Module;
 
 #include <atlmisc.h>
 #include <atlcrack.h>
+#include <atlddx.h>
 
 // project specific includes
 #include "resourceppc.h"

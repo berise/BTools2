@@ -1,6 +1,6 @@
 @echo off
 
-set WORKING_PATH=C:\devel\btools_ppc
+set WORKING_PATH=C:\devel\btools2
 set WORKING_VERSION=%WORKING_PATH%\btools_version.h
 rem Get the svn revision number
 svnversion %WORKING_PATH% > %WORKING_VERSION%

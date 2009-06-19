@@ -5,11 +5,13 @@
 #include "stdafx.h"
 #include "Client.hpp"
 #include "Reporter.h"
+#include "OScopeCtrl.h"
 class Listener;
 
 
 
-class CIPerfClientPage: public CPropertyPage<IDD_IPERF_CLIENT_PAGE>
+class CIPerfClientPage: public CPropertyPage<IDD_IPERF_CLIENT_PAGE>,
+	CReporter
 {
 public:
 	WTL_DLG_NOTITLE
@@ -28,6 +30,13 @@ public: // windows messages
 public:
 	BOOL ParseCommandLine(Settings *pSetting, CString &szCmd);
 
+	/*!
+		\brief CReporter의 가상 함수
+	*/
+	virtual void  PrintBuffer(char *buffer,char *speed);
+	virtual void  ClientFinished();
+	virtual void CallbackBW(double fBW);
+
 
 public:
 
@@ -44,6 +53,11 @@ private:
 
 	ext_Settings* m_pSettings;
 	Settings *m_piperf_setting;
+
+	COScopeCtrl m_OScopeCtrl;
+
+
+	CListBox m_lbResult, m_lbCommands;
 
 };
 
