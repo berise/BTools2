@@ -23,11 +23,13 @@ CBTools2View::CBTools2View()
 
 	m_Page1.SetTitle(_T("Ping"));
 	AddPage(m_Page1);
-	m_Page2.SetTitle(_T("Client"));
+	m_Page2.SetTitle(_T("iPerfClient"));
 	AddPage(m_Page2);
 
-	m_Page3.SetTitle(_T("Server"));
+	m_Page3.SetTitle(_T("iPerfServer"));
 	AddPage(m_Page3);
+
+	SetActivePage(2);
 }
 
 
@@ -35,19 +37,7 @@ CBTools2View::CBTools2View()
 //LRESULT CBTools2View::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 int  CBTools2View::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
-
-	SHMENUBARINFO mbi;
-                ZeroMemory(&mbi, sizeof(SHMENUBARINFO));
-
-                mbi.cbSize     = sizeof(SHMENUBARINFO);
-                mbi.hwndParent = m_hWnd;
-                mbi.nToolBarId = IDR_MENU1;
-				mbi.hInstRes   = _Module.GetModuleInstance();
-                mbi.dwFlags    = SHCMBF_HMENU;
-
-				SHCreateMenuBar(&mbi);
-
-				::AtlMessageBox(NULL, L"init");
+	::AtlMessageBox(NULL, L"init");
 				/*
                 if(SHCreateMenuBar(&mbi))
                 {
@@ -68,20 +58,7 @@ int  CBTools2View::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 LRESULT CBTools2View::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 {
-
-	SHMENUBARINFO mbi;
-                ZeroMemory(&mbi, sizeof(SHMENUBARINFO));
-
-                mbi.cbSize     = sizeof(SHMENUBARINFO);
-                mbi.hwndParent = m_hWnd;
-                mbi.nToolBarId = IDR_MENU1;
-				mbi.hInstRes   = _Module.GetResourceInstance();
-                mbi.dwFlags    = SHCMBF_HMENU;
-
-				SHCreateMenuBar(&mbi);
-
-				::AtlMessageBox(NULL, L"init");
-				/*
+	::AtlMessageBox(NULL, L"init");				/*
                 if(SHCreateMenuBar(&mbi))
                 {
                     g_hwndMb          = mbi.hwndMB;
@@ -101,5 +78,34 @@ LRESULT CBTools2View::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 
 void CBTools2View::OnDestroy()
 {
-	//::AtlMessageBox(NULL, L"OnDestroy");
+	::AtlMessageBox(NULL, L"OnDestroy");
+}
+
+LRESULT CBTools2View::OnMenuAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl)
+{
+	::AtlMessageBox(NULL, L"View::OnMenuAbout");
+	
+
+	return 0;
+}
+
+LRESULT CBTools2View::OnMenuPingtab(WORD wNotifyCode, WORD wID, HWND hWndCtl)
+{
+	SetActivePage(0);
+
+	return 0;
+}
+
+LRESULT CBTools2View::OnMenuClienttab(WORD wNotifyCode, WORD wID, HWND hWndCtl)
+{
+	SetActivePage(1);
+
+	return 0;
+}
+
+LRESULT CBTools2View::OnMenuServertab(WORD wNotifyCode, WORD wID, HWND hWndCtl)
+{
+	SetActivePage(2	);
+
+	return 0;
 }

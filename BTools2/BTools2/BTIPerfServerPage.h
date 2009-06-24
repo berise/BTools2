@@ -5,6 +5,7 @@
 
 #include "Server.hpp"
 #include "Reporter.h"
+#include "ut_clnt.h"
 class Listener;
 
 
@@ -15,11 +16,12 @@ class CIPerfServerPage: public CPropertyPage<IDD_IPERF_SERVER_PAGE>,
 public:
 	WTL_DLG_NOTITLE
 
-
 		// WTL message maps
-	BEGIN_MSG_MAP(CPingPage)
+	BEGIN_MSG_MAP(CIPerfServerPage)
 		MSG_WM_SIZE(OnSize)
 		MSG_WM_INITDIALOG(OnInitDialog)		
+		COMMAND_HANDLER_EX(IDC_RUN_SERVER, BN_CLICKED, OnRunServerBnClicked)
+		COMMAND_CODE_HANDLER_EX(LBN_SELCHANGE, OnLbnSelChange)
 	END_MSG_MAP()
 
 	BEGIN_DDX_MAP(CIPerfServerPage)
@@ -61,6 +63,9 @@ public:
 
 
 public:
+	// WSAStartup, WSAClean
+	///< GetLocalIP를 호출하기 위해서는 Winsock2를 초기화 해야 한다. 
+	CUT_WSClient m_client;
 	// variables
 	ext_Settings* m_pextSettings;
 	Settings *m_piperf_setting;
@@ -83,6 +88,8 @@ public:
 
 
 	
+	LRESULT OnRunServerBnClicked(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+	LRESULT OnLbnSelChange(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 };
 
 #endif

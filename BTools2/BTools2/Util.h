@@ -28,3 +28,4 @@ HRESULT LogToFile(TCHAR * szLog, TCHAR * pszFilename);
 
 // GUI geometry adjustment
 void VerticalSpace(HWND hwndDlg, UINT nIDAlignCtrl, UINT nIDAffectedCtl, UINT nx);
+

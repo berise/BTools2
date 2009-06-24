@@ -68,7 +68,7 @@
 				Name="VCResourceCompilerTool"
 				AdditionalOptions="-n"
 				PreprocessorDefinitions="_DEBUG;_UNICODE;UNICODE;_WIN32_WCE=$(CEVER);SHELLSDK_MODULES_AYGSHELL"
-				Culture="1033"
+				Culture="1042"
 				AdditionalIncludeDirectories="$(IntDir)"
 			/>
 			<Tool
@@ -82,6 +82,7 @@
 				LinkIncremental="2"
 				DelayLoadDLLs="$(NOINHERIT)"
 				GenerateDebugInformation="true"
+				GenerateMapFile="true"
 				SubSystem="0"
 			/>
 			<Tool

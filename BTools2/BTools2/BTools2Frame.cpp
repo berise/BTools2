@@ -89,3 +89,10 @@ LRESULT CBTools2Frame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWn
 	return 0;
 }
 
+
+LRESULT CBTools2Frame::OnMenuClienttab(WORD wNotifyCode, WORD wID, HWND hWndCtl)
+{
+	m_view.SetActivePage(1);
+
+	return 0;
+}

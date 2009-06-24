@@ -72,6 +72,20 @@ BOOL CIPerfServerPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	m_csErrorFile = pLogFile;
 
 
+	
+	 // 컨트롤 설정
+	DoDataExchange(FALSE);
+	//
+	// TODO:  여기에 추가 초기화 작업을 추가합니다.
+	m_lbCommand.AddString(_T("-s"));
+	m_lbCommand.AddString(_T("-s -i 1"));
+	m_lbCommand.AddString(_T("-s -u"));
+	m_lbCommand.AddString(_T("-s -u -i 1"));
+
+	m_lbCommand.SetCurSel(0);	// default selection
+
+
+
 	return TRUE; // set focus to default control
 }
 
@@ -90,7 +104,7 @@ void CIPerfServerPage::OnSize(UINT state, CSize Size)
 		);
 
 	// WM6은 -5 설정
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, -5);
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_STATIC_COMMANDS, -3);
 	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
 
 	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 6);
@@ -227,4 +241,75 @@ void CIPerfServerPage::CallbackBW(double fBW)
 	CString temp;
 	temp.Format(L"Bandwidth : %l", fBW);
 	//m_lbResult.AddString(temp);
+}
+
+
+LRESULT CIPerfServerPage::OnRunServerBnClicked(WORD wNotifyCode, WORD wID, HWND hWndCtl)
+{
+		// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	// start up client or server (listener)
+	TCHAR hostname[64], ip[48];
+
+	GetLocalIP(hostname, ip);
+	GetDlgItem(IDC_SERVER_IP).SetWindowText(ip);
+
+	int nSelected = m_lbCommand.GetCurSel();
+	if(nSelected < 0) // nothing selected
+		return 0;	// do nothing
+
+	if (!m_bServerStarted)
+	{
+
+		// ListBox에서 선택된 명령행을 가져옮
+		CString szCmd;
+
+		m_lbCommand.GetText(nSelected, szCmd);		
+
+		m_pextSettings = new ext_Settings();
+
+		// ListBox의 인자를 
+		m_piperf_setting = new Settings(m_pextSettings);
+		ParseCommandLine(m_piperf_setting, szCmd);
+
+
+		theListener = new Listener( m_pextSettings, this );
+		m_ThreadHandle = CreateThread(NULL,NULL,StartServerThread, theListener,0,NULL);
+
+		if(m_ThreadHandle != NULL)
+			m_bServerStarted = TRUE;
+		else	
+		{	// error
+			theListener->m_pReporter->ClientFinished();
+			return 0;
+		}
+
+		
+		GetDlgItem(IDC_RUN_SERVER).SetWindowText(_T("Stop"));
+	}
+	else
+	{
+		theListener->Sig_Interupt(0);
+		theListener->Stop();
+
+		//DWORD dwExitCode;
+		//TerminateThread(m_ThreadHandle, dwExitCode);
+
+		m_bServerStarted=FALSE;
+		GetDlgItem(IDC_RUN_SERVER).EnableWindow(FALSE);
+		//GetDlgItem(IDC_RUN_SERVER).SetWindowText(_T("Start"));
+	}
+	return 0;
+}
+
+LRESULT CIPerfServerPage::OnLbnSelChange(WORD wNotifyCode, WORD wID, HWND hWndCtl)
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString szCmd;
+
+	int nSelected = m_lbCommand.GetCurSel();
+	m_lbCommand.GetText(nSelected, szCmd);
+
+	GetDlgItem(IDC_COMMAND_EDIT).SetWindowText(szCmd);
+
+	return 0;
 }

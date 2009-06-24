@@ -155,7 +155,7 @@ void CIPerfClientPage::OnSize(UINT state, CSize Size)
 	//VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
 
 	// 최상단 정렬
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_STATIC_COMMANDS, -5);
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_STATIC_COMMANDS, -3);
 
 	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_CB_COMMANDS, 3);
 	VerticalSpace(m_hWnd, IDC_CB_COMMANDS, IDC_STATIC_OUTPUT, 3);

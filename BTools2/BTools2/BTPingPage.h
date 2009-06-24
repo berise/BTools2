@@ -46,6 +46,7 @@ public:
 	//CXGroupBox m_sHost;
 
 
+	LRESULT OnMenuAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 };
 
 #endif

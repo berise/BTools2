@@ -16,7 +16,7 @@ class CIPerfClientPage: public CPropertyPage<IDD_IPERF_CLIENT_PAGE>,
 public:
 	WTL_DLG_NOTITLE
 
-	BEGIN_MSG_MAP(CPingPage)
+	BEGIN_MSG_MAP(CIPerfClientPage)
 		MSG_WM_SIZE(OnSize)
 		MSG_WM_INITDIALOG(OnInitDialog)
 	END_MSG_MAP()

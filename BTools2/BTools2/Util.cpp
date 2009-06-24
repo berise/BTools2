@@ -286,13 +286,9 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 	//      - NIL
 
 	HOSTENT *LocalAddress;
-	char	*Buff;
-	TCHAR	*wBuff;
+	char	Buff[256];
+	TCHAR	wBuff[256];
 
-
-	// Create new string buffer
-	Buff = new char[256];
-	wBuff = new TCHAR[256];
 	// Reset the string buffer
 	memset(Buff, '\0', 256);
 	memset(wBuff, TEXT('\0'), 256*sizeof(TCHAR));
@@ -308,6 +304,14 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 
 		// Get the local PC IP address
 		LocalAddress = gethostbyname(Buff);
+		if(LocalAddress == NULL) // error on retrieve to get local address
+		{
+			int ret = WSAGetLastError();
+			if(ret == WSANOTINITIALISED)
+				;
+			return;
+
+		}
 		// Reset the string buffer
 		memset(Buff, '\0', 256);
 		// Compose the obtain ip address
@@ -330,7 +334,7 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 	}
 
 	//
-	delete Buff;
+	//delete Buff;
 }
 
 

@@ -36,18 +36,15 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 {
 
-		//The second way. Using SHCreateMenuBar function.
-	SHMENUBARINFO info;
-	memset(&info, 0, sizeof(info));
-	info.cbSize = sizeof(info);
-	info.hwndParent = m_hWnd;
-	info.dwFlags = 0;
-	info.nToolBarId = IDR_MENU1;//IDR_MAINFRAME;//IDR_ABOUTDLG_MENU;
-	info.dwFlags = SHCMBF_HMENU;
-	info.hInstRes = GetModuleHandle(NULL);//::AfxGetInstanceHandle();
-	info.nBmpId = 0;
-	info.cBmpImages = 0;
-	SHCreateMenuBar(&info);
+	SHMENUBARINFO mbi;
+	ZeroMemory(&mbi, sizeof(SHMENUBARINFO));
+	mbi.cbSize     = sizeof(SHMENUBARINFO);
+	mbi.hwndParent = GetParent();
+	mbi.nToolBarId = IDR_MENU1;
+	mbi.hInstRes   = _Module.GetResourceInstance();
+	mbi.dwFlags    = SHCMBF_HMENU;
+	SHCreateMenuBar(&mbi);
+
 
 
 	/*
@@ -177,7 +174,7 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 
 
 	// 최상단 정렬
-	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST, -5);
+	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST, -3);
 	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST_COMBO, 6);
 	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_RESULT_LIST, 3);
 

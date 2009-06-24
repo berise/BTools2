@@ -32,9 +32,11 @@ public:
 	BEGIN_MSG_MAP(CBTools2Frame)
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
 		COMMAND_ID_HANDLER(ID_APP_EXIT, OnFileExit)
+
 		COMMAND_ID_HANDLER(ID_FILE_NEW, OnFileNew)
 		COMMAND_ID_HANDLER(ID_ACTION, OnAction)
 		COMMAND_ID_HANDLER(ID_APP_ABOUT, OnAppAbout)
+		COMMAND_ID_HANDLER_EX(ID_MENU_CLIENTTAB, OnMenuClienttab)
 		CHAIN_MSG_MAP(CAppWindow<CBTools2Frame>)
 		CHAIN_MSG_MAP(CUpdateUI<CBTools2Frame>)
 		CHAIN_MSG_MAP(CFrameWindowImpl<CBTools2Frame>)
@@ -54,4 +56,5 @@ public:
 	LRESULT OnAction(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 
 	LRESULT OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
+	LRESULT OnMenuClienttab(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 };
