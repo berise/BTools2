@@ -1,6 +1,8 @@
 // BTools2Frame.h : interface of the CBTools2Frame class
 //
 /////////////////////////////////////////////////////////////////////////////
+#include "ut_clnt.h"
+
 
 #pragma once
 
@@ -14,6 +16,11 @@ public:
 	DECLARE_APP_FRAME_CLASS(NULL, IDR_MAINFRAME, L"Software\\WTL\\BTools2")
 
 	CBTools2View m_view;
+		// WSAStartup, WSAClean
+	///< GetLocalIP를 호출하기 위해서는 Winsock2를 초기화 해야 한다. 
+	CUT_WSClient m_client;
+
+
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 

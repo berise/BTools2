@@ -24,7 +24,7 @@ void BTPing::OnReceiveICMP()
 	char szLog[256];
 
 	GetResponseAddress(wszHost, 256, &hostlen);
-	wsprintf(wszLog, L"seq(%d) %s replies in ms(%d)", 		
+	wsprintf(wszLog, L"%d, %s, %d ms", 		
 		GetResponseSequence(),
 		wszHost, //GetResponseAddress(),
 		GetResponseDuration());

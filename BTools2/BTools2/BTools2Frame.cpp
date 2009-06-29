@@ -53,6 +53,7 @@ LRESULT CBTools2Frame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 
 	m_hWndClient = m_view.Create(m_hWnd);
 
+
 	// register object for message filtering and idle updates
 	CMessageLoop* pLoop = _Module.GetMessageLoop();
 	ATLASSERT(pLoop != NULL);

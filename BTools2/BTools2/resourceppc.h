@@ -15,9 +15,13 @@
 #define IDC_PING                        1001
 #define IDC_STATIC_PLACEHOLDER          1003
 #define IDC_HOST                        1004
+#define IDC_COMBO_INTERVAL              1005
 #define IDC_COMMAND_EDIT                1006
 #define IDC_ADD_COMMAND                 1007
+#define IDC_COMBO_SOCKET_TYPE           1007
 #define IDC_COMMAND_LIST                1008
+#define IDC_COMBO_DURATION              1008
+#define IDC_COMBO_DURATION2             1008
 #define IDC_RUN_CLIENT                  1010
 #define IDC_RESULT_LIST                 1012
 #define IDC_RUN_SERVER                  1013
@@ -26,6 +30,8 @@
 #define IDC_STATIC_VISUAL               1018
 #define IDC_STATIC_COMMANDS             1019
 #define IDC_STATIC_OUTPUT               1020
+#define IDC_STATIC_OPT_INT              1020
+#define IDC_STATIC_OPT_DUR              1021
 #define IDC_STATIC_GRAPH                1022
 #define IDC_STATIC_INFO                 1023
 #define ID_MENU_PINGTAB                 32772
@@ -39,9 +45,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        202
+#define _APS_NEXT_RESOURCE_VALUE        203
 #define _APS_NEXT_COMMAND_VALUE         32778
-#define _APS_NEXT_CONTROL_VALUE         1004
+#define _APS_NEXT_CONTROL_VALUE         1009
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

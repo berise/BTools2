@@ -29,7 +29,7 @@ CBTools2View::CBTools2View()
 	m_Page3.SetTitle(_T("iPerfServer"));
 	AddPage(m_Page3);
 
-	SetActivePage(2);
+	SetActivePage(1);
 }
 
 
@@ -78,7 +78,7 @@ LRESULT CBTools2View::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 
 void CBTools2View::OnDestroy()
 {
-	::AtlMessageBox(NULL, L"OnDestroy");
+	//::AtlMessageBox(NULL, L"OnDestroy");
 }
 
 LRESULT CBTools2View::OnMenuAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl)

@@ -313,3 +313,12 @@ LRESULT CIPerfServerPage::OnLbnSelChange(WORD wNotifyCode, WORD wID, HWND hWndCt
 
 	return 0;
 }
+
+
+void CIPerfServerPage::OnDataExchangeError(UINT nCtrlID, BOOL bSave)
+{
+        CString strMsg;
+        strMsg.Format(_T("컨트롤(ID:%u) 과의 데이터 교환에 실패. "), nCtrlID);
+        MessageBox(strMsg, _T("DDX에러"), MB_ICONWARNING);
+        ::SetFocus(GetDlgItem(nCtrlID));
+    }

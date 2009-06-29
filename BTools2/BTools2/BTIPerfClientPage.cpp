@@ -146,8 +146,6 @@ void CIPerfClientPage::OnSize(UINT state, CSize Size)
 	CScreenLib::OptimizeWidth(m_hWnd, 6, 
 		IDC_STATIC_COMMANDS,
 		IDC_CB_COMMANDS,
-		IDC_COMMAND_LIST,
-		IDC_STATIC_OUTPUT,
 		IDC_RESULT_LIST,
 		IDC_STATIC_PLACEHOLDER);
 
@@ -155,39 +153,43 @@ void CIPerfClientPage::OnSize(UINT state, CSize Size)
 	//VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
 
 	// 최상단 정렬
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_STATIC_COMMANDS, -3);
-
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_STATIC_COMMANDS, -5);
 	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_CB_COMMANDS, 3);
-	VerticalSpace(m_hWnd, IDC_CB_COMMANDS, IDC_STATIC_OUTPUT, 3);
+	VerticalSpace(m_hWnd, IDC_CB_COMMANDS, IDC_STATIC_OPT_INT, 3);
+	VerticalSpace(m_hWnd, IDC_STATIC_OPT_INT, IDC_STATIC_OPT_DUR, 3);
+	//VerticalSpace(m_hWnd, IDC_STATIC_OPT_INT, IDC_STATIC_OPT_DUR, 3);
+	VerticalSpace(m_hWnd, IDC_CB_COMMANDS, IDC_COMBO_INTERVAL, 3);
+	VerticalSpace(m_hWnd, IDC_COMBO_INTERVAL, IDC_COMBO_DURATION, 3);
+	VerticalSpace(m_hWnd, IDC_COMBO_INTERVAL, IDC_COMBO_SOCKET_TYPE, 3);
 
-	//VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 6);
-	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);
+	VerticalSpace(m_hWnd, IDC_COMBO_DURATION, IDC_RESULT_LIST, 3);
 	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_CLIENT_IP, 3);
-	
-	//CScreenLib::DockControl(m_hWnd, IDC_STATIC_PLACEHOLDER, CScreenLib::dtBottom);
 	VerticalSpace(m_hWnd, IDC_CLIENT_IP, IDC_STATIC_PLACEHOLDER, 3);
 
 
 	// IDC_COMMAND_LIST 기준으로 오른쪽에 Add정렬
 	CScreenLib::AlignControls(m_hWnd, 
 		CScreenLib::atRight, 
-		2, 
-		IDC_COMMAND_LIST,		// right edge point
-		IDC_ADD_COMMAND,
-		IDC_RUN_CLIENT);
+		4, 
+		IDC_CB_COMMANDS,		// right edge point
+		IDC_RUN_CLIENT,
+		IDC_COMBO_INTERVAL,
+		IDC_COMBO_DURATION,
+		IDC_COMBO_SOCKET_TYPE);
+
+	//CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_COMBO_INTERVAL, IDC_COMBO_DURATION);
 
 	// TIPS for ScreenLib
 	// Affected Ctrl의 개수를 잘못 사용할 경우, 발견하기 어렵다 -_-;
 	// IDC_COMMAND_LIST을 기준으로 COMMAND_EDIT을 왼쪽에 정렬
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, 
-		IDC_COMMAND_LIST, 
+		IDC_CB_COMMANDS, 
 		IDC_COMMAND_EDIT, 
 		IDC_CLIENT_IP);
 
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_COMMAND_EDIT, IDC_ADD_COMMAND);
 
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_CLIENT_IP, IDC_RUN_CLIENT);
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_CLIENT);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_CB_COMMANDS, IDC_RUN_CLIENT);
 
 	// OSCOPECTRL은 나머지 영역을 채운다
 	//CScreenLib::OptimizeWidth(m_hWnd, 1, IDC_STATIC_PLACEHOLDER);
@@ -231,3 +233,4 @@ void CIPerfClientPage::OnSize(UINT state, CSize Size)
 	return ;
 }
 
+	

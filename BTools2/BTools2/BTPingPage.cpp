@@ -9,15 +9,37 @@
 // ping thread
 DWORD WINAPI PingThread(LPVOID lpParameter )
 {
-	CBTPingPage *c=(CBTPingPage *)lpParameter;
+	CBTPingPage *pThis=(CBTPingPage *)lpParameter;
 
-	TCHAR szTarget[256];
-	_tcscpy(szTarget, L"127.0.0.1");
-	//c->m_target_host.GetWindowText(szTarget, 256);
+	CString szTarget;
 
-	// BTPing은 Thread안에서 생성되어야 한다. 
+	// Combobox manipulation, CBS_AUTOHSCROLL must be in style
+	int nSel = pThis->m_cbHosts.GetCurSel();
+	if(nSel == -1) // nothing selected
+		{
+			// get user input in edit control
+			pThis->m_cbHosts.GetWindowText(szTarget.GetBuffer(128), 128);//LOWORD(nCount)+1);//
+
+			// szTarget의 길이에 따라 처리 필요
+			if(szTarget.GetLength() < 0) // 호스트 주소가 없는 경우
+			{
+				return 0;
+			}
+			/*
+			DWORD nCount = m_cbHosts.GetEditSel();
+			if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)
+			*/
+		}
+		else // get selected ListBox string
+		{
+			pThis->m_cbHosts.GetLBText(nSel, szTarget);
+		}
+
+
+	// BTPing은 Thread안에서 생성되어야 한다. ]==
+
 	// ICMP 패킷의 id 필드는 현재 쓰레드(프로세스) ID를 필요하기 때문이다.
-	BTPing btPing(c);
+	BTPing btPing(pThis);
 
 	btPing.SetDoLookup(true);
 	btPing.SetMaxTimeOuts(6);
@@ -90,6 +112,10 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	m_bStartThread = FALSE;
 	m_hThread = NULL;
 
+	
+	 // 컨트롤 설정
+	DoDataExchange(FALSE);
+
 	return TRUE; // set focus to default control
 }
 
@@ -98,15 +124,17 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 
 LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 {
-
+	
 	//::AtlMessageBox(NULL, L"OnPing");
 	if(!m_bStartThread)
-	{		
+	{
 		m_hThread = CreateThread(NULL,NULL, PingThread,this,0,NULL);
 		m_bStartThread = TRUE;
+		GetDlgItem(IDC_DO_PING).SetWindowText(_T("Stop"));
 	}
 	else
 	{
+		GetDlgItem(IDC_DO_PING).SetWindowText(_T("&Ping"));
 		m_bStartThread = FALSE;
 		if(m_hThread != NULL)
 		{

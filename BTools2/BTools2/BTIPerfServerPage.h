@@ -5,7 +5,7 @@
 
 #include "Server.hpp"
 #include "Reporter.h"
-#include "ut_clnt.h"
+
 class Listener;
 
 
@@ -30,19 +30,7 @@ public:
 	END_DDX_MAP()
 
 
-	void OnDataExchangeError(UINT nCtrlID, BOOL bSave){
-
-        CString strMsg;
-
-        strMsg.Format(_T("컨트롤(ID:%u) 과의 데이터 교환에 실패. "), nCtrlID);
-
-        MessageBox(strMsg, _T("DDX에러"), MB_ICONWARNING);
-
- 
-
-        ::SetFocus(GetDlgItem(nCtrlID));
-
-    }
+	void OnDataExchangeError(UINT nCtrlID, BOOL bSave);
 	// windows messages
 public:
 	void OnSize(UINT state, CSize Size);
@@ -63,9 +51,7 @@ public:
 
 
 public:
-	// WSAStartup, WSAClean
-	///< GetLocalIP를 호출하기 위해서는 Winsock2를 초기화 해야 한다. 
-	CUT_WSClient m_client;
+	
 	// variables
 	ext_Settings* m_pextSettings;
 	Settings *m_piperf_setting;
