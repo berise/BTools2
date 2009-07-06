@@ -46,13 +46,14 @@ BOOL CBTools2Frame::OnIdle()
 
 LRESULT CBTools2Frame::OnCreate(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& /*bHandled*/)
 {
-	CAppInfo info;
+	CAppInfo info;	
+	//HICON hIcon = (HICON)::LoadImage(ModuleHelper::GetResourceInstance(), MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 32, 32, LR_DEFAULTCOLOR);
+	//SetIcon(hIcon);
 
 	CreateSimpleCEMenuBar();
 	UIAddToolBar(m_hWndCECommandBar);
 
 	m_hWndClient = m_view.Create(m_hWnd);
-
 
 	// register object for message filtering and idle updates
 	CMessageLoop* pLoop = _Module.GetMessageLoop();
@@ -96,4 +97,13 @@ LRESULT CBTools2Frame::OnMenuClienttab(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 	m_view.SetActivePage(1);
 
 	return 0;
+}
+
+LRESULT CBTools2Frame::OnDestroy(void)
+{
+	//You should call SetMsgHandled(FALSE) or set bHandled = FALSE for the main window of your application
+	SetMsgHandled(FALSE);
+	//::AtlMessageBox(NULL, L"on destroy");
+
+	return TRUE;
 }

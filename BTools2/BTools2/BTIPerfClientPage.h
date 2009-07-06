@@ -11,7 +11,8 @@ class Listener;
 
 
 class CIPerfClientPage: public CPropertyPage<IDD_IPERF_CLIENT_PAGE>,
-	CReporter
+		public CWinDataExchange<CIPerfClientPage>,
+		CReporter
 {
 public:
 	WTL_DLG_NOTITLE
@@ -19,11 +20,23 @@ public:
 	BEGIN_MSG_MAP(CIPerfClientPage)
 		MSG_WM_SIZE(OnSize)
 		MSG_WM_INITDIALOG(OnInitDialog)
+		COMMAND_ID_HANDLER_EX(IDC_RUN_CLIENT, OnRunClient)
 	END_MSG_MAP()
+
+
+	BEGIN_DDX_MAP(CBTPingPage)
+		DDX_CONTROL_HANDLE(IDC_CB_COMMAND, m_cbCommand)
+		DDX_CONTROL_HANDLE(IDC_RESULT_LIST, m_lbResult)
+		DDX_INT(IDC_COMBO_INTERVAL, m_nInterval)
+		DDX_INT(IDC_COMBO_DURATION, m_nDuration)
+		DDX_TEXT(IDC_COMBO_SOCKET_TYPE, m_szSocketType)
+	END_DDX_MAP()
+
 
 public: // windows messages
 	void OnSize(UINT state, CSize Size);
 	BOOL  OnInitDialog(HWND hwndFocus, LPARAM lParam);
+	
 
 
 	// operations
@@ -57,8 +70,17 @@ private:
 	COScopeCtrl m_OScopeCtrl;
 
 
-	CListBox m_lbResult, m_lbCommands;
 
+	// DDX variables
+	CListBox m_lbResult;
+	CComboBox m_cbCommand;
+	int m_nInterval, m_nDuration;
+	CString m_szSocketType;
+	CString m_szCommand;
+
+
+public:
+	LRESULT OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 };
 
 

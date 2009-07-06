@@ -25,25 +25,32 @@ public:
 	CBTools2View();
 
 	BEGIN_MSG_MAP(CBTools2View)		
-		MSG_WM_CREATE(OnCreate)
-		MSG_WM_INITDIALOG(OnInitDialog)
 		MSG_WM_DESTROY(OnDestroy)
+		COMMAND_ID_HANDLER(IDOK, OnOKCancel)
+        COMMAND_ID_HANDLER(IDCANCEL, OnOKCancel)
 		COMMAND_ID_HANDLER_EX(ID_MENU_ABOUT, OnMenuAbout)
 		COMMAND_ID_HANDLER_EX(ID_MENU_PINGTAB, OnMenuPingtab)
 		COMMAND_ID_HANDLER_EX(ID_MENU_CLIENTTAB, OnMenuClienttab)
 		COMMAND_ID_HANDLER_EX(ID_MENU_SERVERTAB, OnMenuServertab)
+		COMMAND_ID_HANDLER_EX(ID_MENU_EXIT, OnMenuExit)
 		CHAIN_MSG_MAP(CPropertySheetImpl<CBTools2View>)
 	END_MSG_MAP()
+
+
+	LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled); 
+    LRESULT OnOKCancel(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 
 	//
 
 
-	int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	//int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	void OnDestroy();
-	LRESULT OnInitDialog(HWND hwndFocus, LPARAM lParam);
+	//LRESULT OnInitDialog(HWND hwndFocus, LPARAM lParam);
 	LRESULT OnMenuAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 	LRESULT OnMenuPingtab(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 	LRESULT OnMenuClienttab(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 	LRESULT OnMenuServertab(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+	
+	LRESULT OnMenuExit(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 };
 

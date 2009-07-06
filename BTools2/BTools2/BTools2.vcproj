@@ -325,7 +325,7 @@
 				ExecutionBucket="7"
 				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;NDEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;,_WINSOCK_2_0_;"
-				ExceptionHandling="0"
+				ExceptionHandling="1"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -508,6 +508,10 @@
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest"
 			>
+			<File
+				RelativePath=".\res\BTools.ico"
+				>
+			</File>
 			<File
 				RelativePath=".\res\BTools2.ico"
 				>

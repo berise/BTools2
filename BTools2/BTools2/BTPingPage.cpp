@@ -4,6 +4,73 @@
 #include "Util.h"
 
 
+void CBTPingPage::OnReceiveICMP()
+{
+	double nResponseDuration = GetResponseDuration();
+	static double  minY = 0.0, maxY = 100.0;
+	if(nResponseDuration < minY)
+	{
+		minY = nResponseDuration-10;
+		m_OScopeCtrl.SetRange(minY, maxY,  1) ;
+	}
+
+	if(nResponseDuration > maxY)
+	{
+		maxY = nResponseDuration+10;
+		m_OScopeCtrl.SetRange(minY, maxY,  1) ;
+	}
+
+	m_OScopeCtrl.AppendPoint(nResponseDuration);
+
+	TCHAR wszLog[256], wszHost[256];
+	size_t hostlen;
+	
+
+	GetResponseAddress(wszHost, 256, &hostlen);
+	wsprintf(wszLog, L"%d, %s, %d ms", 		
+		GetResponseSequence(),
+		wszHost, //GetResponseAddress(),
+		GetResponseDuration());
+
+	Log(wszLog);
+	
+	/*
+    cout << endl << GetResponseSequence() << ". " 
+        << GetResponseDuration() << "ms" << " \t " 
+        << GetResponseAddress() << "\t" 
+        << GetResponseName() << endl 
+        << "Type: " << GetResponseType() 
+        << "  Code: " << GetResponseCode() << " "
+        << GetResponseMessage() << endl;
+    if(GetResponseFinished())
+        cout << endl << "Data finshed." << endl;
+		*/
+}
+
+// OnError is a member of the CUT_WSClient class, from which
+// CUT_ICMP inherits...
+int CBTPingPage::OnError(int error)
+{	
+    //if(UTE_SUCCESS != error && UTE_ERROR != error)
+	{
+		TCHAR wszLog[256];
+		wsprintf(wszLog, L"%s", 		
+		CUT_ERR::GetErrorString(error));
+		Log(wszLog);
+	}
+        
+		
+    return error;
+}
+
+
+/// user pressed stop button.
+BOOL CBTPingPage::IsAborted()
+{
+
+	return m_bStartThread == 1 ? FALSE : TRUE;
+}
+
 
 
 // ping thread
@@ -25,10 +92,8 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 			{
 				return 0;
 			}
-			/*
-			DWORD nCount = m_cbHosts.GetEditSel();
-			if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)
-			*/
+			/*	DWORD nCount = m_cbHosts.GetEditSel();
+			if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)			*/
 		}
 		else // get selected ListBox string
 		{
@@ -36,19 +101,29 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 		}
 
 
-	// BTPing은 Thread안에서 생성되어야 한다. ]==
+	// BTPing은 Thread안에서 생성되어야 한다.
+	// ICMP 패킷의 id 필드는 현재 쓰레드(프로세스) ID를 필요하기 때문이다.	
+	pThis->m_pPing = new BTPing(pThis);
+	pThis->m_pPing->SetDoLookup(true);
+	pThis->m_pPing->SetMaxTimeOuts(6);
 
-	// ICMP 패킷의 id 필드는 현재 쓰레드(프로세스) ID를 필요하기 때문이다.
-	BTPing btPing(pThis);
-
-	btPing.SetDoLookup(true);
-	btPing.SetMaxTimeOuts(6);
-
-	//while(c->m_bStartThread )
+	//while(pThis->m_bStartThread )
 	{
-		//Ping( LPCWSTR dest, int timeOut, int dataSize, int interval, unsigned short nSendCount)
-		btPing.Ping(szTarget, 5000, 32, 1000, 4);
+		
+		pThis->m_pPing->Ping(szTarget, 5000, pThis->m_nDataSize, 1000, pThis->m_nSendCount == -1 ? 99999 :pThis->m_nSendCount);
 	}
+	
+
+	// Thread 종료시
+	EnterCriticalSection(&pThis->m_cs);
+	pThis->GetDlgItem(IDC_DO_PING).SetWindowText(_T("&Ping"));
+	int nIns = pThis->m_lbPingResult.AddString(_T("---- Finished ----"));
+	pThis->m_lbPingResult.SetCurSel(nIns);
+	LeaveCriticalSection(&pThis->m_cs);
+	pThis->m_bStartThread = FALSE;
+
+	// zap away
+	DELETE_PTR(pThis->m_pPing);
 
 	return 0;
 }
@@ -57,7 +132,6 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 
 BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 {
-
 	SHMENUBARINFO mbi;
 	ZeroMemory(&mbi, sizeof(SHMENUBARINFO));
 	mbi.cbSize     = sizeof(SHMENUBARINFO);
@@ -66,23 +140,6 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	mbi.hInstRes   = _Module.GetResourceInstance();
 	mbi.dwFlags    = SHCMBF_HMENU;
 	SHCreateMenuBar(&mbi);
-
-
-
-	/*
-	//m_sHost.Create(m_hWnd, NULL, NULL);
-	m_sHost.Attach(GetDlgItem(IDC_HOST));
-	//m_sHost = GetDlgItem(IDC_HOST);
-			//m_box.Attach(::GetDlgItem(m_hWnd, IDC_STATIC_TODO));
-	m_sHost.PostSubclassWindow();
-	m_sHost.SetWindowText(L"Target Host", FALSE)
-				.SetTextColor(RGB(0,0,255), FALSE)
-				.SetBorderColor(RGB(255,0,0), FALSE)
-				//.SetBold(TRUE, FALSE)
-				// .SetFont(_T("Comic Sans MS"), 10, FALSE)
-				//.SetAlignment(CXGroupBox::left, FALSE)
-				.SetControlStyle(CXGroupBox::header, TRUE);
-*/
 
 
 	GetDlgItem(IDC_STATIC_PLACEHOLDER).ShowWindow(SW_HIDE);
@@ -106,15 +163,40 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	m_OScopeCtrl.SetPlotColor(RGB(255, 0, 255)) ;
 
 	}
-	//m_bStop = FALSE ;
-	//srand( GetTickCount() );
-
+	
 	m_bStartThread = FALSE;
 	m_hThread = NULL;
 
-	
+	m_pPing = NULL;
+
 	 // 컨트롤 설정
 	DoDataExchange(FALSE);
+	CComboBox cbInt = GetDlgItem(IDC_CB_DATA_SIZE);
+	cbInt.AddString(L"4");
+	cbInt.AddString(L"8");
+	cbInt.AddString(L"16");
+	cbInt.AddString(L"32");
+	cbInt.AddString(L"64");
+	cbInt.AddString(L"128");
+	cbInt.AddString(L"256");
+	cbInt.SetCurSel(3);
+
+	cbInt = GetDlgItem(IDC_CB_SEND_COUNT);
+	cbInt.AddString(L"-1");
+	cbInt.AddString(L"4");
+	cbInt.AddString(L"999"); // boy loves this number.
+	cbInt.SetCurSel(1);
+
+	m_nDataSize = 32; // 4, 8, 16, 32, 64, 128, 256 (kB)
+	m_nSendCount = 4; // -1, 4, 9, 999
+	
+	m_cbHosts.AddString(L"kldp.org");
+	m_cbHosts.AddString(L"localhost");	
+	m_cbHosts.SetCurSel(1);
+
+
+	// Initialize the critical section
+    InitializeCriticalSection(&m_cs);
 
 	return TRUE; // set focus to default control
 }
@@ -124,30 +206,32 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 
 LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 {
-	
-	//::AtlMessageBox(NULL, L"OnPing");
-	if(!m_bStartThread)
+	int nIns = 0 ;
+	if(m_bStartThread == FALSE)
 	{
+		DoDataExchange(TRUE);
+		CString szMsg;
+		szMsg.Format(L"%d, %d", m_nDataSize, m_nSendCount);
+		AtlMessageBox(NULL, szMsg.GetBuffer(), L"debug");
+
 		m_hThread = CreateThread(NULL,NULL, PingThread,this,0,NULL);
+		
+
+		EnterCriticalSection(&m_cs);
+
 		m_bStartThread = TRUE;
 		GetDlgItem(IDC_DO_PING).SetWindowText(_T("Stop"));
+		nIns = m_lbPingResult.AddString(_T("---- Ping started ----"));
+		m_lbPingResult.SetCurSel(nIns);
+		LeaveCriticalSection(&m_cs);
 	}
 	else
 	{
-		GetDlgItem(IDC_DO_PING).SetWindowText(_T("&Ping"));
+		EnterCriticalSection(&m_cs);		
 		m_bStartThread = FALSE;
-		if(m_hThread != NULL)
-		{
-			DWORD ret = WaitForSingleObject(m_hThread, INFINITE);
-			if(ret == WAIT_TIMEOUT)
-				::AtlMessageBox(NULL, L"wait timed out // error");
-			else if (ret == WAIT_FAILED)
-				::AtlMessageBox(NULL, L"wait failed");
-			else 
-			{
-				m_hThread = NULL;
-			}
-		}
+		m_pPing->IsAborted();
+		LeaveCriticalSection(&m_cs);
+
 	}
 
 	return 0;
@@ -155,28 +239,30 @@ LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 
 LRESULT CBTPingPage::OnDestroy(void)
 {
-	//m_sHost.Detach();
+	DeleteCriticalSection(&m_cs);
 
 	//You should call SetMsgHandled(FALSE) or set bHandled = FALSE for the main window of your application
-	//::AtlMessageBox(NULL, L"CBTPingPage::OnDestroy");
 	m_bStartThread = FALSE;
+	if(m_pPing != NULL)
+		m_pPing->IsAborted();
+
+	/*
+	
 	if(m_hThread != NULL)
 	{
-		DWORD ret = WaitForSingleObject(m_hThread, INFINITE);
+		DWORD ret = WaitForSingleObject(m_hThread, 3000);
 		if(ret == WAIT_TIMEOUT)
-			::AtlMessageBox(NULL, L"wait timed out // error");
+			;//::AtlMessageBox(NULL, L"wait timed out // error");
 		else if (ret == WAIT_FAILED)
-			::AtlMessageBox(NULL, L"wait failed");
+			;//::AtlMessageBox(NULL, L"wait failed");
 		else 
 			{
 				m_hThread = NULL;
 			}
 	}
-
+	*/
 	return 0;
 }
-
-
 
 
 
@@ -202,9 +288,15 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 
 
 	// 최상단 정렬
-	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST, -3);
 	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST_COMBO, 6);
-	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_RESULT_LIST, 3);
+	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_STATIC_DATA_SIZE, 3);
+	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_STATIC_SEND_COUNT, 3);
+	VerticalSpace(m_hWnd, IDC_STATIC_DATA_SIZE, IDC_CB_DATA_SIZE, 3);
+	VerticalSpace(m_hWnd, IDC_STATIC_SEND_COUNT, IDC_CB_SEND_COUNT, 3);
+
+	VerticalSpace(m_hWnd, IDC_CB_SEND_COUNT, IDC_RESULT_LIST, 3);
+
+
 
 	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_VISUAL, 6);
 	VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_STATIC_PLACEHOLDER, 3);
@@ -214,10 +306,12 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_HOST, IDC_PING);
 
 	// 오른쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 핑 버튼을 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_HOST_COMBO, IDC_PING);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 3, IDC_HOST_COMBO, 
+					IDC_PING, IDC_STATIC_SEND_COUNT, IDC_CB_SEND_COUNT);
 
 	// 왼쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 호스트 텍스트를 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 1, IDC_HOST_COMBO, IDC_HOST);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 3, IDC_HOST_COMBO, 
+					IDC_HOST, IDC_STATIC_DATA_SIZE, IDC_CB_DATA_SIZE);
 
 
 
@@ -288,10 +382,12 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 //
 void CBTPingPage::Log(TCHAR *wszLog)
 {
-	CListBox lb;
-	lb.Attach(GetDlgItem(IDC_RESULT_LIST));
-
-	if(wszLog != NULL)
-		lb.AddString(wszLog);
-
+	EnterCriticalSection(&m_cs);
+	if(wszLog != NULL) 
+	{
+		
+		int nIns = m_lbPingResult.AddString(wszLog);
+		m_lbPingResult.SetCurSel(nIns);		
+	}
+	LeaveCriticalSection(&m_cs);
 }

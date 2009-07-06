@@ -49,121 +49,6 @@ DWORD WINAPI StartServerThread(LPVOID lpParameter )
 
 
 
-///////////
-BOOL CIPerfServerPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
-{
-	// initialize member variables
-	m_pIPerfServer=0;
-	m_bServerStarted=FALSE;
-	theListener = NULL;	
-	
-	m_fStatistics = NULL;
-	
-	TCHAR *log_dir = L"\\My Documents\\btools_log";
-	TCHAR *log_file_postfix = L"iServer.txt";
-	// log
-	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
-
-	m_csReportFile = pLogFile;
-
-
-	TCHAR *error_file_postfix = L"iServer_error.txt";
-	pLogFile = SetupLog(log_dir, error_file_postfix);
-	m_csErrorFile = pLogFile;
-
-
-	
-	 // 컨트롤 설정
-	DoDataExchange(FALSE);
-	//
-	// TODO:  여기에 추가 초기화 작업을 추가합니다.
-	m_lbCommand.AddString(_T("-s"));
-	m_lbCommand.AddString(_T("-s -i 1"));
-	m_lbCommand.AddString(_T("-s -u"));
-	m_lbCommand.AddString(_T("-s -u -i 1"));
-
-	m_lbCommand.SetCurSel(0);	// default selection
-
-
-
-	return TRUE; // set focus to default control
-}
-
-
-
-void CIPerfServerPage::OnSize(UINT state, CSize Size)
-{
-	CScreenLib::DockControl(m_hWnd, IDC_STATIC_COMMANDS, CScreenLib::dtTop);
-
-	CScreenLib::OptimizeWidth(m_hWnd, 5, 
-		IDC_STATIC_COMMANDS, 
-		IDC_COMMAND_LIST, 
-		IDC_STATIC_OUTPUT,
-		IDC_RESULT_LIST,
-		IDC_STATIC_INFO
-		);
-
-	// WM6은 -5 설정
-	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_STATIC_COMMANDS, -3);
-	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
-
-	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 6);
-	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);	
-
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_INFO,6);
-	VerticalSpace(m_hWnd, IDC_STATIC_INFO, IDC_SERVER_IP, 3);
-	
-
-
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_ADD_COMMAND);
-
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_COMMAND_EDIT, IDC_ADD_COMMAND);
-
-	// IDC_COMMAND_LIST을 기준으로 IDC_SERVER_IP을 왼쪽에 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_COMMAND_LIST, 
-		IDC_COMMAND_EDIT,
-		IDC_SERVER_IP);
-
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_SERVER_IP, IDC_RUN_SERVER);
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_SERVER);
-}
-
-//
-
-BOOL CIPerfServerPage::ParseCommandLine(Settings *pSetting, CString &szCmd)
-{
-	char **pargv = new char*[25]; // allocate big size
-	int curPos = 0, count = 0;
-	CString resToken;
-
-	pargv[count] = new char[10];
-	strcpy(pargv[count], "btiperf"); // dummy program name
-	count++;
-
-	do
-	{
-		resToken= szCmd.Tokenize(L" ",curPos);
-		
-		pargv[count] = new char [resToken.GetLength()+1];
-		unicode_to_ansi(resToken.GetBuffer(), resToken.GetLength(), pargv[count], resToken.GetLength());
-		//pargv[count] =  argv[count];
-		//*pargv++ = argv[count];
-
-		count++;
-	} while (resToken != _T(""));
-
-	pSetting->ParseCommandLine(count-1, pargv);
-
-
-	for(int i = 0; i < count; i++)
-		delete pargv[i];
-	delete [] pargv;
-
-
-	return 0;
-}
-
-
 
 //
 // CReporter
@@ -231,17 +116,160 @@ void CIPerfServerPage::ClientFinished()
 		nInserted = m_lbResult.AddString(_T("Delete listener instance"));
 		m_lbResult.SetCurSel(nInserted );
 
-		delete theListener;
-		theListener = NULL;
+		DELETE_PTR(theListener);
 	}
 }
 
+// server side graph
 void CIPerfServerPage::CallbackBW(double fBW)
 {
 	CString temp;
 	temp.Format(L"Bandwidth : %l", fBW);
 	//m_lbResult.AddString(temp);
 }
+
+
+
+///////////
+BOOL CIPerfServerPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
+{
+		SHMENUBARINFO mbi;
+	ZeroMemory(&mbi, sizeof(SHMENUBARINFO));
+	mbi.cbSize     = sizeof(SHMENUBARINFO);
+	mbi.hwndParent = GetParent();
+	mbi.nToolBarId = IDR_MENU1;
+	mbi.hInstRes   = _Module.GetResourceInstance();
+	mbi.dwFlags    = SHCMBF_HMENU;
+	SHCreateMenuBar(&mbi);
+
+	// initialize member variables
+	m_pIPerfServer=0;
+	m_bServerStarted=FALSE;
+	theListener = NULL;	
+	
+	m_fStatistics = NULL;
+	
+	TCHAR *log_dir = L"\\My Documents\\btools_log";
+	TCHAR *log_file_postfix = L"iServer.txt";
+	// log
+	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
+
+	m_csReportFile = pLogFile;
+
+
+	TCHAR *error_file_postfix = L"iServer_error.txt";
+	pLogFile = SetupLog(log_dir, error_file_postfix);
+	m_csErrorFile = pLogFile;
+
+
+	
+	 // 컨트롤 설정
+	DoDataExchange(FALSE);
+	//
+	// TODO:  여기에 추가 초기화 작업을 추가합니다.
+	m_lbCommand.AddString(_T("-s"));
+	m_lbCommand.AddString(_T("-s -i 1"));
+	m_lbCommand.AddString(_T("-s -u"));
+	m_lbCommand.AddString(_T("-s -u -i 1"));
+
+	m_lbCommand.SetCurSel(0);	// default selection
+
+
+
+	return TRUE; // set focus to default control
+}
+
+
+
+void CIPerfServerPage::OnSize(UINT state, CSize Size)
+{
+	CScreenLib::DockControl(m_hWnd, IDC_STATIC_COMMANDS, CScreenLib::dtTop);
+
+	CScreenLib::OptimizeWidth(m_hWnd, 5, 
+		IDC_STATIC_COMMANDS, 
+		IDC_COMMAND_LIST, 
+		IDC_STATIC_OUTPUT,
+		IDC_RESULT_LIST,
+		IDC_STATIC_INFO
+		);
+
+	// WM6은 -5 설정
+	VerticalSpace(m_hWnd, IDC_STATIC_COMMANDS, IDC_COMMAND_LIST, 3);
+	VerticalSpace(m_hWnd, IDC_COMMAND_LIST, IDC_COMMAND_EDIT, 3);
+
+	VerticalSpace(m_hWnd, IDC_COMMAND_EDIT, IDC_STATIC_OUTPUT, 6);
+	VerticalSpace(m_hWnd, IDC_STATIC_OUTPUT, IDC_RESULT_LIST, 3);	
+
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_INFO,3);
+	VerticalSpace(m_hWnd, IDC_STATIC_INFO, IDC_SERVER_IP, 3);
+	
+
+
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_ADD_COMMAND);
+
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_COMMAND_EDIT, IDC_ADD_COMMAND);
+
+	// IDC_COMMAND_LIST을 기준으로 IDC_SERVER_IP을 왼쪽에 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 2, IDC_COMMAND_LIST, 
+		IDC_COMMAND_EDIT,
+		IDC_SERVER_IP);
+
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_SERVER_IP, IDC_RUN_SERVER);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_COMMAND_LIST, IDC_RUN_SERVER);
+
+	CRect r, cr, vr;
+	//::GetClientRect(::GetDlgItem(m_hWnd, IDC_STATIC_VISUAL), vr);
+	GetDlgItem(IDC_CLIENT_IP).GetWindowRect(vr);
+	ScreenToClient(vr);
+	GetWindowRect(cr);
+	ScreenToClient(cr);
+
+	GetDlgItem(IDC_STATIC_PLACEHOLDER).GetWindowRect(r);
+	ScreenToClient(r);
+
+	GetDlgItem(IDC_STATIC_PLACEHOLDER).MoveWindow(r.left, 
+		r.top, 
+		r.Width(), 
+		cr.Height() - vr.bottom);
+
+}
+
+//
+
+BOOL CIPerfServerPage::ParseCommandLine(Settings *pSetting, CString &szCmd)
+{
+	char **pargv = new char*[25]; // allocate big size
+	int curPos = 0, count = 0;
+	CString resToken;
+
+	pargv[count] = new char[10];
+	strcpy(pargv[count], "btiperf"); // dummy program name
+	count++;
+
+	do
+	{
+		resToken= szCmd.Tokenize(L" ",curPos);
+		
+		pargv[count] = new char [resToken.GetLength()+1];
+		unicode_to_ansi(resToken.GetBuffer(), resToken.GetLength(), pargv[count], resToken.GetLength());
+		//pargv[count] =  argv[count];
+		//*pargv++ = argv[count];
+
+		count++;
+	} while (resToken != _T(""));
+
+	pSetting->ParseCommandLine(count-1, pargv);
+
+
+	for(int i = 0; i < count; i++)
+		delete pargv[i];
+	delete [] pargv;
+
+
+	return 0;
+}
+
+
 
 
 LRESULT CIPerfServerPage::OnRunServerBnClicked(WORD wNotifyCode, WORD wID, HWND hWndCtl)

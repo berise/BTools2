@@ -38,8 +38,9 @@ public:
 
 	BEGIN_MSG_MAP(CBTools2Frame)
 		MESSAGE_HANDLER(WM_CREATE, OnCreate)
-		COMMAND_ID_HANDLER(ID_APP_EXIT, OnFileExit)
+		MSG_WM_DESTROY(OnDestroy)
 
+		COMMAND_ID_HANDLER(ID_APP_EXIT, OnFileExit)
 		COMMAND_ID_HANDLER(ID_FILE_NEW, OnFileNew)
 		COMMAND_ID_HANDLER(ID_ACTION, OnAction)
 		COMMAND_ID_HANDLER(ID_APP_ABOUT, OnAppAbout)
@@ -64,4 +65,5 @@ public:
 
 	LRESULT OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnMenuClienttab(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+	LRESULT OnDestroy(void);
 };

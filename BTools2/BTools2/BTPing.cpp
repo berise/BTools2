@@ -21,7 +21,7 @@ void BTPing::OnReceiveICMP()
 
 	TCHAR wszLog[256], wszHost[256];
 	size_t hostlen;
-	char szLog[256];
+	
 
 	GetResponseAddress(wszHost, 256, &hostlen);
 	wsprintf(wszLog, L"%d, %s, %d ms", 		
@@ -49,11 +49,20 @@ void BTPing::OnReceiveICMP()
 // OnError is a member of the CUT_WSClient class, from which
 // CUT_ICMP inherits...
 int BTPing::OnError(int error)
-{
-	/*
-    if(UTE_SUCCESS != error && UTE_ERROR != error) 
-        cout << endl << CUT_ERR::GetErrorString(error) << endl;
-		*/
+{	
+	//TCHAR wszLog[256];
+	//wsprintf(wszLog, L"%s, CUT_ERR::GetErrorString(error)); m_pWnd->Log(wszLog);
+
+    if(UTE_SUCCESS != error && UTE_ERROR != error)
+	{
+		TCHAR wszLog[256];
+		wsprintf(wszLog, L"%s", 		
+		CUT_ERR::GetErrorString(error));
+		m_pWnd->Log(wszLog);
+	}
+	
+        
+		
     return error;
 }
 
@@ -61,5 +70,5 @@ int BTPing::OnError(int error)
 /// user pressed stop button.
 BOOL BTPing::IsAborted()
 {
-	return !m_pWnd->m_bStartThread;
+	return m_pWnd->m_bStartThread == 1 ? FALSE : TRUE;
 }
