@@ -58,7 +58,9 @@ public:
 	BOOL m_bStartThread;
 	COScopeCtrl m_OScopeCtrl;
 	HANDLE m_hThread;
-	// Global variable 
+
+
+	TCHAR m_szLogFile[256];
 
 	CRITICAL_SECTION m_cs;
 

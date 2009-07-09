@@ -14,7 +14,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_F114893A87864950B90E2E7981D8859F"
+        "MsmKey" = "8:_45B90363B86A4BC9B940FD149EC0223E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -38,7 +38,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\btools_cab_wm6.cab"
+        "OutputFilename" = "8:Release\\btools2_arm_wm6.cab"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
         "SignOutput" = "11:FALSE"
@@ -50,6 +50,24 @@
     {
         "File"
         {
+            "{BA458234-9B71-4F46-8107-E91156377184}:_45B90363B86A4BC9B940FD149EC0223E"
+            {
+            "SourcePath" = "8:..\\BTools2\\BTools2\\Windows Mobile 6 Professional SDK (ARMV4I)\\Release\\BTools2.exe"
+            "TargetName" = "8:BTools2.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_9B79B1AA39A04D5A9284DE75CA90ADAD"
+            "Condition" = "8:"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "Register" = "3:0"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "Folder"
         {
@@ -62,7 +80,7 @@
                 {
                     "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_9B79B1AA39A04D5A9284DE75CA90ADAD"
                     {
-                    "Name" = "8:BTools"
+                    "Name" = "8:BTools2"
                     "Condition" = "8:"
                     "Property" = "8:_A216C76E66534880B998C932F55CA487"
                         "Folders"
@@ -94,7 +112,7 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:BTools for WM6"
+        "ProductName" = "8:BTools2 for WM6"
         "Manufacturer" = "8:berise"
         "OSVersionMin" = "8:4.0"
         "OSVersionMax" = "8:6.99"
@@ -104,32 +122,6 @@
         }
         "ProjectOutput"
         {
-            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_F114893A87864950B90E2E7981D8859F"
-            {
-            "SourcePath" = "8:..\\BTools\\Windows Mobile 6 Professional SDK (ARMV4I)\\Release\\BTools.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9B79B1AA39A04D5A9284DE75CA90ADAD"
-            "Condition" = "8:"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "Register" = "3:0"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:0"
-            "OutputConfiguration" = "8:Release|Windows Mobile 6 Professional SDK (ARMV4I)"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{2511BA27-41D0-4752-B489-95ADC7E49EAB}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
         }
         "Registry"
         {
@@ -166,13 +158,13 @@
         }
         "Shortcut"
         {
-            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_D36AD82229254ABE9195B142AF16011C"
+            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_FF8D55149EA14E56B6245D9FEF46A53B"
             {
-            "Name" = "8:BTools"
+            "Name" = "8:BTools2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "Target" = "8:_F114893A87864950B90E2E7981D8859F"
+            "Target" = "8:_45B90363B86A4BC9B940FD149EC0223E"
             "Folder" = "8:_7DC8D607237542A883F39ECA1F2DDD6B"
             "WorkingFolder" = "8:_9B79B1AA39A04D5A9284DE75CA90ADAD"
             }

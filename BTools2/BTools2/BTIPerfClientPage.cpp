@@ -155,7 +155,7 @@ BOOL CIPerfClientPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 		// customize the control
 		m_OScopeCtrl.SetRange(0.0, 100.0, 1) ;
 		//m_OScopeCtrl.SetYUnits(L"Latency(ms)") ; // 
-		m_OScopeCtrl.SetYUnits(L"kBytes/s") ; //  너무 길지 않게 조절 필요.
+		m_OScopeCtrl.SetYUnits(L"KB/s") ; //  너무 길지 않게 조절 필요.
 		m_OScopeCtrl.SetXUnits(L"Time(sec)") ; // 너무 길지 않도록 설정 필요. 필요시 InvalidateCtrl내부 수정 필요
 		m_OScopeCtrl.SetBackgroundColor(RGB(0, 0, 64)) ;
 		m_OScopeCtrl.SetGridColor(RGB(192, 192, 255)) ;

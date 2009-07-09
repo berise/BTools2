@@ -48,7 +48,7 @@ BOOL CBToolsApp::InitInstance()
 {
 	// Program Expiration routines
 	CTime expirationTime(2009,	// year
-		6,					// month
+		12,					// month
 		30,					// date
 		23,					// hour 24
 		59,					// minute
@@ -81,8 +81,6 @@ BOOL CBToolsApp::InitInstance()
 				*/
 		CString msg("이 프로그램은 기한 제한 버전입니다.\n"
 				"This is a limited version of BTools.\n"
-				"It is submitted for the Windows Mobile Contest,\n"
-				"co-held by SK & Microsoft.\n"
 				"Please contact the author for more use.\nberise@gmail.com\n"
 				"Thank you for your interest\n");
 

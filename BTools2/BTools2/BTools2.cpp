@@ -16,8 +16,8 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 {
 		// Program Expiration routines
 	CTime expirationTime(2009,	// year
-		9,					// month
-		29,					// date
+		12,					// month
+		25,					// date
 		23,					// hour 24
 		59,					// minute
 		59);				// second
@@ -57,7 +57,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 		msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
 		msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
         //msg.Format(L"This software is submitted for the Windows Mobile Contest");
-		AtlMessageBox(NULL, msg.GetBuffer(), L"Sorry");
+		AtlMessageBox(NULL, msg.GetBuffer(), L"Warning");
 		return FALSE;
 	 }
 

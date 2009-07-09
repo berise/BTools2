@@ -4,7 +4,7 @@
 
 #include "stdafx.h"
 #include "resourceppc.h"
-
+#include "aboutdlg.h"
 #include "BTPing.h"
 #include "BTools2View.h"
 
@@ -58,7 +58,8 @@ void CBTools2View::OnDestroy()
 LRESULT CBTools2View::OnMenuAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 {
 	//::AtlMessageBox(NULL, L"View::OnMenuAbout");
-	
+		CAboutDlg dlg;
+	dlg.DoModal();
 
 	return 0;
 }
@@ -105,5 +106,6 @@ LRESULT CBTools2View::OnOKCancel(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL&
 {
 	//::AtlMessageBox(NULL, L"View::OnOKCancel");
 	// EndDialog(m_hWnd, wID);
+	ShowWindow(SW_MINIMIZE);
 	return 0;
 }

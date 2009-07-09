@@ -86,8 +86,7 @@ LRESULT CBTools2Frame::OnAction(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndC
 
 LRESULT CBTools2Frame::OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/)
 {
-	CAboutDlg dlg;
-	dlg.DoModal();
+
 	return 0;
 }
 

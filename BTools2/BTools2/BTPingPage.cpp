@@ -195,6 +195,13 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	m_cbHosts.SetCurSel(1);
 
 
+	// prepare to log
+	TCHAR *log_dir = L"\\My Documents\\btools_log";
+	TCHAR *log_file_postfix = L"ping.txt";
+	// log
+	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
+	_tcscpy(m_szLogFile, pLogFile);
+
 	// Initialize the critical section
     InitializeCriticalSection(&m_cs);
 
@@ -212,7 +219,7 @@ LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 		DoDataExchange(TRUE);
 		CString szMsg;
 		szMsg.Format(L"%d, %d", m_nDataSize, m_nSendCount);
-		AtlMessageBox(NULL, szMsg.GetBuffer(), L"debug");
+		//AtlMessageBox(NULL, szMsg.GetBuffer(), L"debug");
 
 		m_hThread = CreateThread(NULL,NULL, PingThread,this,0,NULL);
 		
@@ -362,13 +369,9 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 		}
 		else
 		{
-			//GetDlgItem(IDC_RESULT_LIST).ShowWindow(SW_SHOW);
-
 			GetDlgItem(IDC_STATIC_PLACEHOLDER).GetWindowRect(rect);//IDC_STATIC_PLACEHOLDER
 			ScreenToClient(rect);
 			m_OScopeCtrl.MoveWindow(rect);//
-			
-			//m_OScopeCtrl.SetWindowPos(NULL, rect.left, rect.top, 0, 0, SWP_NOSIZE);//
 		}
 	}
 
@@ -387,6 +390,7 @@ void CBTPingPage::Log(TCHAR *wszLog)
 	{
 		
 		int nIns = m_lbPingResult.AddString(wszLog);
+		WriteLog(m_szLogFile, wszLog);
 		m_lbPingResult.SetCurSel(nIns);		
 	}
 	LeaveCriticalSection(&m_cs);

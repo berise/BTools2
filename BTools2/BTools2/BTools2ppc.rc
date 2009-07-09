@@ -76,8 +76,8 @@ BEGIN
     COMBOBOX        IDC_COMBO_INTERVAL,3,47,29,45,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Interval",IDC_STATIC_OPT_INT,3,36,24,8
     LTEXT           "Duration",IDC_STATIC_OPT_DUR,36,36,27,8
-    COMBOBOX        IDC_COMBO_SOCKET_TYPE,79,48,29,30,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
-    COMBOBOX        IDC_COMBO_DURATION2,37,46,29,48,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_SOCKET_TYPE,79,48,29,33,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_COMBO_DURATION2,37,46,29,48,CBS_DROPDOWN | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Type",IDC_STATIC_SOCKET_TYPE,87,36,18,8
 END
 
@@ -182,14 +182,14 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG  0, 0, 125, 55
-STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_CAPTION
+IDD_ABOUTBOX DIALOG  0, 0, 125, 94
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION
 CAPTION "About BTools2"
 FONT 8, "MS Shell Dlg"
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "BTools2 v1.0",IDC_STATIC,38,10,70,8,SS_NOPREFIX
-    LTEXT           "(c) Copyright 2009",IDC_STATIC,38,25,70,8
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
+    LTEXT           "BTools2\niPerf for Windows Mobile",IDC_STATIC,38,10,70,15,SS_NOPREFIX
+    LTEXT           "(c) Copyright 2009\nberise@gmail.com",IDC_STATIC,38,33,70,18
 END
 
 IDD_BTOOLS2_PAGE DIALOG  0, 0, 156, 129
@@ -213,7 +213,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 118
         TOPMARGIN, 7
-        BOTTOMMARGIN, 48
+        BOTTOMMARGIN, 87
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -282,14 +282,15 @@ VS_VERSION_INFO VERSIONINFO
 BEGIN
     BLOCK "StringFileInfo"
     BEGIN
-        BLOCK "040904B0"
+        BLOCK "040904b0"
         BEGIN
-            VALUE "FileDescription", "BTools2 Module"
+            VALUE "CompanyName", "Home Brew"
+            VALUE "FileDescription", "BTools2"
             VALUE "FileVersion", "1, 0, 0, 1"
             VALUE "InternalName", "BTools2"
-            VALUE "LegalCopyright", "Copyright 2009"
+            VALUE "LegalCopyright", "Copyright 2009 berise@gmail.com"
             VALUE "OriginalFilename", "BTools2.exe"
-            VALUE "ProductName", "BTools2 Module"
+            VALUE "ProductName", "BTools2(iperf for Windows Mobile)"
             VALUE "ProductVersion", "1, 0, 0, 1"
         END
     END
