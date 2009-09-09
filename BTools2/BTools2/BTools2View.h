@@ -21,6 +21,9 @@ public:
 	CBTPingPage m_Page1;
 	CIPerfClientPage m_Page2;
 	CIPerfServerPage m_Page3;
+
+	TCHAR gszIniFile[256];
+	//
 	
 	CBTools2View();
 
@@ -52,5 +55,9 @@ public:
 	LRESULT OnMenuServertab(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 	
 	LRESULT OnMenuExit(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+
+
+	//
+	void OnSetDefaultIni(TCHAR *);
 };
 

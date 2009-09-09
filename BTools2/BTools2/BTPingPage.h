@@ -8,7 +8,7 @@
 #include "Reporter.h"
 class Listener;
 class BTPing;
-
+class CBTools2View;
 
 
 class CBTPingPage: public CPropertyPage<IDD_PING_PAGE>,
@@ -53,6 +53,7 @@ public:
 
 public:
 	//
+	CBTools2View *m_pView;
 	//
 	BTPing *m_pPing;
 	BOOL m_bStartThread;

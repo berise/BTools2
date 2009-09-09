@@ -66,4 +66,6 @@ public:
 	LRESULT OnAppAbout(WORD /*wNotifyCode*/, WORD /*wID*/, HWND /*hWndCtl*/, BOOL& /*bHandled*/);
 	LRESULT OnMenuClienttab(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 	LRESULT OnDestroy(void);
+
+
 };

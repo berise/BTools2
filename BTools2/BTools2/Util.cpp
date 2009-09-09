@@ -74,8 +74,9 @@ wchar_t* ansi_to_unicode(const char *s, size_t len,
 }
 
 
-char* unicode_to_ansi( const wchar_t *wstr, size_t len,
-				  char *buf, size_t buf_size)
+
+// wstr -> buf
+char* unicode_to_ansi( const wchar_t *wstr, size_t len, char *buf, size_t buf_size)
 {
     //PJ_ASSERT_RETURN(wstr && buf, NULL);
 

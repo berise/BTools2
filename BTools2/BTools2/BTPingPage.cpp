@@ -1,7 +1,13 @@
 #include "stdafx.h"
+#include "IniFile.h"
 #include "BTPing.h"
 #include "BTPingPage.h"
+
+
+
 #include "Util.h"
+#include "BTools2View.h"
+
 
 
 void CBTPingPage::OnReceiveICMP()
@@ -190,9 +196,31 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	m_nDataSize = 32; // 4, 8, 16, 32, 64, 128, 256 (kB)
 	m_nSendCount = 4; // -1, 4, 9, 999
 	
-	m_cbHosts.AddString(L"kldp.org");
-	m_cbHosts.AddString(L"localhost");	
-	m_cbHosts.SetCurSel(1);
+
+	// ini 파일에서 읽은 데이터를 설정
+	//m_cbHosts.AddString(L"kldp.org");
+	//m_cbHosts.AddString(L"localhost");	
+	//m_cbHosts.SetCurSel(1);
+
+	
+		char szFile[256];
+
+
+		
+		unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
+
+		vector<CIniFile::Record> s  = CIniFile::GetSection("Ping", szFile);
+		vector<CIniFile::Record>::iterator i;
+		for( i = s.begin(); i != s.end(); i++)
+		{
+			TCHAR wszBuf[256];
+			string value = CIniFile::GetValue( (*i).Key, "Ping", szFile);
+
+			ansi_to_unicode(value.c_str(), value.length(), wszBuf, 256);
+			m_cbHosts.AddString(wszBuf);
+		}
+
+		m_cbHosts.SetCurSel(1);
 
 
 	// prepare to log

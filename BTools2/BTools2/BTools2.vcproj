@@ -529,6 +529,14 @@
 			Name="modules"
 			>
 			<File
+				RelativePath=".\modules\IniFile.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\IniFile.h"
+				>
+			</File>
+			<File
 				RelativePath=".\modules\OScopeCtrl.cpp"
 				>
 			</File>
@@ -607,30 +615,6 @@
 			<File
 				RelativePath=".\modules\utstrlst.h"
 				>
-			</File>
-			<File
-				RelativePath=".\modules\XGroupBox.cpp"
-				>
-				<FileConfiguration
-					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath=".\modules\XGroupBox.h"
-				>
-				<FileConfiguration
-					Name="Release|Windows Mobile 6 Professional SDK (ARMV4I)"
-					ExcludedFromBuild="true"
-					>
-					<Tool
-						Name="VCCustomBuildTool"
-					/>
-				</FileConfiguration>
 			</File>
 		</Filter>
 		<Filter
