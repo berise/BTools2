@@ -96,7 +96,7 @@ bool CIniFile::Load(string FileName, vector<Record>& content)
 
 bool CIniFile::Save(string FileName, vector<Record>& content)
 {
-	ofstream outFile (FileName.c_str());									// Create an output filestream
+	ofstream outFile (FileName.c_str(), ios_base::trunc | ios_base::out);									// Create an output filestream
 	if (!outFile.is_open()) return false;									// If the output file doesn't open, then return
 
 	for (int i=0;i<(int)content.size();i++)									// Loop through each vector
@@ -517,3 +517,50 @@ bool CIniFile::Create(string FileName)
 	return Save(FileName,content);											// Save
 }
 
+
+/*! steps 1. Add item to the end
+		  2. remove first item if # of item > 5
+		  3. renumber
+		  */
+bool CIniFile::UpdateRecordMRU(string value, string SectionName, string FileName)
+{
+	CIniFile::Record aRecord;
+	std::vector<CIniFile::Record> content;
+	std::vector<CIniFile::Record> section;
+	section = CIniFile::GetSection("Ping", FileName);
+	
+	char szKey[10];
+	sprintf(szKey, "cmd%d", section.size()+1);
+
+
+	//CIniFile::Record r = { "", ' ', SectionName, szKey, value};
+	CIniFile::SetValue(szKey, value, SectionName, FileName);
+
+	CIniFile::Sort(FileName, true);
+
+	section = CIniFile::GetSection("Ping", FileName);
+	//section.insert(section.begin(), r);
+	sprintf(szKey, "cmd%d", section.size()+1);
+	if(section.size() > 5) {
+	//	section.pop_back();
+		section.erase(section.begin() + 5, section.end());		
+	}
+	sprintf(szKey, "cmd%d", section.size()+1);
+
+	for(vector<CIniFile::Record>::iterator it = section.begin(); it < section.end(); it++) // For each Record
+	{
+		sprintf(szKey, "cmd%d", section.end() - it);
+		(*it).Key = szKey;
+	}
+
+	
+	CIniFile::DeleteSection("Ping", FileName);
+	CIniFile::Load(FileName, content);
+	CIniFile::AddSection("Ping", FileName);
+
+
+	for(vector<CIniFile::Record>::iterator it = section.begin(); it < section.end(); it++)
+		content.push_back(*it);
+	return CIniFile::Save(FileName, content);
+
+}

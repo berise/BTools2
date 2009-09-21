@@ -28,6 +28,8 @@ public:
 	CIniFile(void);
 	virtual ~CIniFile(void);
 
+	static bool UpdateRecordMRU(string value, string SectionName, string FileName);
+
 	static bool AddSection(string SectionName, string FileName);
 	static bool CommentRecord(CommentChar cc, string KeyName,string SectionName,string FileName);
 	static bool CommentSection(char CommentChar, string SectionName, string FileName);

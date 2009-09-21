@@ -1,8 +1,6 @@
 #ifndef __BIPERF_SERVER_INCLUDED__
 #define __BIPERF_SERVER_INCLUDED__
 
-//#include "XGroupBox.h"
-
 #include "Server.hpp"
 #include "Reporter.h"
 
@@ -69,9 +67,6 @@ public:
 
 	CListBox m_lbCommand;
 	CListBox m_lbResult;
-
-
-
 
 	
 	LRESULT OnRunServerBnClicked(WORD wNotifyCode, WORD wID, HWND hWndCtl);

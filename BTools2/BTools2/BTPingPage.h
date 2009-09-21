@@ -47,6 +47,8 @@ public:
     int OnError(int error);
 	BOOL IsAborted();
 
+	void OnUpdateMRU();
+
 
 public:
 	void Log(TCHAR *wszLog);
@@ -60,16 +62,14 @@ public:
 	COScopeCtrl m_OScopeCtrl;
 	HANDLE m_hThread;
 
-
+	CString m_szTarget;
 	TCHAR m_szLogFile[256];
 
 	CRITICAL_SECTION m_cs;
 
 	CComboBox m_cbHosts;
 	CListBox	m_lbPingResult;
-	//
-	//CXGroupBox m_sHost;
-
+	
 	int m_nDataSize, m_nSendCount;
 
 

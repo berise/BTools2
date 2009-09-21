@@ -10,6 +10,8 @@
 
 
 
+
+// CUT_ICMP functions
 void CBTPingPage::OnReceiveICMP()
 {
 	double nResponseDuration = GetResponseDuration();
@@ -53,6 +55,7 @@ void CBTPingPage::OnReceiveICMP()
 		*/
 }
 
+// CUT_ICMP functions
 // OnError is a member of the CUT_WSClient class, from which
 // CUT_ICMP inherits...
 int CBTPingPage::OnError(int error)
@@ -70,6 +73,7 @@ int CBTPingPage::OnError(int error)
 }
 
 
+// CUT_ICMP functions
 /// user pressed stop button.
 BOOL CBTPingPage::IsAborted()
 {
@@ -84,27 +88,7 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 {
 	CBTPingPage *pThis=(CBTPingPage *)lpParameter;
 
-	CString szTarget;
-
-	// Combobox manipulation, CBS_AUTOHSCROLL must be in style
-	int nSel = pThis->m_cbHosts.GetCurSel();
-	if(nSel == -1) // nothing selected
-		{
-			// get user input in edit control
-			pThis->m_cbHosts.GetWindowText(szTarget.GetBuffer(128), 128);//LOWORD(nCount)+1);//
-
-			// szTarget의 길이에 따라 처리 필요
-			if(szTarget.GetLength() < 0) // 호스트 주소가 없는 경우
-			{
-				return 0;
-			}
-			/*	DWORD nCount = m_cbHosts.GetEditSel();
-			if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)			*/
-		}
-		else // get selected ListBox string
-		{
-			pThis->m_cbHosts.GetLBText(nSel, szTarget);
-		}
+	// Ping을 호출하기 전에 m_szTarget을 설정해야 함
 
 
 	// BTPing은 Thread안에서 생성되어야 한다.
@@ -116,7 +100,7 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 	//while(pThis->m_bStartThread )
 	{
 		
-		pThis->m_pPing->Ping(szTarget, 5000, pThis->m_nDataSize, 1000, pThis->m_nSendCount == -1 ? 99999 :pThis->m_nSendCount);
+		pThis->m_pPing->Ping(pThis->m_szTarget, 5000, pThis->m_nDataSize, 1000, pThis->m_nSendCount == -1 ? 99999 :pThis->m_nSendCount);
 	}
 	
 
@@ -205,7 +189,6 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	
 		char szFile[256];
 
-
 		
 		unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
 
@@ -220,15 +203,14 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 			m_cbHosts.AddString(wszBuf);
 		}
 
-		m_cbHosts.SetCurSel(1);
-
+		m_cbHosts.SetCurSel(0);
 
 	// prepare to log
 	TCHAR *log_dir = L"\\My Documents\\btools_log";
 	TCHAR *log_file_postfix = L"ping.txt";
 	// log
 	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
-	_tcscpy(m_szLogFile, pLogFile);
+	_tcscpy((m_szLogFile, pLogFile);
 
 	// Initialize the critical section
     InitializeCriticalSection(&m_cs);
@@ -239,9 +221,41 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 
 
 
+// OnPing
 LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 {
 	int nIns = 0 ;
+
+	// Combobox manipulation, CBS_AUTOHSCROLL must be in style
+	int nSel = m_cbHosts.GetCurSel();
+	if(nSel == -1) // nothing selected
+	{
+		// get user input in edit control
+		m_cbHosts.GetWindowText(m_szTarget.GetBuffer(128), 128);//LOWORD(nCount)+1);//
+
+		// szTarget의 길이에 따라 처리 필요
+		if(m_szTarget.GetLength() < 0) // 호스트 주소가 없는 경우
+		{
+			return 0;
+		}
+		/*	DWORD nCount = m_cbHosts.GetEditSel();
+		if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)			*/
+	}
+	else // get selected ListBox string
+	{
+		m_cbHosts.GetLBText(nSel, m_szTarget);
+	}
+
+	int nItem = m_cbHosts.GetCount();
+	if(nItem > 5)
+		m_cbHosts.DeleteString(0);
+	m_cbHosts.AddString(m_szTarget);
+
+	// update ini
+	OnUpdateMRU();
+
+
+
 	if(m_bStartThread == FALSE)
 	{
 		DoDataExchange(TRUE);
@@ -265,6 +279,7 @@ LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 		EnterCriticalSection(&m_cs);		
 		m_bStartThread = FALSE;
 		m_pPing->IsAborted();
+		GetDlgItem(IDC_DO_PING).SetWindowText(_T("Ping"));
 		LeaveCriticalSection(&m_cs);
 
 	}
@@ -281,21 +296,6 @@ LRESULT CBTPingPage::OnDestroy(void)
 	if(m_pPing != NULL)
 		m_pPing->IsAborted();
 
-	/*
-	
-	if(m_hThread != NULL)
-	{
-		DWORD ret = WaitForSingleObject(m_hThread, 3000);
-		if(ret == WAIT_TIMEOUT)
-			;//::AtlMessageBox(NULL, L"wait timed out // error");
-		else if (ret == WAIT_FAILED)
-			;//::AtlMessageBox(NULL, L"wait failed");
-		else 
-			{
-				m_hThread = NULL;
-			}
-	}
-	*/
 	return 0;
 }
 
@@ -408,8 +408,6 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 
 
 
-
-
 //
 void CBTPingPage::Log(TCHAR *wszLog)
 {
@@ -422,4 +420,35 @@ void CBTPingPage::Log(TCHAR *wszLog)
 		m_lbPingResult.SetCurSel(nIns);		
 	}
 	LeaveCriticalSection(&m_cs);
+}
+
+#include <vector>
+
+
+// m_cbHost의 내용을 파일로 덤포
+void CBTPingPage::OnUpdateMRU()
+{
+	char szFile[256];
+	char szKey[100];
+	char szCmd[256];
+	
+
+	unicode_to_ansi(m_szLogFile, wcslen(m_szLogFile), szFile, 256);
+
+	CIniFile::DeleteSection("Ping", szFile);
+	CIniFile::AddSection("Ping", szFile);
+
+	int nCount = m_cbHosts.GetCount();
+
+	TCHAR wszCmd[256];
+	for(int i = 0; i < nCount; i++)
+	{
+		m_cbHosts.GetLBText(i, wszCmd);
+		unicode_to_ansi(wszCmd, wcslen(wszCmd), szCmd, 10);
+		sprintf(szKey, "cmd%d_%s", i+1, szFile);
+
+		//??? 이상하다. char -> string으로 복사가 안 되네.. ptr만 전달되네...
+		CIniFile::SetValue(szKey, szCmd, "Ping", szFile);
+	}
+
 }

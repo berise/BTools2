@@ -219,18 +219,17 @@ void CIPerfServerPage::OnSize(UINT state, CSize Size)
 
 	CRect r, cr, vr;
 	//::GetClientRect(::GetDlgItem(m_hWnd, IDC_STATIC_VISUAL), vr);
-	GetDlgItem(IDC_CLIENT_IP).GetWindowRect(vr);
+	GetDlgItem(IDC_SERVER_IP).GetWindowRect(vr);
 	ScreenToClient(vr);
 	GetWindowRect(cr);
 	ScreenToClient(cr);
 
-	GetDlgItem(IDC_STATIC_PLACEHOLDER).GetWindowRect(r);
+	/*
+	CWindow holder = GetDlgItem(IDC_STATIC_PLACEHOLDER);
+	holder.GetWindowRect(r);
 	ScreenToClient(r);
-
-	GetDlgItem(IDC_STATIC_PLACEHOLDER).MoveWindow(r.left, 
-		r.top, 
-		r.Width(), 
-		cr.Height() - vr.bottom);
+	holder.MoveWindow(r.left, r.top, r.Width(), cr.Height() - vr.bottom);
+	*/
 
 }
 
