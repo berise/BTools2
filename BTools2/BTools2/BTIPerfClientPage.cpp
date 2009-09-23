@@ -1,7 +1,9 @@
 #include "stdafx.h"
+#include "IniFile.h"
 #include "BTIPerfClientPage.h"
 #include "ScreenLib.h"
 #include "Util.h"
+#include "BTools2View.h"
 
 
 
@@ -50,7 +52,7 @@ void CIPerfClientPage::PrintBuffer(char *buffer,char *speed)
 
 void CIPerfClientPage::ClientFinished()
 {
-	int nInserted = m_lbResult.AddString(_T("iperf client finished"));
+	int nInserted = m_lbResult.AddString(_T("---- Done ----"));
 	m_lbResult.SetCurSel(nInserted );
 	//GetDlgItem(IDC_CLIENT_STATUS)->SetWindowText(_T("Client Finished"));
 	m_bClientStarted=FALSE;
@@ -189,8 +191,25 @@ BOOL CIPerfClientPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 
 	//m_nInterval = 1;	m_nDuration = 5;	m_szSocketType = L"TCP";
 
-	m_cbCommand.AddString(L"-c 127.0.0.1");
-	m_cbCommand.AddString(L"-c 192.168.0.1");
+	//m_cbCommand.AddString(L"-c 127.0.0.1");
+	//m_cbCommand.AddString(L"-c 192.168.0.1");
+	//m_cbCommand.SetCurSel(0);
+
+	// ini 파일에서 읽은 데이터를 설정
+	char szFile[256];		
+	unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
+
+	vector<CIniFile::Record> s  = CIniFile::GetSection(INI_SECTION_CLIENT, szFile);
+	vector<CIniFile::Record>::iterator i;
+	for( i = s.begin(); i != s.end(); i++)
+	{
+		TCHAR wszBuf[256];
+		string value = CIniFile::GetValue( (*i).Key, INI_SECTION_CLIENT, szFile);
+
+		ansi_to_unicode(value.c_str(), value.length(), wszBuf, 256);
+		m_cbCommand.AddString(wszBuf);
+	}
+
 	m_cbCommand.SetCurSel(0);
 
 
@@ -329,13 +348,14 @@ BOOL CIPerfClientPage::ParseCommandLine(Settings *pSetting, CString &szCmd)
 
 
 
+// GUI 설정을 가져온 후
+// Ini파일 업데이트 후
+// iPerf Client를 실행한다.
 LRESULT CIPerfClientPage::OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 {
 	DoDataExchange(TRUE);
-	CString szMsg;
-	szMsg.Format(L" -i %d -t %d", m_nInterval, m_nDuration);
 
-	CString szCommand;
+	CString szCmdOption;
 	TCHAR szCmd[256];
 
 	// Combobox manipulation, CBS_AUTOHSCROLL must be in style
@@ -350,25 +370,31 @@ LRESULT CIPerfClientPage::OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 		if(_tcslen(szCmd) < 0) // 호스트 주소가 없는 경우
 		{
 			return 0;
-		}
-		/*
-		DWORD nCount = m_cbCommands.GetEditSel();
-
-		if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)
-		*/
+		}		
 	}
 	else // get selected ListBox string
 	{
 		m_cbCommand.GetLBText(nSel, szCmd);
 	}
-	_tcscat(szCmd, szMsg);
 
+	szCmdOption.Format(L" -i %d -t %d", m_nInterval, m_nDuration);
+
+	_tcscat(szCmd, szCmdOption);
+
+	// DEBUG
 	//AtlMessageBox(NULL, szCmd);
+	
+	// szServer를 다시 ComboBox에 넣고 Ping 시작
+	m_cbCommand.InsertString(0, szCmd);
+
+	int nItem = m_cbCommand.GetCount();
+	if(nItem > MAX_ITEM) m_cbCommand.DeleteString(MAX_ITEM);
+
+	OnUpdateIni();
 
 
-		// szServer를 다시 ComboBox에 넣고 Ping 시작
-	m_cbCommand.AddString(szCmd);
-
+	
+	// prepare iPerf client
 	m_pSettings = new ext_Settings();
 
 	// ListBox의 인자를 
@@ -379,7 +405,7 @@ LRESULT CIPerfClientPage::OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 
 	if (!m_bClientStarted)
 	{
-		m_lbResult.AddString(_T("iperf client started..."));
+		m_lbResult.AddString(_T("---- Start ----"));
 
 
 		m_bClientStarted=TRUE;
@@ -391,27 +417,11 @@ LRESULT CIPerfClientPage::OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 		if (m_pIPerfClient!=0)
 			delete m_pIPerfClient;
 
-		//Settings *pSettings = new Settings(m_pSettings);
-
-		//m_pSettings->mHost=GetCharBuffer(m_csHostName);
-		//m_pSettings->mInterval=m_uiInterval;
-
-		/*if (m_uiTotalTime>1)
-			m_pSettings->mAmount=-m_uiTotalTime*100;
-			*/
-
+	
 		m_pIPerfClient = new Client(m_pSettings, true, NULL, this);
-
 		m_pIPerfClient->InitiateServer();
 
-		CreateThread(NULL,NULL, ClientThread,m_pIPerfClient,0,NULL);
-
-		//GetDlgItem(IDC_CLIENT_STATUS)->SetWindowText(_T("실행 중(Running)..."));
-
-		//		StartThread(m_pIPerfClient);
-		// Run the test
-		// TODO : Start 버튼 이후, 초기화 및 client 실행시 까지 Button을 disable
-		// Stop시도 마찬가지 처리 (client/server 둘다)
+		CreateThread(NULL,NULL, ClientThread,m_pIPerfClient,0,NULL);		
 	}
 	else
 	{
@@ -420,8 +430,40 @@ LRESULT CIPerfClientPage::OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 		GetDlgItem(IDC_RUN_CLIENT).EnableWindow(FALSE);
 		GetDlgItem(IDC_RUN_CLIENT).SetWindowText(_T("Start"));
 	}
-	
-
 
 	return 0;
+}
+
+void CIPerfClientPage::SetView(CBTools2View *pView)
+{
+	m_pView = pView;
+}
+
+// Listbox 내용을(m_cbHost) 을 파일로 덤프
+void CIPerfClientPage::OnUpdateIni()
+{
+	char szFile[256];
+	char szKey[100];
+	char szCmd[256];
+	
+
+	unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
+
+	CIniFile::DeleteSection("iPref Client", szFile);
+	CIniFile::AddSection("iPref Client", szFile);
+
+	int nCount = m_cbCommand.GetCount();
+
+	TCHAR wszCmd[256];
+	for(int i = 0; i < nCount; i++)
+	{
+		m_cbCommand.GetLBText(i, wszCmd);
+		unicode_to_ansi(wszCmd, wcslen(wszCmd), szCmd, 256);
+		sprintf(szKey, "cmd%d", i+1);
+
+		//??? 이상하다. char -> string으로 복사가 안 되네.. ptr만 전달되네...
+		CIniFile::SetValue(szKey, szCmd, "iPref Client", szFile);
+	}
+	CIniFile::Sort(szFile, FALSE);
+
 }

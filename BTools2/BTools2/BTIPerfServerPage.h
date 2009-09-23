@@ -5,6 +5,7 @@
 #include "Reporter.h"
 
 class Listener;
+class CBTools2View;
 
 
 class CIPerfServerPage: public CPropertyPage<IDD_IPERF_SERVER_PAGE>,
@@ -36,6 +37,9 @@ public:
 
 	BOOL  OnInitDialog(HWND hwndFocus, LPARAM lParam);
 
+	LRESULT OnRunServerBnClicked(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+	LRESULT OnLbnSelChange(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+
 	// operations
 public:
 	BOOL ParseCommandLine(Settings *pSetting, CString &szCmd);
@@ -47,9 +51,13 @@ public:
 	virtual void  ClientFinished();
 	virtual void CallbackBW(double fBW);
 
+	void OnUpdateIni();
+	void SetView(CBTools2View *pView);
 
 public:
-	
+	//
+	CBTools2View *m_pView;
+
 	// variables
 	ext_Settings* m_pextSettings;
 	Settings *m_piperf_setting;
@@ -69,8 +77,7 @@ public:
 	CListBox m_lbResult;
 
 	
-	LRESULT OnRunServerBnClicked(WORD wNotifyCode, WORD wID, HWND hWndCtl);
-	LRESULT OnLbnSelChange(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+	
 };
 
 #endif

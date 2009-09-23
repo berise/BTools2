@@ -36,44 +36,33 @@ public:
 public:
 	void OnSize(UINT state, CSize Size);
 	BOOL  OnInitDialog(HWND hwndFocus, LPARAM lParam);
-	LRESULT OnDestroy(void);
-
-
-	LRESULT OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl);
-
-	// UT_ICMP virtual functions
-	void OnReceiveICMP();    
-    // OnError is a member of the CUT_WSClient class, from which CUT_ICMP inherits...
-    int OnError(int error);
-	BOOL IsAborted();
-
-	void OnUpdateMRU();
-
+	LRESULT OnDestroy(void);	
+	LRESULT OnMenuAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 
 public:
+	LRESULT OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+	void OnUpdateIni();
 	void Log(TCHAR *wszLog);
+	void SetView(CBTools2View *pView);
 
 public:
 	//
 	CBTools2View *m_pView;
 	//
+	HANDLE m_hThread;
 	BTPing *m_pPing;
 	BOOL m_bStartThread;
-	COScopeCtrl m_OScopeCtrl;
-	HANDLE m_hThread;
+	CRITICAL_SECTION m_cs;
+
+	COScopeCtrl m_OScopeCtrl;	
 
 	CString m_szTarget;
-	TCHAR m_szLogFile[256];
-
-	CRITICAL_SECTION m_cs;
+	TCHAR m_szLogFile[256];	
 
 	CComboBox m_cbHosts;
 	CListBox	m_lbPingResult;
 	
 	int m_nDataSize, m_nSendCount;
-
-
-	LRESULT OnMenuAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 };
 
 #endif

@@ -25,22 +25,26 @@ CBTools2View::CBTools2View()
 	//SetTitle(_T("Properties"));
 	//SetLinkText(_T("Tap <file:\\Windows\\default.htm{here}>."));
 
-	m_Page1.m_pView = this;
+	m_Page1.SetView(this);
 	m_Page1.SetTitle(_T("Ping"));
 	AddPage(m_Page1);
+
+
+	m_Page2.SetView(this);
 	m_Page2.SetTitle(_T("iPerf Client"));
 	AddPage(m_Page2);
 
+	m_Page3.SetView(this);
 	m_Page3.SetTitle(_T("iPerf Server"));
 	AddPage(m_Page3);
 
 	
 	// 현재 프로그램 설정 파일 위치
-	TCHAR szTemp[MAX_PATH] = L"";
-	SHGetSpecialFolderPath(m_hWnd, szTemp, CSIDL_PROGRAM_FILES, 0); 
+	//TCHAR szTemp[MAX_PATH] = L"";
+	SHGetSpecialFolderPath(m_hWnd, gszIniFile, CSIDL_PROGRAM_FILES, 0); 
 
-	_tcscpy(gszIniFile, szTemp);
-	_tcscat(gszIniFile, L"\\BTools2\\BTools2.txt");
+	//_tcscpy(gszIniFile, szTemp);
+	_tcscat(gszIniFile, L"\\BTools2\\BTools2.ini");
 
 	OnSetDefaultIni(gszIniFile);
 
@@ -141,23 +145,23 @@ void CBTools2View::OnSetDefaultIni(TCHAR *pszFileName)
 	if( INVALID_HANDLE_VALUE == hFile )
 	{
 		// init ini file
-		char szAnsi[256];
-		unicode_to_ansi(pszFileName, wcslen(pszFileName), szAnsi, 256);
-		CIniFile::Create(szAnsi);
+		char szFile[256];
+		unicode_to_ansi(pszFileName, wcslen(pszFileName), szFile, 256);
+		CIniFile::Create(szFile);
 
 		// Name, Value, [Section], file
-		CIniFile::SetValue("cmd1", "localhost", "Ping", szAnsi);
-		CIniFile::SetValue("cmd2", "192.168.1.1", "Ping", szAnsi);
-		CIniFile::SetValue("cmd3", "192.168.1.100", "Ping", szAnsi);
+		CIniFile::SetValue("cmd1", "localhost", INI_SECTION_PING, szFile);
+		CIniFile::SetValue("cmd2", "192.168.1.1", INI_SECTION_PING, szFile);
+		CIniFile::SetValue("cmd3", "192.168.1.100", INI_SECTION_PING, szFile);
 
-		CIniFile::SetValue("cmd3", "-c localhost -i 1", "iPref Client", szAnsi);
-		CIniFile::SetValue("cmd2", "-c 192.168.0.1 -t 20 -i 1", "iPref Client", szAnsi);
-		CIniFile::SetValue("cmd1", "-c 192.168.0.1 -u -i 1", "iPref Client", szAnsi);
+		CIniFile::SetValue("cmd3", "-c localhost -i 1", INI_SECTION_CLIENT, szFile);
+		CIniFile::SetValue("cmd2", "-c 192.168.0.1 -t 20 -i 1", INI_SECTION_CLIENT, szFile);
+		CIniFile::SetValue("cmd1", "-c 192.168.0.1 -u -i 1", INI_SECTION_CLIENT, szFile);
 
-		CIniFile::SetValue("cmd1", "-s", "iPref Server", szAnsi);
-		CIniFile::SetValue("cmd2", "-s -u", "iPref Server", szAnsi);
+		CIniFile::SetValue("cmd1", "-s", INI_SECTION_SERVER, szFile);
+		CIniFile::SetValue("cmd2", "-s -u",INI_SECTION_SERVER, szFile);
 
-		CIniFile::Sort(szAnsi, false);
+		CIniFile::Sort(szFile, false);
 		return;
 	}
 
@@ -167,5 +171,4 @@ void CBTools2View::OnSetDefaultIni(TCHAR *pszFileName)
 		CloseHandle( hFile );
 		return;
 	}
-
 }

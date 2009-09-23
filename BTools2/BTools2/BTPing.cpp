@@ -67,7 +67,7 @@ int BTPing::OnError(int error)
 }
 
 
-/// user pressed stop button.
+//
 BOOL BTPing::IsAborted()
 {
 	return m_pWnd->m_bStartThread == 1 ? FALSE : TRUE;

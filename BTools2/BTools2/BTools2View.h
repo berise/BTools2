@@ -22,7 +22,7 @@ public:
 	CIPerfClientPage m_Page2;
 	CIPerfServerPage m_Page3;
 
-	TCHAR gszIniFile[256];
+	TCHAR gszIniFile[MAX_PATH];
 	//
 	
 	CBTools2View();

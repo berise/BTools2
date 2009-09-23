@@ -3,83 +3,10 @@
 #include "BTPing.h"
 #include "BTPingPage.h"
 
-
-
 #include "Util.h"
 #include "BTools2View.h"
 
-
-
-
-// CUT_ICMP functions
-void CBTPingPage::OnReceiveICMP()
-{
-	double nResponseDuration = GetResponseDuration();
-	static double  minY = 0.0, maxY = 100.0;
-	if(nResponseDuration < minY)
-	{
-		minY = nResponseDuration-10;
-		m_OScopeCtrl.SetRange(minY, maxY,  1) ;
-	}
-
-	if(nResponseDuration > maxY)
-	{
-		maxY = nResponseDuration+10;
-		m_OScopeCtrl.SetRange(minY, maxY,  1) ;
-	}
-
-	m_OScopeCtrl.AppendPoint(nResponseDuration);
-
-	TCHAR wszLog[256], wszHost[256];
-	size_t hostlen;
-	
-
-	GetResponseAddress(wszHost, 256, &hostlen);
-	wsprintf(wszLog, L"%d, %s, %d ms", 		
-		GetResponseSequence(),
-		wszHost, //GetResponseAddress(),
-		GetResponseDuration());
-
-	Log(wszLog);
-	
-	/*
-    cout << endl << GetResponseSequence() << ". " 
-        << GetResponseDuration() << "ms" << " \t " 
-        << GetResponseAddress() << "\t" 
-        << GetResponseName() << endl 
-        << "Type: " << GetResponseType() 
-        << "  Code: " << GetResponseCode() << " "
-        << GetResponseMessage() << endl;
-    if(GetResponseFinished())
-        cout << endl << "Data finshed." << endl;
-		*/
-}
-
-// CUT_ICMP functions
-// OnError is a member of the CUT_WSClient class, from which
-// CUT_ICMP inherits...
-int CBTPingPage::OnError(int error)
-{	
-    //if(UTE_SUCCESS != error && UTE_ERROR != error)
-	{
-		TCHAR wszLog[256];
-		wsprintf(wszLog, L"%s", 		
-		CUT_ERR::GetErrorString(error));
-		Log(wszLog);
-	}
-        
-		
-    return error;
-}
-
-
-// CUT_ICMP functions
-/// user pressed stop button.
-BOOL CBTPingPage::IsAborted()
-{
-
-	return m_bStartThread == 1 ? FALSE : TRUE;
-}
+#include <vector>
 
 
 
@@ -100,14 +27,18 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 	//while(pThis->m_bStartThread )
 	{
 		
-		pThis->m_pPing->Ping(pThis->m_szTarget, 5000, pThis->m_nDataSize, 1000, pThis->m_nSendCount == -1 ? 99999 :pThis->m_nSendCount);
+		pThis->m_pPing->Ping(pThis->m_szTarget,		// Your target host
+							4000,					// Timeout
+							pThis->m_nDataSize,		// ICMP size
+							1000,					// Interval
+							pThis->m_nSendCount == -1 ? 99999 : pThis->m_nSendCount);  // how many icmp will you send?
 	}
 	
 
 	// Thread 종료시
 	EnterCriticalSection(&pThis->m_cs);
 	pThis->GetDlgItem(IDC_DO_PING).SetWindowText(_T("&Ping"));
-	int nIns = pThis->m_lbPingResult.AddString(_T("---- Finished ----"));
+	int nIns = pThis->m_lbPingResult.AddString(_T("---- Done ----"));
 	pThis->m_lbPingResult.SetCurSel(nIns);
 	LeaveCriticalSection(&pThis->m_cs);
 	pThis->m_bStartThread = FALSE;
@@ -181,36 +112,35 @@ BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 	m_nSendCount = 4; // -1, 4, 9, 999
 	
 
-	// ini 파일에서 읽은 데이터를 설정
+	
 	//m_cbHosts.AddString(L"kldp.org");
 	//m_cbHosts.AddString(L"localhost");	
 	//m_cbHosts.SetCurSel(1);
 
-	
-		char szFile[256];
+	// ini 파일에서 읽은 데이터를 설정
+	char szFile[256];		
+	unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
 
-		
-		unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
+	vector<CIniFile::Record> s  = CIniFile::GetSection(INI_SECTION_PING, szFile);
+	vector<CIniFile::Record>::iterator i;
+	for( i = s.begin(); i != s.end(); i++)
+	{
+		TCHAR wszBuf[256];
+		string value = CIniFile::GetValue( (*i).Key, INI_SECTION_PING, szFile);
 
-		vector<CIniFile::Record> s  = CIniFile::GetSection("Ping", szFile);
-		vector<CIniFile::Record>::iterator i;
-		for( i = s.begin(); i != s.end(); i++)
-		{
-			TCHAR wszBuf[256];
-			string value = CIniFile::GetValue( (*i).Key, "Ping", szFile);
+		ansi_to_unicode(value.c_str(), value.length(), wszBuf, 256);
+		m_cbHosts.AddString(wszBuf);
+	}
 
-			ansi_to_unicode(value.c_str(), value.length(), wszBuf, 256);
-			m_cbHosts.AddString(wszBuf);
-		}
+	m_cbHosts.SetCurSel(0);
 
-		m_cbHosts.SetCurSel(0);
 
 	// prepare to log
 	TCHAR *log_dir = L"\\My Documents\\btools_log";
 	TCHAR *log_file_postfix = L"ping.txt";
 	// log
 	TCHAR *pLogFile = SetupLog(log_dir, log_file_postfix);
-	_tcscpy((m_szLogFile, pLogFile);
+	_tcscpy(m_szLogFile, pLogFile);
 
 	// Initialize the critical section
     InitializeCriticalSection(&m_cs);
@@ -226,39 +156,41 @@ LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 {
 	int nIns = 0 ;
 
-	// Combobox manipulation, CBS_AUTOHSCROLL must be in style
-	int nSel = m_cbHosts.GetCurSel();
-	if(nSel == -1) // nothing selected
-	{
-		// get user input in edit control
-		m_cbHosts.GetWindowText(m_szTarget.GetBuffer(128), 128);//LOWORD(nCount)+1);//
-
-		// szTarget의 길이에 따라 처리 필요
-		if(m_szTarget.GetLength() < 0) // 호스트 주소가 없는 경우
-		{
-			return 0;
-		}
-		/*	DWORD nCount = m_cbHosts.GetEditSel();
-		if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)			*/
-	}
-	else // get selected ListBox string
-	{
-		m_cbHosts.GetLBText(nSel, m_szTarget);
-	}
-
-	int nItem = m_cbHosts.GetCount();
-	if(nItem > 5)
-		m_cbHosts.DeleteString(0);
-	m_cbHosts.AddString(m_szTarget);
-
-	// update ini
-	OnUpdateMRU();
-
-
-
 	if(m_bStartThread == FALSE)
 	{
 		DoDataExchange(TRUE);
+
+
+			// Combobox manipulation, CBS_AUTOHSCROLL must be in style
+		int nSel = m_cbHosts.GetCurSel();
+		if(nSel == -1) // nothing selected
+		{
+			// get user input in edit control
+			m_cbHosts.GetWindowText(m_szTarget.GetBuffer(128), 128);//LOWORD(nCount)+1);//
+
+			// szTarget의 길이에 따라 처리 필요
+			if(m_szTarget.GetLength() < 0) // 호스트 주소가 없는 경우
+			{
+				return 0;
+			}
+			/*	DWORD nCount = m_cbHosts.GetEditSel();
+			if(LOWORD(nCount) > 0)  현재 커서의 위치 (0 ... ^    \0)			*/
+		}
+		else // get selected ListBox string
+		{
+			m_cbHosts.GetLBText(nSel, m_szTarget);
+		}
+
+		m_cbHosts.InsertString(0, m_szTarget);
+
+		int nItem = m_cbHosts.GetCount();
+		if(nItem > MAX_ITEM) m_cbHosts.DeleteString(MAX_ITEM);
+		
+
+		// update ini
+		OnUpdateIni();
+
+
 		CString szMsg;
 		szMsg.Format(L"%d, %d", m_nDataSize, m_nSendCount);
 		//AtlMessageBox(NULL, szMsg.GetBuffer(), L"debug");
@@ -270,16 +202,20 @@ LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 
 		m_bStartThread = TRUE;
 		GetDlgItem(IDC_DO_PING).SetWindowText(_T("Stop"));
-		nIns = m_lbPingResult.AddString(_T("---- Ping started ----"));
+		nIns = m_lbPingResult.AddString(_T("---- Start ----"));
 		m_lbPingResult.SetCurSel(nIns);
 		LeaveCriticalSection(&m_cs);
 	}
 	else
 	{
-		EnterCriticalSection(&m_cs);		
+		EnterCriticalSection(&m_cs);
 		m_bStartThread = FALSE;
-		m_pPing->IsAborted();
+		//if(m_pPing != NULL)m_pPing->IsAborted();
+
 		GetDlgItem(IDC_DO_PING).SetWindowText(_T("Ping"));
+		nIns = m_lbPingResult.AddString(_T("---- Stop ----"));
+		m_lbPingResult.SetCurSel(nIns);
+
 		LeaveCriticalSection(&m_cs);
 
 	}
@@ -293,8 +229,8 @@ LRESULT CBTPingPage::OnDestroy(void)
 
 	//You should call SetMsgHandled(FALSE) or set bHandled = FALSE for the main window of your application
 	m_bStartThread = FALSE;
-	if(m_pPing != NULL)
-		m_pPing->IsAborted();
+	//IsAborted();
+	//if(m_pPing != NULL) m_pPing->IsAborted();
 
 	return 0;
 }
@@ -315,6 +251,9 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 		IDC_STATIC_PLACEHOLDER
 		);
 
+	// 2009/9/23 relocate IDC_PING
+	// Reason : Pushing ping button will close dialog by pressing OK
+	// 
 	// In order to show ping button on the top of IDC_HOST, IDC_HOST must be shrinked to width of IDC_PING
 	CRect r1, r2;
 	GetDlgItem(IDC_PING).GetClientRect(r1);
@@ -337,12 +276,12 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 	VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_STATIC_PLACEHOLDER, 3);
 
 
-	// IDC_HOST에 Ping 버튼 상 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_HOST, IDC_PING);
+	// IDC_STATIC_DATA_SIZE에 Ping 버튼 상 정렬
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atTop, 1, IDC_CB_DATA_SIZE, IDC_PING);
 
 	// 오른쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 핑 버튼을 정렬
-	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 3, IDC_HOST_COMBO, 
-					IDC_PING, IDC_STATIC_SEND_COUNT, IDC_CB_SEND_COUNT);
+	CScreenLib::AlignControls(m_hWnd, CScreenLib::atRight, 1, IDC_HOST_COMBO, 
+					IDC_PING);
 
 	// 왼쪽 정렬은 IDC_HOST_COMBO(주소창)을 기준으로 호스트 텍스트를 정렬
 	CScreenLib::AlignControls(m_hWnd, CScreenLib::atLeft, 3, IDC_HOST_COMBO, 
@@ -369,10 +308,7 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 	GetDlgItem(IDC_STATIC_PLACEHOLDER).GetWindowRect(r);
 	ScreenToClient(r);
 
-	GetDlgItem(IDC_STATIC_PLACEHOLDER).MoveWindow(r.left, 
-		r.top, 
-		r.Width(), 
-		cr.Height() - vr.bottom - 5); // padding(-5)
+	GetDlgItem(IDC_STATIC_PLACEHOLDER).MoveWindow(r.left, r.top, r.Width(), cr.Height() - vr.bottom - 5); // padding(-5)
 		
 
 	
@@ -422,21 +358,23 @@ void CBTPingPage::Log(TCHAR *wszLog)
 	LeaveCriticalSection(&m_cs);
 }
 
-#include <vector>
+void CBTPingPage::SetView(CBTools2View *pView)
+{
+	m_pView = pView;
+}
 
-
-// m_cbHost의 내용을 파일로 덤포
-void CBTPingPage::OnUpdateMRU()
+// Listbox 내용을(m_cbHost) 을 파일로 덤프
+void CBTPingPage::OnUpdateIni()
 {
 	char szFile[256];
 	char szKey[100];
 	char szCmd[256];
 	
 
-	unicode_to_ansi(m_szLogFile, wcslen(m_szLogFile), szFile, 256);
+	unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
 
-	CIniFile::DeleteSection("Ping", szFile);
-	CIniFile::AddSection("Ping", szFile);
+	CIniFile::DeleteSection(INI_SECTION_PING, szFile);
+	CIniFile::AddSection(INI_SECTION_PING, szFile);
 
 	int nCount = m_cbHosts.GetCount();
 
@@ -444,11 +382,12 @@ void CBTPingPage::OnUpdateMRU()
 	for(int i = 0; i < nCount; i++)
 	{
 		m_cbHosts.GetLBText(i, wszCmd);
-		unicode_to_ansi(wszCmd, wcslen(wszCmd), szCmd, 10);
-		sprintf(szKey, "cmd%d_%s", i+1, szFile);
+		unicode_to_ansi(wszCmd, wcslen(wszCmd), szCmd, 256);
+		sprintf(szKey, "cmd%d", i+1);
 
-		//??? 이상하다. char -> string으로 복사가 안 되네.. ptr만 전달되네...
-		CIniFile::SetValue(szKey, szCmd, "Ping", szFile);
+		//
+		CIniFile::SetValue(szKey, szCmd, INI_SECTION_PING, szFile);
 	}
+	CIniFile::Sort(szFile, FALSE);
 
 }

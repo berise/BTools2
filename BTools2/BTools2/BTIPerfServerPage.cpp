@@ -1,8 +1,11 @@
 #include "stdafx.h"
+#include "IniFile.h"
 #include "BTIPerfServerPage.h"
 #include "Util.h"
-#include "LIstener.hpp"
+#include "Listener.hpp"
 #include "ScreenLib.h"
+#include "BTools2View.h"
+
 
 
 // Server Thread
@@ -88,7 +91,7 @@ void CIPerfServerPage::PrintBuffer(char *buffer,char *speed)
 
 void CIPerfServerPage::ClientFinished()
 {	
-	int nInserted = m_lbResult.AddString(_T("Server finished"));
+	int nInserted = m_lbResult.AddString(_T("---- Done ----"));
 	m_lbResult.SetCurSel(nInserted );
 
 	m_bServerStarted=FALSE;
@@ -111,13 +114,12 @@ void CIPerfServerPage::ClientFinished()
 
 	DELETE_PTR(m_piperf_setting);
 
-	if(theListener != NULL)
-	{
-		nInserted = m_lbResult.AddString(_T("Delete listener instance"));
-		m_lbResult.SetCurSel(nInserted );
+	//if(theListener != NULL)	{
+		//nInserted = m_lbResult.AddString(_T("Delete listener instance"));
+		//m_lbResult.SetCurSel(nInserted );
 
-		DELETE_PTR(theListener);
-	}
+	DELETE_PTR(theListener);
+	//}
 }
 
 // server side graph
@@ -348,4 +350,39 @@ void CIPerfServerPage::OnDataExchangeError(UINT nCtrlID, BOOL bSave)
         strMsg.Format(_T("컨트롤(ID:%u) 과의 데이터 교환에 실패. "), nCtrlID);
         MessageBox(strMsg, _T("DDX에러"), MB_ICONWARNING);
         ::SetFocus(GetDlgItem(nCtrlID));
-    }
+}
+
+
+
+void CIPerfServerPage::SetView(CBTools2View *pView)
+{
+	m_pView = pView;
+}
+
+// Listbox 내용을(m_cbHost) 을 파일로 덤프
+void CIPerfServerPage::OnUpdateIni()
+{
+	char szFile[256];
+	char szKey[100];
+	char szCmd[256];
+	
+
+	unicode_to_ansi(m_pView->gszIniFile, wcslen(m_pView->gszIniFile), szFile, 256);
+
+	CIniFile::DeleteSection(INI_SECTION_SERVER, szFile);
+	CIniFile::AddSection(INI_SECTION_SERVER, szFile);
+
+	int nCount = m_lbCommand.GetCount();
+	TCHAR wszCmd[256];
+	for(int i = 0; i < nCount; i++)
+	{
+		m_lbCommand.GetText(i, wszCmd);
+		unicode_to_ansi(wszCmd, wcslen(wszCmd), szCmd, 256);
+		sprintf(szKey, "cmd%d", i+1);
+
+		//??? 이상하다. char -> string으로 복사가 안 되네.. ptr만 전달되네...
+		CIniFile::SetValue(szKey, szCmd, INI_SECTION_SERVER, szFile);
+	}
+	CIniFile::Sort(szFile, FALSE);
+
+}

@@ -308,8 +308,8 @@ void GetLocalIP(TCHAR *hostname, TCHAR *ip)
 		if(LocalAddress == NULL) // error on retrieve to get local address
 		{
 			int ret = WSAGetLastError();
-			if(ret == WSANOTINITIALISED)
-				;
+			//if(ret == WSANOTINITIALISED)		;
+
 			return;
 
 		}

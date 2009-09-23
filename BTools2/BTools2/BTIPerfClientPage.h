@@ -6,7 +6,11 @@
 #include "Client.hpp"
 #include "Reporter.h"
 #include "OScopeCtrl.h"
+
+// forward declaration
 class Listener;
+class CBTools2View;
+
 
 
 
@@ -49,9 +53,10 @@ public:
 	virtual void  PrintBuffer(char *buffer,char *speed);
 	virtual void  ClientFinished();
 	virtual void CallbackBW(double fBW);
-
-
-public:
+	
+	LRESULT OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl);
+	void OnUpdateIni();
+	void SetView(CBTools2View *pView);
 
 private:
 	// variables
@@ -70,6 +75,9 @@ private:
 	COScopeCtrl m_OScopeCtrl;
 
 
+	/// parent window
+	CBTools2View *m_pView;
+
 
 	// DDX variables
 	CListBox m_lbResult;
@@ -78,11 +86,7 @@ private:
 	CString m_szSocketType;
 	CString m_szCommand;
 
-
-public:
-	LRESULT OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl);
 };
-
 
 
 #endif
