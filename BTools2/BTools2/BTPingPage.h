@@ -2,7 +2,7 @@
 #define __BTPAGES_INCLUDED__
 
 //#include "XGroupBox.h"
-#include "ut_icmp.h"
+//#include "ut_icmp.h"
 #include "Client.hpp"
 #include "Server.hpp"
 #include "Reporter.h"
@@ -12,8 +12,7 @@ class CBTools2View;
 
 
 class CBTPingPage: public CPropertyPage<IDD_PING_PAGE>,
-			public CWinDataExchange<CBTPingPage>, 
-			public CUT_ICMP
+			public CWinDataExchange<CBTPingPage>//, public CUT_ICMP
 {
 public:
 	//WTL_DLG_NOTITLE

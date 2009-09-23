@@ -323,6 +323,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
+				Optimization="1"
 				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;NDEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;,_WINSOCK_2_0_;"
 				ExceptionHandling="1"
