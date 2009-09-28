@@ -55,7 +55,7 @@ BEGIN
     LTEXT           "Target Host",IDC_HOST,10,10,42,8
     LISTBOX         IDC_RESULT_LIST,7,68,96,32,LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP
     COMBOBOX        IDC_HOST_COMBO,8,24,95,69,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Ping Graph",IDC_STATIC_VISUAL,7,108,95,8
+    LTEXT           "Ping Graph DO_NOT_USE",IDC_STATIC_VISUAL,7,108,95,8,NOT WS_VISIBLE
     PUSHBUTTON      "&Ping",IDC_PING,80,50,30,11
     COMBOBOX        IDC_CB_DATA_SIZE,11,50,29,45,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "DataSize",IDC_STATIC_DATA_SIZE,11,39,30,8
@@ -96,6 +96,24 @@ BEGIN
     LTEXT           "iPerf Server IP",IDC_STATIC_INFO,7,125,95,8
 END
 
+IDD_ABOUTBOX DIALOG  0, 0, 138, 154
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION
+CAPTION "About BTools2"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,21,20
+    LTEXT           "BTools2 -- iPerf for Windows Mobile --",IDC_STATIC_MATRIX,7,79,123,59,SS_NOPREFIX,WS_EX_STATICEDGE
+    LTEXT           "(c) Copyright 2009 berise@gmail.com",IDC_STATIC,7,133,124,11
+    CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,36,124,38,0,WS_EX_STATICEDGE
+END
+
+IDD_BTOOLS2_PAGE DIALOG  0, 0, 156, 129
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
+FONT 8, "MS Shell Dlg"
+BEGIN
+    CTEXT           "TODO: Place form controls on this dialog.",IDC_STATIC,24,48,112,23
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -108,6 +126,14 @@ BEGIN
     IDD_IPERF_CLIENT_PAGE, DIALOG
     BEGIN
         BOTTOMMARGIN, 177
+    END
+
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 131
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 147
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -136,6 +162,13 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\BTools.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_BITMAP1             BITMAP                  "res\\Matrix_TinyBlue.bmp"
 #endif    // 한국어 resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -175,48 +208,6 @@ BEGIN
         MENUITEM "Exit",                        ID_APP_EXIT
     END
 END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Dialog
-//
-
-IDD_ABOUTBOX DIALOG  0, 0, 125, 94
-STYLE DS_SETFONT | DS_CENTER | WS_POPUP | WS_CAPTION
-CAPTION "About BTools2"
-FONT 8, "MS Shell Dlg"
-BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,21,20
-    LTEXT           "BTools2\niPerf for Windows Mobile",IDC_STATIC,38,10,70,15,SS_NOPREFIX
-    LTEXT           "(c) Copyright 2009\nberise@gmail.com",IDC_STATIC,38,33,70,18
-END
-
-IDD_BTOOLS2_PAGE DIALOG  0, 0, 156, 129
-STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS
-FONT 8, "MS Shell Dlg"
-BEGIN
-    CTEXT           "TODO: Place form controls on this dialog.",IDC_STATIC,24,48,112,23
-END
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// DESIGNINFO
-//
-
-#ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
-BEGIN
-    IDD_ABOUTBOX, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 118
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 87
-    END
-END
-#endif    // APSTUDIO_INVOKED
 
 
 #ifdef APSTUDIO_INVOKED

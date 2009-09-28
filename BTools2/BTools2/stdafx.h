@@ -42,3 +42,5 @@ const int MAX_ITEM	=	3;
 #define INI_SECTION_PING	"Ping"
 #define INI_SECTION_CLIENT	"iPref Client"
 #define INI_SECTION_SERVER	"iPref Server"
+
+#define TSTORE_APPLICATION_ID "OM00016302"

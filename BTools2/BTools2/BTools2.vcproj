@@ -144,8 +144,8 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;_DEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;,_WINSOCK_2_0_;"
+				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib;../ARM"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;_DEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;,_WINSOCK_2_0_;__TSTORE_ARM__;"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
 				UsePrecompiledHeader="2"
@@ -169,9 +169,12 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
-				AdditionalOptions=" /subsystem:windowsce,5.02 /machine:THUMB"
-				AdditionalDependencies="../../iperflib/lib/iperf.lib"
+				AdditionalOptions=" /subsystem:windowsce,5.02 /machine:THUMB /verbose:lib "
+				AdditionalDependencies="uafxcwd.lib libcmtd.lib ../../iperflib/lib/iperf.lib ARM_PLUGIN_2005.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="../ARM"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="uafxcw.lib"
 				DelayLoadDLLs="$(NOINHERIT)"
 				GenerateDebugInformation="true"
 				SubSystem="0"
@@ -234,8 +237,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
-				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;NDEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;_WINSOCK_2_0_"
+				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib;../ARM"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;NDEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;_WINSOCK_2_0_;__TSTORE_ARM__;"
 				ExceptionHandling="1"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
@@ -260,8 +263,9 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
 				AdditionalOptions=" /subsystem:windowsce,5.01 /machine:THUMB"
-				AdditionalDependencies="../../iperflib/lib/iperf.lib"
+				AdditionalDependencies="../../iperflib/lib/iperf.lib ARM_PLUGIN_2005.lib"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="../ARM"
 				DelayLoadDLLs="$(NOINHERIT)"
 				SubSystem="0"
 			/>
@@ -324,8 +328,8 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="1"
-				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
-				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;NDEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;,_WINSOCK_2_0_;"
+				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib;../ARM"
+				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;NDEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL;,_WINSOCK_2_0_;__TSTORE_ARM__;"
 				ExceptionHandling="1"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
@@ -350,8 +354,10 @@
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
 				AdditionalOptions=" /subsystem:windowsce,5.02 /machine:THUMB"
-				AdditionalDependencies="../../iperflib/lib/iperf.lib"
+				AdditionalDependencies="../../iperflib/lib/iperf.lib ARM_PLUGIN_2005.lib"
+				OutputFile="$(OutDir)\$(ProjectName).exe"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="../ARM"
 				DelayLoadDLLs="$(NOINHERIT)"
 				SubSystem="0"
 			/>
@@ -525,6 +531,10 @@
 				RelativePath=".\BTools2ppc.rc2"
 				>
 			</File>
+			<File
+				RelativePath=".\res\Matrix_TinyBlue.bmp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="modules"
@@ -535,6 +545,14 @@
 			</File>
 			<File
 				RelativePath=".\modules\IniFile.h"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\MatrixStatic.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\MatrixStatic.h"
 				>
 			</File>
 			<File
@@ -720,5 +738,9 @@
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="BTools2ppc.rc"
+		/>
 	</Globals>
 </VisualStudioProject>

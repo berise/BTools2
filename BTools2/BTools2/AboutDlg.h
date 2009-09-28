@@ -2,6 +2,8 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
+#include "modules/MatrixStatic.h"
+
 #pragma once
 
 class CAboutDlg : public CStdDialogImpl<CAboutDlg>
@@ -20,4 +22,6 @@ public:
 //	LRESULT NotifyHandler(int /*idCtrl*/, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/)
 
 	LRESULT OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
+private:
+	CMatrixStatic m_matrix;
 };

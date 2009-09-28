@@ -243,11 +243,11 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 	CScreenLib::DockControl(m_hWnd, IDC_HOST, CScreenLib::dtTop);
 
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.  
-	CScreenLib::OptimizeWidth(m_hWnd, 5,
+	// 2009/9/29 IDC_STATIC_VISUAL 제거
+	CScreenLib::OptimizeWidth(m_hWnd, 4,
 		IDC_HOST,
 		IDC_HOST_COMBO, 
 		IDC_RESULT_LIST, 
-		IDC_STATIC_VISUAL,
 		IDC_STATIC_PLACEHOLDER
 		);
 
@@ -262,7 +262,7 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 
 
 	// 최상단 정렬
-	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST_COMBO, 6);
+	VerticalSpace(m_hWnd, IDC_HOST, IDC_HOST_COMBO, 3);
 	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_STATIC_DATA_SIZE, 3);
 	VerticalSpace(m_hWnd, IDC_HOST_COMBO, IDC_STATIC_SEND_COUNT, 3);
 	VerticalSpace(m_hWnd, IDC_STATIC_DATA_SIZE, IDC_CB_DATA_SIZE, 3);
@@ -272,8 +272,8 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 
 
 
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_VISUAL, 6);
-	VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_STATIC_PLACEHOLDER, 3);
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_PLACEHOLDER, 6);
+	//VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_STATIC_PLACEHOLDER, 3);
 
 
 	// IDC_STATIC_DATA_SIZE에 Ping 버튼 상 정렬
@@ -300,7 +300,7 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 	// IDC_STATIC_VISUAL아래쪽의 남은 공간의 크기를 계산하여 OScopeCtrl을 가득 채운다.
 	CRect r, cr, vr;
 	//::GetClientRect(::GetDlgItem(m_hWnd, IDC_STATIC_VISUAL), vr);
-	GetDlgItem(IDC_STATIC_VISUAL).GetWindowRect(vr);
+	GetDlgItem(IDC_RESULT_LIST).GetWindowRect(vr);
 	ScreenToClient(vr);
 	GetWindowRect(cr);
 	ScreenToClient(cr);

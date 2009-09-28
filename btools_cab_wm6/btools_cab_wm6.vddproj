@@ -14,7 +14,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_45B90363B86A4BC9B940FD149EC0223E"
+        "MsmKey" = "8:_681A613551294270B48964F52F4D71EE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -50,12 +50,12 @@
     {
         "File"
         {
-            "{BA458234-9B71-4F46-8107-E91156377184}:_45B90363B86A4BC9B940FD149EC0223E"
+            "{BA458234-9B71-4F46-8107-E91156377184}:_681A613551294270B48964F52F4D71EE"
             {
             "SourcePath" = "8:..\\BTools2\\BTools2\\Windows Mobile 6 Professional SDK (ARMV4I)\\Release\\BTools2.exe"
             "TargetName" = "8:BTools2.exe"
             "Tag" = "8:"
-            "Folder" = "8:_9B79B1AA39A04D5A9284DE75CA90ADAD"
+            "Folder" = "8:_7A406509CF4741AF8F30DA5D57C4A460"
             "Condition" = "8:"
             "Vital" = "11:TRUE"
             "ReadOnly" = "11:FALSE"
@@ -158,15 +158,15 @@
         }
         "Shortcut"
         {
-            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_FF8D55149EA14E56B6245D9FEF46A53B"
+            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_F3896DFFCDBD495B9F276C521F549CFF"
             {
-            "Name" = "8:BTools2"
+            "Name" = "8:BTools2.exe"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "Target" = "8:_45B90363B86A4BC9B940FD149EC0223E"
+            "Target" = "8:_681A613551294270B48964F52F4D71EE"
             "Folder" = "8:_7DC8D607237542A883F39ECA1F2DDD6B"
-            "WorkingFolder" = "8:_9B79B1AA39A04D5A9284DE75CA90ADAD"
+            "WorkingFolder" = "8:_7A406509CF4741AF8F30DA5D57C4A460"
             }
         }
     }

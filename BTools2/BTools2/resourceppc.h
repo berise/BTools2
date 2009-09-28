@@ -10,6 +10,7 @@
 #define IDD_IPERF_SERVER_PAGE           131
 #define IDR_MENU1                       201
 #define IDI_ICON1                       203
+#define IDB_BITMAP1                     204
 #define IDC_CB_COMMANDS                 1000
 #define IDC_HOST_COMBO                  1000
 #define IDC_CB_COMMAND                  1000
@@ -33,6 +34,7 @@
 #define IDC_RUN_SERVER                  1013
 #define IDC_CB_DATA_SIZE                1013
 #define IDC_CB_SEND_COUNT               1014
+#define IDC_STATIC_MATRIX               1015
 #define IDC_SERVER_IP                   1016
 #define IDC_CLIENT_IP                   1017
 #define IDC_STATIC_VISUAL               1018
@@ -53,9 +55,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        204
+#define _APS_NEXT_RESOURCE_VALUE        205
 #define _APS_NEXT_COMMAND_VALUE         32778
-#define _APS_NEXT_CONTROL_VALUE         1015
+#define _APS_NEXT_CONTROL_VALUE         1016
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
