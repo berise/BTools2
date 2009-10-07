@@ -98,12 +98,12 @@ END
 
 IDD_ABOUTBOX DIALOG  0, 0, 138, 154
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION
-CAPTION "About BTools2"
+CAPTION "About..."
 FONT 8, "MS Shell Dlg"
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,21,20
-    LTEXT           "BTools2 -- iPerf for Windows Mobile --",IDC_STATIC_MATRIX,7,79,123,59,SS_NOPREFIX,WS_EX_STATICEDGE
-    LTEXT           "(c) Copyright 2009 berise@gmail.com",IDC_STATIC,7,133,124,11
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,20,20
+    LTEXT           "BTools2 -- iPerf for Windows Mobile --",IDC_STATIC_MATRIX,7,78,100,42,SS_NOPREFIX,WS_EX_STATICEDGE
+    LTEXT           "BTools2",IDC_STATIC,33,10,88,14
     CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,36,124,38,0,WS_EX_STATICEDGE
 END
 

@@ -117,7 +117,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 
 #endif
 
-	CAboutDlg aboutDlg;	aboutDlg.DoModal();
+	//CAboutDlg aboutDlg;	aboutDlg.DoModal();
     //
 	HRESULT hRes = CBTools2Frame::ActivatePreviousInstance(hInstance, lpstrCmdLine);
 

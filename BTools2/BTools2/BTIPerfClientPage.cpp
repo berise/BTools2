@@ -287,7 +287,7 @@ void CIPerfClientPage::OnSize(UINT state, CSize Size)
 	GetDlgItem(IDC_STATIC_PLACEHOLDER).MoveWindow(r.left, 
 		r.top, 
 		r.Width(), 
-		cr.Height() - vr.bottom);
+		cr.Height() - vr.bottom-6);
 
 
 	if(m_OScopeCtrl.m_hWnd!= NULL)

@@ -272,7 +272,7 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 
 
 
-	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_PLACEHOLDER, 6);
+	VerticalSpace(m_hWnd, IDC_RESULT_LIST, IDC_STATIC_PLACEHOLDER, 4);
 	//VerticalSpace(m_hWnd, IDC_STATIC_VISUAL, IDC_STATIC_PLACEHOLDER, 3);
 
 
@@ -308,7 +308,7 @@ void CBTPingPage::OnSize(UINT state, CSize Size)
 	GetDlgItem(IDC_STATIC_PLACEHOLDER).GetWindowRect(r);
 	ScreenToClient(r);
 
-	GetDlgItem(IDC_STATIC_PLACEHOLDER).MoveWindow(r.left, r.top, r.Width(), cr.Height() - vr.bottom - 5); // padding(-5)
+	GetDlgItem(IDC_STATIC_PLACEHOLDER).MoveWindow(r.left, r.top, r.Width(), cr.Height() - vr.bottom - 6); // padding(-6)
 		
 
 	

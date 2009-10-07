@@ -453,7 +453,7 @@ void CMatrixStatic::AdjustClientXToSize(int size )
 	GetClientRect(&rc);
 	int width =  ((m_icharwidth + m_ixspacing) * size);
 	int height = rc.bottom - rc.top;
-	SetWindowPos(NULL, 0, 0, width+4, height+4, SWP_NOMOVE);
+	SetWindowPos(NULL, 0, 0, width+0, height+0, SWP_NOMOVE);
 }
 
 
@@ -471,7 +471,7 @@ void CMatrixStatic::AdjustClientYToSize(int size)
 	GetClientRect(&rc);
 	int width =  rc.right - rc.left;
 	int height = ((m_icharheight+m_iyspacing) * size);
-	SetWindowPos(NULL, 0, 0, width+4, height+4, SWP_NOMOVE);
+	SetWindowPos(NULL, 0, 0, width+0, height+0, SWP_NOMOVE);
 }
 
 /** @brief  »ö ÁöÁ¤
