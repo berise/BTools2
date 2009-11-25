@@ -50,9 +50,23 @@ DWORD WINAPI PingThread(LPVOID lpParameter )
 }
 
 
+CBTPingPage::CBTPingPage()
+{
+	// ICON
+	m_psp.dwFlags |= PSP_USEICONID;
+	//m_psp.dwFlags |= PSP_USEHICON;
+	//m_psp.pszIcon = MAKEINTRESOURCE(IDI_PING);
+	m_psp.pszIcon = MAKEINTRESOURCE(IDI_PING);//m_pView->m_ImageList16x16.GetIcon(0);
+	//HICON a = m_pView->m_ImageList16x16.G.GetIcon(0);	
+	//m_psp.pszIcon = m_pView->m_ImageList16x16.G.GetIcon(0);
+	m_psp.hInstance = _Module.GetResourceInstance();
+	//m_psp.hInstance = ModuleHelper::GetResourceInstance();//_Module.GetResourceInstance();
+}
+
 
 BOOL CBTPingPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 {
+	// MENUBAR
 	SHMENUBARINFO mbi;
 	ZeroMemory(&mbi, sizeof(SHMENUBARINFO));
 	mbi.cbSize     = sizeof(SHMENUBARINFO);

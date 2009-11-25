@@ -52,7 +52,7 @@
 				Name="VCCLCompilerTool"
 				ExecutionBucket="7"
 				Optimization="0"
-				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib"
+				AdditionalIncludeDirectories="modules;iperfcs;../../iperflib;../ARM"
 				PreprocessorDefinitions="_WIN32_WCE=$(CEVER);UNDER_CE=$(CEVER);WINCE;_DEBUG;$(PLATFORMDEFINES);$(ARCHFAM);$(_ARCHFAM_);_UNICODE;POCKETPC2003_UI_MODEL,_WINSOCK_2_0_"
 				MinimalRebuild="true"
 				RuntimeLibrary="1"
@@ -535,24 +535,88 @@
 				RelativePath=".\res\Matrix_TinyBlue.bmp"
 				>
 			</File>
+			<Filter
+				Name="16x16"
+				>
+				<File
+					RelativePath=".\res\16\icon_world_dynamic.ico"
+					>
+				</File>
+				<File
+					RelativePath=".\res\16\page_down.ico"
+					>
+				</File>
+				<File
+					RelativePath=".\res\16\page_up.ico"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="32x32"
+				>
+				<File
+					RelativePath=".\res\32\2downarrow.ico"
+					>
+				</File>
+				<File
+					RelativePath=".\res\32\2uparrow.ico"
+					>
+				</File>
+				<File
+					RelativePath=".\res\32\kr_bookmark.ico"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="modules"
 			>
+			<File
+				RelativePath=".\modules\CFireRoutine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\CFireRoutine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\CPlasmaRoutine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\CPlasmaRoutine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\CSFXPage_w.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\CSFXPage_w.h"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\CWaterRoutine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\CWaterRoutine.h"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\DIBSectionLite.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\modules\DIBSectionLite.h"
+				>
+			</File>
 			<File
 				RelativePath=".\modules\IniFile.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\modules\IniFile.h"
-				>
-			</File>
-			<File
-				RelativePath=".\modules\MatrixStatic.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\modules\MatrixStatic.h"
 				>
 			</File>
 			<File

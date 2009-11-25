@@ -22,6 +22,21 @@ BOOL CBTools2View::PreTranslateMessage(MSG* pMsg)
 
 CBTools2View::CBTools2View()
 {
+	// image list
+	// Init CPropertyView 
+	//CTabCtrl *tab = GetTabControl();
+	
+	HINSTANCE hInstance = ModuleHelper::GetModuleInstance();
+
+	
+	m_ImageList16x16.Create(16, 16, ILC_COLOR32|ILC_MASK, 6, 3);
+	m_ImageList16x16.AddIcon( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PING_16x)) ); // 
+	m_ImageList16x16.AddIcon( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_CLIENT_16x)) );
+	m_ImageList16x16.AddIcon( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_IPERF_SERVER_16x)) );
+	//m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT1)) );
+	//m_ImageList16x16.Add( ::LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ABOUT2)) );
+
+
 	//SetTitle(_T("Properties"));
 	//SetLinkText(_T("Tap <file:\\Windows\\default.htm{here}>."));
 
@@ -47,6 +62,10 @@ CBTools2View::CBTools2View()
 	_tcscat(gszIniFile, L"\\BTools2\\BTools2.ini");
 
 	OnSetDefaultIni(gszIniFile);
+
+
+	// test code
+	
 
 }
 

@@ -10,6 +10,7 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 {
 	AtlCreateEmptyMenuBar(m_hWnd);
 
+	/*
 	m_matrix.Create(m_hWnd);//GetDlgItem(IDC_STATIC_MATRIX));
 
 	
@@ -37,6 +38,16 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 					"+------------------+");
 	
 	m_matrix.SetText(msg);
+	*/
+
+	CRect r;
+	ATL::CWindow w = GetDlgItem(IDC_STATIC_ENG);
+	w.GetClientRect(r);
+	m_SFX.Create(w, r);
+	m_SFX.MoveWindow(r);
+	m_SFX.SetWindowText(L"LLLLAAA");
+
+	//m_SFX.m_hWnd = w;
 
 	return bHandled = FALSE;
 }

@@ -2,7 +2,8 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-#include "modules/MatrixStatic.h"
+//#include "modules/MatrixStatic.h"
+#include "modules/CSFXPage_w.h"
 
 #pragma once
 
@@ -23,5 +24,6 @@ public:
 
 	LRESULT OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
 private:
-	CMatrixStatic m_matrix;
+	//CMatrixStatic m_matrix;
+	CSFXPage m_SFX;
 };

@@ -1,17 +1,13 @@
-
-#include "resourceppc.h"
-#include "atlddx.h"
-#include "atlcrack.h"
-
+//#include "resourceppc.h"
 #include "DIBSectionLite.h"
 #include "CWaterRoutine.h"
 #include "CFireRoutine.h"
 
-class CSFXPage: public CPropertyPageImpl<CSFXPage>,
+class CSFXPage: public CStatic,
 			public CWinDataExchange<CSFXPage>
 {
 public:
-  enum { IDD = IDD_SFX_PAGE };
+//  enum { IDD = IDD_SFX_PAGE };
  
   // Construction
 
@@ -20,12 +16,12 @@ public:
  
   // Maps
 
-  BEGIN_MSG_MAP(CSFXPage)
+  BEGIN_MSG_MAP_EX(CSFXPage)
     MSG_WM_INITDIALOG(OnInitDialog)
 	MSG_WM_PAINT(OnPaint)
-		MSG_WM_TIMER(OnTimer)
-    CHAIN_MSG_MAP(CPropertyPageImpl<CSFXPage>)
-  END_MSG_MAP()
+	MSG_WM_TIMER(OnTimer)
+    //CHAIN_MSG_MAP(CStatic)
+  END_MSG_MAP_EX()
  
   /*
   BEGIN_DDX_MAP(CSFXPage)

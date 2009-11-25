@@ -104,8 +104,13 @@ void CIPerfClientPage::CallbackBW(double fBW)
 }
 
 
-//
-
+/// To put icon on CPropertyPage
+CIPerfClientPage::CIPerfClientPage()
+{
+	m_psp.dwFlags |= PSP_USEICONID;
+	m_psp.pszIcon = MAKEINTRESOURCE(IDI_IPERF_CLIENT);
+	m_psp.hInstance = ModuleHelper::GetResourceInstance();
+}
 
 BOOL CIPerfClientPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 {
@@ -377,15 +382,16 @@ LRESULT CIPerfClientPage::OnRunClient(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 		m_cbCommand.GetLBText(nSel, szCmd);
 	}
 
+	// ComboBox의 명령만 cbCommand에 넣어야 함. 그렇지 않으면 -i -t 옵션이 계속 추가됨
+	// szServer를 다시 ComboBox에 넣고 Ping 시작
+	m_cbCommand.InsertString(0, szCmd);
+
 	szCmdOption.Format(L" -i %d -t %d", m_nInterval, m_nDuration);
 
 	_tcscat(szCmd, szCmdOption);
 
 	// DEBUG
 	//AtlMessageBox(NULL, szCmd);
-	
-	// szServer를 다시 ComboBox에 넣고 Ping 시작
-	m_cbCommand.InsertString(0, szCmd);
 
 	int nItem = m_cbCommand.GetCount();
 	if(nItem > MAX_ITEM) m_cbCommand.DeleteString(MAX_ITEM);

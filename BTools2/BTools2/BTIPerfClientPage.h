@@ -19,6 +19,7 @@ class CIPerfClientPage: public CPropertyPage<IDD_IPERF_CLIENT_PAGE>,
 		CReporter
 {
 public:
+	CIPerfClientPage();
 	WTL_DLG_NOTITLE
 
 	BEGIN_MSG_MAP(CIPerfClientPage)

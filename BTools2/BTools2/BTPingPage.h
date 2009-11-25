@@ -15,6 +15,7 @@ class CBTPingPage: public CPropertyPage<IDD_PING_PAGE>,
 			public CWinDataExchange<CBTPingPage>//, public CUT_ICMP
 {
 public:
+	CBTPingPage();
 	//WTL_DLG_NOTITLE
 
 	BEGIN_MSG_MAP(CBTPingPage)

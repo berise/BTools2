@@ -132,7 +132,17 @@ void CIPerfServerPage::CallbackBW(double fBW)
 
 
 
-///////////
+///
+///< To put icon on CPropertyPage
+CIPerfServerPage::CIPerfServerPage()
+{
+	m_psp.dwFlags |= PSP_USEICONID;
+	m_psp.pszIcon = MAKEINTRESOURCE(IDI_IPERF_SERVER);
+	m_psp.hInstance = ModuleHelper::GetResourceInstance();
+}
+
+
+
 BOOL CIPerfServerPage::OnInitDialog(HWND hwndFocus, LPARAM lParam)
 {
 		SHMENUBARINFO mbi;
@@ -288,7 +298,6 @@ LRESULT CIPerfServerPage::OnRunServerBnClicked(WORD wNotifyCode, WORD wID, HWND 
 
 	if (!m_bServerStarted)
 	{
-
 		// ListBox에서 선택된 명령행을 가져옮
 		CString szCmd;
 

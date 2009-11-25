@@ -14,7 +14,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_FAA1F28776F74526997C30E004537B48"
+        "MsmKey" = "8:_B8AF8DE21E2D4EDFB09A68DA71A4E812"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -38,7 +38,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\btools_arm_wm5.cab"
+        "OutputFilename" = "8:Release\\btools2_arm_wm5.cab"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
         "SignOutput" = "11:FALSE"
@@ -63,6 +63,15 @@
                 {
                 }
             }
+            "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_BDD28A3DFC004B8FB5D9CD43D03E9548"
+            {
+            "Name" = "8:#1916"
+            "Condition" = "8:"
+            "Property" = "8:%CE11%"
+                "Folders"
+                {
+                }
+            }
             "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_F0AB25EDC3884C4EA9ABD7B61498EABE"
             {
             "Name" = "8:#1911"
@@ -72,7 +81,7 @@
                 {
                     "{5943FCFD-5B64-4EE4-96C9-4618EC95352A}:_0B20D2FC95864602BAB465765256C0DF"
                     {
-                    "Name" = "8:BTools"
+                    "Name" = "8:BTools2"
                     "Condition" = "8:"
                     "Property" = "8:_1211A7DE5288447096E44986680C8DF3"
                         "Folders"
@@ -81,20 +90,11 @@
                     }
                 }
             }
-            "{F6DFDB62-1DD1-498B-89B7-27BAC542EE5A}:_FA4BFC74F99C4B1E9F04D65112967059"
-            {
-            "Name" = "8:#1919"
-            "Condition" = "8:"
-            "Property" = "8:%CE17%"
-                "Folders"
-                {
-                }
-            }
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:BTools for WM5"
+        "ProductName" = "8:BTools2 for WM5"
         "Manufacturer" = "8:berise"
         "OSVersionMin" = "8:4.0"
         "OSVersionMax" = "8:6.99"
@@ -104,9 +104,9 @@
         }
         "ProjectOutput"
         {
-            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_FAA1F28776F74526997C30E004537B48"
+            "{605BE39E-5046-48BD-AEC0-63C3A46626D5}:_B8AF8DE21E2D4EDFB09A68DA71A4E812"
             {
-            "SourcePath" = "8:..\\BTools\\Windows Mobile 5.0 Pocket PC SDK (ARMV4I)\\Release\\BTools.exe"
+            "SourcePath" = "8:..\\BTools2\\BTools2\\Windows Mobile 5.0 Pocket PC SDK (ARMV4I)\\Release\\BTools2.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0B20D2FC95864602BAB465765256C0DF"
@@ -124,7 +124,7 @@
             "ProjectOutputGroupRegister" = "3:0"
             "OutputConfiguration" = "8:Release|Windows Mobile 5.0 Pocket PC SDK (ARMV4I)"
             "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{2511BA27-41D0-4752-B489-95ADC7E49EAB}"
+            "OutputProjectGuid" = "8:{36B37DF9-DD12-4844-8AC6-3ECA2A287228}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
@@ -166,14 +166,14 @@
         }
         "Shortcut"
         {
-            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_9CD3F2227C4B45C498DC895DB0391103"
+            "{971D45E9-E38C-49AC-B36E-4C5BEA533350}:_D54B4A659296425183549B44B9E0A3A7"
             {
-            "Name" = "8:BTools"
+            "Name" = "8:BTools2"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
-            "Target" = "8:_FAA1F28776F74526997C30E004537B48"
-            "Folder" = "8:_FA4BFC74F99C4B1E9F04D65112967059"
+            "Target" = "8:_B8AF8DE21E2D4EDFB09A68DA71A4E812"
+            "Folder" = "8:_BDD28A3DFC004B8FB5D9CD43D03E9548"
             "WorkingFolder" = "8:_0B20D2FC95864602BAB465765256C0DF"
             }
         }

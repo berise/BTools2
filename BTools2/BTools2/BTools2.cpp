@@ -14,12 +14,15 @@
 
 CAppModule _Module;
 
+
+#define __EXPIRATION__ 0
+
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lpstrCmdLine, int nCmdShow)
 {
-	/*
+#ifdef __EXPIRATION__
 	// Program Expiration routines
 	CTime expirationTime(2009,	// year
-		10,					// month
+		12,					// month
 		31,					// date
 		23,					// hour 24
 		59,					// minute
@@ -41,7 +44,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 		 if(leftTime.GetDays() < 7)
 		 {
 			 msg = leftTime.Format(L"This software will expire after %D day(s)");// %H Hour(s) %M Minute(s)");
-			 AtlMessageBox(NULL, msg.GetBuffer(), L"Warning");
+			 AtlMessageBox(NULL, msg.GetBuffer(), L"Expiration Warning");
 		 }
 		 //AfxMessageBox(msg);
     }
@@ -53,15 +56,15 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 				"Thank you for your interest\n");
 
 		msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
-		msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S left" );
+		msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S passed" );
         //msg.Format(L"This software is submitted for the Windows Mobile Contest");
 		AtlMessageBox(NULL, msg.GetBuffer(), L"Warning");
 		return FALSE;
 	 }
-	 */
 
-#ifdef __TSTORE_ARM__
-	/*
+#endif
+
+#ifdef __TSTORE_ARM__0
 	// ARM
 	T_RETURN ret;
 	TAPPID *APPID = TSTORE_APPLICATION_ID;
@@ -77,9 +80,16 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 		{ 
 			ARM_PLUGIN_RequestLicense(&res); 
 			if (res.code !=ARM_SUCCESS) 
-			{ //실패시 메시 구현 
-				aSuccess=false; 
-			} 
+			{ //실패시 구현 
+				aSuccess=false;
+				TCHAR wszMsg[1024];
+				if(ret.pMsg)
+				{
+					ansi_to_unicode(ret.pMsg, strlen(ret.pMsg), wszMsg, 1024);
+					::AtlMessageBox(NULL, wszMsg, L"[ARM]Request License");
+				}
+			}
+		
 		} 
 		else 
 		{//실패시 메시 구현 
@@ -97,7 +107,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 					if(ret.pMsg)
 					{
 						ansi_to_unicode(ret.pMsg, strlen(ret.pMsg), wszMsg, 1024);
-						::AtlMessageBox(NULL, wszMsg, L"Check License");
+						::AtlMessageBox(NULL, wszMsg, L"[ARM]Check License");
 					}
 				}
 
@@ -111,9 +121,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 		aSuccess=false; 
 	} 
 	ARM_PLUGIN_Uninitialize(&res); 
-	*/
 
-	//if (! aSuccess) PostQuitMessage(0); 
+
+	//if (! aSuccess) return 0;//PostQuitMessage(0); 
 
 #endif
 

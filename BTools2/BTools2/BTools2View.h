@@ -23,6 +23,11 @@ public:
 	CIPerfServerPage m_Page3;
 
 	TCHAR gszIniFile[MAX_PATH];
+
+	//
+	CImageList m_ImageList16x16;
+	CImageList m_ImageList32x32;
+
 	//
 	
 	CBTools2View();

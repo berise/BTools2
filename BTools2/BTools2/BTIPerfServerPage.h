@@ -13,6 +13,7 @@ class CIPerfServerPage: public CPropertyPage<IDD_IPERF_SERVER_PAGE>,
 		CReporter
 {
 public:
+	CIPerfServerPage();
 	WTL_DLG_NOTITLE
 
 		// WTL message maps

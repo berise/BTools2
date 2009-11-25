@@ -102,9 +102,10 @@ CAPTION "About..."
 FONT 8, "MS Shell Dlg"
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,7,7,20,20
-    LTEXT           "BTools2 -- iPerf for Windows Mobile --",IDC_STATIC_MATRIX,7,78,100,42,SS_NOPREFIX,WS_EX_STATICEDGE
+    CTEXT           "BTools2\n-- iPerf for Windows Mobile --\n Under construction",IDC_STATIC_MATRIX,7,83,100,42,SS_NOPREFIX | NOT WS_VISIBLE,WS_EX_STATICEDGE
     LTEXT           "BTools2",IDC_STATIC,33,10,88,14
-    CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,36,124,38,0,WS_EX_STATICEDGE
+    CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,23,124,38,NOT WS_VISIBLE,WS_EX_STATICEDGE
+    CTEXT           "-= Warning =-\nThis program can cause heavy traffics. This means that you have to pay more money if not using proper plan.",IDC_STATIC_ENG,7,36,124,38,0,WS_EX_STATICEDGE
 END
 
 IDD_BTOOLS2_PAGE DIALOG  0, 0, 156, 129
@@ -162,6 +163,12 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\BTools.ico"
+IDI_PING                ICON                    "res\\32\\kr_bookmark.ico"
+IDI_IPERF_SERVER        ICON                    "res\\32\\2downarrow.ico"
+IDI_IPERF_CLIENT        ICON                    "res\\32\\2uparrow.ico"
+IDI_PING_16x            ICON                    "res\\16\\icon_world_dynamic.ico"
+IDI_IPERF_SERVER_16x    ICON                    "res\\16\\page_down.ico"
+IDI_IPERF_CLIENT_16x    ICON                    "res\\16\\page_up.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
