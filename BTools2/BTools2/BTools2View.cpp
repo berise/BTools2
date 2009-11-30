@@ -63,10 +63,7 @@ CBTools2View::CBTools2View()
 
 	OnSetDefaultIni(gszIniFile);
 
-
 	// test code
-	
-
 }
 
 

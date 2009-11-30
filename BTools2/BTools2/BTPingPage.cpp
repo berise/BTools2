@@ -234,6 +234,8 @@ LRESULT CBTPingPage::OnPing(WORD wNotifyCode, WORD wID, HWND hWndCtl)
 
 	}
 
+
+
 	return 0;
 }
 

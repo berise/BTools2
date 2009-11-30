@@ -399,7 +399,7 @@ void COScopeCtrl::InvalidateCtrl()
   // y units
   oldFont = m_dcGrid.SelectFont(yUnitFont) ;
 
-  textRect = CRect(m_rectClient.left+10, m_rectPlot.top, m_rectPlot.left, m_rectPlot.bottom);
+  textRect = CRect(m_rectClient.left+10, m_rectPlot.top, m_rectPlot.left, m_rectClient.bottom/2);
 
   //m_dcGrid.Rectangle(textRect);
 

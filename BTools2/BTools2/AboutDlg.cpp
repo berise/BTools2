@@ -41,14 +41,35 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 	*/
 
 	CRect r;
-	ATL::CWindow w = GetDlgItem(IDC_STATIC_ENG);
+	ATL::CWindow w = GetDlgItem(IDC_STATIC_MATRIX);
 	w.GetClientRect(r);
-	m_SFX.Create(w, r);
+	m_SFX.Create(w);
+	//m_SFX.Attach(w);
 	m_SFX.MoveWindow(r);
 	m_SFX.SetWindowText(L"LLLLAAA");
 
 	//m_SFX.m_hWnd = w;
 
+
+
+	/*
+	int height = GetSystemMetrics(SM_CYSCREEN);
+	int width = GetSystemMetrics(SM_CXSCREEN);
+	
+	CString szMsg;
+	szMsg.Format(L"%d, %d", height, width);
+	AtlMessageBox(m_hWnd, szMsg.GetBuffer());
+	*/
+
+
+
 	return bHandled = FALSE;
 }
 
+
+
+void CAboutDlg::OnDestroy()
+{
+	m_SFX.DestroyWindow();
+
+}

@@ -588,11 +588,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\modules\CSFXPage_w.cpp"
+				RelativePath=".\modules\CSFXStatic.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\modules\CSFXPage_w.h"
+				RelativePath=".\modules\CSFXStatic.h"
 				>
 			</File>
 			<File

@@ -3,7 +3,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 //#include "modules/MatrixStatic.h"
-#include "modules/CSFXPage_w.h"
+#include "modules/CSFXStatic.h"
 
 #pragma once
 
@@ -14,6 +14,7 @@ public:
 
 	BEGIN_MSG_MAP(CAboutDlg)
 		MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
+		MSG_WM_DESTROY(OnDestroy)
 		CHAIN_MSG_MAP(CStdDialogImpl<CAboutDlg>)
 	END_MSG_MAP()
 
@@ -23,7 +24,8 @@ public:
 //	LRESULT NotifyHandler(int /*idCtrl*/, LPNMHDR /*pnmh*/, BOOL& /*bHandled*/)
 
 	LRESULT OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);
+	void OnDestroy();
 private:
 	//CMatrixStatic m_matrix;
-	CSFXPage m_SFX;
+	CSFXStatic m_SFX;
 };

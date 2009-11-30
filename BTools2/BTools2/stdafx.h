@@ -33,11 +33,13 @@ extern CAppModule _Module;
 #include <atlmisc.h>
 #include <atlcrack.h>
 #include <atlddx.h>
+#include <atlctrls.h>
 
 // project specific includes
 #include "resourceppc.h"
 
 
+// ini settings
 const int MAX_ITEM	=	3;
 #define INI_SECTION_PING	"Ping"
 #define INI_SECTION_CLIENT	"iPref Client"

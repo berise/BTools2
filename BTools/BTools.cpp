@@ -42,10 +42,14 @@ CBToolsApp::CBToolsApp()
 // 유일한 CBToolsApp 개체입니다.
 CBToolsApp theApp;
 
+
+const int __TIME_EXPIRATION__ = 0;
 // CBToolsApp 초기화
 
 BOOL CBToolsApp::InitInstance()
 {
+
+#ifdef __TIME_EXPIRATION__
 	// Program Expiration routines
 	CTime expirationTime(2009,	// year
 		12,					// month
@@ -90,6 +94,7 @@ BOOL CBToolsApp::InitInstance()
 		AfxMessageBox(msg);
 		return FALSE;
 	 }
+#endif//__TIME_EXPIRATION__
 
 	//CAboutDlg aboutDlg;	aboutDlg.DoModal();
     //

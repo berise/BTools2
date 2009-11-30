@@ -15,7 +15,7 @@
 CAppModule _Module;
 
 
-#define __EXPIRATION__ 0
+#define __EXPIRATION__
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lpstrCmdLine, int nCmdShow)
 {
@@ -44,7 +44,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 		 if(leftTime.GetDays() < 7)
 		 {
 			 msg = leftTime.Format(L"This software will expire after %D day(s)");// %H Hour(s) %M Minute(s)");
-			 AtlMessageBox(NULL, msg.GetBuffer(), L"Expiration Warning");
+			 //AtlMessageBox(NULL, msg.GetBuffer(), L"Expiration Warning");
 		 }
 		 //AfxMessageBox(msg);
     }
@@ -58,7 +58,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 		msg += expirationTime.Format(L"Expiration date :\n %Y-%m-%d  %H:%M\n\n");
 		msg += leftTime.Format(L"%D day(s) and\n %H:%M:%S passed" );
         //msg.Format(L"This software is submitted for the Windows Mobile Contest");
-		AtlMessageBox(NULL, msg.GetBuffer(), L"Warning");
+		//AtlMessageBox(NULL, msg.GetBuffer(), L"Warning");
 		return FALSE;
 	 }
 
