@@ -532,6 +532,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\f01.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\Matrix_TinyBlue.bmp"
 				>
 			</File>

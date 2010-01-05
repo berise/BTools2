@@ -96,16 +96,16 @@ BEGIN
     LTEXT           "iPerf Server IP",IDC_STATIC_INFO,7,125,95,8
 END
 
-IDD_ABOUTBOX DIALOG  0, 0, 138, 154
+IDD_ABOUTBOX DIALOG  0, 0, 138, 183
 STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION
 CAPTION "About..."
 FONT 8, "MS Shell Dlg"
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,20,20
-    CTEXT           "BTools2\n-- iPerf for Windows Mobile --\n Under construction",IDC_STATIC_MATRIX,7,83,124,42,SS_NOPREFIX,WS_EX_STATICEDGE
-    LTEXT           "BTools2",IDC_STATIC,33,10,88,14
-    CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,23,124,38,NOT WS_VISIBLE,WS_EX_STATICEDGE
-    CTEXT           "-= Warning =-\nThis program can cause heavy traffics. This means that you have to pay more money if not using proper plan.",IDC_STATIC_ENG,7,36,124,38,0,WS_EX_STATICEDGE
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,21,20
+    CTEXT           "BTools2\n-- iPerf for Windows Mobile --\n Under construction",IDC_STATIC_MATRIX,7,97,124,65,SS_NOPREFIX,WS_EX_STATICEDGE
+    LTEXT           "BTools2",IDC_STATIC_VERSION,33,10,88,19
+    CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,37,124,38,NOT WS_VISIBLE,WS_EX_STATICEDGE
+    CTEXT           "-= Warning =-\nThis program can cause heavy traffics. This means that you have to pay more money if not using proper plan.",IDC_STATIC_ENG,7,50,124,38,0,WS_EX_STATICEDGE
 END
 
 IDD_BTOOLS2_PAGE DIALOG  0, 0, 156, 129
@@ -134,7 +134,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 131
         TOPMARGIN, 7
-        BOTTOMMARGIN, 147
+        BOTTOMMARGIN, 176
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -176,6 +176,7 @@ IDI_IPERF_CLIENT_16x    ICON                    "res\\16\\page_up.ico"
 //
 
 IDB_BITMAP1             BITMAP                  "res\\Matrix_TinyBlue.bmp"
+IDB_BITMAP2             BITMAP                  "res\\f01.bmp"
 #endif    // 한국어 resources
 /////////////////////////////////////////////////////////////////////////////
 

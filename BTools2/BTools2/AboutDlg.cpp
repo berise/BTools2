@@ -5,6 +5,8 @@
 #include "stdafx.h"
 #include "resourceppc.h"
 #include "aboutdlg.h"
+#include "../../btools_version.h"
+
 
 LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled)
 {
@@ -49,6 +51,12 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 	m_SFX.SetWindowText(L"LLLLAAA");
 
 	//m_SFX.m_hWnd = w;
+
+	CString szVersion;
+	szVersion.Format(_T("BTools2 Build %s.\niperf for Windows Mobile"),BTOOLS_SVN_VERSION);
+	//szVersion += BTOOLS_SVN_VERSION;
+	CStatic cVersion = GetDlgItem(IDC_STATIC_VERSION);
+	cVersion.SetWindowText(szVersion);
 
 
 

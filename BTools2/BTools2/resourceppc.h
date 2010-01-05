@@ -17,6 +17,7 @@
 #define IDI_PING_16x                    213
 #define IDI_IPERF_SERVER_16x            214
 #define IDI_IPERF_CLIENT_16x            215
+#define IDB_BITMAP2                     216
 #define IDC_CB_COMMANDS                 1000
 #define IDC_HOST_COMBO                  1000
 #define IDC_CB_COMMAND                  1000
@@ -44,6 +45,7 @@
 #define IDC_SERVER_IP                   1016
 #define IDC_STATIC_ENG                  1016
 #define IDC_CLIENT_IP                   1017
+#define IDC_STATIC_VERSION              1017
 #define IDC_STATIC_VISUAL               1018
 #define IDC_STATIC_COMMANDS             1019
 #define IDC_STATIC_OUTPUT               1020
@@ -62,9 +64,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        216
+#define _APS_NEXT_RESOURCE_VALUE        217
 #define _APS_NEXT_COMMAND_VALUE         32778
-#define _APS_NEXT_CONTROL_VALUE         1017
+#define _APS_NEXT_CONTROL_VALUE         1018
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

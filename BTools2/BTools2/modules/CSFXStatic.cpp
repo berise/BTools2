@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "CSFXStatic.h"
 
-const int SFX_TIMER_ID = 999;
+const int SFX_TIMER_UPDATE = 999;
+const int SFX_TIMER_WATER = SFX_TIMER_UPDATE + 1;
+
 
 // Parent window must call destroy & clean CSFXStatic
 // or you'll see ERROR - Object deleted before window was destroyed
@@ -18,7 +20,7 @@ int CSFXStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CBitmap bm;
 	CDIBSectionLite bmTemp;
 	//bmTemp.Load(L"\\ee.bmp");
-	bmTemp.SetBitmap(IDB_BITMAP1);
+	bmTemp.SetBitmap(IDB_BITMAP2);
 
 	CSize bmSize = bmTemp.GetSize();
 
@@ -43,8 +45,12 @@ int CSFXStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_Fire.InitFire();
 
 
-	SetTimer(SFX_TIMER_ID, 40, NULL);
+	SetTimer(SFX_TIMER_UPDATE, 40, NULL);
+	SetTimer(SFX_TIMER_WATER, 2000, NULL);
 
+
+	// random water drop.
+	srand(GetTickCount());
 
 	//
 	SetMsgHandled(TRUE);
@@ -53,8 +59,8 @@ int CSFXStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void CSFXStatic::OnDestroy()
 {
-
-	KillTimer(SFX_TIMER_ID);
+	KillTimer(SFX_TIMER_UPDATE);
+	KillTimer(SFX_TIMER_WATER);
 }
 
 
@@ -70,7 +76,7 @@ LRESULT CSFXStatic::OnTimer(UINT_PTR nIDEvent)
 
 	CSize bmSize = m_dest.GetSize();
 
-	if(nIDEvent == SFX_TIMER_ID)
+	if(nIDEvent == SFX_TIMER_UPDATE)
 	{
 		//if(!m_bRunWater)
 		//	m_Water.FlattenWater();// flatten it so it appears we turned it off...
@@ -78,11 +84,35 @@ LRESULT CSFXStatic::OnTimer(UINT_PTR nIDEvent)
 		m_Water.Render((DWORD*)m_src.GetDIBits(),(DWORD*)m_dest.GetDIBits());
 
 		//if(m_bRunFire)
-			m_Fire.Render((DWORD*)m_dest.GetDIBits(),bmSize.cx,bmSize.cy);
+		//	m_Fire.Render((DWORD*)m_dest.GetDIBits(),bmSize.cx,bmSize.cy);
 
 		//if(m_bRunPlasma)
 		//	m_Plasma.Render((DWORD*)m_dest.GetDIBits(),402,120,402);
 		Invalidate(FALSE);
+	}
+
+	if(nIDEvent == SFX_TIMER_WATER)
+	{
+		CRect rcPicture;
+
+		rcPicture.left = 0;
+		rcPicture.top =0;
+		rcPicture.right = rcPicture.left + m_src.GetWidth();
+		rcPicture.bottom = rcPicture.top + m_src.GetHeight();
+
+		CPoint point;
+		point.x = rand() % m_src.GetWidth();
+		point.y = rcPicture.top + rand() % m_src.GetHeight();
+
+		if(rcPicture.PtInRect(point) == TRUE)
+		{
+			// since dibs are drawn upside down we need to flip the y position (for it to look right)
+			point.y = rcPicture.bottom - point.y;
+
+			m_Water.HeightBlob(point.x,point.y,20,40,m_Water.m_iHpage);
+			//m_Water.SineBlob(point.x,point.y,20,40,m_Water.m_iHpage);
+		}
+
 	}
 
 	return 0;
