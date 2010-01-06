@@ -20,7 +20,7 @@ int CSFXStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	CBitmap bm;
 	CDIBSectionLite bmTemp;
 	//bmTemp.Load(L"\\ee.bmp");
-	bmTemp.SetBitmap(IDB_BITMAP2);
+	bmTemp.SetBitmap(IDB_BITMAP3);
 
 	CSize bmSize = bmTemp.GetSize();
 
@@ -46,7 +46,7 @@ int CSFXStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 
 	SetTimer(SFX_TIMER_UPDATE, 40, NULL);
-	SetTimer(SFX_TIMER_WATER, 2000, NULL);
+	SetTimer(SFX_TIMER_WATER, 5000, NULL);
 
 
 	// random water drop.
@@ -54,6 +54,8 @@ int CSFXStatic::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 	//
 	SetMsgHandled(TRUE);
+
+	MoveWindow(0, 0, bmSize.cx, bmSize.cy);
 	return 0;
 }
 

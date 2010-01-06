@@ -21,9 +21,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 {
 #ifdef __EXPIRATION__
 	// Program Expiration routines
-	CTime expirationTime(2009,	// year
-		12,					// month
-		31,					// date
+	CTime expirationTime(2010,	// year
+		2,					// month
+		30,					// date
 		23,					// hour 24
 		59,					// minute
 		59);				// second
@@ -127,7 +127,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 
 #endif
 
-	//CAboutDlg aboutDlg;	aboutDlg.DoModal();
+	CAboutDlg aboutDlg;	aboutDlg.DoModal();
     //
 	HRESULT hRes = CBTools2Frame::ActivatePreviousInstance(hInstance, lpstrCmdLine);
 

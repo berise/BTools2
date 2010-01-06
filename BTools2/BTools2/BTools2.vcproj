@@ -516,6 +516,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest"
 			>
 			<File
+				RelativePath=".\res\btools.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\BTools.ico"
 				>
 			</File>

@@ -45,15 +45,15 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 	CRect r;
 	ATL::CWindow w = GetDlgItem(IDC_STATIC_MATRIX);
 	w.GetClientRect(r);
-	m_SFX.Create(w);
+	m_SFX.Create(m_hWnd);
 	//m_SFX.Attach(w);
-	m_SFX.MoveWindow(r);
+	//m_SFX.MoveWindow(r);
 	m_SFX.SetWindowText(L"LLLLAAA");
 
 	//m_SFX.m_hWnd = w;
 
 	CString szVersion;
-	szVersion.Format(_T("BTools2 Build %s.\niperf for Windows Mobile"),BTOOLS_SVN_VERSION);
+	szVersion.Format(_T("BTools2 for Windows Mobile\nBuild Rev %s."),BTOOLS_SVN_VERSION);
 	//szVersion += BTOOLS_SVN_VERSION;
 	CStatic cVersion = GetDlgItem(IDC_STATIC_VERSION);
 	cVersion.SetWindowText(szVersion);
