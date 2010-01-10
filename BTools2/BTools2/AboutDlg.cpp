@@ -53,7 +53,7 @@ LRESULT CAboutDlg::OnInitDialog(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lPara
 	//m_SFX.m_hWnd = w;
 
 	CString szVersion;
-	szVersion.Format(_T("BTools2 for Windows Mobile\nBuild Rev %s."),BTOOLS_SVN_VERSION);
+	szVersion.Format(_T("BTools2(beta) for WM.\nBuild Rev. %s."),BTOOLS_SVN_VERSION);
 	//szVersion += BTOOLS_SVN_VERSION;
 	CStatic cVersion = GetDlgItem(IDC_STATIC_VERSION);
 	cVersion.SetWindowText(szVersion);

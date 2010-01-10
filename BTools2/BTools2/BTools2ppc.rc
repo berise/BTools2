@@ -101,11 +101,11 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION
 CAPTION "About..."
 FONT 8, "MS Shell Dlg"
 BEGIN
-    ICON            IDR_MAINFRAME,IDC_STATIC,7,114,21,20
-    CTEXT           "BTools2 Place Holder",IDC_STATIC_MATRIX,7,7,40,32,SS_NOPREFIX | NOT WS_VISIBLE,WS_EX_STATICEDGE
-    LTEXT           "BTools2",IDC_STATIC_VERSION,50,7,81,30
-    CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,42,124,38,NOT WS_VISIBLE,WS_EX_STATICEDGE
-    CTEXT           "-= Warning =-\nThis program can cause heavy traffics. This means that you have to pay more money if not using proper plan.",IDC_STATIC_ENG,7,55,124,47,0,WS_EX_STATICEDGE
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,115,21,20,NOT WS_VISIBLE
+    CTEXT           "BTools2 Place Holder",IDC_STATIC_MATRIX,7,8,40,32,SS_NOPREFIX | NOT WS_VISIBLE,WS_EX_STATICEDGE
+    LTEXT           "BTools2",IDC_STATIC_VERSION,50,8,81,30
+    CTEXT           "-= 데이터 통신 이용료 안내=-\n\n본 프로그램은 데이터 사용량이 많습니다. 주의하시길 바랍니다.",IDC_STATIC,7,43,124,38,NOT WS_VISIBLE,WS_EX_STATICEDGE
+    CTEXT           "-= Warning =-\nThis program can cause heavy traffics. This means that you have to pay more money if not using proper plan.\n\nThis version is available up to 2010.2.30.",IDC_STATIC_ENG,7,56,124,68,0,WS_EX_STATICEDGE
 END
 
 IDD_BTOOLS2_PAGE DIALOG  0, 0, 156, 129
