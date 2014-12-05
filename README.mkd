@@ -6,6 +6,9 @@ Simply it is a mobile version [iperf](https://iperf.fr)
 This program is a port of iperf-1.7.0 to Windows Mobile 5.0 and Windows Mobile 6.0.
 it uses iperf-1.7.0 and is completely compatible with it. 
 
+Here's an original posting at [xda-developers](http://forum.xda-developers.com/showthread.php?t=499647)
+
+
 Features
 --------
  - Provides ping to check latency between nodes. (with graphs) 
