@@ -75,4 +75,4 @@ Without their efforts nothing could be done.
 
 Author
 ------
-berise@gmail.com
+JaeSung Lee, berise@gmail.com
