@@ -1,4 +1,3 @@
-* This repository is converted from svn using svn2git *
 Overview
 --------
 BTools is a sort of handy tools to check network performance including latency and bandwidth.
@@ -19,6 +18,13 @@ Requirements
 ------------
 - Windows Mobile 5.0/6.0
 - 240x320 Resolution (longer height doesn't matter)
+
+In order to build this project. You might need followings
+ - Microsoft Visual Studio 2005 or above
+ - Windows Mobile 5 Pocket PC SDK
+ - Windows Mobile 6 Pocket PC SDK
+ - WTL, http://sourceforge.net/projects/wtl/
+
 
 Ping Usage
 ----------
@@ -55,6 +61,7 @@ Without their efforts nothing could be done.
  - iperf by National Laboratory for Applied Network Research, 
           Mark Gates <mgates@nlanr.net>,  Kevin Gibbs <kgibbs@ncsa.uiuc.edu> 
  - iperf for WinCE by Rutgers, The State University of New Jersey
+ - Ultimate TCP/IP v4.2, http://www.codeproject.com/Articles/20181/The-Ultimate-TCP-IP-Home-Page
 
 Author
 ------
