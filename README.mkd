@@ -1,0 +1,61 @@
+* This repository is converted from svn using svn2git *
+Overview
+--------
+BTools is a sort of handy tools to check network performance including latency and bandwidth.
+Simply it is a mobile version [iperf](https://iperf.fr)
+
+This program is a port of iperf-1.7.0 to Windows Mobile 5.0 and Windows Mobile 6.0.
+it uses iperf-1.7.0 and is completely compatible with it. 
+
+Features
+--------
+ - Provides ping to check latency between nodes. (with graphs) 
+ - Visualization of ping latency graph. (it's even good when in landscape)
+ - Provides full functionality of iperf based on 1.7.0 both client and server.
+ - Logs for ping, iperf client & server.(located in \MyDocuments\btools_log)
+
+
+Requirements
+------------
+- Windows Mobile 5.0/6.0
+- 240x320 Resolution (longer height doesn't matter)
+
+Ping Usage
+----------
+- Connect to internet.
+- For Ping, Just type target host and press button "Ping"
+- See results graphs. Log will be \My Documents\btools_log.
+
+
+Usage 1 (Mobile Client to PC Server)
+-----------------------------------------
+- you have to install iperf-1.7.0 before running PC server. (ask google iperf-win32-1.7.0)
+- In PC, open console box and run "iperf -s"
+- In Mobile, Choose iperf client tab and type server's IP Press "Start"
+- iperf will run 10 seconds if -t option is not specified.
+- Log will be \My Documents\btools_log.
+
+Usage 2(Mobile Client to Mobile Server)
+---------------------------------------------
+- Choose iperf server tab, and press "Start"
+- Choose iperf client tab, and type server's IP and Press "Start"
+
+Acknowledges
+------------
+Thanks for all who contributes their great efforts in making following libraries. 
+Without their efforts nothing could be done.
+
+ - icon by mini icons - famfamfam.com,  Contact: mjames@gmail.com, kde-icons-kdemod_0.1
+ - DIB class by ???@????
+ - SFX(water, fire, plasma) by ???@codeproject (needed to see who made it)
+ - OScopeCtrl by Mark C. Malburg
+ - MatrixStatic by Nic Wilson, nicw@bigpond.net.au
+ - ScreenLib by Microsoft(R)
+ - CPropertyView by YEAsoft Int'l (Leo Moll, Andrea Pennelli).
+ - iperf by National Laboratory for Applied Network Research, 
+          Mark Gates <mgates@nlanr.net>,  Kevin Gibbs <kgibbs@ncsa.uiuc.edu> 
+ - iperf for WinCE by Rutgers, The State University of New Jersey
+
+Author
+------
+berise@gmail.com
