@@ -6,8 +6,15 @@ Simply it is a mobile version [iperf](https://iperf.fr)
 This program is a port of iperf-1.7.0 to Windows Mobile 5.0 and Windows Mobile 6.0.
 it uses iperf-1.7.0 and is completely compatible with it. 
 
-Here's an original posting at [xda-developers](http://forum.xda-developers.com/showthread.php?t=499647)
+You can see an article posted on [xda-developers](http://forum.xda-developers.com/showthread.php?t=499647)
 
+- - - 
+
+![bt01](https://github.com/berise/BTools2/blob/master/misc/bt_001.png)
+![bt02](https://github.com/berise/BTools2/blob/master/misc/bt_002.png)
+![bt03](https://github.com/berise/BTools2/blob/master/misc/bt_003.png)
+![bt04](https://github.com/berise/BTools2/blob/master/misc/bt_004.png)
+![bt05](https://github.com/berise/BTools2/blob/master/misc/bt_005.png)
 
 Features
 --------
