@@ -56,8 +56,8 @@ Usage 2(Mobile Client to Mobile Server)
 - Choose iperf server tab, and press "Start"
 - Choose iperf client tab, and type server's IP and Press "Start"
 
-Acknowledges
-------------
+Credits
+-------
 Thanks for all who contributes their great efforts in making following libraries. 
 Without their efforts nothing could be done.
 
